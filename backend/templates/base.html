@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+
+    <!-- TITLE -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="{% static 'images/fav/fav.ico' %}" type="image" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/fav/apple-touch-icon.png' %}" />
+    <link rel="shortcut icon" type="image/png" sizes="32x32" href="{% static 'images/fav/favicon-32x32.png' %}" />
+    <link rel="shortcut icon" type="image/png" sizes="16x16" href="{% static 'images/fav/favicon-16x16.png' %}" />
+
+    <!-- BOOTSTRAP CSS -->
+    <link id="style" href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- STYLE CSS -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/dark-style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/dark-style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/skin-modes.css' %}" rel="stylesheet" />
+
+    <!--- FONT-ICONS CSS -->
+    <link href="{% static 'css/icons.css' %}" rel="stylesheet" />
+
+    <!-- COLOR SKIN CSS -->
+    <link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'colors/color1.css' %}" />
+  </head>
+
+  <!-- PAGE -->
+  <body class="app sidebar-mini ltr light-mode">
+    <div id="global-loader">
+      <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
+    </div>
+    <div class="page">
+      <div class="page-main">
+        <!-- HEADER -->
+        <!-- app-Header -->
+        <header>
+          {% include 'includes/header.html' %}
+          {% include 'includes/sidebar-left.html' %}
+          {% include 'includes/sidebar-right.html' %}
+        </header>
+
+        <!-- CONTENT -->
+        <main>
+          {% block content %}{% endblock %}
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+          {% include 'includes/footer.html' %}
+        </footer>
+      </div>
+    </div>
+    
+    <!-- BACK-TO-TOP -->
+    <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+    <!-- JQUERY JS -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <!-- BOOTSTRAP JS -->
+    <script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <!-- INPUT MASK JS -->
+    <script src="{% static 'plugins/input-mask/jquery.mask.min.js' %}"></script>
+
+    <!-- SIDE-MENU JS -->
+    <script src="{% static 'plugins/sidemenu/sidemenu.js' %}"></script>
+
+	  <!-- TypeHead js -->
+	  <script src="{% static 'plugins/bootstrap5-typehead/autocomplete.js' %}"></script>
+    <script src="{% static 'js/typehead.js' %}"></script>
+
+    <!-- SIDEBAR JS -->
+    <script src="{% static 'plugins/sidebar/sidebar.js' %}"></script>
+
+    <!-- Perfect SCROLLBAR JS-->
+    <script src="{% static 'plugins/p-scroll/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'plugins/p-scroll/pscroll.js' %}"></script>
+    <script src="{% static 'plugins/p-scroll/pscroll-1.js' %}"></script>
+
+    <!-- Color Theme js -->
+    <script src="{% static 'js/themeColors.js' %}"></script>
+
+    <!-- Sticky js -->
+    <script src="{% static 'js/sticky.js' %}"></script>
+
+    <!-- CUSTOM JS -->
+    <script src="{% static 'js/custom.js' %}"></script>
+
+  </body>
+
+</html>
