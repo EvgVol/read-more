@@ -15,7 +15,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # My apps
     'blog.apps.BlogConfig',
+    # Other apps
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +83,17 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / 'static'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+THUMBNAIL_CACHE_BACKEND = 'django.core.cache.backends.filebased.FileBasedCache'
+THUMBNAIL_CACHE_LOCATION = BASE_DIR / 'thumb_cache'
+CLEANUP_AUTO = True
+CLEANUP_KEEP_EXTENSIONS = ['jpg', 'jpeg', 'png']

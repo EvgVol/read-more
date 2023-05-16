@@ -26,6 +26,7 @@ class Post(models.Model):
                                related_name='blog_posts',
                                verbose_name='Автор')
     body = models.TextField('Контент')
+    image = models.ImageField('Изображение', upload_to='blog/images/',)
     publish = models.DateTimeField('Опубликовано', default=timezone.now)
     created = models.DateTimeField('Дата создания', auto_now_add=True)
     update = models.DateTimeField('Дата изменения', auto_now=True)

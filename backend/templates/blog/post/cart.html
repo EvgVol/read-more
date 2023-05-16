@@ -1,6 +1,9 @@
 {% load static %}
+{% load thumbnail %}
 <div class="card">
-	<a href="{% url 'blog:post_detail' post.id %}"><img class="card-img-top" src="{% static 'images/media/13.jpg' %}"></a>
+	{% thumbnail post.image  "500x333" crop="center" as im %}
+	<a href="{% url 'blog:post_detail' post.id %}"><img class="card-img-top" src="{{ im.url }}"></a>
+	{% endthumbnail %}
 	<div class="card-body d-flex flex-column">
 			<h3><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h3>
 			<div class="text-muted">{{ post.body|truncatewords:30|linebreaks }}</div>
