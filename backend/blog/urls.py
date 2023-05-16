@@ -6,7 +6,7 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', views.post_list, name='post_list'),
-    path('<int:id>/', include([
+    path('<int:year>/<int:month>/<int:day>/<slug:post>/', include([
         path('', views.post_detail, name='post_detail'),
     ])),
 ]
