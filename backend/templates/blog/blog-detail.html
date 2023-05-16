@@ -2,6 +2,8 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
 {% load static %}
+{% load humanize %}
+{% load thumbnail %}
 <div class="main-content app-content mt-0">
   <div class="side-app">
 
@@ -23,14 +25,16 @@
       <div class="row">
         <div class="col-xl-8">
           <div class="card">
-              <img class="card-img-top " src="../assets/images/media/blog11.jpg" alt="Card image cap">
+              {% thumbnail post.image  "820x513" crop="center" as im %}
+              <img class="card-img-top " src="{{ im.url }}" alt="Card image cap">
+              {% endthumbnail %}
               <div class="card-body">
                   <div class="d-md-flex">
-                      <a href="javascript:void(0);" class="d-flex me-4 mb-2"><i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
-                          <div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">Sep-25-2021</div>
+                      <a href="#" class="d-flex me-4 mb-2"><i class="fe fe-calendar fs-16 me-1 p-3 bg-secondary-transparent text-secondary bradius"></i>
+                          <div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ post.publish|naturaltime }}</div>
                       </a>
-                      <a href="profile.html" class="d-flex mb-2"><i class="fe fe-user fs-16 me-1 p-3 bg-primary-transparent text-primary bradius"></i>
-                          <div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">Harry Fisher</div>
+                      <a href="#" class="d-flex mb-2"><i class="fe fe-user fs-16 me-1 p-3 bg-primary-transparent text-primary bradius"></i>
+                          <div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ post.author }}</div>
                       </a>
                       <div class="ms-auto">
                           <a href="javascript:void(0);" class="d-flex mb-2"><i class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
@@ -40,12 +44,8 @@
                   </div>
               </div>
               <div class="card-body">
-                  <h3><a href="javascript:void(0)"> Voluptatem quia voluptas</a></h3>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <p> Lorem ipsum dolor sit amet, quis Neque porro quisquam est, nostrud exercitation ullamco laboris commodo consequat. There’s an old maxim that states, “No fun for the writer, no fun for the reader.”No matter what industry
-                      you’re working in, as a blogger, you should live and die by this statement.</p>
-                  <p>I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the
-                      truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure.</p>
+                  <h3><a href="javascript:void(0)">{{ post.title }}</a></h3>
+                  <p class="card-text">{{ post.body|truncatewords:30|linebreaks }}</p>
               </div>
           </div>
           <div class="card">
