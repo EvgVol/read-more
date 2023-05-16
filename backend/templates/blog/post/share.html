@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Поделиться статьей{% endblock %}
+{% block content %}
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    {% if sent %}
+      <h1>Письмо успешно отправлено</h1>
+      <p>
+        "{{ post.title }}" была успешно отправлена на адрес {{ form.cleaned_data.to }}.
+      </p>
+    {% else %}
+      <h1>Поделиться "{{ post.title }}" по email</h1>
+      <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Отправить">
+      </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
