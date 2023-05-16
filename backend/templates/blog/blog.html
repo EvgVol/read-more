@@ -20,7 +20,7 @@
           {% for post in posts %}
             {% include 'blog/post/cart.html' %}
           {% endfor %}
-          {% include 'blog/includes/paginator.html' with page_obj=posts %}
+          {% include 'blog/includes/paginator.html' with page=page_obj %}
       </div>
         <div class="col-xl-4">
             <div class="card">
