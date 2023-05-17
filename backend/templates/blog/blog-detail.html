@@ -57,7 +57,9 @@
                 <a href="{% url "blog:post_comment" post.id %}"><span class="badge btn-outline-primary rounded-pill py-2 px-3"><i class="fe fe-feather mx-1"></i>Оставить комментарий</span></a>
               </div>
           </div>
-          {% comment %} {% include 'blog/includes/comments.html' %} {% endcomment %}
+          {% if comments %}
+            {% include 'blog/includes/comments.html' %}
+          {% endif %}
           {% comment %} {% include 'blog/post/comment.html' %} {% endcomment %}
         </div>
         <div class="col-xl-4">
