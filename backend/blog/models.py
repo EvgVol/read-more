@@ -4,6 +4,9 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 
+from taggit.managers import TaggableManager
+
+
 User = get_user_model()
 
 
@@ -26,6 +29,7 @@ class Post(models.Model):
                                related_name='blog_posts',
                                verbose_name='Автор')
     body = models.TextField('Контент')
+    tags = TaggableManager()
     image = models.ImageField('Изображение', upload_to='blog/images/',)
     publish = models.DateTimeField('Опубликовано', default=timezone.now)
     created = models.DateTimeField('Дата создания', auto_now_add=True)

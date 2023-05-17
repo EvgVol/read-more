@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     # Other apps
     'sorl.thumbnail',
+    'taggit', #https://github.com/jazzband/django-taggit
 ]
 
 MIDDLEWARE = [
