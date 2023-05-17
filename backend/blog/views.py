@@ -1,9 +1,10 @@
 from django.views.generic import ListView, DetailView, FormView
 from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
+from django.views.decorators.http import require_POST
 
-from .models import Post
-from .forms import EmailPostForm
+from .models import Post, Comment
+from .forms import EmailPostForm, CommentForm
 
 
 class PostListView(ListView):
@@ -15,24 +16,19 @@ class PostListView(ListView):
     template_name = 'blog/blog.html'
 
 
-class PostDetailView(DetailView):
-    """Представление поста."""
-
-    model = Post
-    context_object_name = 'post'
-    template_name = 'blog/blog-detail.html'
-    slug_field = 'slug'
-    slug_url_kwarg = 'post'
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(
-            status=Post.Status.PUBLISHED,
-            publish__year=self.kwargs['year'],
-            publish__month=self.kwargs['month'],
-            publish__day=self.kwargs['day'],
-            slug=self.kwargs['post']
-        )
+def post_detail(request, year, month, day, post):
+    post =  get_object_or_404(Post,
+                              status=Post.Status.PUBLISHED,
+                              slug=post,
+                              publish__year=year,
+                              publish__month=month,
+                              publish__day=day)
+    comments = post.comments.filter(active=True)
+    form = CommentForm()
+    return render(request, 'blog/blog-detail.html',
+                  {'post': post,
+                   'comments': comments,
+                   'form': form})
 
 
 def post_share(request, post_id):
@@ -57,3 +53,19 @@ def post_share(request, post_id):
     return render(request, 'blog/post/share.html', {'post': post,
                                                     'form': form,
                                                     'sent': sent})
+
+
+@require_POST
+def post_comment(request, post_id):
+    post = get_object_or_404(Post,
+                             id= post_id,
+                             status= Post.Status.PUBLISHED)
+    form = CommentForm(data=request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.post = post
+        comment.save()
+    return render(request, 'blog/post/comment.html',
+                  {'post': post,
+                   'form': form,
+                   'comment': comment})
