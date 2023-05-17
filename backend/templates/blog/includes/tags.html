@@ -4,14 +4,9 @@
     </div>
     <div class="card-body">
         <div class="tags">
-            <a href="javascript:void(0)" class="tag">Development</a>
-            <a href="javascript:void(0)" class="tag">Design</a>
-            <a href="javascript:void(0)" class="tag">Technology</a>
-            <a href="javascript:void(0)" class="tag">Popular</a>
-            <a href="javascript:void(0)" class="tag">Codiegniter</a>
-            <a href="javascript:void(0)" class="tag">JavaScript</a>
-            <a href="javascript:void(0)" class="tag">Bootstrap</a>
-            <a href="javascript:void(0)" class="tag">PHP</a>
+            {% for tag in tag_list %}
+                <a href="javascript:void(0)" class="tag">{{ tag.name }}</a>
+            {% endfor %}
         </div>
     </div>
 </div>
