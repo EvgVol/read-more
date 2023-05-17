@@ -1,14 +1,59 @@
 <div class="card">
-    <div class="card-header">
-      <div class="card-title">Добавить комментарий</div>
-    </div>
-    <div class="card-body">
-      <form class="form-horizontal  m-t-20" action="{% url 'blog:post_comment' post.id %}" method='post'>
-          {{ form.as_p }}
-          {% csrf_token %}
-          <div class="">
-            <p><input type="submit" class="btn btn-primary btn-rounded  waves-effect waves-light" value="Отправить"></p>
-          </div>
-      </form>
-    </div>
+  <div class="card-header">
+    <div class="card-title">Добавить комментарий</div>
   </div>
+  <div class="card-body">
+    <form
+      class="form-horizontal m-t-20"
+      action="{% url 'blog:post_comment' post.id %}"
+      method="post"
+    >
+      <div class="form-group">
+        <div class="col-xs-12">
+          <input
+            class="form-control"
+            type="text"
+            required=""
+            placeholder="Имя*"
+            name="name"
+            id="id_name"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <input
+            class="form-control"
+            type="email"
+            required=""
+            placeholder="Email*"
+            name="email"
+            id="id_email"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <textarea
+            class="form-control"
+            rows="5"
+            required=""
+            placeholder="Ваш комментарий*"
+            name="body"
+            id="id_body"
+          ></textarea>
+        </div>
+      </div>
+      {% csrf_token %}
+      <div class="">
+        <p>
+          <input
+            type="submit"
+            class="btn btn-primary btn-rounded waves-effect waves-light"
+            value="Отправить"
+          />
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
