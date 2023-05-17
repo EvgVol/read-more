@@ -35,36 +35,6 @@ class PostDetailView(DetailView):
         )
 
 
-# class PostShareView(FormView):
-#     """Представление по отравки статьи по эл.почте."""
-
-#     def get(self, request, post_id, *args, **kwargs):
-#         post = get_object_or_404(Post,
-#                                  id=post_id,
-#                                  status=Post.Status.PUBLISHED)
-#         form = EmailPostForm()
-#         context = {'post': post, 'form': form}
-#         return render(request, 'blog/post/share.html', context)
-
-#     def post(self, request, post_id, *args, **kwargs):
-#         post = get_object_or_404(Post,
-#                                  id=post_id,
-#                                  status=Post.Status.PUBLISHED)
-#         form = EmailPostForm(request.POST)
-#         sent = False
-#         if form.is_valid():
-#             cd = form.cleaned_data
-#             post_url = request.build_absolute_uri(post.get_absolute_url())
-#             subject = f"{cd['name']} рекомендует вам прочитать статью \"{post.title}\""
-#             message = f"Прочитайте статью \"{post.title}\" здесь: {post_url}\n\n" \
-#                       f"Комментарий от {cd['name']}: {cd['comments']}"
-#             # Подставьте свой email
-#             from_email = 'volochek93@yandex.ru'
-#             send_mail(subject, message, from_email, [cd['to']])
-#             sent = True
-#         context = {'post': post, 'form': form, 'sent': sent}
-#         return render(request, 'blog/post/share.html', context)
-
 def post_share(request, post_id):
     post = get_object_or_404(Post,
                              id=post_id,

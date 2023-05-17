@@ -39,8 +39,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-publish']
-        verbose_name = 'Пост'
-        verbose_name_plural = 'Посты'
+        verbose_name = 'Статья'
+        verbose_name_plural = 'Статьи'
         indexes = [
             models.Index(fields=['-publish']),
         ]
@@ -54,3 +54,29 @@ class Post(models.Model):
                              self.publish.month,
                              self.publish.day,
                              self.slug])
+
+
+class Comment(models.Model):
+    """Модель комментариев."""
+
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='comments',
+                             verbose_name='Статья')
+    name = models.CharField('Имя отправителя', max_length=80)
+    email = models.EmailField('Электронный адрес(email)')
+    body = models.TextField('Комментарий')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=True, verbose_name='Активный')
+
+    class Meta:
+        ordering = ['created']
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+        indexes = [
+            models.Index(fields=['created']),
+        ]
+    
+    def __str__(self):
+        return f'Комментарий от {self.name} к статье {self.post}'
