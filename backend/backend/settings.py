@@ -28,13 +28,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
+    'django.contrib.postgres',
     # My apps
     'blog.apps.BlogConfig',
     # Other apps
     'sorl.thumbnail',
     'taggit', #https://github.com/jazzband/django-taggit
-    'django.contrib.sites',
-    'django.contrib.sitemaps',
+
+    
 ]
 
 MIDDLEWARE = [
@@ -75,8 +78,6 @@ DATABASES = {
         'NAME': config('DB_NAME'),
         'USER': config('POSTGRES_USER'),
         'PASSWORD': config('POSTGRES_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT')
     }
 }
 
