@@ -10,14 +10,25 @@ from .models import Post
 from .forms import EmailPostForm, CommentForm
 
 
-# Отображаем список статей
+
 def post_list(request, tag_slug=None):
     """Отображает список статей."""
+    # Отображаем только опубликованные статьи(черновики не показываем)
     post_list = Post.published.all()
     tag = None
+
+    # Отображение статей с выбранным тегом
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         post_list = post_list.filter(tags__in=[tag])
+
+    # Сортировка статей по дате публикации и вывод последних 4 статей
+    latest_posts = post_list.order_by('-publish')[:4]
+
+    # Получение списка всех тегов и количества статей, связанных с каждым тегом
+    tag_list = Tag.objects.annotate(total_posts=Count('post'))
+
+    # Пагинация статей
     paginator = Paginator(post_list, 3)
     page_number = request.GET.get('page', 1)
     try:
@@ -29,7 +40,9 @@ def post_list(request, tag_slug=None):
     return render(request, 
                   'blog/blog.html',
                   {'posts': posts,
-                   'tag': tag})
+                   'tag': tag,
+                   'latest_posts': latest_posts,
+                   'tag_list': tag_list})
 
 
 # Отображаем детали статьи
@@ -50,12 +63,14 @@ def post_detail(request, year, month, day, post):
     similar_posts = similar_posts.annotate(
         same_tags=Count('tags')
     ).order_by('-same_tags','-publish')[:4]
+    tag_list = Tag.objects.annotate(total_posts=Count('post'))
     
     return render(request, 'blog/blog-detail.html',
                   {'post': post,
                    'comments': comments,
                    'form': form,
-                   'similar_posts': similar_posts})
+                   'similar_posts': similar_posts,
+                   'tag_list': tag_list})
 
 
 # Поделиться статьей

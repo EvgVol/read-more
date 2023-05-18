@@ -10,10 +10,10 @@
       {% for post in similar_posts %}
       <div class="d-flex overflow-visible mt-3">
         {% thumbnail post.image  "500x333" crop="center" as im %}
-        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="{{ im.url }}" style="background: url(&quot;{{ im.url }}&quot;) center top;"></a>
+        <a href="{{ post.get_absolute_url }}" class="card-aside-column br-5 cover-image" data-bs-image-src="{{ im.url }}" style="background: url(&quot;{{ im.url }}&quot;) center top;"></a>
         {% endthumbnail %}
         <div class="ps-3 flex-column">
-          <h4><a href="blog-details.html">{{ post.title }}</a></h4>
+          <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
           <div class="text-muted">{{ post.body|truncatewords:20|linebreaks }}</div>
         </div>
       </div>
