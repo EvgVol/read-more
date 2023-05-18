@@ -3,12 +3,16 @@ from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count
+from django.views.generic import TemplateView
 
 from taggit.models import Tag
 
 from .models import Post
 from .forms import EmailPostForm, CommentForm
 
+
+class SettingView(TemplateView):
+    template_name = 'blog/setting.html'
 
 
 def post_list(request, tag_slug=None):

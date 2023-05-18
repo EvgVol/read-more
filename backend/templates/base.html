@@ -29,6 +29,8 @@
 
     <!-- COLOR SKIN CSS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'colors/color1.css' %}" />
+    <link href="{% static 'switcher/css/switcher.css' %}" rel="stylesheet" />
+    <link href="{% static 'switcher/demo.css' %}" rel="stylesheet" />
   </head>
 
   <!-- PAGE -->
@@ -93,7 +95,12 @@
     <script src="{% static 'js/sticky.js' %}"></script>
 
     <!-- CUSTOM JS -->
-    <script src="{% static 'js/custom.js' %}"></script>
+    {% comment %} <script src="{% static 'js/custom.js' %}"></script> {% endcomment %}
+    <script src="{% static 'js/custom1.js' %}"></script>
+
+    <!-- Switcher js -->
+    <script src="{% static 'switcher/js/switcher.js' %}"></script>
+
 
   </body>
 
