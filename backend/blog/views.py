@@ -4,14 +4,17 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count
 from django.views.generic import TemplateView
+from django.contrib.postgres.search import SearchVector
 
 from taggit.models import Tag
 
 from .models import Post
-from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm, CommentForm, SearchForm
 
 
 class SettingView(TemplateView):
+    """Отображает страницу с настройками сайта."""
+
     template_name = 'blog/setting.html'
 
 
@@ -74,16 +77,12 @@ def post_detail(request, year, month, day, post):
     # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
     
-    # # Получение списка похожих авторов
-    # similar_authors_list = get_similar_authors(post, count=4)
-    
     return render(request, 'blog/blog-detail.html',
                   {'post': post,
                    'comments': comments,
                    'form': form,
                    'similar_posts': similar_posts,
                    'tag_list': tag_list})
-                #    'similar_authors_list': similar_authors_list})
 
 
 # Поделиться статьей
@@ -130,14 +129,20 @@ def post_comment(request, post_id):
                    'comment': comment})
 
 
-# def get_similar_authors(post, count=4):
-#     """Возвращает список авторов похожих постов."""
-#     post_tags_ids = post.tags.values_list('id', flat=True)
-#     similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
-#     similar_authors = []
-#     for p in similar_posts:
-#         if p.author not in similar_authors:
-#             similar_authors.append(p.author)
-#     current_author = post.author
-#     similar_authors = list(filter(lambda a: a != current_author, similar_authors))
-#     return similar_authors[:count]
+def post_search(request):
+    """Осуществляет поисковой запрос."""
+    form = SearchForm()
+    query = None
+    results = []
+
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.published.annotate(
+                search = SearchVector('title', 'body')
+            ).filter(search=query)
+        return render(request, 'blog/includes/search.html',
+                      {'form': form,
+                       'query': query,
+                       'results': results})

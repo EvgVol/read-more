@@ -1,6 +1,7 @@
 <div class="card">
   <div class="card-body">
-    <div class="input-group">
+    <form class="input-group" method="get">
+      {{ form.as_p }}
       <input
         type="text"
         class="form-control border-end-0"
@@ -11,6 +12,6 @@
       >
         <i class="fe fe-search" aria-hidden="true"></i>
       </button>
-    </div>
+    </form>
   </div>
 </div>
