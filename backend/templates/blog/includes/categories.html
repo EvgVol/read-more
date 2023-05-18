@@ -1,13 +1,40 @@
+{% load blog_tags %}
 <div class="card">
-    <div class="card-header">
-        <div class="card-title">Категории</div>
+  {% comment %} <div class="card-header">
+    <div class="card-title">
+      Статьи <span class="product-label">{% total_posts %}</span>
     </div>
-    <div class="card-body">
-        <ul class="list-group">
-                <li class="list-group-item border-0 p-0"><a href="javascript:void(0)"><i class="fe fe-chevron-right"></i> Development</a> <span class="product-label">22</span> </li>
-                <li class="list-group-item border-0 p-0"><a href="javascript:void(0)"><i class="fe fe-chevron-right"></i> Web Design</a> <span class="product-label">15</span> </li>
-                <li class="list-group-item border-0 p-0"><a href="javascript:void(0)"><i class="fe fe-chevron-right"></i> Technology</a> <span class="product-label">10</span> </li>
-                <li class="list-group-item border-0 p-0"><a href="javascript:void(0)"><i class="fe fe-chevron-right"></i> Sports</a> <span class="product-label">88</span> </li>
-        </ul>
-    </div>
+  </div> {% endcomment %}
+  <div class="card-header row justify-content-between">
+    <div class="col-6 card-title">Статьи</div>
+    <span class="col-1 badge bg-dark">{% total_posts %}</span>
+  </div>
+  <div class="card-body">
+    <ul class="list-group">
+      <li class="list-group-item border-0 p-0">
+        <a href="javascript:void(0)"
+          ><i class="fe fe-chevron-right"></i> Development</a
+        >
+        <span class="product-label">22</span>
+      </li>
+      <li class="list-group-item border-0 p-0">
+        <a href="javascript:void(0)"
+          ><i class="fe fe-chevron-right"></i> Web Design</a
+        >
+        <span class="product-label">15</span>
+      </li>
+      <li class="list-group-item border-0 p-0">
+        <a href="javascript:void(0)"
+          ><i class="fe fe-chevron-right"></i> Technology</a
+        >
+        <span class="product-label">10</span>
+      </li>
+      <li class="list-group-item border-0 p-0">
+        <a href="javascript:void(0)"
+          ><i class="fe fe-chevron-right"></i> Sports</a
+        >
+        <span class="product-label">88</span>
+      </li>
+    </ul>
+  </div>
 </div>
