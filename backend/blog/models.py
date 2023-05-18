@@ -10,6 +10,21 @@ from taggit.managers import TaggableManager
 User = get_user_model()
 
 
+class Category(models.Model):
+    """Модель категорий."""
+
+    name = models.CharField('Название', max_length=50)
+    slug = models.SlugField('Slug', unique=True)
+
+    class Meta:
+        ordering = ['-name']
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    def __str__(self) -> str:
+        return self.name
+
+
 class PublishManager(models.Manager):
     def get_queryset(self) -> QuerySet:
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
@@ -30,6 +45,10 @@ class Post(models.Model):
                                verbose_name='Автор')
     body = models.TextField('Контент')
     tags = TaggableManager()
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL,
+                                 null=True, blank=True,
+                                 related_name='posts',
+                                 verbose_name='Категория')
     image = models.ImageField('Изображение', upload_to='blog/images/',)
     publish = models.DateTimeField('Опубликовано', default=timezone.now)
     created = models.DateTimeField('Дата создания', auto_now_add=True)
