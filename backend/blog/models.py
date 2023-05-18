@@ -33,7 +33,7 @@ class Post(models.Model):
     image = models.ImageField('Изображение', upload_to='blog/images/',)
     publish = models.DateTimeField('Опубликовано', default=timezone.now)
     created = models.DateTimeField('Дата создания', auto_now_add=True)
-    update = models.DateTimeField('Дата изменения', auto_now=True)
+    updated = models.DateTimeField('Дата изменения', auto_now=True)
     status = models.CharField('Статус',
                               max_length=2,
                               choices=Status.choices,

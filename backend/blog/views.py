@@ -48,6 +48,7 @@ def post_list(request, tag_slug=None):
 # Отображаем детали статьи
 def post_detail(request, year, month, day, post):
     """Отображает детали статьи."""
+    
     post =  get_object_or_404(Post,
                               status=Post.Status.PUBLISHED,
                               slug=post,
@@ -56,6 +57,8 @@ def post_detail(request, year, month, day, post):
                               publish__day=day)
     comments = post.comments.filter(active=True)
     form = CommentForm()
+    
+    # Получение списка похожих статей
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = Post.published.filter(
         tags__in=post_tags_ids
@@ -63,7 +66,12 @@ def post_detail(request, year, month, day, post):
     similar_posts = similar_posts.annotate(
         same_tags=Count('tags')
     ).order_by('-same_tags','-publish')[:4]
+    
+    # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
+    
+    # # Получение списка похожих авторов
+    # similar_authors_list = get_similar_authors(post, count=4)
     
     return render(request, 'blog/blog-detail.html',
                   {'post': post,
@@ -71,6 +79,7 @@ def post_detail(request, year, month, day, post):
                    'form': form,
                    'similar_posts': similar_posts,
                    'tag_list': tag_list})
+                #    'similar_authors_list': similar_authors_list})
 
 
 # Поделиться статьей
@@ -115,3 +124,16 @@ def post_comment(request, post_id):
                   {'post': post,
                    'form': form,
                    'comment': comment})
+
+
+# def get_similar_authors(post, count=4):
+#     """Возвращает список авторов похожих постов."""
+#     post_tags_ids = post.tags.values_list('id', flat=True)
+#     similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+#     similar_authors = []
+#     for p in similar_posts:
+#         if p.author not in similar_authors:
+#             similar_authors.append(p.author)
+#     current_author = post.author
+#     similar_authors = list(filter(lambda a: a != current_author, similar_authors))
+#     return similar_authors[:count]

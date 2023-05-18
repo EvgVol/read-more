@@ -18,6 +18,8 @@ ALLOWED_HOSTS = config(
     default='127.0.0.1'
 )
 
+SITE_ID = 1
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -31,6 +33,8 @@ INSTALLED_APPS = [
     # Other apps
     'sorl.thumbnail',
     'taggit', #https://github.com/jazzband/django-taggit
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [

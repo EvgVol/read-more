@@ -58,8 +58,32 @@
                 </div>
                 <h3 class="py-2"><a href="javascript:void(0)">{{ post.title }}</a></h3>
                 <p class="card-text">{{ post.body|linebreaks }}</p>
-                <a href="{% url "blog:post_share" post.id %}"><span class="badge btn-outline-primary rounded-pill py-2 px-3"><i class="fe fe-share mx-1"></i>Поделиться</span></a>
-                <a href="{% url "blog:post_comment" post.id %}"><span class="badge btn-outline-primary rounded-pill py-2 px-3"><i class="fe fe-feather mx-1"></i>Оставить комментарий</span></a>
+                <div class="card-footer user-pro-2">
+                  <div class="media mt-0">
+                      <div class="media-user me-2">
+                          <div class="avatar-list avatar-list-stacked">
+                              <span class="avatar brround" style="background-image: url(../assets/images/users/12.jpg)"></span>
+                              <span class="avatar brround" style="background-image: url(../assets/images/users/2.jpg)"></span>
+                              <span class="avatar brround" style="background-image: url(../assets/images/users/9.jpg)"></span>
+                              <span class="avatar brround" style="background-image: url(../assets/images/users/2.jpg)"></span>
+                              <span class="avatar brround" style="background-image: url(../assets/images/users/4.jpg)"></span>
+                              <span class="avatar brround text-primary">+28</span>
+                          </div>
+                      </div>
+                      <div class="media-body">
+                          <h6 class="mb-0 mt-2 ms-2"> {% with comments.count as total_comments %}
+                            {{ total_comments }} комментари{{ total_comments|ru_plural:"й,я,ев" }}
+                          {% endwith %}</h6>
+                      </div>
+                      <div class="ms-auto">
+                          <div class="d-flex mt-1">
+                              <a class="new me-2 text-muted fs-16" href="#"><span class=""><i class="fe fe-heart"></i></span></a>
+                              <a class="new me-2 text-muted fs-16" href="#"><span class=""><i class="fe fe-message-square"></i></span></a>
+                              <a class="new text-muted fs-16" href="{% url "blog:post_share" post.id %}"><span class=""><i class="fe fe-share-2"></i></span></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
               </div>
           </div>
           {% if comments %}
@@ -71,7 +95,8 @@
             {% include 'blog/includes/search.html' %}
             {% include 'blog/includes/categories.html' %}
             {% include 'blog/includes/top_writers.html' %}
-            {% include 'blog/includes/top_posts.html' %}
+            {% include 'blog/includes/similar_posts.html' %}
+            {% include 'blog/includes/top_comment_post.html' %}
             {% include 'blog/includes/tags.html' %}
         </div>
       </div>
