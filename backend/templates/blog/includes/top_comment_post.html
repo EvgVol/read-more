@@ -9,13 +9,15 @@
     <div class="">
         {% for post in most_commented_posts %}
           <div class="d-flex overflow-visible mt-2">
-            {% thumbnail post.image  "500x333" crop="center" as im %}
-            <a href="{{ post.get_absolute_url }}" class="card-aside-column br-5 cover-image" data-bs-image-src="{{ im.url }}" style="background: url(&quot;{{ im.url }}&quot;) center top;"></a>
-            {% endthumbnail %}
+            {% if post.image %}
+              {% thumbnail post.image  "500x333" crop="center" as im %}
+              <a href="{{ post.get_absolute_url }}" class="card-aside-column br-5 cover-image" data-bs-image-src="{{ im.url }}" style="background: url(&quot;{{ im.url }}&quot;) center top;"></a>
+              {% endthumbnail %}
+            {% endif %}
             <div class="ps-3 flex-column">
               {% for tag in post.tags.all %}
                 {% if forloop.counter <= 4 %}
-                  <span class="badge bg-info me-1 mb-1 mt-1">{{ tag.name }}</span>
+                  <span class="badge bg-dark me-1 mb-1 mt-1">{{ tag.name }}</span>
                 {% endif %}
 			        {% endfor %}
               <h5><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h5>
