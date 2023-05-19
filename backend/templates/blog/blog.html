@@ -2,6 +2,7 @@
 {% block title %}Блог{% endblock %}
 {% block content %}
 {% load static %}
+{% load blog_tags %}
 <div class="main-content app-content mt-0">
   <div class="side-app">
     <div class="main-container container-fluid">
@@ -24,7 +25,7 @@
       </div>
         <div class="col-xl-4">
           {% include 'blog/includes/search.html' %}
-          {% include 'blog/includes/categories.html' %}
+          {% show_categories %}
           {% include 'blog/includes/top_comment_post.html' %}
           {% include 'blog/includes/last_posts.html' %}
           {% include 'blog/includes/tags.html' %}

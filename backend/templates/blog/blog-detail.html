@@ -5,7 +5,7 @@
 {% load humanize %}
 {% load comment_filter %}
 {% load thumbnail %}
-
+{% load blog_tags %}
 <div class="main-content app-content mt-0">
   <div class="side-app">
 
@@ -19,7 +19,7 @@
         <div>
           <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{% url 'blog:post_list' %}">Блог</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Статья</li>
+              <li class="breadcrumb-item active" aria-current="page">{{ post.category.name }}</li>
           </ol>
         </div>
       </div>
@@ -93,7 +93,7 @@
         </div>
         <div class="col-xl-4">
             {% include 'blog/includes/search.html' %}
-            {% include 'blog/includes/categories.html' %}
+            {% show_categories %}
             {% include 'blog/includes/top_writers.html' %}
             {% include 'blog/includes/similar_posts.html' %}
             {% include 'blog/includes/top_comment_post.html' %}

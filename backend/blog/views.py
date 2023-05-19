@@ -11,7 +11,7 @@ from django.contrib.postgres.search import (SearchVector, SearchQuery,
 
 from taggit.models import Tag
 
-from .models import Post
+from .models import Post, Category
 from .forms import EmailPostForm, CommentForm, SearchForm
 
 
@@ -21,16 +21,21 @@ class SettingView(TemplateView):
     template_name = 'blog/setting.html'
 
 
-def post_list(request, tag_slug=None):
+def post_list(request, tag_slug=None, category_slug=None):
     """Отображает список статей."""
     # Отображаем только опубликованные статьи(черновики не показываем)
-    post_list = Post.published.all()
+    post_list = Post.published.select_related('author', 'category')
     tag = None
+    category = None
 
     # Отображение статей с выбранным тегом
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         post_list = post_list.filter(tags__in=[tag])
+
+    if category_slug:
+        category = get_object_or_404(Category, slug=category_slug)
+        post_list = post_list.filter(category__in=[category])
 
     # Сортировка статей по дате публикации и вывод последних 4 статей
     latest_posts = post_list.order_by('-publish')[:4]
@@ -52,20 +57,24 @@ def post_list(request, tag_slug=None):
                   {'posts': posts,
                    'tag': tag,
                    'latest_posts': latest_posts,
-                   'tag_list': tag_list})
+                   'tag_list': tag_list,
+                   'category': 'category'})
 
 
 # Отображаем детали статьи
 def post_detail(request, year, month, day, post):
     """Отображает детали статьи."""
-    
+
+    # Получение статьи по заданным параметрам
     post =  get_object_or_404(Post,
                               status=Post.Status.PUBLISHED,
                               slug=post,
                               publish__year=year,
                               publish__month=month,
                               publish__day=day)
+    # Получение списка активных комментариев для этой статьи
     comments = post.comments.filter(active=True)
+     # Если пользователь оставил комментарий
     form = CommentForm()
     # Получение списка похожих статей
     post_tags_ids = post.tags.values_list('id', flat=True)
@@ -146,12 +155,12 @@ def post_search(request):
             search_query = SearchQuery(query, config='russian')
             # Засекаем время поиска
             start_time = time.time()
-            # Осуществляем поиск по слову или предложению с ранжированием по частоте повторения
+            # Осуществляем поиск 
             results = Post.published.annotate(
                 search=search_vector,
                 rank=SearchRank(search_vector, search_query),
                 similarity=TrigramSimilarity('title', query) + \
-                            TrigramSimilarity('body', query)
+                           TrigramSimilarity('body', query)
             ).filter(
                 Q(search=search_query) | Q(search__icontains=query)
             ).filter(similarity__gt=0.1).order_by('-rank', '-similarity')

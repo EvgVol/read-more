@@ -46,7 +46,7 @@ class Post(models.Model):
     body = models.TextField('Контент')
     tags = TaggableManager()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL,
-                                 null=True, blank=True,
+                                 null=True, blank=False,
                                  related_name='posts',
                                  verbose_name='Категория')
     image = models.ImageField('Изображение', upload_to='blog/images/',)

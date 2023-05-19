@@ -22,8 +22,7 @@
               <span class="badge bg-info me-1 mb-1 mt-1">{{ tag.name }}</span>
             {% endif %}
 			    {% endfor %}
-          <h4><a href="{{ post.get_absolute_url }}">{{ post.title|truncatewords:3 }}</a></h4>
-          <div class="text-muted">{{ post.body|truncatewords:20|linebreaks }}</div>
+          <h5><a href="{{ post.get_absolute_url }}" >{{ post.title }}</a></h5>
         </div>
       </div>
       {% endfor %}
