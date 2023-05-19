@@ -142,7 +142,7 @@ def post_search(request):
             results = Post.published.annotate(
                 search = SearchVector('title', 'body')
             ).filter(search=query)
-        return render(request, 'blog/includes/search.html',
-                      {'form': form,
-                       'query': query,
-                       'results': results})
+    return render(request, 'blog/post/search.html',
+                    {'form': form,
+                    'query': query,
+                    'results': results})

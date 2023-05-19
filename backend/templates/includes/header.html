@@ -4,7 +4,7 @@
     <div class="d-flex">
       <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
       <!-- sidebar-toggle-->
-      <a class="logo-horizontal " href="index.html">
+      <a class="logo-horizontal " href="{% url 'blog:post_list' %}">
         <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img desktop-logo" alt="logo">
         <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img light-logo1"
             alt="logo">

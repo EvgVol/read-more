@@ -1,0 +1,121 @@
+{% extends "base.html" %} {% load blog_tags %} {% load comment_filter %} {% block title %}Поиск{% endblock%} {% block content %}
+
+
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <!-- CONTAINER -->
+    <div class="main-container container-fluid">
+      <!-- PAGE-HEADER -->
+      <div class="page-header">
+        <h1 class="page-title">Поиск</h1>
+        <div>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)">READ MORE</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Поиск</li>
+          </ol>
+        </div>
+      </div>
+      <!-- PAGE-HEADER END -->
+
+      <!-- Row -->
+      <div class="row">
+        <div class="col-sm-12 col-md-12">
+          <div class="card">
+            <div class="card-body pb-0">
+              <form class="input-group mb-2" method="get">
+                <input
+                  type="text"
+                  name="query"
+                  required id="id_query"
+                  class="form-control"
+                  placeholder="Искать на сайте....."
+                  value="{{ request.GET.query }}"
+                />
+                <input class="input-group-text btn btn-primary" type="submit" value="Найти"></input>
+              </form>
+              <div class="tabs-menu search-tabs">
+                <ul class="nav panel-tabs">
+                  <li>
+                    <a href="#tab5" class="active" data-bs-toggle="tab"
+                      >Везде</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#tab6" data-bs-toggle="tab" class="text-dark"
+                      >Блоги</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#tab7" data-bs-toggle="tab" class="text-dark"
+                      >Рецепты</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#tab8" data-bs-toggle="tab" class="text-dark"
+                      >Новости</a
+                    >
+                  </li>
+                  <li>
+                    <a href="#tab9" data-bs-toggle="tab" class="text-dark"
+                      >Почта</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- SEARCH RESULTS -->
+            {% if request.GET.query %}
+            {% with results.count as total_results %}
+            <div class="card-body p-5">
+              <p class="text-muted mb-0 ps-3">
+                Ищем: "{{ request.GET.query }}"
+              </p>
+              <p class="text-muted mb-0 ps-3">
+                Найдено {{ total_results }} совпадений (0.56 Seconds)
+              </p>
+            </div>
+            {% endwith %}
+          </div>
+
+          <div class="panel-body tabs-menu-body p-0 border-0">
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab5">
+                {% for post in results %}
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <div class="mb-2">
+                      <a
+                        href="{{ post.get_absolute_url }}"
+                        target="_blank"
+                        class="h4 text-dark"
+                        >{{ post.title }}</a
+                      >
+                    </div>
+                    <p class="text-muted mt-2 mb-2">
+                      {{ post.body|markdown|truncatewords_html:20 }}
+                    </p>
+                  </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="card">
+                  <div class="card-body">
+                     <p class="text-muted mt-0 mb-0">Введите свой запрос я попробую найти это на сайте</p>
+                  </div>
+                </div>
+                
+              </div>
+              {% endif %}
+              </div>
+            </div>
+          </div>
+          <!-- End Row -->
+        </div>
+        <!-- CONTAINER CLOSE -->
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+</div>
