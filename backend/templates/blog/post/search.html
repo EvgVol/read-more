@@ -73,12 +73,18 @@
                 Ищем: "{{ request.GET.query }}"
               </p>
               <p class="text-muted mb-0 ps-3">
-                Найдено {{ total_results }} совпадений (0.56 Seconds)
+                Найдено {{ total_results }} совпадений (
+                  {% if elapsed_time < 1 %}
+                    {{ elapsed_time|floatformat:10 }} мс
+                  {% else %}
+                    {{ elapsed_time|floatformat:1 }} сек
+                  {% endif %}
+                )
               </p>
             </div>
             {% endwith %}
           </div>
-
+          <!-- View the search results -->
           <div class="panel-body tabs-menu-body p-0 border-0">
             <div class="tab-content">
               <div class="tab-pane active" id="tab5">

@@ -1,10 +1,13 @@
+import time
+
 from django.shortcuts import get_object_or_404, render
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.views.generic import TemplateView
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import (SearchVector, SearchQuery,
+                                            SearchRank)
 
 from taggit.models import Tag
 
@@ -64,7 +67,6 @@ def post_detail(request, year, month, day, post):
                               publish__day=day)
     comments = post.comments.filter(active=True)
     form = CommentForm()
-    
     # Получение списка похожих статей
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = Post.published.filter(
@@ -73,7 +75,6 @@ def post_detail(request, year, month, day, post):
     similar_posts = similar_posts.annotate(
         same_tags=Count('tags')
     ).order_by('-same_tags','-publish')[:4]
-    
     # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
     
@@ -139,10 +140,21 @@ def post_search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
+            # Засекаем время поиска
+            start_time = time.time()
+            # Осуществляем поиск
             results = Post.published.annotate(
-                search = SearchVector('title', 'body')
-            ).filter(search=query)
+                search=SearchVector('title', 'body'),
+                rank=SearchRank(SearchVector('title', 'body'), SearchQuery(query))
+            ).filter(
+                Q(search=SearchQuery(query)) | Q(search__icontains=query)
+            ).order_by('-rank')
+            # Оставливаем счетчик времени
+            elapsed_time = time.time() - start_time
+    else:
+        elapsed_time = 0
     return render(request, 'blog/post/search.html',
                     {'form': form,
                     'query': query,
-                    'results': results})
+                    'results': results,
+                    'elapsed_time': elapsed_time})
