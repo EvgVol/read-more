@@ -1,0 +1,166 @@
+{% extends 'account/base.html' %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+<div class="container-login100">
+    <div class="wrap-login100 p-6">
+      <form class="login100-form validate-form">
+        <span class="login100-form-title pb-5"> Авторизация </span>
+        <div class="panel panel-primary">
+
+          <div class="tab-menu-heading">
+            <div class="tabs-menu1">
+              <!-- Tabs -->
+              <ul class="nav panel-tabs">
+                <li class="mx-0">
+                  <a href="#tab5" class="active" data-bs-toggle="tab"
+                    >Логин</a
+                  >
+                </li>
+                <li class="mx-0">
+                  <a href="#tab6" data-bs-toggle="tab">Телефон</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="panel-body tabs-menu-body p-0 pt-5">
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab5">
+                <div
+                  class="wrap-input100 validate-input input-group"
+                >
+                  <a
+                    href="javascript:void(0)"
+                    class="input-group-text bg-white text-muted"
+                  >
+                    <i
+                      class="zmdi zmdi-account-o text-muted"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                  <input
+                    class="input100 border-start-0 form-control ms-0"
+                    type="text"
+                    name="username"
+                    required id="id_username"
+                    placeholder="Логин"
+                  />
+                </div>
+                <div
+                  class="wrap-input100 validate-input input-group"
+                  id="Password-toggle"
+                >
+                  <a
+                    href="javascript:void(0)"
+                    class="input-group-text bg-white text-muted"
+                  >
+                    <i
+                      class="zmdi zmdi-lock text-muted"
+                      aria-hidden="true"
+                    ></i>
+                  </a>
+                  <input
+                    class="input100 border-start-0 form-control ms-0"
+                    type="password"
+                    name="password"
+                    required id="id_password"
+                    placeholder="Пароль"
+                  />
+                </div>
+                <div class="text-end pt-4">
+                  <p class="mb-0">
+                    <a href="#" class="text-primary ms-1"
+                      >Забыли пароль?</a
+                    >
+                  </p>
+                </div>
+                <div class="container-login100-form-btn">
+                  <a href="index.html" class="login100-form-btn btn-primary">
+                    Войти
+                  </a>
+                </div>
+                <div class="text-center pt-3">
+                  <p class="text-dark mb-0">
+                    Впервые?<a
+                      href="#"
+                      class="text-primary ms-1"
+                      >Зарегистрироваться</a
+                    >
+                  </p>
+                </div>
+                <label class="login-social-icon"
+                  ><span>Войти с помощью </span></label
+                >
+                <div class="d-flex justify-content-center">
+                  <a href="#">
+                    <div class="social-login me-4 text-center">
+                      <i class="fa fa-google"></i>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="social-login me-4 text-center">
+                      <i class="fa fa-twitter"></i>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="social-login text-center">
+                      <i class="fa fa-github"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="tab-pane" id="tab6">
+                <div
+                  id="mobile-num"
+                  class="wrap-input100 validate-input input-group mb-4"
+                >
+                  <a
+                    href="javascript:void(0)"
+                    class="input-group-text bg-white text-muted"
+                  >
+                    <span>+7</span>
+                  </a>
+                  <input class="input100 border-start-0 form-control ms-0" />
+                </div>
+                <div id="login-otp" class="justify-content-around mb-5">
+                  <input
+                    class="form-control text-center w-15"
+                    id="txt1"
+                    maxlength="1"
+                  />
+                  <input
+                    class="form-control text-center w-15"
+                    id="txt2"
+                    maxlength="1"
+                  />
+                  <input
+                    class="form-control text-center w-15"
+                    id="txt3"
+                    maxlength="1"
+                  />
+                  <input
+                    class="form-control text-center w-15"
+                    id="txt4"
+                    maxlength="1"
+                  />
+                </div>
+                <span
+                  >Войдите в систему посредством телефона</span
+                >
+                <div class="container-login100-form-btn">
+                  <a
+                    href="javascript:void(0)"
+                    class="login100-form-btn btn-primary"
+                    id="generate-otp"
+                  >
+                    Войти
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock content %}

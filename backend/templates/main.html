@@ -38,27 +38,8 @@
     <div id="global-loader">
       <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
     </div>
-    <div class="page">
-      <div class="page-main">
-        <!-- HEADER -->
-        <!-- app-Header -->
-        <header>
-          {% include 'includes/header.html' %}
-          {% include 'includes/sidebar-left.html' %}
-          {% include 'includes/sidebar-right.html' %}
-        </header>
-
-        <!-- CONTENT -->
-        <main>
-          {% block content %}{% endblock %}
-        </main>
-
-        <!-- FOOTER -->
-        <footer>
-          {% include 'includes/footer.html' %}
-        </footer>
-      </div>
-    </div>
+    {% block base %}
+    {% endblock base %}
     
     <!-- BACK-TO-TOP -->
     <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
@@ -100,8 +81,5 @@
 
     <!-- Switcher js -->
     <script src="{% static 'switcher/js/switcher.js' %}"></script>
-
-
   </body>
-
 </html>

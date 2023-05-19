@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block base %}
+<div class="page">
+  <div class="page-main">
+    <header>
+      {% include 'blog/includes/header.html' %}
+      {% include 'blog/includes/sidebar-left.html' %}
+      {% include 'blog/includes/sidebar-right.html' %}
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      {% include 'blog/includes/footer.html' %}
+    </footer>
+  </div>
+</div>
+{% endblock base %}

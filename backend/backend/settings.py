@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
     # My apps
+    'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     # Other apps
     'sorl.thumbnail',

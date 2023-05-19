@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block base %}
+{% load static %}
+<div class="page">
+  <div class="">
+    <!-- CONTAINER OPEN -->
+    <div class="col col-login mx-auto mt-7">
+      <div class="text-center">
+        <a href="index.html"
+          ><img
+            src="{% static 'images/fav/favicon-32x32.png' %}"
+            class="header-brand-img"
+            alt=""
+        /></a>
+      </div>
+    </div>
+    {% block content %}{% endblock %}
+  </div>
+</div>
+{% endblock base %}
