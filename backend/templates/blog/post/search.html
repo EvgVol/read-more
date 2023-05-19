@@ -70,9 +70,6 @@
             {% with results.count as total_results %}
             <div class="card-body p-5">
               <p class="text-muted mb-0 ps-3">
-                Ищем: "{{ request.GET.query }}"
-              </p>
-              <p class="text-muted mb-0 ps-3">
                 Найдено {{ total_results }} совпадений (
                   {% if elapsed_time < 1 %}
                     {{ elapsed_time|floatformat:10 }} мс

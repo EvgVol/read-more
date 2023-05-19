@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count, Q
 from django.views.generic import TemplateView
 from django.contrib.postgres.search import (SearchVector, SearchQuery,
-                                            SearchRank)
+                                            SearchRank, TrigramSimilarity)
 
 from taggit.models import Tag
 
@@ -135,24 +135,29 @@ def post_search(request):
     form = SearchForm()
     query = None
     results = []
+    elapsed_time = 0
 
     if 'query' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
+            search_vector = SearchVector('title', weight='A') + \
+                            SearchVector('body', weight='B')
+            search_query = SearchQuery(query, config='russian')
             # Засекаем время поиска
             start_time = time.time()
-            # Осуществляем поиск
+            # Осуществляем поиск по слову или предложению с ранжированием по частоте повторения
             results = Post.published.annotate(
-                search=SearchVector('title', 'body'),
-                rank=SearchRank(SearchVector('title', 'body'), SearchQuery(query))
+                search=search_vector,
+                rank=SearchRank(search_vector, search_query),
+                similarity=TrigramSimilarity('title', query) + \
+                            TrigramSimilarity('body', query)
             ).filter(
-                Q(search=SearchQuery(query)) | Q(search__icontains=query)
-            ).order_by('-rank')
+                Q(search=search_query) | Q(search__icontains=query)
+            ).filter(similarity__gt=0.1).order_by('-rank', '-similarity')
             # Оставливаем счетчик времени
             elapsed_time = time.time() - start_time
-    else:
-        elapsed_time = 0
+    # Возвращаем результаты поиска в шаблон
     return render(request, 'blog/post/search.html',
                     {'form': form,
                     'query': query,
