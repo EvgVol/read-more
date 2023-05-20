@@ -19,12 +19,12 @@
                         class="side-menu__label">Главная</span></a>
             </li>
             <li class="slide">
-              <a class="side-menu__item" data-bs-toggle="slide" href="{% url 'blog:post_list' %}"><span
+              <a class="side-menu__item {% if request.path == '/' %}btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="{% url 'blog:post_list' %}"><span
                       class="side-menu__label">Блог</span></a>
             </li>
             <li class="slide">
                 <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
-                        class="side-menu__label">Рецепты</span></a>
+                        class="side-menu__label ">Рецепты</span></a>
             </li>
             <li class="slide">
                 <a class="side-menu__item" data-bs-toggle="slide" href="#About"><span
