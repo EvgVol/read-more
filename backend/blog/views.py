@@ -9,6 +9,7 @@ from django.views.generic import TemplateView
 from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
 
+
 from taggit.models import Tag
 
 from .models import Post, Category

@@ -9,11 +9,12 @@
         <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img light-logo1"
             alt="logo">
       </a>
+      
       <!-- LOGO -->
-      <div class="main-header-center ms-3 d-none d-lg-block">
-        <input type="text" class="form-control" id="typehead" placeholder="Найти на сайте..." autocomplete="off">
+      <form class="main-header-center ms-3 d-none d-lg-block" action="{% url 'blog:post_search' %}" method="get">
+        <input type="text" name="query" class="form-control" id="typehead" placeholder="Найти на сайте..." autocomplete="off">
         <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
-      </div>
+      </form>
 
       <div class="d-flex order-lg-2 ms-auto header-right-icons">
         <!-- SEARCH -->
@@ -384,7 +385,7 @@
                             target="_blank">Зарегистрироваться
                         </a>
                         <a href="{% url 'account:login' %}" class="btn ripple btn-min w-sm btn-dark me-2 my-auto d-lg-none d-xl-block d-block"
-                            target="_blank">Войти
+                            target="_blank">ВОЙТИ
                         </a>
                     </div>
                     {% endif %}
