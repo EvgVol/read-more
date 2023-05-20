@@ -1,4 +1,4 @@
-{% extends 'account/base.html' %}
+{% extends 'registration/base.html' %}
 {% block title %}Авторизация{% endblock %}
 {% block content %}
 <div class="container-login100">
@@ -25,19 +25,12 @@
 
           <div class="panel-body tabs-menu-body p-0 pt-5">
             <div class="tab-content">
-              <form method="post">
-                <div class="tab-pane active" id="tab5">
-                  <div
-                    class="wrap-input100 validate-input input-group"
-                  >
-                    <a
-                      href="javascript:void(0)"
-                      class="input-group-text bg-white text-muted"
-                    >
-                      <i
-                        class="zmdi zmdi-account-o text-muted"
-                        aria-hidden="true"
-                      ></i>
+              <div class="tab-pane active" id="tab5">
+                <!-- Form of registration -->
+                <form method="post">
+                  <div class="wrap-input100 validate-input input-group">
+                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                      <i class="zmdi zmdi-account-o text-muted" aria-hidden="true"></i>
                     </a>
                     <input
                       class="input100 border-start-0 form-control ms-0"
@@ -47,18 +40,9 @@
                       placeholder="Логин"
                     />
                   </div>
-                  <div
-                    class="wrap-input100 validate-input input-group"
-                    id="Password-toggle"
-                  >
-                    <a
-                      href="javascript:void(0)"
-                      class="input-group-text bg-white text-muted"
-                    >
-                      <i
-                        class="zmdi zmdi-lock text-muted"
-                        aria-hidden="true"
-                      ></i>
+                  <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                    <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                      <i class="zmdi zmdi-lock text-muted" aria-hidden="true"></i>
                     </a>
                     <input
                       class="input100 border-start-0 form-control ms-0"
@@ -75,43 +59,45 @@
                       >
                     </p>
                   </div>
+                  {% csrf_token %}
                   <div class="container-login100-form-btn">
-                    {% csrf_token %}
-                    <a class="login100-form-btn btn-primary" type="submit">
+                    <button class="login100-form-btn btn-primary" type="submit">
                       Войти
-                    </a>
+                    </button>
                   </div>
-                  <div class="text-center pt-3">
-                    <p class="text-dark mb-0">
-                      Впервые?<a
-                        href="#"
-                        class="text-primary ms-1"
-                        >Зарегистрироваться</a
-                      >
-                    </p>
-                  </div>
-                  <label class="login-social-icon"
-                    ><span>Войти с помощью </span></label
-                  >
-                  <div class="d-flex justify-content-center">
-                    <a href="#">
-                      <div class="social-login me-4 text-center">
-                        <i class="fa fa-google"></i>
-                      </div>
-                    </a>
-                    <a href="#">
-                      <div class="social-login me-4 text-center">
-                        <i class="fa fa-twitter"></i>
-                      </div>
-                    </a>
-                    <a href="#">
-                      <div class="social-login text-center">
-                        <i class="fa fa-github"></i>
-                      </div>
-                    </a>
-                  </div>
+                </form>
+
+                <div class="text-center pt-3">
+                  <p class="text-dark mb-0">
+                    Впервые?<a
+                      href="#"
+                      class="text-primary ms-1"
+                      >Зарегистрироваться</a
+                    >
+                  </p>
                 </div>
-              </form>
+                <label class="login-social-icon"
+                  ><span>Войти с помощью </span></label
+                >
+                <div class="d-flex justify-content-center">
+                  <a href="#">
+                    <div class="social-login me-4 text-center">
+                      <i class="fa fa-google"></i>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="social-login me-4 text-center">
+                      <i class="fa fa-twitter"></i>
+                    </div>
+                  </a>
+                  <a href="#">
+                    <div class="social-login text-center">
+                      <i class="fa fa-github"></i>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
               <div class="tab-pane" id="tab6">
                 <div
                   id="mobile-num"

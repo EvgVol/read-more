@@ -10,7 +10,7 @@
         {% for post in most_commented_posts %}
           <div class="d-flex overflow-visible mt-2">
             {% if post.image %}
-              {% thumbnail post.image  "500x333" crop="center" as im %}
+              {% thumbnail post.image  "100x60" crop="center" as im %}
               <a href="{{ post.get_absolute_url }}" class="card-aside-column br-5 cover-image" data-bs-image-src="{{ im.url }}" style="background: url(&quot;{{ im.url }}&quot;) center top;"></a>
               {% endthumbnail %}
             {% endif %}

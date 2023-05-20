@@ -8,7 +8,7 @@
     <div class="">
       {% for post in latest_posts %}
       <div class="d-flex overflow-visible mt-2">
-        {% thumbnail post.image  "500x333" crop="center" as im %}
+        {% thumbnail post.image  "100x60" crop="center" as im %}
         <a
           href="{{ post.get_absolute_url }}"
           class="card-aside-column br-5 cover-image"
