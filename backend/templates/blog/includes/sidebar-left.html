@@ -19,28 +19,28 @@
                         class="side-menu__label">Главная</span></a>
             </li>
             <li class="slide">
-              <a class="side-menu__item {% if request.path == '/' %}btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="{% url 'blog:post_list' %}"><span
+              <a class="side-menu__item {% if request.path == '/' %}btn btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="{% url 'blog:post_list' %}"><span
                       class="side-menu__label">Блог</span></a>
             </li>
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
+                <a class="side-menu__item {% if request.path == '/recipes/' %}btn btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="#Features"><span
                         class="side-menu__label ">Рецепты</span></a>
             </li>
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#About"><span
+                <a class="side-menu__item {% if request.path == '/shop/' %}btn btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="#"><span
                         class="side-menu__label">Магазин</span></a>
             </li>
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#Faqs"><span
+                <a class="side-menu__item {% if request.path == '/education/' %}btn btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="#"><span
                         class="side-menu__label">Обучение</span></a>
             </li>
             
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
+                <a class="side-menu__item {% if request.path == '/chat/' %}btn btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="#"><span
                         class="side-menu__label">Чат</span></a>
             </li>
             <li class="slide">
-                <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
+                <a class="side-menu__item {% if request.path == '/help/' %}btn btn-outline-dark active{% endif %}" data-bs-toggle="slide" href="#"><span
                         class="side-menu__label">Поддержать</span></a>
             </li>
           </ul>
