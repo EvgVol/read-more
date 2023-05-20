@@ -127,3 +127,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str, default='your-password')
+
+
+LOGIN_REDIRECT_URL = 'blog:post_list'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'

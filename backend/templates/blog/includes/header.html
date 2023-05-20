@@ -10,21 +10,23 @@
             alt="logo">
       </a>
       <!-- LOGO -->
-      {% comment %} <div class="main-header-center ms-3 d-none d-lg-block">
-        <input type="text" class="form-control" id="typehead" placeholder="Search for results..." autocomplete="off">
+      <div class="main-header-center ms-3 d-none d-lg-block">
+        <input type="text" class="form-control" id="typehead" placeholder="Найти на сайте..." autocomplete="off">
         <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
-      </div> {% endcomment %}
+      </div>
+
       <div class="d-flex order-lg-2 ms-auto header-right-icons">
         <!-- SEARCH -->
-        {% comment %} <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
+        <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"
             data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent-4"
             aria-controls="navbarSupportedContent-4" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon fe fe-more-vertical"></span>
-        </button> {% endcomment %}
+        </button>
         <div class="navbar navbar-collapse responsive-navbar p-0">
             <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
                 <div class="d-flex order-lg-2">
+                    {% if request.user.is_authenticated %}
                     <div class="dropdown d-lg-none d-flex">
                         <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
                             <i class="fe fe-search"></i>
@@ -38,22 +40,17 @@
                             </div>
                         </div>
                     </div>
-                    {% comment %} <div class="d-flex country">
+                    <div class="d-flex country">
                         <a class="nav-link icon text-center" data-bs-target="#country-selector"
                             data-bs-toggle="modal">
                             <i class="fe fe-globe"></i><span
                                 class="fs-16 ms-2 d-none d-xl-block">English</span>
                         </a>
-                    </div> {% endcomment %}
-                    <!-- COUNTRY -->
-                    <div class="d-flex country">
-                        <a class="nav-link icon theme-layout nav-link-bg layout-setting">
-                            <span class="dark-layout"><i class="fe fe-moon"></i></span>
-                            <span class="light-layout"><i class="fe fe-sun"></i></span>
-                        </a>
                     </div>
+                    <!-- COUNTRY -->
+                    
                     <!-- Theme-Layout -->
-                    {% comment %} <div class="dropdown  d-flex shopping-cart">
+                    <div class="dropdown  d-flex shopping-cart">
                         <a class="nav-link icon text-center" data-bs-toggle="dropdown">
                             <i class="fe fe-shopping-cart"></i><span class="badge bg-secondary header-badge">4</span>
                         </a>
@@ -169,17 +166,17 @@
                                 <span class="float-end p-2 fs-17 fw-semibold">Total: $6789</span>
                             </div>
                         </div>
-                    </div> {% endcomment %}
+                    </div>
                     <!-- CART -->
 
-                    {% comment %} <div class="dropdown d-flex">
+                    <div class="dropdown d-flex">
                         <a class="nav-link icon full-screen-link nav-link-bg">
                             <i class="fe fe-minimize fullscreen-button"></i>
                         </a>
-                    </div> {% endcomment %}
+                    </div>
                     <!-- FULL-SCREEN -->
 
-                    {% comment %} <div class="dropdown  d-flex notifications">
+                    <div class="dropdown  d-flex notifications">
                         <a class="nav-link icon" data-bs-toggle="dropdown"><i
                                 class="fe fe-bell"></i><span class=" pulse"></span>
                         </a>
@@ -236,10 +233,10 @@
                                 class="dropdown-item text-center p-3 text-muted">View all
                                 Notification</a>
                         </div>
-                    </div> {% endcomment %}
+                    </div>
 
                     <!-- NOTIFICATIONS -->
-                    {% comment %} <div class="dropdown  d-flex message">
+                    <div class="dropdown  d-flex message">
                         <a class="nav-link icon text-center" data-bs-toggle="dropdown">
                             <i class="fe fe-message-square"></i><span class="pulse-danger"></span>
                         </a>
@@ -330,8 +327,16 @@
                             <a href="javascript:void(0)" class="dropdown-item text-center p-3 text-muted">See all
                                 Messages</a>
                         </div>
-                    </div> {% endcomment %}
+                    </div>
                     <!-- MESSAGE-BOX -->
+                    
+                    
+                    <div class="d-flex country">
+                        <a class="nav-link icon theme-layout nav-link-bg layout-setting">
+                            <span class="dark-layout"><i class="fe fe-moon"></i></span>
+                            <span class="light-layout"><i class="fe fe-sun"></i></span>
+                        </a>
+                    </div>
 
                     <div class="dropdown d-flex header-settings">
                         <a href="javascript:void(0);" class="nav-link icon"
@@ -340,6 +345,7 @@
                         </a>
                     </div>
                     <!-- SIDE-MENU -->
+                    
                     <div class="dropdown d-flex profile-1">
                         <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
                             <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
@@ -366,11 +372,22 @@
                             <a class="dropdown-item" href="{% url 'blog:setting' %}">
                               <i class="dropdown-icon fe fe-settings"></i> Настройка сайта
                             </a>
-                            <a class="dropdown-item" href="login.html">
+                            <a class="dropdown-item" href="{% url 'account:logout' %}">
                                 <i class="dropdown-icon fe fe-alert-circle"></i> Выйти
                             </a>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="header-nav-right d-none d-lg-flex">
+                        <a href="register.html"
+                            class="btn ripple btn-min w-sm btn-outline-dark me-2 my-auto d-lg-none d-xl-block d-block"
+                            target="_blank">Зарегистрироваться
+                        </a>
+                        <a href="{% url 'account:login' %}" class="btn ripple btn-min w-sm btn-dark me-2 my-auto d-lg-none d-xl-block d-block"
+                            target="_blank">Войти
+                        </a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

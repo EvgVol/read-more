@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-login100">
     <div class="wrap-login100 p-6">
-      <form class="login100-form validate-form">
+      <div class="login100-form validate-form">
         <span class="login100-form-title pb-5"> Авторизация </span>
         <div class="panel panel-primary">
 
@@ -22,9 +22,9 @@
               </ul>
             </div>
           </div>
-
           <div class="panel-body tabs-menu-body p-0 pt-5">
             <div class="tab-content">
+              
               <div class="tab-pane active" id="tab5">
                 <!-- Form of registration -->
                 <form method="post">
@@ -39,18 +39,24 @@
                       required id="id_username"
                       placeholder="Логин"
                     />
+                    {% for error in form.username.errors %}
+                      <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
                   </div>
                   <div class="wrap-input100 validate-input input-group" id="Password-toggle">
                     <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
-                      <i class="zmdi zmdi-lock text-muted" aria-hidden="true"></i>
+                      <i class="zmdi zmdi-eye-off text-muted" aria-hidden="true"></i>
                     </a>
                     <input
                       class="input100 border-start-0 form-control ms-0"
                       type="password"
                       name="password"
                       required id="id_password"
-                      placeholder="Пароль"
+                      placeholder="Password"
                     />
+                    {% for error in form.password.errors %}
+                      <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
                   </div>
                   <div class="text-end pt-4">
                     <p class="mb-0">
@@ -65,8 +71,17 @@
                       Войти
                     </button>
                   </div>
+                  {% if form.errors %}
+                    <div class="alert alert-danger mt-4">
+                      <ul>
+                        {% for error in form.non_field_errors %}
+                          <li>{{ error }}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
                 </form>
-
+                
                 <div class="text-center pt-3">
                   <p class="text-dark mb-0">
                     Впервые?<a
@@ -149,7 +164,7 @@
             </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 {% endblock content %}
