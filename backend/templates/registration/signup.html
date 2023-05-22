@@ -7,7 +7,6 @@
       <span class="login100-form-title"> Регистрация </span>
       <div
         class="wrap-input100 validate-input input-group"
-        data-bs-validate="Valid email is required: ex@abc.xyz"
       >
         <a
           href="javascript:void(0)"
@@ -19,7 +18,8 @@
           class="input100 border-start-0 ms-0 form-control"
           type="text"
           name="username"
-          maxlength="32" autofocus required id="id_username"
+          maxlength="32" 
+          required id="id_username"
           placeholder="Логин"
         />
       </div>
@@ -61,29 +61,10 @@
           placeholder="Пароль"
         />
       </div>
-      <div
-        class="wrap-input100 validate-input input-group"
-        id="Password-toggle"
-      >
-        <a
-          href="javascript:void(0)"
-          class="input-group-text bg-white text-muted"
-        >
-          <i class="zmdi zmdi-eye" aria-hidden="true"></i>
-        </a>
-        <input
-          class="input100 border-start-0 ms-0 form-control"
-          type="password"
-          name="password2"
-          autocomplete="new-password"
-          required id="id_password2"
-          placeholder="Подтверждение пароля"
-        />
-      </div>
       <label class="custom-control custom-checkbox mt-4">
-        <input type="checkbox" class="custom-control-input" />
+        <input type="checkbox" class="custom-control-input" name="privacy_policy" required id="id_privacy_policy" />
         <span class="custom-control-label"
-          >Согласен с <a href="terms.html">Политикой кондифициальности</a></span
+          >Согласен с <a href="#">Политикой кондифициальности</a></span
         >
       </label>
       {% csrf_token %}
@@ -94,7 +75,7 @@
       </div>
       <div class="text-center pt-3">
         <p class="text-dark mb-0">
-          Уже зарегистрированы?<a href="login.html" class="text-primary ms-1"
+          Уже зарегистрированы?<a href="{% url 'account:login' %}" class="text-primary ms-1"
             >Войти</a
           >
         </p>
