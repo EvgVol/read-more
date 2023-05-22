@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% block base %}
+{% load static %}
+<div class="page">
+  <div class="page-main">
+    <header>
+      {% include 'includes/header.html' %}
+      {% include 'includes/sidebar-left.html' %}
+      {% include 'includes/sidebar-right.html' %}
+    </header>
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      {% include 'includes/footer.html' %}
+    </footer>
+  </div>
+</div>
+{% endblock base %}

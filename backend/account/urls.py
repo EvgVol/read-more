@@ -1,6 +1,7 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
+from . import views
 
 app_name = 'account'
 
@@ -31,4 +32,8 @@ urlpatterns = [
              auth_views.PasswordResetDoneView.as_view(),
              name='password_reset_done'),
     ])),
+
+    path('profile/', include([
+        path('<int:pk>/', views.ProfileView.as_view(), name='profile'),
+    ]))
 ]

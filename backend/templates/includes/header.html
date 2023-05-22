@@ -360,7 +360,7 @@
                                 </div>
                             </div>
                             <div class="dropdown-divider m-0"></div>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{% url 'account:profile' user.pk %}">
                                 <i class="dropdown-icon fe fe-user"></i> Профиль
                             </a>
                             <a class="dropdown-item" href="#">
@@ -370,9 +370,11 @@
                             <a class="dropdown-item" href="#">
                                 <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                             </a>
+                            {% if user.is_staff %}
                             <a class="dropdown-item" href="{% url 'blog:setting' %}">
                               <i class="dropdown-icon fe fe-settings"></i> Настройка сайта
                             </a>
+                            {% endif %}
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLogOut">
                                 <i class="dropdown-icon fe fe-alert-circle"></i> Выйти
                             </a>
