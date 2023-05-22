@@ -1,7 +1,6 @@
 from django.apps import AppConfig
 
 
-class AccountConfig(AppConfig):
+class CoreConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'account'
-    verbose_name='Аккаунт'
+    name = 'core'

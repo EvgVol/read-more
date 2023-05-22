@@ -23,6 +23,7 @@ SITE_ID = 1
 MODE = config('MODE', cast=str, default='dev')
 
 INSTALLED_APPS = [
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -34,11 +35,9 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
     'djoser',
-    'rest_framework',
-    'rest_framework.authtoken',
     # My apps
-    'account.apps.AccountConfig',
-    'blog.apps.BlogConfig',
+    'blog',
+    'core',
     # Other apps
     'sorl.thumbnail',
     'taggit', #https://github.com/jazzband/django-taggit
@@ -95,6 +94,7 @@ else:
         }
     }
 
+AUTH_USER_MODEL = 'account.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
