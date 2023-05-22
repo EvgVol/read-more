@@ -23,7 +23,7 @@ SITE_ID = 1
 MODE = config('MODE', cast=str, default='dev')
 
 INSTALLED_APPS = [
-    'account',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'djoser',
     # My apps
+    'account',
     'blog',
     'core',
     # Other apps
@@ -87,6 +88,12 @@ if MODE == 'dev':
 else:
     DATABASES = {
         'default': {
+            'ENGINE': config('DB_ENGINE'),
+            'NAME': config('DB_NAME'),
+            'USER': config('POSTGRES_USER'),
+            'PASSWORD': config('POSTGRES_PASSWORD'),
+        },
+        'blog': {
             'ENGINE': config('DB_ENGINE'),
             'NAME': config('DB_NAME'),
             'USER': config('POSTGRES_USER'),

@@ -64,9 +64,12 @@ class User(AbstractUser):
                 message="Проверьте корректно ли указан номер телефона"
             )
         ],
-        blank=False,
+        blank=True,
         help_text='Укажите номер телефона для связи', max_length=12
     )
+
+    about_me = models.TextField('О себе', blank=True,
+                                help_text='Укажите информацию о себе',)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ('email',)

@@ -1,22 +1,23 @@
-{% extends 'account/base.html' %}
+{% extends 'includes/base.html' %}
 {% block title %}Профиль пользователя {% endblock %}
 {% block content %}
 {% load thumbnail %}
 {% load static %}
+{% load blog_tags %}
 <div class="main-content app-content mt-0">
   <div class="side-app">
     <!-- CONTAINER -->
     <div class="main-container container-fluid">
       <!-- PAGE-HEADER -->
       <div class="page-header">
-        <h1 class="page-title">Мой профиль</h1>
+        <h1 class="page-title">Профиль</h1>
         <div>
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="javascript:void(0)">READ MORE</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Мой профиль
+              Пользователь
             </li>
           </ol>
         </div>
@@ -55,6 +56,13 @@
                             </div>
                           </div>
                         </div>
+                        {% if request.user.username == user.username %}
+                        <div class="btn-profile">
+                          <button class="btn btn-outline-primary mt-1 mb-1">
+                            <i class="fa fa-sliders"></i> <span>Редактировать</span>
+                          </button>
+                        </div>
+                        {% else %}
                         <div class="btn-profile">
                           <button class="btn btn-primary mt-1 mb-1">
                             <i class="fa fa-rss"></i> <span>Подписаться</span>
@@ -63,6 +71,7 @@
                             <i class="fa fa-envelope"></i> <span>Написать</span>
                           </button>
                         </div>
+                        {% endif %}
                       </div>
                     </div>
                     <div class="row">
@@ -73,19 +82,19 @@
                           <div class="mt-3">
                             <a
                               class="social-icon text-primary"
-                              href="https://www.facebook.com/"
+                              href="#"
                               target="_blank"
                               ><i class="fa fa-facebook"></i
                             ></a>
                             <a
                               class="social-icon text-primary"
-                              href="https://twitter.com/"
+                              href="#/"
                               target="_blank"
                               ><i class="fa fa-twitter"></i
                             ></a>
                             <a
                               class="social-icon text-primary"
-                              href="https://www.youtube.com/"
+                              href="#"
                               target="_blank"
                               ><i class="fa fa-youtube"></i
                             ></a>
@@ -96,13 +105,13 @@
                             ></a>
                             <a
                               class="social-icon text-primary"
-                              href="https://www.linkedin.com/"
+                              href="#"
                               target="_blank"
                               ><i class="fa fa-linkedin"></i
                             ></a>
                             <a
                               class="social-icon text-primary"
-                              href="https://myaccount.google.com/"
+                              href="#"
                               target="_blank"
                               ><i class="fa fa-google-plus"></i
                             ></a>
@@ -126,8 +135,8 @@
                           <i class="fe fe-edit fs-20 text-white"></i>
                         </div>
                         <div class="media-body">
-                          <span class="text-muted">Posts</span>
-                          <div class="fw-semibold fs-25">328</div>
+                          <span class="text-muted">Статей</span>
+                          <div class="fw-semibold fs-25">{{ user.posts.count }}</div>
                         </div>
                       </div>
                     </div>
@@ -166,19 +175,16 @@
               </div>
               <div class="card">
                 <div class="card-header">
-                  <div class="card-title">About</div>
+                  <div class="card-title">О себе</div>
                 </div>
                 <div class="card-body">
                   <div>
                     <h5>
-                      Biography<i class="fe fe-edit-3 text-primary mx-2"></i>
+                      Биография<i class="fe fe-edit-3 text-primary mx-2"></i>
                     </h5>
                     <p>
-                      Nor again is there anyone who loves or pursues or desires
-                      to obtain pain of itself, because it is pain, but because
-                      occasionally circumstances occur in which toil and pain
-                      can procure him some great pleasure.
-                      <a href="javascript:void(0)">Read more</a>
+                      {{ user.about_me|markdown|truncatewords_html:30 }}
+                      <a href="javascript:void(0)">Читать подробно...</a>
                     </p>
                   </div>
                   <hr />
@@ -203,7 +209,7 @@
                       <span><i class="fe fe-phone fs-20"></i></span>
                     </div>
                     <div>
-                      <strong>+125 254 3562 </strong>
+                      <strong>{{ user.phone_number }} </strong>
                     </div>
                   </div>
                   <div class="d-flex align-items-center mb-3 mt-3">
@@ -211,14 +217,14 @@
                       <span><i class="fe fe-mail fs-20"></i></span>
                     </div>
                     <div>
-                      <strong>georgeme@abc.com </strong>
+                      <strong>{{ user.email }} </strong>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="card">
                 <div class="card-header">
-                  <div class="card-title">Skills</div>
+                  <div class="card-title">Навыки</div>
                 </div>
                 <div class="card-body">
                   <div class="tags">
@@ -354,7 +360,7 @@
                           <img
                             alt=""
                             class="rounded-circle avatar avatar-md"
-                            src="../assets/images/users/16.jpg"
+                            src="{% static 'images/users/16.jpeg' %}"
                           />
                         </div>
                       </div>
@@ -407,31 +413,31 @@
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/12.jpg);
+                            background-image: url({% static 'images/users/12.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/2.jpg);
+                            background-image: url({% static 'images/users/2.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/9.jpg);
+                            background-image: url({% static 'images/users/9.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/2.jpg);
+                            background-image: url({% static 'images/users/2.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/4.jpg);
+                            background-image: url({% static 'images/users/4.jpeg' %});
                           "
                         ></span>
                         <span class="avatar brround text-primary">+28</span>
@@ -472,7 +478,7 @@
                           <img
                             alt=""
                             class="rounded-circle avatar avatar-md"
-                            src="../assets/images/users/16.jpg"
+                            src="{% static 'images/users/16.jpeg' %}"
                           />
                         </div>
                       </div>
@@ -510,13 +516,13 @@
                     <div class="d-flex">
                       <a href="gallery.html" class="w-30 m-2"
                         ><img
-                          src="../assets/images/media/22.jpg"
+                          src="{% static 'images/users/22.jpeg' %}"
                           alt="img"
                           class="br-5"
                       /></a>
                       <a href="gallery.html" class="w-30 m-2"
                         ><img
-                          src="../assets/images//media/24.jpg"
+                          src="{% static 'images/media/24.jpeg' %}"
                           alt="img"
                           class="br-5"
                       /></a>
@@ -539,31 +545,31 @@
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/12.jpg);
+                            background-image: url({% static 'images/users/12.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/2.jpg);
+                            background-image: url({% static 'images/users/2.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/9.jpg);
+                            background-image: url({% static 'images/users/9.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/2.jpg);
+                            background-image: url({% static 'images/users/2.jpeg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/4.jpg);
+                            background-image: url({% static 'images/users/4.jpeg' %});
                           "
                         ></span>
                         <span class="avatar brround text-primary">+28</span>
@@ -604,7 +610,7 @@
                           <img
                             alt=""
                             class="rounded-circle avatar avatar-md"
-                            src="../assets/images/users/16.jpg"
+                            src="{% static 'images/users/16.jpeg' %}"
                           />
                         </div>
                       </div>
@@ -642,19 +648,19 @@
                     <div class="d-flex">
                       <a href="gallery.html" class="w-30 m-2"
                         ><img
-                          src="../assets/images/media/26.jpg"
+                          src="{% static 'images/images/media/26.jpg' %}"
                           alt="img"
                           class="br-5"
                       /></a>
                       <a href="gallery.html" class="w-30 m-2"
                         ><img
-                          src="../assets/images/media/23.jpg"
+                          src="{% static 'images/images/media/23.jpg' %}"
                           alt="img"
                           class="br-5"
                       /></a>
                       <a href="gallery.html" class="w-30 m-2"
                         ><img
-                          src="../assets/images/media/21.jpg"
+                          src="{% static 'images/images/media/21.jpg' %}"
                           alt="img"
                           class="br-5"
                       /></a>

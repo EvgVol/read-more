@@ -1,13 +1,11 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from django.utils import timezone
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.urls import reverse
+from django.conf import settings
 
 from taggit.managers import TaggableManager
-
-
-User = get_user_model()
 
 
 class Category(models.Model):
@@ -39,7 +37,7 @@ class Post(models.Model):
 
     title = models.CharField('Заголовок', max_length=250)
     slug = models.SlugField('Slug', max_length=50, unique_for_date='publish')
-    author = models.ForeignKey(User,
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='blog_posts',
                                verbose_name='Автор')

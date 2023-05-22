@@ -7,6 +7,9 @@ app_name = 'account'
 
 
 urlpatterns = [
+    path('signup/',
+            views.RegisterView.as_view(),
+            name='signup'),
     path('login/',
          auth_views.LoginView.as_view(),
          name='login'),

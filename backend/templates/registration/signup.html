@@ -1,8 +1,9 @@
-{% extends 'account/base.html' %} {% block title %}Регистрация{% endblock %} {%
-block content %}
+{% extends 'registration/base.html' %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
 <div class="container-login100">
   <div class="wrap-login100 p-6">
-    <form class="login100-form validate-form">
+    <form class="login100-form validate-form" method="POST" action="{% url 'account:signup' %}">
       <span class="login100-form-title"> Регистрация </span>
       <div
         class="wrap-input100 validate-input input-group"
@@ -17,6 +18,8 @@ block content %}
         <input
           class="input100 border-start-0 ms-0 form-control"
           type="text"
+          name="username"
+          maxlength="32" autofocus required id="id_username"
           placeholder="Логин"
         />
       </div>
@@ -33,6 +36,9 @@ block content %}
         <input
           class="input100 border-start-0 ms-0 form-control"
           type="email"
+          name="email"
+          maxlength="256"
+          required id="id_email"
           placeholder="Электронная почта"
         />
       </div>
@@ -49,7 +55,29 @@ block content %}
         <input
           class="input100 border-start-0 ms-0 form-control"
           type="password"
+          name="password1"
+          autocomplete="new-password"
+          required id="id_password1"
           placeholder="Пароль"
+        />
+      </div>
+      <div
+        class="wrap-input100 validate-input input-group"
+        id="Password-toggle"
+      >
+        <a
+          href="javascript:void(0)"
+          class="input-group-text bg-white text-muted"
+        >
+          <i class="zmdi zmdi-eye" aria-hidden="true"></i>
+        </a>
+        <input
+          class="input100 border-start-0 ms-0 form-control"
+          type="password"
+          name="password2"
+          autocomplete="new-password"
+          required id="id_password2"
+          placeholder="Подтверждение пароля"
         />
       </div>
       <label class="custom-control custom-checkbox mt-4">
@@ -58,10 +86,11 @@ block content %}
           >Согласен с <a href="terms.html">Политикой кондифициальности</a></span
         >
       </label>
+      {% csrf_token %}
       <div class="container-login100-form-btn">
-        <a href="index.html" class="login100-form-btn btn-primary">
+        <button class="login100-form-btn btn-primary" type="submit">
           Зарегистрироваться
-        </a>
+        </button>
       </div>
       <div class="text-center pt-3">
         <p class="text-dark mb-0">
