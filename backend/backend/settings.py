@@ -33,6 +33,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.postgres',
+    'djoser',
+    'rest_framework',
+    'rest_framework.authtoken',
     # My apps
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
@@ -138,7 +141,26 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str, default='your-password')
 
-
 LOGIN_REDIRECT_URL = 'blog:post_list'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+}
+
+DJOSER = {
+    'LOGIN_FIELD': 'username',
+    'HIDE_USER': 'False',
+    'PERMISSIONS': {
+        'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
+    },
+}

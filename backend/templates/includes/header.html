@@ -373,7 +373,7 @@
                             <a class="dropdown-item" href="{% url 'blog:setting' %}">
                               <i class="dropdown-icon fe fe-settings"></i> Настройка сайта
                             </a>
-                            <a class="dropdown-item" href="{% url 'account:logout' %}">
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalLogOut">
                                 <i class="dropdown-icon fe fe-alert-circle"></i> Выйти
                             </a>
                         </div>
@@ -396,3 +396,4 @@
     </div>
   </div>
 </div>
+{% include 'includes/exit_confirmation.html' %}
