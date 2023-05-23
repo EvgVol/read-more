@@ -60,7 +60,7 @@
                   </div>
                   <div class="text-end pt-4">
                     <p class="mb-0">
-                      <a href="#" class="text-primary ms-1"
+                      <a href="{% url 'password_reset' %}" class="text-primary ms-1"
                         >Забыли пароль?</a
                       >
                     </p>
@@ -85,14 +85,14 @@
                 <div class="text-center pt-3">
                   <p class="text-dark mb-0">
                     Впервые?<a
-                      href="#"
+                      href="{% url 'signup' %}"
                       class="text-primary ms-1"
                       >Зарегистрироваться</a
                     >
                   </p>
                 </div>
                 <label class="login-social-icon"
-                  ><span>Войти с помощью </span></label
+                  ><span>ИЛИ</span></label
                 >
                 <div class="d-flex justify-content-center">
                   <a href="#">

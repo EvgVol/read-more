@@ -23,7 +23,7 @@ SITE_ID = 1
 MODE = config('MODE', cast=str, default='dev')
 
 INSTALLED_APPS = [
-    
+    'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'djoser',
     # My apps
-    'account',
+
     'blog',
     'core',
     # Other apps
@@ -140,6 +140,10 @@ THUMBNAIL_CACHE_LOCATION = BASE_DIR / 'thumb_cache'
 CLEANUP_AUTO = True
 CLEANUP_KEEP_EXTENSIONS = ['jpg', 'jpeg', 'png']
 
+
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+
 # Setting server-email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
@@ -148,9 +152,15 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str, default='your-password')
 
-LOGIN_REDIRECT_URL = 'blog:post_list'
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
+DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
+SERVER_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
+
+
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
+LOGOUT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-login100">
   <div class="wrap-login100 p-6">
-    <form class="login100-form validate-form" method="POST" action="{% url 'account:signup' %}">
+    <form class="login100-form validate-form" method="POST" action="{% url 'signup' %}">
       <span class="login100-form-title"> Регистрация </span>
       <div
         class="wrap-input100 validate-input input-group"
@@ -75,12 +75,12 @@
       </div>
       <div class="text-center pt-3">
         <p class="text-dark mb-0">
-          Уже зарегистрированы?<a href="{% url 'account:login' %}" class="text-primary ms-1"
+          Уже зарегистрированы?<a href="{% url 'login' %}" class="text-primary ms-1"
             >Войти</a
           >
         </p>
       </div>
-      <label class="login-social-icon"><span>Войти с помощью</span></label>
+      <label class="login-social-icon"><span>ИЛИ</span></label>
       <div class="d-flex justify-content-center">
         <a href="javascript:void(0)">
           <div class="social-login me-4 text-center">

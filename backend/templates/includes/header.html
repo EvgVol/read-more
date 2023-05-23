@@ -517,7 +517,7 @@
                   <div class="dropdown-divider m-0"></div>
                   <a
                     class="dropdown-item"
-                    href="{% url 'account:profile' user.pk %}"
+                    href="{% url 'profile' user.pk %}"
                   >
                     <i class="dropdown-icon fe fe-user"></i> Профиль
                   </a>
@@ -548,13 +548,13 @@
               {% else %}
               <div class="header-nav-right d-none d-lg-flex">
                 <a
-                  href="{% url 'account:signup' %}"
+                  href="{% url 'signup' %}"
                   class="btn ripple btn-min w-sm btn-outline-dark me-2 my-auto d-lg-none d-xl-block d-block"
                   target="_blank"
                   >Зарегистрироваться
                 </a>
                 <a
-                  href="{% url 'account:login' %}"
+                  href="{% url 'login' %}"
                   class="btn ripple btn-min w-sm btn-dark me-2 my-auto d-lg-none d-xl-block d-block"
                   target="_blank"
                   >ВОЙТИ
