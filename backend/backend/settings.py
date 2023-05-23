@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import Csv, config
 from dotenv import load_dotenv
+from django.urls import reverse_lazy
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +35,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.postgres',
-    'djoser',
     # My apps
 
     'blog',
@@ -101,6 +101,8 @@ else:
         }
     }
 
+AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
+
 AUTH_USER_MODEL = 'account.User'
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -157,8 +159,8 @@ SERVER_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru
 
 
 
-LOGIN_REDIRECT_URL = 'blog:post_list'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = reverse_lazy("blog:post_list")
+LOGIN_URL = reverse_lazy("login")
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'blog:post_list'
 
@@ -190,3 +192,8 @@ PASSWORD_HASHERS = [
  'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
  'django.contrib.auth.hashers.ScryptPasswordHasher',
 ]
+
+# Настройка CSRF-токена:
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = "Lax"

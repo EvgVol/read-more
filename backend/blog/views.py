@@ -64,7 +64,7 @@ def post_list(request, tag_slug=None, category_slug=None):
 
 # Отображаем детали статьи
 def post_detail(request, year, month, day, post):
-    """Отображает детали статьи."""
+    """Отображает данные статьи."""
 
     # Получение статьи по заданным параметрам
     post =  get_object_or_404(Post,

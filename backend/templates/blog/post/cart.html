@@ -16,7 +16,17 @@
 		<div class="text-muted">{{ post.body|markdown|truncatewords_html:30 }}</div>
 		
 		<div class="d-flex align-items-center pt-5 mt-auto">
-			<div class="avatar brround avatar-md me-3 cover-image" data-bs-image-src="{% static 'images/users/18.jpg' %}"></div>
+			{% if post.author.avatar %}
+				{% thumbnail post.author.avatar "50x50" crop="center" upscale=True as im %}
+				<img class="avatar brround avatar-md me-3 cover-image" src="{{ im.url }}" />
+				{% endthumbnail %}
+			{% else %}
+				<img
+					class="avatar brround avatar-md me-3 cover-image"
+					src="{% static 'images/users/default-user.jpeg' %}"
+					alt="Аватар"
+				/>
+			{% endif %}
 			<div>
 				<a href="#" class="text-default">{{ post.author }}</a>
 				<small class="d-block text-muted">{{ post.publish|naturaltime }}</small>

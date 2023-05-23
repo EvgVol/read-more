@@ -2,7 +2,7 @@ from django.contrib.auth import login, get_user_model
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.db import transaction
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import RegisterForm, ProfileUpdateForm
 
@@ -26,6 +26,10 @@ def register(request):
                   'registration/signup.html',
                   {'form': form})
 
+def user_detail(request, username):
+    """Отображает данные пользователя."""
+    author = get_object_or_404(User, username=username)
+    post_list = author.blog_posts.select_related('category').all()
 
 
 class ProfileView(DetailView):
