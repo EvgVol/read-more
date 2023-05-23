@@ -1,58 +1,31 @@
 from django.contrib.auth import login, get_user_model
 from django.views.generic import CreateView, DetailView, UpdateView
-from django.contrib.auth.views import (PasswordChangeDoneView,
-                                       PasswordChangeView,
-                                       PasswordResetCompleteView,
-                                       PasswordResetConfirmView,
-                                       PasswordResetDoneView,
-                                       PasswordResetView)
 from django.urls import reverse_lazy
 from django.db import transaction
-
+from django.shortcuts import render, redirect
 
 from .forms import RegisterForm, ProfileUpdateForm
+
 
 User = get_user_model()
 
 
-# class PasswordChangeDone(PasswordChangeDoneView):
-#     template_name = 'account/password_change_done.html'
+def register(request):
+    """Регистрирует новых пользователей."""
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            login(request, user)
+        return redirect('blog:post_list')
+    else:
+        form = RegisterForm()
+    return render(request,
+                  'registration/signup.html',
+                  {'form': form})
 
-
-# class PasswordChange(PasswordChangeView):
-#     success_url = reverse_lazy('account:password_change_done')
-#     template_name = 'account/password_change_form.html'
-
-
-# class PasswordResetComplete(PasswordResetCompleteView):
-#     template_name = 'account/password_reset_complete.html'
-
-
-# class PasswordResetConfirm(PasswordResetConfirmView):
-#     success_url = reverse_lazy('account:password_reset_complete')
-#     template_name = 'account/password_reset_confirm.html'
-
-
-# class PasswordResetDone(PasswordResetDoneView):
-#     template_name = 'account/password_reset_done.html'
-
-
-# class PasswordReset(PasswordResetView):
-#     success_url = reverse_lazy('account:password_reset_done')
-#     template_name = 'account/password_reset_form.html'
-
-
-class RegisterView(CreateView):
-    """Отображение страницы регистрации."""
-
-    form_class = RegisterForm
-    success_url = reverse_lazy('blog:post_list')
-    template_name = 'registration/signup.html'
-
-    def form_valid(self, form):
-        valid = super().form_valid(form)
-        login(self.request, self.object)
-        return valid
 
 
 class ProfileView(DetailView):

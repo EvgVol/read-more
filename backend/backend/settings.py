@@ -157,10 +157,10 @@ SERVER_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru
 
 
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/'
-LOGOUT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'blog:post_list'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'blog:post_list'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -181,3 +181,12 @@ DJOSER = {
         'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
     },
 }
+
+# Setting password hashers
+PASSWORD_HASHERS = [
+ 'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+ 'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+ 'django.contrib.auth.hashers.Argon2PasswordHasher',
+ 'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+ 'django.contrib.auth.hashers.ScryptPasswordHasher',
+]
