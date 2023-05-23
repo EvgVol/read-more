@@ -491,8 +491,8 @@
                   data-bs-toggle="dropdown"
                   class="nav-link leading-none d-flex"
                 >
-                {% if user.avatar %}
-                  {% thumbnail user.avatar "216x226" crop="center" upscale=True as im %}
+                {% if request.user.avatar %}
+                  {% thumbnail request.user.avatar "216x226" crop="center" upscale=True as im %}
                   <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
                   {% endthumbnail %}
                 {% else %}
@@ -509,9 +509,9 @@
                   <div class="drop-heading">
                     <div class="text-center">
                       <h5 class="text-dark mb-0 fs-14 fw-semibold">
-                        {{ user.get_full_name }}
+                        {{ request.user.get_full_name }}
                       </h5>
-                      <small class="text-muted">{{ user.username }}</small>
+                      <small class="text-muted">{{ request.user.username }}</small>
                     </div>
                   </div>
                   <div class="dropdown-divider m-0"></div>
@@ -530,7 +530,7 @@
                   <a class="dropdown-item" href="#">
                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                   </a>
-                  {% if user.is_staff %}
+                  {% if request.user.is_staff %}
                   <a class="dropdown-item" href="{% url 'blog:setting' %}">
                     <i class="dropdown-icon fe fe-settings"></i> Настройка сайта
                   </a>

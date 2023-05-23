@@ -16,6 +16,7 @@
 		<div class="text-muted">{{ post.body|markdown|truncatewords_html:30 }}</div>
 		
 		<div class="d-flex align-items-center pt-5 mt-auto">
+			<a href="{% url 'profile' post.author.id %}">
 			{% if post.author.avatar %}
 				{% thumbnail post.author.avatar "50x50" crop="center" upscale=True as im %}
 				<img class="avatar brround avatar-md me-3 cover-image" src="{{ im.url }}" />
@@ -27,8 +28,9 @@
 					alt="Аватар"
 				/>
 			{% endif %}
+			</a>
 			<div>
-				<a href="#" class="text-default">{{ post.author }}</a>
+				<a href="{% url 'profile' post.author.id %}" class="text-default">{{ post.author.username }}</a>
 				<small class="d-block text-muted">{{ post.publish|naturaltime }}</small>
 			</div>
 			<div class="ms-auto">
