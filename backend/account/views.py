@@ -1,10 +1,11 @@
 from django.contrib.auth import login, get_user_model
+from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import RegisterForm, ProfileUpdateForm
+from .forms import RegisterForm, UserEditForm
 
 
 User = get_user_model()
@@ -26,49 +27,72 @@ def register(request):
                   'registration/signup.html',
                   {'form': form})
 
+
 def user_detail(request, username):
     """Отображает данные пользователя."""
     author = get_object_or_404(User, username=username)
-    post_list = author.blog_posts.select_related('category').all()
+    post_list = author.blog_posts.all()
+    context = {
+        'author': author,
+        'post_list': post_list,
+    }
+    return render(request, 'account/profile.html', context)
 
 
-class ProfileView(DetailView):
-    """Отображение страницы пользователя."""
+@login_required
+def user_edit(request):
+    """Редактируем данные пользователя."""
+    if request.method == 'POST':
+        form = UserEditForm(instance=request.user,
+                            data=request.POST,
+                            files=request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = UserEditForm(instance=request.user)
+    return render(request, 'account/profile-edit.html', {'form': form})
 
-    model = User
-    template_name = 'account/profile.html'
+#     author = get_object_or_404(User, username=username)
+#     post_list = author.blog_posts.select_related('category').all()
 
 
-class ProfileUpdateView(UpdateView):
-    """Отображение страницы редактирования профиля пользователя."""
+# class ProfileView(DetailView):
+#     """Отображение страницы пользователя."""
 
-    model = User
-    form_class = ProfileUpdateForm
-    template_name = 'account/profile-edit.html'
+#     model = User
+#     template_name = 'account/profile.html'
 
-    def get_object(self, queryset=None):
-        return self.request.user
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = f'Редактирование профиля пользователя: {self.request.user.username}'
-        form = kwargs.get('form')
-        if not form:
-            form = self.form_class(instance=self.request.user)
-        context['user_form'] = form
-        return context
+# class ProfileUpdateView(UpdateView):
+#     """Отображение страницы редактирования профиля пользователя."""
 
-    def form_valid(self, form):
-        context = self.get_context_data()
-        user_form = context['user_form']
-        with transaction.atomic():
-            if all([form.is_valid(), user_form.is_valid()]):
-                user_form.save()
-                form.save()
-            else:
-                context.update({'user_form': user_form})
-                return self.render_to_response(context)
-        return super(ProfileUpdateView, self).form_valid(form)
+#     model = User
+#     form_class = ProfileUpdateForm
+#     template_name = 'account/profile-edit.html'
 
-    def get_success_url(self):
-        return reverse_lazy('account:profile', kwargs={'pk': self.object.pk})
+#     def get_object(self, queryset=None):
+#         return self.request.user
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['title'] = f'Редактирование профиля пользователя: {self.request.user.username}'
+#         form = kwargs.get('form')
+#         if not form:
+#             form = self.form_class(instance=self.request.user)
+#         context['user_form'] = form
+#         return context
+
+#     def form_valid(self, form):
+#         context = self.get_context_data()
+#         user_form = context['user_form']
+#         with transaction.atomic():
+#             if all([form.is_valid(), user_form.is_valid()]):
+#                 user_form.save()
+#                 form.save()
+#             else:
+#                 context.update({'user_form': user_form})
+#                 return self.render_to_response(context)
+#         return super(ProfileUpdateView, self).form_valid(form)
+
+#     def get_success_url(self):
+#         return reverse_lazy('account:profile', kwargs={'pk': self.object.pk})

@@ -1,18 +1,21 @@
-{% extends 'includes/base.html' %} {% block title %}Настройки{% endblock %} {% block content %} {% load static %}
+{% extends 'includes/base.html' %}
+{% block title %}Настройки{% endblock %}
+{% block content %}
+{% load static %}
 <div class="main-content app-content mt-0">
   <div class="side-app">
     <!-- CONTAINER -->
     <div class="main-container container-fluid">
       <!-- PAGE-HEADER -->
       <div class="page-header">
-        <h1 class="page-title">Switcher Style-1</h1>
+        <h1 class="page-title">Внешний вид</h1>
         <div>
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="javascript:void(0)">Switcher</a>
+              <a href="javascript:void(0)">READ MORE</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Switcher Style-1
+              Внешний вид
             </li>
           </ol>
         </div>
@@ -26,11 +29,11 @@
             <div class="card sidebar-right1">
               <div class="card-body">
                 <div>
-                  <h6 class="main-content-label mb-3">Navigation Style</h6>
+                  <h6 class="main-content-label mb-3">Стиль навигации</h6>
                 </div>
                 <div class="switch_section">
                   <div class="switch-toggle d-flex">
-                    <span class="me-auto">Vertical Menu</span>
+                    <span class="me-auto">Вертильное меню</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -46,7 +49,7 @@
                     </p>
                   </div>
                   <div class="switch-toggle d-flex mt-2">
-                    <span class="me-auto">Horizontal Click Menu</span>
+                    <span class="me-auto">Горизонтальное меню</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -61,7 +64,7 @@
                     </p>
                   </div>
                   <div class="switch-toggle d-flex mt-2">
-                    <span class="me-auto">Horizontal Hover Menu</span>
+                    <span class="me-auto">Горисонтальное меню при наведении курсора</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -79,11 +82,11 @@
               </div>
               <div class="card-body">
                 <div>
-                  <h6 class="main-content-label mb-3">LTR and RTL VERSIONS</h6>
+                  <h6 class="main-content-label mb-3">Лвая или правая версия</h6>
                 </div>
                 <div class="switch_section">
                   <div class="switch-toggle d-flex">
-                    <span class="me-auto">LTR Version</span>
+                    <span class="me-auto">Левая</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -99,7 +102,7 @@
                     </p>
                   </div>
                   <div class="switch-toggle d-flex mt-2">
-                    <span class="me-auto">RTL Version</span>
+                    <span class="me-auto">Правая</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -117,11 +120,11 @@
               </div>
               <div class="card-body">
                 <div>
-                  <h6 class="main-content-label mb-3">Light Theme Style</h6>
+                  <h6 class="main-content-label mb-3">Настройка светлой темы</h6>
                 </div>
                 <div class="switch_section">
                   <div class="switch-toggle d-flex">
-                    <span class="me-auto">Light Theme</span>
+                    <span class="me-auto">Светлая тема</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -137,7 +140,7 @@
                     </p>
                   </div>
                   <div class="switch-toggle d-flex">
-                    <span class="me-auto">Light Primary</span>
+                    <span class="me-auto">Цвет иконок</span>
                     <div class="">
                       <input
                         class="w-30p h-30 input-color-picker color-primary-light"
@@ -157,11 +160,11 @@
               </div>
               <div class="card-body">
                 <div>
-                  <h6 class="main-content-label mb-3">Dark Theme Style</h6>
+                  <h6 class="main-content-label mb-3">Настройка темной темы</h6>
                 </div>
                 <div class="switch_section">
                   <div class="switch-toggle d-flex mt-2">
-                    <span class="me-auto">Dark Theme</span>
+                    <span class="me-auto">Темная тема</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -176,7 +179,7 @@
                     </p>
                   </div>
                   <div class="switch-toggle d-flex mt-2">
-                    <span class="me-auto">Dark Primary</span>
+                    <span class="me-auto">Цвет иконок</span>
                     <div class="">
                       <input
                         class="w-30p h-30 input-dark-color-picker color-primary-dark"
@@ -198,12 +201,12 @@
               <div class="card-body">
                 <div>
                   <h6 class="main-content-label mb-3">
-                    Transparent Theme Styles
+                    Настройка прозрачной темы
                   </h6>
                 </div>
                 <div class="switch_section">
                   <div class="switch-toggle d-flex mt-2">
-                    <span class="me-auto">Transparent Theme</span>
+                    <span class="me-auto">Прозрачная тема</span>
                     <p class="onoffswitch2">
                       <input
                         type="radio"
@@ -640,7 +643,7 @@
               <div class="card-body">
                 <div class="switch_section text-center px-0">
                   <div class="btn-list">
-                    <button class="btn btn-success w-lg">Save Settings</button>
+                    <button class="btn btn-success w-lg">Сохранить настройки</button>
                     <button
                       class="btn btn-danger"
                       onclick="localStorage.clear();
@@ -649,7 +652,7 @@
                                         resetData() ;"
                       type="button"
                     >
-                      Reset All
+                      Сбросить всё
                     </button>
                   </div>
                 </div>

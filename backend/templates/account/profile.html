@@ -37,8 +37,8 @@
                         <div class="profile-cover__action bg-img"></div>
                         <div class="profile-cover__img">
                           <div class="profile-img-1">
-                            {% if user.avatar %}
-                              {% thumbnail user.avatar "216x226" crop="center" upscale=True as im %}
+                            {% if author.avatar %}
+                              {% thumbnail author.avatar "216x226" crop="center" upscale=True as im %}
                               <img class="card-img my-2" src="{{ im.url }}" />
                               {% endthumbnail %}
                             {% else %}
@@ -51,14 +51,14 @@
                           </div>
                           <div class="profile-img-content text-dark text-start">
                             <div class="text-dark">
-                              <h3 class="h3 mb-2">{{ user.get_full_name }}</h3>
-                              <h5 class="text-muted">{{ user.username }}</h5>
+                              <h3 class="h3 mb-2">{{ author.get_full_name }}</h3>
+                              <h5 class="text-muted">{{ author.username }}</h5>
                             </div>
                           </div>
                         </div>
-                        {% if request.user.username == user.username %}
+                        {% if request.user.username == author.username %}
                         <div class="btn-profile">
-                          <button class="btn btn-outline-primary mt-1 mb-1">
+                          <button class="btn btn-primary mt-1 mb-1">
                             <i class="fa fa-sliders"></i> <span>Редактировать</span>
                           </button>
                         </div>
@@ -136,7 +136,7 @@
                         </div>
                         <div class="media-body">
                           <span class="text-muted">Статей</span>
-                          <div class="fw-semibold fs-25">{{ user.posts.count }}</div>
+                          <div class="fw-semibold fs-25">{{ author.blog_posts.count }}</div>
                         </div>
                       </div>
                     </div>
@@ -183,7 +183,7 @@
                       Биография<i class="fe fe-edit-3 text-primary mx-2"></i>
                     </h5>
                     <p>
-                      {{ user.about_me|markdown|truncatewords_html:30 }}
+                      {{ author.about_me|markdown|truncatewords_html:30 }}
                       <a href="javascript:void(0)">Читать подробно...</a>
                     </p>
                   </div>
@@ -209,7 +209,7 @@
                       <span><i class="fe fe-phone fs-20"></i></span>
                     </div>
                     <div>
-                      <strong>{{ user.phone_number }} </strong>
+                      <strong>{{ author.phone_number }} </strong>
                     </div>
                   </div>
                   <div class="d-flex align-items-center mb-3 mt-3">
@@ -217,7 +217,7 @@
                       <span><i class="fe fe-mail fs-20"></i></span>
                     </div>
                     <div>
-                      <strong>{{ user.email }} </strong>
+                      <strong>{{ author.email }} </strong>
                     </div>
                   </div>
                 </div>
@@ -683,31 +683,31 @@
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/12.jpg);
+                            background-image: url({% static 'images/users/12.jpg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/2.jpg);
+                            background-image: url({% static 'images/users/2.jpg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/9.jpg);
+                            background-image: url({% static 'images/users/9.jpg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/2.jpg);
+                            background-image: url({% static 'images/users/2.jpg' %});
                           "
                         ></span>
                         <span
                           class="avatar brround"
                           style="
-                            background-image: url(../assets/images/users/4.jpg);
+                            background-image: url({% static 'images/users/4.jpg' %});
                           "
                         ></span>
                         <span class="avatar brround text-primary">+28</span>
@@ -750,7 +750,7 @@
                     <div class="media overflow-visible">
                       <img
                         class="avatar brround avatar-md me-3"
-                        src="../assets/images/users/18.jpg"
+                        src="{% static 'images/users/18.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle mt-2">
@@ -793,7 +793,7 @@
                     <div class="media overflow-visible mt-sm-5">
                       <img
                         class="avatar brround avatar-md me-3"
-                        src="../assets/images/users/2.jpg"
+                        src="{% static 'images/users/2.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle mt-2">
@@ -845,7 +845,7 @@
                     <div class="media media-xs overflow-visible">
                       <img
                         class="avatar bradius avatar-xl me-3"
-                        src="../assets/images/users/12.jpg"
+                        src="{% static 'images/users/12.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle">
@@ -863,7 +863,7 @@
                     <div class="media media-xs overflow-visible mt-5">
                       <img
                         class="avatar bradius avatar-xl me-3"
-                        src="../assets/images/users/2.jpg"
+                        src="{% static 'images/users/2.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle">
@@ -881,7 +881,7 @@
                     <div class="media media-xs overflow-visible mt-5">
                       <img
                         class="avatar bradius avatar-xl me-3"
-                        src="../assets/images/users/9.jpg"
+                        src="{% static 'images/users/9.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle">
@@ -899,7 +899,7 @@
                     <div class="media media-xs overflow-visible mt-5">
                       <img
                         class="avatar bradius avatar-xl me-3"
-                        src="../assets/images/users/4.jpg"
+                        src="{% static 'images/users/4.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle">
@@ -926,7 +926,7 @@
                     <div class="media media-xs overflow-visible">
                       <img
                         class="avatar brround avatar-md me-3"
-                        src="../assets/images/users/18.jpg"
+                        src="{% static 'images/users/18.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle">
@@ -993,7 +993,7 @@
                     <div class="media media-xs overflow-visible mt-5">
                       <img
                         class="avatar brround avatar-md me-3"
-                        src="../assets/images/users/2.jpg"
+                        src="{% static 'images/users/2.jpg' %}"
                         alt="avatar-img"
                       />
                       <div class="media-body valign-middle mt-0">

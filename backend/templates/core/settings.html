@@ -1,0 +1,347 @@
+{% extends 'includes/base.html' %}
+{% block title %}Настройки{% endblock %}
+{% block content %}
+{% load static %}
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <!-- CONTAINER -->
+    <div class="main-container container-fluid">
+      <!-- PAGE-HEADER -->
+      <div class="page-header">
+        <h1 class="page-title">Настройки</h1>
+        <div>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)">READ MORE</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Настройки</li>
+          </ol>
+        </div>
+      </div>
+      <!-- PAGE-HEADER END -->
+
+      <!-- ROW-1 OPEN -->
+
+      <!-- Row -->
+      <div class="row">
+        <div class="col-lg-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <div
+                class="list-group list-group-transparent mb-0 file-manager file-manager-border"
+              >
+                <h4>Настройки</h4>
+                <div>
+                  <a
+                    href="{% url 'account_edit' %}"
+                    class="list-group-item d-flex align-items-center px-0 border-top"
+                  >
+                    <i class="fe fe-user fs-18 me-2 text-success p-2"></i
+                    >Аккаунт
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i class="fe fe-bell fs-18 me-2 text-secondary p-2"></i
+                    >Уведомления
+                  </a>
+                </div>
+                {% if request.user.is_staff %}
+                <div>
+                  <a
+                    href="{% url 'core:style' %}"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i class="fe fe-eye fs-18 me-2 text-primary p-2"></i>
+                    Внешний вид
+                  </a>
+                </div>
+                {% endif %}
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i class="fe fe-lock fs-18 me-2 text-warning p-2"></i>
+                    Конфидициальность
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i class="fe fe-headphones fs-18 me-2 text-info p-2"></i>
+                    Помощь и поддержка
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i class="fe fe-database fs-18 me-2 text-pink p-2"></i> База данных
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i
+                      class="fe fe-battery-charging fs-18 me-2 text-green p-2"
+                    ></i>
+                    Power Saving Management
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="javascript:void(0);"
+                    class="list-group-item d-flex align-items-center px-0"
+                  >
+                    <i class="fe fe-help-circle fs-18 me-2 text-danger p-2"></i>
+                    О нас
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-xl-9">
+          <div class="row row-sm">
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-primary-transparent text-primary"
+                          ><i class="fe fe-settings"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">Общие</h4>
+                      </a>
+                      <p>
+                        Общие настройки, такие как название сайта, логотип, другие общие настройки
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-secondary-transparent text-secondary border-secondary"
+                          ><i class="fe fe-home"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">Главная страница</h4>
+                      </a>
+                      <p>
+                        В этих настройках мы можем изменять боковое меню, а главной страницей можно управлять
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-danger-transparent text-danger border-danger"
+                          ><i class="fe fe-bell"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">Уведомления</h4>
+                      </a>
+                      <p>
+                        Настройки уведомлений мы можем управлять конфиденциальностью и безопасностью уведомлений
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-warning-transparent text-warning border-warning"
+                          ><i class="fe fe-grid"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">Веб-приложения</h4>
+                      </a>
+                      <p>
+                        Можно управлять настройками веб-приложений, такими как приложения, элементы и почта, связанные с веб-приложениями
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-success-transparent text-success border-success"
+                          ><i class="fe fe-flag"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">Регион & Язык</h4>
+                      </a>
+                      <p>
+                        Настройки региона и языка мы можем добавлять, удалять и редактировать ваш регион и язык
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-pink-transparent text-pink border-pink"
+                          ><i class="fe fe-cast"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">Блог</h4>
+                      </a>
+                      <p>
+                        Можно управлять такими настройками блога, как "включить блог", "максимальное количество страниц на странице" и другими
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-info-transparent text-info border-info"
+                          ><i class="fe fe-search"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">SEO</h4>
+                      </a>
+                      <p>
+                        Можно управлять настройками поисковой оптимизации, мета-теги и социальные сети..
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-12 col-xxl-6">
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-2 col-sm-2 col-md-12">
+                      <div class="mt-3 mb-5">
+                        <span
+                          class="settings-icon bg-danger-transparent text-orange border-orange"
+                          ><i class="fe fe-mail"></i
+                        ></span>
+                      </div>
+                    </div>
+                    <div class="col-xl-10 col-sm-10 col-md-12">
+                      <a href="javascript:void(0)">
+                        <h4 class="mb-1 text-dark">SMTP</h4>
+                      </a>
+                      <p>
+                        Можно управлять настройками SMTP электронной почты
+                      </p>
+                      <a href="javascript:void(0)"
+                        >Изменить
+                        <i class="ion-chevron-right fs-10 ms-1"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Row -->
+    </div>
+    <!-- CONTAINER CLOSED -->
+  </div>
+</div>
+{% endblock %}

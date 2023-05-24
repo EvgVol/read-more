@@ -5,21 +5,13 @@ from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count, Q
-from django.views.generic import TemplateView
 from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
-
 
 from taggit.models import Tag
 
 from .models import Post, Category
 from .forms import EmailPostForm, CommentForm, SearchForm
-
-
-class SettingView(TemplateView):
-    """Отображает страницу с настройками сайта."""
-
-    template_name = 'blog/setting.html'
 
 
 def post_list(request, tag_slug=None, category_slug=None):

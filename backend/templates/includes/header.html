@@ -517,7 +517,7 @@
                   <div class="dropdown-divider m-0"></div>
                   <a
                     class="dropdown-item"
-                    href="{% url 'profile' user.pk %}"
+                    href="{{ user.get_absolute_url }}"
                   >
                     <i class="dropdown-icon fe fe-user"></i> Профиль
                   </a>
@@ -530,11 +530,9 @@
                   <a class="dropdown-item" href="#">
                     <i class="dropdown-icon fe fe-lock"></i> Lockscreen
                   </a>
-                  {% if request.user.is_staff %}
-                  <a class="dropdown-item" href="{% url 'blog:setting' %}">
-                    <i class="dropdown-icon fe fe-settings"></i> Настройка сайта
+                  <a class="dropdown-item" href="{% url 'core:setting' %}">
+                    <i class="dropdown-icon fe fe-settings"></i> Настройки
                   </a>
-                  {% endif %}
                   <a
                     class="dropdown-item"
                     href="#"
