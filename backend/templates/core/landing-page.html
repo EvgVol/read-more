@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% block title %}READ MORE | Сайт для разработчиков и о разработчиках, и ещё кое о чем...{% endblock %}
 {% block base %}
 {% load static %}
 <div class="page">
@@ -10,7 +11,7 @@
                 <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                     href="javascript:void(0)"></a>
                 <!-- sidebar-toggle-->
-                <a class="logo-horizontal " href="index.html">
+                <a class="logo-horizontal " href="{% url 'core:index' %}">
                     <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img desktop-logo" alt="logo">
                     <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img light-logo1"
                         alt="logo">
@@ -50,7 +51,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="main-sidemenu navbar px-0">
-                            <a class="navbar-brand ps-0 d-none d-lg-block" href="index.html">
+                            <a class="navbar-brand ps-0 d-none d-lg-block" href="{% url 'core:index' %}">
                                 <img alt="" class="logo-2" src="{% static 'images/fav/favicon-32x32.png' %}">
                                 <img src="{% static 'images/fav/favicon-32x32.png' %}" class="logo-3" alt="logo">
                             </a>
@@ -103,7 +104,7 @@
                     <div class="container px-sm-0">
                         <div class="row">
                             <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                                <h4 class="fw-semibold mt-3">Backend-developer</h4>
+                                <h4 class="fw-semibold mt-3">Backend-developers</h4>
                                 <h1 class="text-start fw-bold">Welcome, <span
                                         class="text-primary animate-heading">Each</span></h1>
                                 <p class="pb-3">
@@ -111,11 +112,11 @@
 
                                 <a href="#"
                                     target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fe fe-play me-2"></i> Get Started
+                                        class="fe fe-play me-2"></i> Посмотреть
                                 </a>
                                 <a href="#"
                                     class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fe fe-eye me-2"></i>Discover More
+                                        class="fe fe-eye me-2"></i>Узнать больше
                                 </a>
                             </div>
                             <div class="col-xl-6 col-lg-6 my-auto">
