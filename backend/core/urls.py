@@ -6,6 +6,7 @@ app_name = 'core'
 
 
 urlpatterns = [
-    path('settings/', views.SettingView.as_view(), name='setting'),
+    path('', views.IndexView.as_view(), name='index'),
+    path('setting/', views.SettingView.as_view(), name='setting'),
     path('style/', views.StyleView.as_view(), name='style'),
 ]

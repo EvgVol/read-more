@@ -9,3 +9,8 @@ class SettingView(TemplateView):
 class StyleView(TemplateView):
     """Отображает страницу с настройками стилей."""
     template_name = 'core/style.html'
+
+
+class IndexView(TemplateView):
+    """Отображает главную страницу"""
+    template_name = 'core/landing-page.html'

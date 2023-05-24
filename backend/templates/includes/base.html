@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block base %}
 <div class="page">
   <div class="page-main">
@@ -15,5 +16,50 @@
     </footer>
   </div>
 </div>
-{% block scripts %}{% endblock %}
 {% endblock base %}
+
+{% block script %}
+<!-- BACK-TO-TOP -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<!-- JQUERY JS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- INPUT MASK JS -->
+<script src="{% static 'plugins/input-mask/jquery.mask.min.js' %}"></script>
+
+<!-- SIDE-MENU JS -->
+<script src="{% static 'plugins/sidemenu/sidemenu.js' %}"></script>
+
+<!-- TypeHead js -->
+<script src="{% static 'plugins/bootstrap5-typehead/autocomplete.js' %}"></script>
+<script src="{% static 'js/typehead.js' %}"></script>
+
+<!-- SHOW PASSWORD JS -->
+<script src="{% static 'js/show-password.min.js' %}"></script>
+
+<!-- SIDEBAR JS -->
+<script src="{% static 'plugins/sidebar/sidebar.js' %}"></script>
+
+<!-- Perfect SCROLLBAR JS-->
+<script src="{% static 'plugins/p-scroll/perfect-scrollbar.js' %}"></script>
+<script src="{% static 'plugins/p-scroll/pscroll.js' %}"></script>
+<script src="{% static 'plugins/p-scroll/pscroll-1.js' %}"></script>
+
+<!-- Color Theme js -->
+<script src="{% static 'js/themeColors.js' %}"></script>
+
+<!-- Sticky js -->
+<script src="{% static 'js/sticky.js' %}"></script>
+
+<!-- CUSTOM JS -->
+{% comment %} <script src="{% static 'js/custom.js' %}"></script> {% endcomment %}
+<script src="{% static 'js/custom1.js' %}"></script>
+
+<!-- Switcher js -->
+<script src="{% static 'switcher/js/switcher.js' %}"></script>
+{% endblock script %}
