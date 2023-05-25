@@ -4,8 +4,7 @@ from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.forms import ModelForm
-
-from core.mixins import RequiredFieldsMixin
+from django.utils import timezone
 
 
 User = get_user_model()
@@ -29,6 +28,12 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'password', 'privacy_policy']
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exclude(id=self.instance.id).exists():
+            raise ValidationError('Пользователь с таким email уже существует')
+        return email
+
 
 class UserEditForm(ModelForm):
     """Форма редактирования данных пользователя."""
@@ -37,14 +42,48 @@ class UserEditForm(ModelForm):
         model = User
         fields = ['username', 'email', 'first_name',
                  'last_name', 'birthdate', 'avatar',
-                'phone_number', 'about_me']
+                 'phone_number', 'about_me']
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username__iexact=username)\
+                       .exclude(username=username)\
+                       .exists():
+            raise ValidationError(
+                "Пользователь с таким логином уже существует."
+            )
+        return username
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        # проверяем, что email уникален
-        if User.objects.filter(email=email).exclude(id=self.instance.id).exists():
-            raise ValidationError('Пользователь с таким email уже существует')
+        if User.objects.filter(email=email)\
+                       .exclude(id=self.instance.id)\
+                       .exists():
+            raise ValidationError(
+                'Пользователь с таким email уже существует'
+            )
         return email
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        if phone_number:
+            if not phone_number.isdigit():
+                raise ValidationError(
+                    'Номер телефона должен содержать только цифры'
+                )
+            if User.objects.filter(phone_number=phone_number)\
+                           .exclude(pk=self.instance.pk)\
+                           .exists():
+                raise ValidationError(
+                    'Пользователь с таким номером телефона уже существует'
+                )
+        return phone_number
+
+    def clean_birthdate(self):
+        birthdate = self.cleaned_data.get('birthdate')
+        if birthdate and birthdate > timezone.now().date():
+            raise ValidationError('Дата рождения не может быть в будущем')
+        return birthdate
 
 
 class PasswordChangingForm(PasswordChangeForm):
@@ -61,54 +100,12 @@ class PasswordChangingForm(PasswordChangeForm):
 
         # проверяем, что новый пароль не совпадает со старым
         if old_password and old_password == new_password1:
-            raise ValidationError("Новый пароль не может совпадать со старым")
+            raise ValidationError(
+                'Новый пароль не может совпадать со старым'
+            )
         
         # проверяем, что новый пароль подтвержден верно
-        if new_password1 and new_password2 and new_password1 != new_password2:
+        if (new_password1 and new_password2 
+            and new_password1 != new_password2):
             raise ValidationError("Пароли не совпадают")
-
         return self.cleaned_data
-
-# class ProfileUpdateForm(ModelForm):
-#     """Форма обновления данных пользователя."""
-
-#     class Meta:
-#         model = User
-#         fields = ('username', 'email', 'first_name',
-#                   'last_name', 'birthdate', 'avatar',
-#                   'phone_number')
-
-#     def __init__(self, *args, **kwargs):
-#         """Обновление стилей формы под bootstrap."""
-#         super().__init__(*args, **kwargs)
-#         for field in self.fields:
-#             self.fields[field].widget.attrs.update({
-#                 'class': 'form-control',
-#                 'autocomplete': 'off'
-#             })
-
-#     def get_object(self, queryset=None):
-#         return self.request.user.profile
-
-#     def clean_username(self):
-#         username = self.cleaned_data.get('username')
-#         user = User.objects.filter(username__iexact=username).exclude(username=username).exists()
-#         if user:
-#             raise ValidationError("Пользователь с таким именем уже существует.")
-#         return username
-
-#     def clean_email(self):
-#         email = self.cleaned_data.get('email')
-#         username = self.cleaned_data.get('username')
-#         user = User.objects.filter(email__iexact=email).exclude(username=username).exists()
-#         if user:
-#             raise ValidationError("Пользователь с таким email уже существует.")
-#         return email
-
-#     def clean_phone_number(self):
-#         phone_number = self.cleaned_data.get('phone_number')
-#         username = self.cleaned_data.get('username')
-#         user = User.objects.filter(phone_number__iexact=phone_number).exclude(username=username).exists()
-#         if user:
-#             raise ValidationError("Пользователь с таким номером телефона уже существует.")
-#         return phone_number
