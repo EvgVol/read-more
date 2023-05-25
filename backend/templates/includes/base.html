@@ -5,20 +5,16 @@
   <div class="page-main">
     <header>
       {% include 'includes/header.html' %}
-      {% include 'includes/sidebar-left.html' %}
-      {% include 'includes/sidebar-right.html' %}
+      {% include 'includes/sidebar-left.html' %} 
+      {% include 'includes/sidebar-right.html'%}
     </header>
     <main>
       {% block content %}{% endblock %}
     </main>
-    <footer>
-      {% include 'includes/footer.html' %}
-    </footer>
+    <footer>{% include 'includes/footer.html' %}</footer>
   </div>
 </div>
-{% endblock base %}
-
-{% block script %}
+{% endblock base %} {% block script %}
 <!-- BACK-TO-TOP -->
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
@@ -57,7 +53,9 @@
 <script src="{% static 'js/sticky.js' %}"></script>
 
 <!-- CUSTOM JS -->
-{% comment %} <script src="{% static 'js/custom.js' %}"></script> {% endcomment %}
+{% comment %}
+<script src="{% static 'js/custom.js' %}"></script>
+{% endcomment %}
 <script src="{% static 'js/custom1.js' %}"></script>
 
 <!-- Switcher js -->

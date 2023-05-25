@@ -1,8 +1,6 @@
 from django.contrib.auth import login, get_user_model, logout
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, DetailView, UpdateView
-from django.urls import reverse_lazy
-from django.db import transaction
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import RegisterForm, UserEditForm, PasswordChangingForm
@@ -52,10 +50,12 @@ def user_edit(request):
         if 'save-details' in request.POST:
             if form.is_valid():
                 form.save()
+                messages.success(request, 'Данные профиля изменены')
         elif 'change-password' in request.POST:
             if form_password.is_valid():
                 form_password.save()
                 logout(request)
+                messages.success(request, 'Пароль успешно изменен')
                 return redirect('login')
     return render(request, 'account/profile-edit.html',
                   {'form': form,

@@ -38,6 +38,17 @@
     <div id="global-loader">
       <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
     </div>
+    {% if messages %} {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message|safe }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %} {% endif %} 
     {% block base %}{% endblock base %}
     {% block script %}{% endblock script %}
     
