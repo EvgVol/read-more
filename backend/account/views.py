@@ -1,11 +1,11 @@
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login, get_user_model, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.urls import reverse_lazy
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import RegisterForm, UserEditForm
+from .forms import RegisterForm, UserEditForm, PasswordChangingForm
 
 
 User = get_user_model()
@@ -42,15 +42,24 @@ def user_detail(request, username):
 @login_required
 def user_edit(request):
     """Редактируем данные пользователя."""
+    user = request.user
+    form = UserEditForm(instance=user,
+                        data=request.POST or None,
+                        files=request.FILES or None)
+    form_password = PasswordChangingForm(user=user,
+                                         data=request.POST or None)
     if request.method == 'POST':
-        form = UserEditForm(instance=request.user,
-                            data=request.POST,
-                            files=request.FILES)
-        if form.is_valid():
-            form.save()
-    else:
-        form = UserEditForm(instance=request.user)
-    return render(request, 'account/profile-edit.html', {'form': form})
+        if 'save-details' in request.POST:
+            if form.is_valid():
+                form.save()
+        elif 'change-password' in request.POST:
+            if form_password.is_valid():
+                form_password.save()
+                logout(request)
+                return redirect('login')
+    return render(request, 'account/profile-edit.html',
+                  {'form': form,
+                   'form_password': form_password})
 
 #     author = get_object_or_404(User, username=username)
 #     post_list = author.blog_posts.select_related('category').all()

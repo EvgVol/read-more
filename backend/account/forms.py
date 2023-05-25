@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -39,6 +39,12 @@ class UserEditForm(ModelForm):
                  'last_name', 'birthdate', 'avatar',
                 'phone_number', 'about_me']
 
+
+class PasswordChangingForm(PasswordChangeForm):
+    """Форма редактирования пароля пользователя."""
+
+    class Meta:
+        model = User
 
 # class ProfileUpdateForm(ModelForm):
 #     """Форма обновления данных пользователя."""

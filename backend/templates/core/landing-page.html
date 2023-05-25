@@ -2,6 +2,7 @@
 {% block title %}READ MORE | Сайт для разработчиков и о разработчиках, и ещё кое о чем...{% endblock %}
 {% block base %}
 {% load static %}
+{% load thumbnail %}
 <div class="page">
   <div class="page-main">
     <!-- app-Header -->
@@ -85,15 +86,39 @@
                                             class="side-menu__label">Связаться</span></a>
                                 </li>
                             </ul>
-                            <div class="header-nav-right d-none d-lg-flex">
-                                <a href="register.html"
-                                    class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                    target="_blank">Зарегистрироваться
+                            {% if request.user.is_authenticated %}
+                              <div class="dropdown d-flex profile">
+                                {% load thumbnail %}
+                                <a class='text-muted' href="{% url 'profile' user.username %}"> Здравствуй, {{ user.username }}
+                                <a
+                                  href="javascript:void(0)"
+                                  data-bs-toggle="dropdown"
+                                  class="nav-link leading-none d-flex"
+                                >
+                                {% if request.user.avatar %}
+                                  {% thumbnail request.user.avatar "216x226" crop="center" upscale=True as im %}
+                                  <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
+                                  {% endthumbnail %}
+                                {% else %}
+                                  <img
+                                    class="avatar profile-user brround cover-image"
+                                    src="{% static 'images/users/default-user.jpeg' %}"
+                                    alt="Аватар"
+                                  />
+                                {% endif %}
                                 </a>
-                                <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
-                                    target="_blank">ВОЙТИ
-                                </a>
-                            </div>
+                              </div>
+                            {% else %}
+                              <div class="header-nav-right d-none d-lg-flex">
+                                  <a href="register.html"
+                                      class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                      target="_blank">Зарегистрироваться
+                                  </a>
+                                  <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                      target="_blank">ВОЙТИ
+                                  </a>
+                              </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

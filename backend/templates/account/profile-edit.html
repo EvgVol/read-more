@@ -25,7 +25,7 @@
         </div>
       </div>
       <!-- PAGE-HEADER END -->
-
+      {% include 'includes/check_error.html' %}
       <!-- ROW-1 OPEN -->
       <div class="row">
         <div class="col-xl-4">
@@ -61,82 +61,19 @@
                   </p>
                 </div>
               </div>
-              <form method="post">
+              {% with form_password as form %}
+              <form method='post'>
                 <div class="form-group">
-                  <label class="form-label">Текущий пароль</label>
-                  <div
-                    class="wrap-input100 validate-input input-group"
-                    id="Password-toggle"
-                  >
-                    <a
-                      href="javascript:void(0)"
-                      class="input-group-text bg-white text-muted"
-                    >
-                      <i
-                        class="zmdi zmdi-eye text-muted"
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                    <input
-                      class="input100 form-control"
-                      type="password"
-                      placeholder="Введите текущий пароль"
-                      autocomplete="current-password"
-                    />
-                  </div>
+                  {% include 'includes/cycle_forms.html' %}
                 </div>
-                <div class="form-group">
-                  <label class="form-label">Новый пароль</label>
-                  <div
-                    class="wrap-input100 validate-input input-group"
-                    id="Password-toggle1"
-                  >
-                    <a
-                      href="javascript:void(0)"
-                      class="input-group-text bg-white text-muted"
-                    >
-                      <i
-                        class="zmdi zmdi-eye text-muted"
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                    <input
-                      class="input100 form-control"
-                      type="password"
-                      placeholder="Новый пароль"
-                      autocomplete="new-password"
-                    />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Подтверждение пароля</label>
-                  <div
-                    class="wrap-input100 validate-input input-group"
-                    id="Password-toggle2"
-                  >
-                    <a
-                      href="javascript:void(0)"
-                      class="input-group-text bg-white text-muted"
-                    >
-                      <i
-                        class="zmdi zmdi-eye text-muted"
-                        aria-hidden="true"
-                      ></i>
-                    </a>
-                    <input
-                      class="input100 form-control"
-                      type="password"
-                      placeholder="Подтверждение пароля"
-                      autocomplete="new-password"
-                    />
-                  </div>
+                {% csrf_token %}
+                <div class="card-footer text-end">
+                  <button class="btn btn-primary" type="submit" name="change-password">Изменить</button>
                 </div>
               </form>
+              {% endwith %}
             </div>
-            <div class="card-footer text-end">
-              <a href="javascript:void(0)" class="btn btn-primary">Изменить</a>
-              <a href="javascript:void(0)" class="btn btn-danger">Отмена</a>
-            </div>
+              
           </div>
           <div class="card panel-theme">
             <div class="card-header">
@@ -185,188 +122,25 @@
             </div>
           </div>
         </div>
+        
         <div class="col-xl-8">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">Персональные данные</h3>
             </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-lg-6 col-md-12">
-                  <div class="form-group">
-                    <label for="exampleInputname">Имя</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputname"
-                      {% if user.first_name %}
-                        placeholder="{{ user.first_name }}"
-                      {% else %}
-                        placeholder="Укажите имя"
-                      {% endif %}
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                  <div class="form-group">
-                    <label for="exampleInputname1">Фамилия</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputname1"
-                      {% if user.last_name %}
-                        placeholder="{{ user.last_name }}"
-                      {% else %}
-                        placeholder="Укажите фамилию"
-                      {% endif %}
-                    />
-                  </div>
-                </div>
+            {% with form as form %}
+            <form method='post' enctype="multipart/form-data">
+              <div class="card-body">
+                {% include 'includes/cycle_forms.html' %}
               </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">Электронный адрес</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  {% if user.email %}
-                  placeholder="{{ user.email }}"
-                  {% else %}
-                  placeholder="Укажите адрес электронной почты"
-                  {% endif %}
-                />
+              {% csrf_token %}
+              <div class="card-footer text-end">
+                <button type="submit" class="btn btn-dark my-1" name="save-details">
+                  Обновить
+                </button>
               </div>
-              <div class="form-group">
-                <label for="exampleInputnumber">Номер телефона</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="exampleInputnumber"
-                  {% if user.phone_number %}
-                  placeholder="{{ user.phone_number }}"
-                  {% else %}
-                  placeholder="Укажите номер телефона"
-                  {% endif %}
-                />
-              </div>
-              <div class="form-group">
-                <label class="form-label">О себе</label>
-                <textarea class="form-control" rows="10" placeholder="Введите данные о себе...">{{ user.about_me }}</textarea>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Вебсайт</label>
-                <input class="form-control" placeholder="http://splink.com" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Дата рождения</label>
-                <div class="row">
-                  <div class="col-md-4 mb-2">
-                    <select class="form-control select2 form-select">
-                      <option value="0">День</option>
-                      <option value="1">01</option>
-                      <option value="2">02</option>
-                      <option value="3">03</option>
-                      <option value="4">04</option>
-                      <option value="5">05</option>
-                      <option value="6">06</option>
-                      <option value="7">07</option>
-                      <option value="8">08</option>
-                      <option value="9">09</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                      <option value="13">13</option>
-                      <option value="14">14</option>
-                      <option value="15">15</option>
-                      <option value="16">16</option>
-                      <option value="17">17</option>
-                      <option value="18">18</option>
-                      <option value="19">19</option>
-                      <option value="20">20</option>
-                      <option value="21">21</option>
-                      <option value="22">22</option>
-                      <option value="23">23</option>
-                      <option value="24">24</option>
-                      <option value="25">25</option>
-                      <option value="26">26</option>
-                      <option value="27">27</option>
-                      <option value="28">28</option>
-                      <option value="29">29</option>
-                      <option value="30">30</option>
-                      <option value="31">31</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4 mb-2">
-                    <select class="form-control select2 form-select">
-                      <option value="0">Месяц</option>
-                      <option value="1">Январь</option>
-                      <option value="2">Февраль</option>
-                      <option value="3">Март</option>
-                      <option value="4">Апрель</option>
-                      <option value="5">Май</option>
-                      <option value="6">Июнь</option>
-                      <option value="7">Июль</option>
-                      <option value="8">Август</option>
-                      <option value="9">Сентябрь</option>
-                      <option value="10">Октябрь</option>
-                      <option value="11">Ноябрь</option>
-                      <option value="12">Декабрь</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4 mb-2">
-                    <select class="form-control select2 form-select">
-                      <option value="0">Год</option>
-                      <option value="1">2018</option>
-                      <option value="2">2017</option>
-                      <option value="3">2016</option>
-                      <option value="4">2015</option>
-                      <option value="5">2014</option>
-                      <option value="6">2013</option>
-                      <option value="7">2102</option>
-                      <option value="8">2012</option>
-                      <option value="9">2011</option>
-                      <option value="10">2010</option>
-                      <option value="11">2009</option>
-                      <option value="12">2008</option>
-                      <option value="13">2007</option>
-                      <option value="14">2006</option>
-                      <option value="15">2005</option>
-                      <option value="16">2004</option>
-                      <option value="17">2003</option>
-                      <option value="18">2002</option>
-                      <option value="19">2001</option>
-                      <option value="20">1999</option>
-                      <option value="21">1998</option>
-                      <option value="22">1997</option>
-                      <option value="23">1996</option>
-                      <option value="24">1995</option>
-                      <option value="25">1994</option>
-                      <option value="26">1993</option>
-                      <option value="27">1992</option>
-                      <option value="28">1991</option>
-                      <option value="29">1990</option>
-                      <option value="30">1989</option>
-                      <option value="31">1987</option>
-                      <option value="31">1986</option>
-                      <option value="31">1985</option>
-                      <option value="31">1984</option>
-                      <option value="31">1983</option>
-                      <option value="31">1982</option>
-                      <option value="31">1981</option>
-                      <option value="31">1980</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card-footer text-end">
-              <a href="javascript:void(0)" class="btn btn-success my-1"
-                >Обновить</a
-              >
-              <a href="javascript:void(0)" class="btn btn-danger my-1"
-                >Отмена</a
-              >
-            </div>
+            </form>
+            {% endwith %}
           </div>
           <div class="row">
             <div class="col-lg-6">
