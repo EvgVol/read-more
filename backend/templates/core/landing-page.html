@@ -110,11 +110,11 @@
                               </div>
                             {% else %}
                               <div class="header-nav-right d-none d-lg-flex">
-                                  <a href="register.html"
+                                  <a href="{% url 'signup' %}"
                                       class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                       target="_blank">Зарегистрироваться
                                   </a>
-                                  <a href="login.html" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                  <a href="{% url 'login' %}" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
                                       target="_blank">ВОЙТИ
                                   </a>
                               </div>
