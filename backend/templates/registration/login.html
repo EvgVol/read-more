@@ -95,17 +95,17 @@
                   ><span>ИЛИ</span></label
                 >
                 <div class="d-flex justify-content-center">
-                  <a href="#">
+                  <a href="{% url "social:begin" "facebook" %}">
                     <div class="social-login me-4 text-center">
-                      <i class="fa fa-google"></i>
+                      <i class="fa fa-facebook"></i>
                     </div>
                   </a>
-                  <a href="#">
+                  <a href="{% url 'social:begin' 'yandex-oauth2' %}">
                     <div class="social-login me-4 text-center">
                       <i class="fa fa-twitter"></i>
                     </div>
                   </a>
-                  <a href="#">
+                  <a href="{% url 'social:begin' 'mailru-oauth2' %}">
                     <div class="social-login text-center">
                       <i class="fa fa-github"></i>
                     </div>

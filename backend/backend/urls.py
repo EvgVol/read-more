@@ -4,7 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import PostSitemap
-
+from social_django.views import auth
 
 sitemaps = {
     'posts': PostSitemap
@@ -13,6 +13,7 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
+    path('auth/', include('social_django.urls', namespace='social')),
     path('', include('core.urls', namespace='core')),
     path('blog/', include('blog.urls', namespace='blog')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},

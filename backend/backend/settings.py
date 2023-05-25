@@ -36,19 +36,19 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
     # My apps
-
     'blog',
     'core',
     # Other apps
     'sorl.thumbnail',
     'taggit', #https://github.com/jazzband/django-taggit
-
-    
+    'social_django', 
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -59,7 +59,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES_DIR = BASE_DIR / 'templates'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -78,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
+#Setting Database (SQLite3 or PostgreSQL)
 if MODE == 'dev':
     DATABASES = {
         'default': {
@@ -101,9 +101,14 @@ else:
         }
     }
 
+#Setting AUTHENTICATION for Users
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.yandex.YandexOAuth2',
+    'social_core.backends.mailru.MailruOAuth2',
+    'social_core.backends.mailru.MRGOAuth2',
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -145,11 +150,11 @@ THUMBNAIL_CACHE_LOCATION = BASE_DIR / 'thumb_cache'
 CLEANUP_AUTO = True
 CLEANUP_KEEP_EXTENSIONS = ['jpg', 'jpeg', 'png']
 
-
+# Default email-server
 # EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 # EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
-# Setting server-email
+# Setting Yandex email-server
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587
@@ -160,43 +165,39 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str, default='your-pass
 DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 SERVER_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 
-
-
+# Action Users LOGIN and LOGOUT
 LOGIN_REDIRECT_URL = reverse_lazy("blog:post_list")
 LOGIN_URL = reverse_lazy("login")
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'blog:post_list'
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ],
-}
-
-DJOSER = {
-    'LOGIN_FIELD': 'username',
-    'HIDE_USER': 'False',
-    'PERMISSIONS': {
-        'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
-    },
-}
-
 # Setting password hashers
 PASSWORD_HASHERS = [
- 'django.contrib.auth.hashers.PBKDF2PasswordHasher',
- 'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
- 'django.contrib.auth.hashers.Argon2PasswordHasher',
- 'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
- 'django.contrib.auth.hashers.ScryptPasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
 ]
 
-# Настройка CSRF-токена:
+# Setting CSRF-token:
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = "Lax"
+
+# Social Auth when using PosgreSQL:
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+# Facebook -->> https://developers.facebook.com/apps/
+SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_KEY')
+SOCIAL_AUTH_FACEBOOK_SECRET = config('FACEBOOK_SECRET')
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_YANDEX_OAUTH2_KEY = config('YANDEX_KEY')
+SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = config('YANDEX_SECRET')
+SOCIAL_AUTH_YANDEX_OAUTH2_SCOPE = []
+SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'https://read-more.tech:8000/auth/complete/yandex-oauth2/'
+
+SOCIAL_AUTH_MAILRU_OAUTH2_KEY = config('MAIL_KEY')
+SOCIAL_AUTH_MAILRU_OAUTH2_SECRET = config('MAIL_SECRET')
+SOCIAL_AUTH_MAILRU_OAUTH2_SCOPE = ['user_info']

@@ -61,6 +61,8 @@ def user_edit(request):
                   {'form': form,
                    'form_password': form_password})
 
+
+
 #     author = get_object_or_404(User, username=username)
 #     post_list = author.blog_posts.select_related('category').all()
 
