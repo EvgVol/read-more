@@ -105,10 +105,7 @@ else:
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
-    'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.yandex.YandexOAuth2',
-    'social_core.backends.mailru.MailruOAuth2',
-    'social_core.backends.mailru.MRGOAuth2',
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -188,16 +185,8 @@ CSRF_COOKIE_SAMESITE = "Lax"
 # Social Auth when using PosgreSQL:
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
-# Facebook -->> https://developers.facebook.com/apps/
-SOCIAL_AUTH_FACEBOOK_KEY = config('FACEBOOK_KEY')
-SOCIAL_AUTH_FACEBOOK_SECRET = config('FACEBOOK_SECRET')
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
 SOCIAL_AUTH_YANDEX_OAUTH2_KEY = config('YANDEX_KEY')
 SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = config('YANDEX_SECRET')
 SOCIAL_AUTH_YANDEX_OAUTH2_SCOPE = []
 SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'https://read-more.tech:8000/auth/complete/yandex-oauth2/'
-
-SOCIAL_AUTH_MAILRU_OAUTH2_KEY = config('MAIL_KEY')
-SOCIAL_AUTH_MAILRU_OAUTH2_SECRET = config('MAIL_SECRET')
-SOCIAL_AUTH_MAILRU_OAUTH2_SCOPE = ['user_info']
