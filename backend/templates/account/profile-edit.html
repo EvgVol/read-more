@@ -1,5 +1,5 @@
 {% extends 'includes/base.html' %}
-{% block title %}Изменить данные{% endblock %}
+{% block title %}READ MORE | Изменение данных аккаунта{% endblock %}
 {% block content %}
 {% load thumbnail %}
 {% load static %}
@@ -9,7 +9,7 @@
     <div class="main-container container-fluid">
       <!-- PAGE-HEADER -->
       <div class="page-header">
-        <h1 class="page-title">Редактировать</h1>
+        <h1 class="page-title">Изменение данных аккаунта</h1>
         <div>
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -74,52 +74,6 @@
               {% endwith %}
             </div>
               
-          </div>
-          <div class="card panel-theme">
-            <div class="card-header">
-              <div class="float-start">
-                <h3 class="card-title">Контакты</h3>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="card-body no-padding">
-              <ul class="list-group no-margin">
-                <li class="list-group-item d-flex ps-3">
-                  <div class="social social-profile-buttons me-2">
-                    <a
-                      class="social-icon text-primary"
-                      href="javascript:void(0)"
-                      ><i class="fe fe-mail"></i
-                    ></a>
-                  </div>
-                  <a href="javascript:void(0)" class="my-auto"
-                    >{{ user.email }}</a
-                  >
-                </li>
-                <li class="list-group-item d-flex ps-3">
-                  <div class="social social-profile-buttons me-2">
-                    <a
-                      class="social-icon text-primary"
-                      href="javascript:void(0)"
-                      ><i class="fe fe-globe"></i
-                    ></a>
-                  </div>
-                  <a href="javascript:void(0)" class="my-auto">www.abcd.com</a>
-                </li>
-                <li class="list-group-item d-flex ps-3">
-                  <div class="social social-profile-buttons me-2">
-                    <a
-                      class="social-icon text-primary"
-                      href="javascript:void(0)"
-                      ><i class="fe fe-phone"></i
-                    ></a>
-                  </div>
-                  <a href="javascript:void(0)" class="my-auto"
-                    >{{ user.phone_number }}</a
-                  >
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
         

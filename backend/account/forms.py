@@ -39,12 +39,35 @@ class UserEditForm(ModelForm):
                  'last_name', 'birthdate', 'avatar',
                 'phone_number', 'about_me']
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        # проверяем, что email уникален
+        if User.objects.filter(email=email).exclude(id=self.instance.id).exists():
+            raise ValidationError('Пользователь с таким email уже существует')
+        return email
+
 
 class PasswordChangingForm(PasswordChangeForm):
     """Форма редактирования пароля пользователя."""
 
     class Meta:
         model = User
+        fields = ['old_password', 'new_password1', 'new_password2']
+
+    def clean(self):
+        old_password = self.cleaned_data.get('old_password')
+        new_password1 = self.cleaned_data.get('new_password1')
+        new_password2 = self.cleaned_data.get('new_password2')
+
+        # проверяем, что новый пароль не совпадает со старым
+        if old_password and old_password == new_password1:
+            raise ValidationError("Новый пароль не может совпадать со старым")
+        
+        # проверяем, что новый пароль подтвержден верно
+        if new_password1 and new_password2 and new_password1 != new_password2:
+            raise ValidationError("Пароли не совпадают")
+
+        return self.cleaned_data
 
 # class ProfileUpdateForm(ModelForm):
 #     """Форма обновления данных пользователя."""
