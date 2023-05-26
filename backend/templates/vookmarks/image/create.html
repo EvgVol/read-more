@@ -45,9 +45,9 @@
               <div class="card-body">
                   <form class="form-horizontal" method="post">
                       <div class="row mb-4">
-                          <label for="id_title" class="col-md-3 form-label">Заголовок</label>
+                          <label for="{{ form.title.id_for_label }}" class="col-md-3 form-label">{{ form.title.label }}</label>
                           <div class="col-md-9">
-                              <input type="text" class="form-control" name="title" maxlength="200" required id="id_title">
+                            <input class="form-control" type="text" name="title" maxlength="200" required id="id_title">
                           </div>
                       </div>
                       <div class="row mb-4">
