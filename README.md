@@ -54,6 +54,7 @@ pip install -r requirements.txt
 6. Start the Django development server using the following command:
 ```
 python manage.py runserver
+python manage.py runserver_plus --cert-file cert.crt #SSL
 ```
 
 7. Open your web browser and navigate to http://localhost:8000 to view the application.
