@@ -26,17 +26,17 @@ def post_list(request, tag_slug=None, category_slug=None):
         tag = get_object_or_404(Tag, slug=tag_slug)
         post_list = post_list.filter(tags__in=[tag])
 
+    # Отображение статей с выбранной категорией
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         post_list = post_list.filter(category__in=[category])
 
-    # Сортировка статей по дате публикации и вывод последних 4 статей
+    # Получаем 4 последние опубликованные статьи
     latest_posts = post_list.order_by('-publish')[:4]
 
-    # Получение списка всех тегов и количества статей, связанных с каждым тегом
+    # Получаем список всех тегов, связанных со статьями
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
 
-    # Пагинация статей
     paginator = Paginator(post_list, 3)
     page_number = request.GET.get('page', 1)
     try:
@@ -45,13 +45,12 @@ def post_list(request, tag_slug=None, category_slug=None):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 
-                  'blog/blog.html',
-                  {'posts': posts,
-                   'tag': tag,
-                   'latest_posts': latest_posts,
-                   'tag_list': tag_list,
-                   'category': 'category'})
+
+    return render(request, 'blog/blog.html', {'posts': posts,
+                                              'tag': tag,
+                                              'latest_posts': latest_posts,
+                                              'tag_list': tag_list,
+                                              'category': 'category'})
 
 
 # Отображаем детали статьи

@@ -1,0 +1,97 @@
+{% extends 'includes/base.html' %}
+{% block title %}READ MORE | Блог{% endblock %}
+{% block content %}
+{% load static %}
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <div class="main-container container-fluid">
+      <div class="page-header">
+        <h1 class="page-title">Создаем визуальную закладку</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Закладки</li>
+            </ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-xl-6">
+            <div class="card">
+                <div class="row g-0">
+                    {% if request.GET.url %}
+                    <div class="col-md-4">
+                      <img src="{{ request.GET.url }}" class="card-img-left h-100" alt="img">
+                    </div>
+                    {% else %}
+                    <div class="col-md-4">
+                      <img src="{% static 'images/media/22.jpg' %}" class="card-img-left h-100" alt="img">
+                    </div>
+                    {% endif %}
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title my-title">Lorem ipsum dolor sit amet</h5>
+                            <p class="card-text my-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p class="card-text"><small class="text-muted">Добавлено минуту назад</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-xl-6">
+          <div class="card">
+              <div class="card-header">
+                  <h4 class="card-title">Добавление закладки</h4>
+              </div>
+              <div class="card-body">
+                  <form class="form-horizontal" method="post">
+                      <div class="row mb-4">
+                          <label for="id_title" class="col-md-3 form-label">Заголовок</label>
+                          <div class="col-md-9">
+                              <input type="text" class="form-control" name="title" maxlength="200" required id="id_title">
+                          </div>
+                      </div>
+                      <div class="row mb-4">
+                          <label for="id_description" class="col-md-3 form-label">Описание</label>
+                          <div class="col-md-9 form-floating floating-label">
+                            <textarea class="form-control" name="description" cols="40" rows="10" id="id_description"></textarea>
+                          </div>
+                          <input type="hidden" name="url" id="id_url">
+                      </div>
+                      {% csrf_token %}
+                      <div class="mb-0 mt-4 row justify-content-end">
+                          <div class="col-md-9">
+                              <button class="btn btn-secondary">Отмена</button>
+                              <button class="btn btn-primary" type="submit">Добавить</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Находим элементы
+  var titleInput = document.getElementById('id_title');
+  var descriptionInput = document.getElementById('id_description');
+  var cardTitle = document.querySelector('.my-title');
+  var cardText = document.querySelector('.my-text');
+
+  // Обработчик события изменения поля title
+  titleInput.addEventListener('input', function() {
+    console.log('Значение заголовка:', this.value);
+    cardTitle.textContent = this.value;
+  });
+
+  // Обработчик события изменения поля description
+  descriptionInput.addEventListener('input', function() {
+    console.log('Значение описания:', this.value);
+    cardText.textContent = this.value;
+  });
+</script>
+
+
+{% endblock content %}
