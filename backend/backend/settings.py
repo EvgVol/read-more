@@ -70,6 +70,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -106,6 +108,9 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
     'social_core.backends.yandex.YandexOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.vk.VKOAuth2',
+    'social_core.backends.github.GithubOAuth2',
 ]
 
 AUTH_USER_MODEL = 'account.User'
@@ -189,4 +194,15 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_YANDEX_OAUTH2_KEY = config('YANDEX_KEY')
 SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = config('YANDEX_SECRET')
 SOCIAL_AUTH_YANDEX_OAUTH2_SCOPE = []
-SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'https://read-more.tech:8000/auth/complete/yandex-oauth2/'
+# SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'https://read-more.tech:8000/auth/complete/yandex-oauth2/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('GOOGLE_KEY')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_SECRET')
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = config('VK_KEY')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = config('VK_SECRET')
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+
+SOCIAL_AUTH_GITHUB_KEY = config('GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = config('GITHUB_SECRET')
+SOCIAL_AUTH_GITHUB_SCOPE = ['username']
