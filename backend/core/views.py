@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import render
 
 
 class SettingView(TemplateView):
@@ -14,3 +15,7 @@ class StyleView(TemplateView):
 class IndexView(TemplateView):
     """Отображает главную страницу"""
     template_name = 'core/landing-page.html'
+
+
+def countdown_view(request):
+    return render(request, 'core/countdown.html')

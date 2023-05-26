@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import RegisterForm, UserEditForm, PasswordChangingForm
+from .models import Profile
 
 
 User = get_user_model()
@@ -14,10 +15,11 @@ def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            login(request, user)
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
+            login(request, new_user)
+            Profile.objects.create(user=new_user)
         return redirect('blog:post_list')
     else:
         form = RegisterForm()
@@ -60,6 +62,7 @@ def user_edit(request):
     return render(request, 'account/profile-edit.html',
                   {'form': form,
                    'form_password': form_password})
+
 
 
 

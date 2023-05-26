@@ -91,3 +91,13 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('profile', args=[self.username])
+
+
+class Profile(models.Model):
+    """Модель профиля пользователя."""
+    user = models.OneToOneField(User,
+                                on_delete=models.CASCADE,
+                                related_name='profile')
+
+    def __str__(self):
+        return f'Профиль {self.user.username}'

@@ -1,7 +1,6 @@
 from django.db import models
 from django.db.models.query import QuerySet
 from django.utils import timezone
-from django.contrib.auth.models import User
 from django.urls import reverse
 from django.conf import settings
 
@@ -57,6 +56,10 @@ class Post(models.Model):
                               default=Status.DRAFT)
     objects = models.Manager()
     published = PublishManager()
+    users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                        verbose_name='Понравилось',
+                                        related_name='posts_liked',
+                                        blank=True)
 
     class Meta:
         ordering = ['-publish']
