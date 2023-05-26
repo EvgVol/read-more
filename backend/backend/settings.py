@@ -130,14 +130,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Setting language code
 LANGUAGE_CODE = 'ru-RU'
-
-TIME_ZONE = 'Europe/Samara'
-
 USE_I18N = True
 
+# Setting time-zone
+TIME_ZONE = 'Europe/Samara'
 USE_TZ = True
 
+# Setting auto-generated primary key for Django model
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Setting static and media
@@ -191,18 +192,21 @@ CSRF_COOKIE_SAMESITE = "Lax"
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
+# Auth via Yandex
 SOCIAL_AUTH_YANDEX_OAUTH2_KEY = config('YANDEX_KEY')
 SOCIAL_AUTH_YANDEX_OAUTH2_SECRET = config('YANDEX_SECRET')
 SOCIAL_AUTH_YANDEX_OAUTH2_SCOPE = []
-# SOCIAL_AUTH_YANDEX_OAUTH2_REDIRECT_URI = 'https://read-more.tech:8000/auth/complete/yandex-oauth2/'
 
+# Auth via Google
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('GOOGLE_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('GOOGLE_SECRET')
 
+# Auth via VK.ru
 SOCIAL_AUTH_VK_OAUTH2_KEY = config('VK_KEY')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = config('VK_SECRET')
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
+# Auth via GitHub
 SOCIAL_AUTH_GITHUB_KEY = config('GITHUB_KEY')
 SOCIAL_AUTH_GITHUB_SECRET = config('GITHUB_SECRET')
 SOCIAL_AUTH_GITHUB_SCOPE = ['username']
