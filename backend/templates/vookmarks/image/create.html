@@ -1,4 +1,16 @@
 {% extends 'includes/base.html' %}
+{% comment %} {% block title %}READ MORE | Блог{% endblock %}
+{% block content %}
+ <h1>Bookmark an image</h1>
+ <img src="{{ request.GET.url }}" class="image-preview">
+ <form method="post">
+ {{ form.as_p }}
+ {% csrf_token %}
+ <input type="submit" value="Bookmark it!">
+ </form>
+{% endblock %} {% endcomment %}
+
+
 {% block title %}READ MORE | Блог{% endblock %}
 {% block content %}
 {% load static %}
@@ -45,25 +57,10 @@
               <div class="card-body">
                   <form class="form-horizontal" method="post">
                       <div class="row mb-4">
-                          <label for="{{ form.title.id_for_label }}" class="col-md-3 form-label">{{ form.title.label }}</label>
-                          <div class="col-md-9">
-                            <input class="form-control" type="text" name="title" maxlength="200" required id="id_title">
-                          </div>
-                      </div>
-                      <div class="row mb-4">
-                          <label for="id_description" class="col-md-3 form-label">Описание</label>
-                          <div class="col-md-9 form-floating floating-label">
-                            <textarea class="form-control" name="description" cols="40" rows="10" id="id_description"></textarea>
-                          </div>
-                          <input type="hidden" name="url" id="id_url">
+                        {% include 'includes/cycle_forms.html' %}
                       </div>
                       {% csrf_token %}
-                      <div class="mb-0 mt-4 row justify-content-end">
-                          <div class="col-md-9">
-                              <button class="btn btn-secondary">Отмена</button>
-                              <button class="btn btn-primary" type="submit">Добавить</button>
-                          </div>
-                      </div>
+                      <input type="submit" value="Bookmark it!">
                   </form>
               </div>
           </div>

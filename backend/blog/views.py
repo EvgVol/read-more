@@ -1,17 +1,21 @@
 import time
 
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Count, Q
 from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
+from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from taggit.models import Tag
 
 from .models import Post, Category
-from .forms import EmailPostForm, CommentForm, SearchForm
+from .forms import EmailPostForm, CommentForm, SearchForm, PostForm
 
 
 def post_list(request, tag_slug=None, category_slug=None):
@@ -54,13 +58,13 @@ def post_list(request, tag_slug=None, category_slug=None):
 
 
 # Отображаем детали статьи
-def post_detail(request, year, month, day, post):
+def post_detail(request, year, month, day, slug):
     """Отображает данные статьи."""
 
     # Получение статьи по заданным параметрам
     post =  get_object_or_404(Post,
                               status=Post.Status.PUBLISHED,
-                              slug=post,
+                              slug=slug,
                               publish__year=year,
                               publish__month=month,
                               publish__day=day)
@@ -164,3 +168,52 @@ def post_search(request):
                     'query': query,
                     'results': results,
                     'elapsed_time': elapsed_time})
+
+
+
+# class PostCreateView(LoginRequiredMixin, generic.CreateView):
+#     login_url = '/auth/login/'
+#     model = Post
+#     form_class = PostForm
+#     template_name = "blog/post/create.html"
+
+#     def form_valid(self, form):
+#         form.instance.author = self.request.user
+#         return super().form_valid(form)
+
+
+@login_required
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            form.save_m2m()
+            return redirect('blog:post_detail',
+                            year=post.publish.year,
+                            month=post.publish.month,
+                            day=post.publish.day,
+                            slug=post.slug)
+    else:
+        form = PostForm()
+    return render(request, 'blog/post/create.html', {'form': form})
+
+
+@login_required
+@require_POST
+def post_like(request):
+    post_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if post_id and action:
+        try:
+            post = Post.objects.get(id=post_id)
+            if action == 'like':
+                post.users_like.add(request.user)
+            else:
+                post.users_like.remove(request.user)
+            return JsonResponse({'status': 'ok'})
+        except Post.DoesNotExist:
+            pass
+    return JsonResponse({'status': 'error'})

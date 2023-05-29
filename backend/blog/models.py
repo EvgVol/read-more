@@ -35,7 +35,8 @@ class Post(models.Model):
         PUBLISHED = 'PB', 'Опубликовано'
 
     title = models.CharField('Заголовок', max_length=250)
-    slug = models.SlugField('Slug', max_length=50, unique_for_date='publish')
+    slug = models.SlugField('Slug', max_length=50,
+                            unique_for_date='publish')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='blog_posts',
