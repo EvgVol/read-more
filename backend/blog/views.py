@@ -58,13 +58,13 @@ def post_list(request, tag_slug=None, category_slug=None):
 
 
 # Отображаем детали статьи
-def post_detail(request, year, month, day, slug):
+def post_detail(request, year, month, day, post):
     """Отображает данные статьи."""
 
     # Получение статьи по заданным параметрам
     post =  get_object_or_404(Post,
                               status=Post.Status.PUBLISHED,
-                              slug=slug,
+                              slug=post,
                               publish__year=year,
                               publish__month=month,
                               publish__day=day)
@@ -190,12 +190,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            form.save_m2m()
-            return redirect('blog:post_detail',
-                            year=post.publish.year,
-                            month=post.publish.month,
-                            day=post.publish.day,
-                            slug=post.slug)
+            return redirect('blog:post_list')
     else:
         form = PostForm()
     return render(request, 'blog/post/create.html', {'form': form})

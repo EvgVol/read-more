@@ -54,7 +54,7 @@ class Post(models.Model):
     status = models.CharField('Статус',
                               max_length=2,
                               choices=Status.choices,
-                              default=Status.DRAFT)
+                              default=Status.PUBLISHED)
     objects = models.Manager()
     published = PublishManager()
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
