@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.conf import settings
 
 from taggit.managers import TaggableManager
-
+from pytils.translit import slugify
 
 class Category(models.Model):
     """Модель категорий."""
@@ -72,6 +72,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
