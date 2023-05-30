@@ -9,8 +9,7 @@ from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 from taggit.models import Tag
 
@@ -190,7 +189,8 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect('blog:post_list')
+            messages.success(request, 'Статья успешно добавлена')
+            return redirect(post.get_absolute_url())
     else:
         form = PostForm()
     return render(request, 'blog/post/create.html', {'form': form})
