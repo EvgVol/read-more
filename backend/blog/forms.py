@@ -7,7 +7,7 @@ from .models import Comment, Post, Category
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'body', 'category', 'tags',  'image']
+        fields = ['title', 'body', 'category', 'tags',  'image', 'slug']
         labels = {
             'title': 'Заголовок',
             'body': 'Контент',
