@@ -28,3 +28,9 @@ def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
     return render(request, 'vookmarks/image/detail.html',
                   {'section': 'images', 'image': image})
+
+
+def image_list(request):
+    vookmarks = Image.objects.select_related('user')
+    return render(request, 'vookmarks/image/vookmark_list.html', {'vookmarks': vookmarks})
+    

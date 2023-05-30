@@ -8,6 +8,7 @@ app_name = 'vookmarks'
 
 urlpatterns = [
     path('create/', views.image_create, name='create'),
+    path('', views.image_list, name='list'),
     path('detail/<int:id>/<slug:slug>/', views.image_detail, name='detail'),
 
 ]

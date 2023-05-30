@@ -1,0 +1,44 @@
+{% extends 'includes/base.html' %}
+{% block title %}READ MORE | Закладки {% endblock %}
+{% block content %}
+{% load thumbnail %}
+{% load blog_tags %}
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <div class="main-container container-fluid">
+      <div class="page-header">
+        <h1 class="page-title">Список закладок</h1>
+        <div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Закладки</li>
+            </ol>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          {% for vookmark in vookmarks %}
+            <a class="card" href="{{ vookmark.get_absolute_url }}">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                      {% thumbnail vookmark.image  "500x333" crop="center" as im %}
+                      <img src="{{ im.url }}" class="card-img-left h-100" alt="img">
+                      {% endthumbnail %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title my-title">{{ vookmark.title }}</h5>
+                            <p class="card-text my-text">{{ vookmark.description|markdown|truncatewords_html:30 }}</p>
+                            <p class="card-text"><small class="text-muted">{{ vookmark.created }}</small></p>
+                        </div>
+                    </div>
+                </div>
+              </a>
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

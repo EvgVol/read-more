@@ -1,0 +1,25 @@
+{% extends 'includes/base.html' %}
+{% block title %}READ MORE | Закладки | {{ image.title }}{% endblock %} 
+{% block content %}
+<h1>{{ image.title }}</h1>
+<img src="{{ image.image.url }}" class="image-detail" />
+{% with total_likes=image.users_like.count %}
+<div class="image-info">
+  <div>
+    <span class="count">
+      {{ total_likes }} like{{ total_likes|pluralize }}
+    </span>
+  </div>
+  {{ image.description|linebreaks }}
+</div>
+<div class="image-likes">
+  {% for user in image.users_like.all %}
+  <div>
+    {% if user.avatar %}
+    <img src="{{ user.avatar.url }}" />
+    {% endif %}
+    <p>{{ user.first_name }}</p>
+  </div>
+  {% empty %} Nobody likes this image yet. {% endfor %}
+</div>
+{% endwith %} {% endblock %}
