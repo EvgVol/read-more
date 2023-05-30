@@ -222,3 +222,8 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['username']
 SOCIAL_AUTH_GITHUB_KEY = config('GITHUB_KEY')
 SOCIAL_AUTH_GITHUB_SECRET = config('GITHUB_SECRET')
 SOCIAL_AUTH_GITHUB_SCOPE = ['username']
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type('application/javascript', '.js', True)
+    mimetypes.add_type('text/css', '.css', True)

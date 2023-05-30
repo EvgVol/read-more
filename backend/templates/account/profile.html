@@ -183,8 +183,8 @@
                       Биография<i class="fe fe-edit-3 text-primary mx-2"></i>
                     </h5>
                     <p>
-                      {{ author.about_me|markdown|truncatewords_html:30 }}
-                      <a href="javascript:void(0)">Читать подробно...</a>
+                      Перетащите следующую кнопку на панель закладок, чтобы добавить в закладки изображения с других веб-сайтов
+                      <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">Bookmark it...</a>
                     </p>
                   </div>
                   <hr />

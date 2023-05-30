@@ -7,4 +7,4 @@
     else {
       bookmarkletLaunch();
     }
-  })();
+})();

@@ -1,14 +1,4 @@
 {% extends 'includes/base.html' %}
-{% comment %} {% block title %}READ MORE | Блог{% endblock %}
-{% block content %}
- <h1>Bookmark an image</h1>
- <img src="{{ request.GET.url }}" class="image-preview">
- <form method="post">
- {{ form.as_p }}
- {% csrf_token %}
- <input type="submit" value="Bookmark it!">
- </form>
-{% endblock %} {% endcomment %}
 
 
 {% block title %}READ MORE | Блог{% endblock %}
@@ -60,7 +50,7 @@
                         {% include 'includes/cycle_forms.html' %}
                       </div>
                       {% csrf_token %}
-                      <input type="submit" value="Bookmark it!">
+                      <input type="submit" value="Bookmark it!" class="botton">
                   </form>
               </div>
           </div>
@@ -69,7 +59,13 @@
     </div>
   </div>
 </div>
-{% block script %}
+
+
+
+
+{% endblock content %}
+
+{% block add_script %}
 <script>
   // Находим элементы
   var titleInput = document.getElementById('id_title');
@@ -89,6 +85,4 @@
     cardText.textContent = this.value;
   });
 </script>
-{% endblock script %}
-
-{% endblock content %}
+{% endblock add_script %}
