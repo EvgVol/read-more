@@ -44,7 +44,6 @@
                             0 просмотров 
                         </div>
                     </a>
-                    
                   </div>
                 </div>
               </div>
@@ -57,12 +56,7 @@
 
                         <div class="media-user me-2">
                           <div class="avatar-list avatar-list-stacked">
-                            {% for users in image.users_like.all %}
-                              {% thumbnail users.avatar  "820x513" crop="center" as im %}
-                              <span class="avatar brround" style="background-image: url({{ im.url }})"></span>
-                              {% endthumbnail %}
-                            {% endfor %}
-                            <span class="avatar brround text-primary total">{{ total_likes }}</span>
+                            <span class="avatar brround text-primary my-total">{{ total_likes }}</span>
                           </div>
                         </div>
                         <div class="media-body">
@@ -74,9 +68,9 @@
                             <div class="d-flex mt-1">
                               <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">
                                 {% if request.user not in users_like %}
-                                Like
+                                Нравится <i data-id="{{ image.id }}" class="fa fa-heart-o"></i>
                                 {% else %}
-                                Unlike
+                                Не нравится <i data-id="{{ image.id }}" class="fa fa-heart"></i>
                                 {% endif %}
                               </a>
                             </div>
@@ -118,17 +112,17 @@
     // отправить HTTP-запрос
     fetch(url, options)
       .then(data => {
-        if (data.status === 'ok')
+        if (data.ok)
         {
-          const previousAction = likeButton.dataset.action;
+          const previousAction = likeButton.dataset.action  ;
 
           // переключить текст кнопки и атрибут data-action
           const action = previousAction === 'like' ? 'unlike' : 'like';
           likeButton.dataset.action = action;
-          likeButton.innerHTML = action;
+          likeButton.innerHTML = action === 'like' ? 'Нравится <i class="fa fa-heart-o"></i>' : 'Не нравится <i class="fa fa-heart"></i>';
 
           // обновить количество лайков
-          var likeCount = document.querySelector('span.count .total');
+          const likeCount = document.querySelector('.my-total');
           if (previousAction === 'like')
           {
             let totalLikes = parseInt(likeCount.innerHTML);
