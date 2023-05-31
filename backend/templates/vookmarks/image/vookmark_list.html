@@ -26,12 +26,12 @@
                       {% endthumbnail %}
                     </div>
                     <div class="col-md-8">
-                        <div class="card-body">
-                          <a href="{{ vookmark.get_absolute_url }}"><h5 class="card-title my-title">{{ vookmark.title }}</h5>
-                            <p class="card-text my-text">{{ vookmark.description|markdown|truncatewords_html:30 }}</p>
-                            <p class="card-text"><small class="text-muted">{{ vookmark.created }}</small></p>
-                            
-                        </div>
+                      <div class="card-body">
+                        <a href="{{ vookmark.get_absolute_url }}"><h5 class="card-title my-title">{{ vookmark.title }}</h5>
+                          <p class="card-text my-text">{{ vookmark.description|markdown|truncatewords_html:30 }}</p>
+                          <p class="card-text"><small class="text-muted">{{ vookmark.created }}</small></p>
+                          
+                      </div>
                         
                     </div>
                 </div>

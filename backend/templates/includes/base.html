@@ -17,8 +17,17 @@
 {% endblock base %}
 
 {% block script %}
-<!-- BACK-TO-TOP -->
+
 {% block add_script %}{% endblock add_script %}
+
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+<script>
+  const csrftoken = Cookies.get('csrftoken');
+  document.addEventListener('DOMContentLoaded', (event) => {
+    {% block domready %}{% endblock %}
+  });
+</script>
+<!-- BACK-TO-TOP -->
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
 <!-- JQUERY JS -->
