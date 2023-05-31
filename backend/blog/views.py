@@ -8,6 +8,7 @@ from django.db.models import Count, Q
 from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib import messages
 
@@ -169,20 +170,9 @@ def post_search(request):
                     'elapsed_time': elapsed_time})
 
 
-
-# class PostCreateView(LoginRequiredMixin, generic.CreateView):
-#     login_url = '/auth/login/'
-#     model = Post
-#     form_class = PostForm
-#     template_name = "blog/post/create.html"
-
-#     def form_valid(self, form):
-#         form.instance.author = self.request.user
-#         return super().form_valid(form)
-
-
 @login_required
 def create_post(request):
+    """Осуществляет добавление новой статьи."""
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
@@ -196,9 +186,11 @@ def create_post(request):
     return render(request, 'blog/post/create.html', {'form': form})
 
 
+@csrf_exempt
 @login_required
 @require_POST
 def post_like(request):
+    """Осуществляет проставление отметки `Нравится` """
     post_id = request.POST.get('id')
     action = request.POST.get('action')
     if post_id and action:
