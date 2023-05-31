@@ -35,15 +35,23 @@
 			</div>
 			<div class="ms-auto">
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
-					<i class="fe fe-heart me-1 border brround">
+					<i class="fa fa-thumbs-o-up border brround">
 						{% if post.users_like.count != 0 %}
-						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-danger">
+						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-info">
 							{{ post.users_like.count }}
 						<span class="visually-hidden">лайков</span>
 						{% endif %}
 					</i>
 				</a>
-				<a href="#" class="icon d-none d-md-inline-block text-muted"><i class="fa fa-thumbs-o-up border brround"></i></a>
+				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
+					<i class="fa fa-comments border brround">
+						{% if post.comments.count != 0 %}
+						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-info">
+							{{ post.comments.count }}
+						<span class="visually-hidden">комментариев</span>
+						{% endif %}
+					</i>
+				</a>
 				<a href="{% url "blog:post_share" post.id %}" class="icon d-none d-md-inline-block text-muted"><i class="fa fa-send border brround"></i></a>
 			</div>
 		</div>
