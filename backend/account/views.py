@@ -2,9 +2,11 @@ from django.contrib.auth import login, get_user_model, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 from .forms import RegisterForm, UserEditForm, PasswordChangingForm
-from .models import Profile
+from .models import Profile, Contact
 
 
 User = get_user_model()
@@ -75,48 +77,23 @@ def user_list(request):
                    'users': users})
 
 
-
-#     author = get_object_or_404(User, username=username)
-#     post_list = author.blog_posts.select_related('category').all()
-
-
-# class ProfileView(DetailView):
-#     """Отображение страницы пользователя."""
-
-#     model = User
-#     template_name = 'account/profile.html'
-
-
-# class ProfileUpdateView(UpdateView):
-#     """Отображение страницы редактирования профиля пользователя."""
-
-#     model = User
-#     form_class = ProfileUpdateForm
-#     template_name = 'account/profile-edit.html'
-
-#     def get_object(self, queryset=None):
-#         return self.request.user
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['title'] = f'Редактирование профиля пользователя: {self.request.user.username}'
-#         form = kwargs.get('form')
-#         if not form:
-#             form = self.form_class(instance=self.request.user)
-#         context['user_form'] = form
-#         return context
-
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         user_form = context['user_form']
-#         with transaction.atomic():
-#             if all([form.is_valid(), user_form.is_valid()]):
-#                 user_form.save()
-#                 form.save()
-#             else:
-#                 context.update({'user_form': user_form})
-#                 return self.render_to_response(context)
-#         return super(ProfileUpdateView, self).form_valid(form)
-
-#     def get_success_url(self):
-#         return reverse_lazy('account:profile', kwargs={'pk': self.object.pk})
+@require_POST
+@login_required
+def user_follow(request):
+    user_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if user_id and action:
+        try:
+            user = User.objects.get(id=user_id)
+            if action == 'follow':
+                Contact.objects.get_or_create(
+                    user_from=request.user,
+                    user_to=user)
+            else:
+                Contact.objects.filter(
+                    user_from=request.user, user_to=user
+                ).delete()
+            return JsonResponse({'status':'ok'})
+        except User.DoesNotExist:
+            return JsonResponse({'status':'error'})
+    return JsonResponse({'status':'error'})
