@@ -64,11 +64,15 @@
                         </div>
                         {% else %}
                         <div class="btn-profile">
-                          <button class="btn btn-primary mt-1 mb-1">
-                            <i class="fa fa-rss"></i> <span>Подписаться</span>
-                          </button>
+                          <a href="#" data-id="{{ author.id }}" data-action="{% if request.user in author.followers.all %}un{% endif %}follow" class="btn btn-primary mt-1 mb-1 follow button">
+                            {% if request.user not in author.followers.all %}
+                            <i class="fa fa-bell"></i><span>  Подписаться</span>
+                            {% else %}
+                            <i class="fa fa-bell-slash"></i><span> Отписаться</span>
+                            {% endif %}
+                          </a>
                           <button class="btn btn-secondary mt-1 mb-1">
-                            <i class="fa fa-envelope"></i> <span>Написать</span>
+                            <i class="fa fa-envelope"></i> <span> Написать</span>
                           </button>
                         </div>
                         {% endif %}
@@ -134,10 +138,12 @@
                         <div class="media-icon bg-secondary bradius me-3 mt-1">
                           <i class="fe fe-edit fs-20 text-white"></i>
                         </div>
+                        {% with total_posts=author.blog_posts.count %}
                         <div class="media-body">
                           <span class="text-muted">Статей</span>
-                          <div class="fw-semibold fs-25">{{ author.blog_posts.count }}</div>
+                          <div class="fw-semibold fs-25">{{ total_posts }}</div>
                         </div>
+                        {% endwith %}
                       </div>
                     </div>
                     <div class="me-5 mt-5 mt-md-0">
@@ -149,10 +155,12 @@
                             <i class="fe fe-users fs-20"></i>
                           </span>
                         </div>
+                        {% with total_followers=author.followers.count %}
                         <div class="media-body">
-                          <span class="text-muted">Followers</span>
-                          <div class="fw-semibold fs-25">937k</div>
+                          <span class="text-muted">Подписчиков</span>
+                          <div class="fw-semibold fs-25 my-follower">{{ total_followers }}</div>
                         </div>
+                        {% endwith %}
                       </div>
                     </div>
                     <div class="me-0 mt-5 mt-md-0">
