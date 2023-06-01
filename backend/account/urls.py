@@ -1,5 +1,4 @@
 from django.urls import path, include
-from django.contrib.auth import views as auth_views
 
 from . import views
 
@@ -13,5 +12,7 @@ urlpatterns = [
 
     path('profile/', include([
         path('<str:username>/', views.user_detail, name='profile'),
-    ]))
+    ])),
+
+    path('users/', views.user_list, name='user_list'),
 ]

@@ -69,8 +69,8 @@ def image_list(request):
     if images_only:
         return render(request,
                       'vookmarks/image/list_images.html',
-                      {'section': 'images', 'images': images})
+                      {'images': images})
 
     return render(request,
                   'vookmarks/image/list.html',
-                  {'section': 'images', 'images': images})
+                  {'images': images})

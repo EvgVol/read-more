@@ -72,6 +72,11 @@ class User(AbstractUser):
     about_me = models.TextField('О себе', blank=True,
                                 help_text='Укажите информацию о себе',)
 
+    following = models.ManyToManyField('self',
+                                       through='Contact',
+                                       related_name='followers',
+                                       symmetrical=False)
+
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ('email',)
 
@@ -101,3 +106,36 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'Профиль {self.user.username}'
+
+
+class Contact(models.Model):
+    """Модель взаимосвязи между пользователями."""
+
+    user_from = models.ForeignKey(User,
+                                  related_name='rel_from_set',
+                                  on_delete=models.CASCADE)
+    user_to = models.ForeignKey(User,
+                                related_name='rel_to_set',
+                                on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+        indexes = [
+            models.Index(fields=['-created']),
+        ]
+        ordering = ['-created']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user_from', 'user_to'],
+                name='unique_follow'
+            ),
+            models.CheckConstraint(
+                check=~models.Q(user_to=models.F('user_from')),
+                name='no_self_follow'
+            )
+        ]
+
+    def __str__(self):
+        return f'{self.user_from} подписался на {self.user_to}'

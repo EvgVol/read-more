@@ -1,0 +1,177 @@
+{% extends 'includes/base.html' %}
+{% block title %} Список пользователей {% endblock %}
+{% load static %}
+{% load thumbnail %}
+{% comment %} {% block css %} <link href="{% static 'css/transparent-style.css' %}" rel="stylesheet"> {% endblock %} {% endcomment %}
+{% block content %}
+
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <div class="main-container container-fluid">
+      <div class="page-header">
+          <h1 class="page-title">Пользователи</h1>
+          <div>
+              <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Пользователи</li>
+              </ol>
+          </div>
+      </div>
+      <div class="row row-cards">
+        <div class="col-lg-12 col-xl-12">
+          <div class="input-group mb-5">
+            <input type="text" class="form-control" placeholder="Поиск">
+            <div class="input-group-text btn btn-primary">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title mb-0">Список пользователей</h3>
+            </div>
+            <div class="card-body pt-4">
+              <div class="grid-margin">
+                <div class="">
+                  <div class="panel panel-primary">
+                    <div class="tab-menu-heading border-0 p-0">
+                      <div class="tabs-menu1">
+                          <!-- Tabs -->
+                        <ul class="nav panel-tabs product-sale">
+                          <li><a href="#tab5" class="active"
+                                  data-bs-toggle="tab">Все пользователи</a></li>
+                          <li><a href="#tab6" data-bs-toggle="tab"
+                                  class="text-dark">Активные</a></li>
+                          <li><a href="#tab7" data-bs-toggle="tab"
+                                  class="text-dark">Заблокированные</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="panel-body tabs-menu-body border-0 pt-0">
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tab5">
+                          <div class="table-responsive">
+                            <table id="data-table"
+                                class="table table-bordered text-nowrap mb-0">
+                                <thead class="border-top">
+                                    <tr>
+                                        <th class="bg-transparent border-bottom-0 text-center"
+                                            style="width: 5%;">Id</th>
+                                        <th
+                                            class="bg-transparent border-bottom-0">
+                                            Юзернейм</th>
+                                        <th
+                                            class="bg-transparent border-bottom-0">
+                                            Роль</th>
+                                        <th
+                                            class="bg-transparent border-bottom-0">
+                                            Дата регистрации</th>
+                                        <th
+                                            class="bg-transparent border-bottom-0">
+                                            Email</th>
+                                        <th
+                                            class="bg-transparent border-bottom-0">
+                                            Полное имя</th>
+                                        <th class="bg-transparent border-bottom-0"
+                                            style="width: 10%;">Статус</th>
+                                        <th class="bg-transparent border-bottom-0"
+                                            style="width: 5%;">Действия</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  {% for user in users %}
+                                  <tr class="border-bottom">
+                                    <td class="text-center">
+                                      <div class="mt-0 mt-sm-2 d-block">
+                                        <h6
+                                            class="mb-0 fs-14 fw-semibold">
+                                            {{ user.id }}</h6>
+                                      </div>
+                                    </td>
+                                    <td>
+                                        <a class="d-flex" href="{{ user.get_absolute_url }}">
+                                            {% if user.avatar %}
+                                            <span class="avatar bradius" style="background-image: url({% thumbnail user.avatar "32x32" %})"></span>
+                                            {% else %}
+                                            <span class="avatar bradius" style="background-image: url({% static 'images/users/default-user.jpeg' %})"></span>
+                                            {% endif %}
+                                            
+                                            <div
+                                                class="ms-3 mt-0 mt-sm-2 d-block">
+                                                <h6
+                                                    class="mb-0 fs-14 fw-semibold">
+                                                    {{ user.username }}</h6>
+                                            </div>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                          <div class="mt-0 mt-sm-3 d-block">
+                                            {% if user.is_staff %}
+                                            <span class="badge bg-dark-transparent rounded-pill text-dark p-2 px-3">Администратор</span>
+                                            {% else %}
+                                            <span class="badge bg-info-transparent rounded-pill text-info p-2 px-3">Пользователь</span>
+                                            {% endif %} 
+                                          </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="mt-sm-2 d-block">{{ user.date_joined }}</span></td>
+                                    <td><span
+                                            class="fw-semibold mt-sm-2 d-block">{{ user.email }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <div
+                                                class="mt-0 mt-sm-3 d-block">
+                                                <h6
+                                                    class="mb-0 fs-14 fw-semibold">
+                                                    {{ user.get_full_name }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="mt-sm-1 d-block">
+                                          {% if user.is_active %}
+                                            <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Активен</span>
+                                          {% else %}
+                                            <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Заблокирован</span>
+                                          {% endif %} 
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="g-2">
+                                            {% if user.is_active %}
+                                            <a class="btn text-danger btn-sm"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-original-title="Заблокировать"><span
+                                                    class="fe fe-eye-off fs-14"></span></a>
+                                            {% else %}
+                                            <a class="btn text-success btn-sm"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-original-title="Разблокировать"><span
+                                                    class="fe fe-eye fs-14"></span></a>
+                                            {% endif %}
+                                            <a class="btn text-dark btn-sm"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-original-title="Удалить"><span
+                                                    class="fe fe-trash-2 fs-14"></span></a>
+                                        </div>
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

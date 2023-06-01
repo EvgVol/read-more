@@ -1,5 +1,5 @@
 from django.contrib.auth import login, get_user_model, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -27,12 +27,13 @@ def register(request):
                   'registration/signup.html',
                   {'form': form})
 
-
+@login_required
 def user_detail(request, username):
     """Отображает данные пользователя."""
-    author = get_object_or_404(User, username=username)
+    author = get_object_or_404(User, username=username, is_active=True)
     post_list = author.blog_posts.all()
     context = {
+        'section': 'people',
         'author': author,
         'post_list': post_list,
     }
@@ -63,6 +64,15 @@ def user_edit(request):
                   {'form': form,
                    'form_password': form_password})
 
+
+@user_passes_test(lambda user: user.is_staff)
+@login_required
+def user_list(request):
+    users = User.objects.all()
+    return render(request,
+                  'account/user-list.html',
+                  {'section': 'people',
+                   'users': users})
 
 
 

@@ -59,10 +59,9 @@ def post_list(request, tag_slug=None, category_slug=None):
     if posts_only:
         return render(request,
                       'blog/post/cart.html',
-                      {'section': 'posts', 'posts': posts})
+                      {'posts': posts})
 
-    return render(request, 'blog/blog.html', {'section': 'posts',
-                                              'posts': posts,
+    return render(request, 'blog/blog.html', {'posts': posts,
                                               'tag': tag,
                                               'latest_posts': latest_posts,
                                               'tag_list': tag_list,

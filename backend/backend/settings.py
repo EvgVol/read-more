@@ -227,3 +227,7 @@ if DEBUG:
     import mimetypes
     mimetypes.add_type('application/javascript', '.js', True)
     mimetypes.add_type('text/css', '.css', True)
+
+ABSOLUTE_URL_OVERRIDES = {
+    'account.User': lambda u: reverse_lazy('profile', args=[u.username])
+}

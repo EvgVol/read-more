@@ -21,7 +21,6 @@
     <!-- STYLE CSS -->
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <link href="{% static 'css/dark-style.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/dark-style.css' %}" rel="stylesheet" />
     <link href="{% static 'css/skin-modes.css' %}" rel="stylesheet" />
 
     <!--- FONT-ICONS CSS -->
@@ -31,6 +30,7 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="{% static 'colors/color1.css' %}" />
     <link href="{% static 'switcher/css/switcher.css' %}" rel="stylesheet" />
     <link href="{% static 'switcher/demo.css' %}" rel="stylesheet" />
+    {% block css %}{% endblock %}
   </head>
 
   <!-- PAGE -->

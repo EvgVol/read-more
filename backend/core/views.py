@@ -14,8 +14,8 @@ class StyleView(TemplateView):
     template_name = 'core/style.html'
 
 
-class IndexView(TemplateView):
-    """Отображает главную страницу."""
+class LangingPageView(TemplateView):
+    """Отображает страницу лендинг."""
 
     template_name = 'core/landing-page.html'
 
