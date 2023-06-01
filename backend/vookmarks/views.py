@@ -34,10 +34,6 @@ def image_detail(request, id, slug):
                   {'section': 'images', 'image': image})
 
 
-# def image_list(request):
-#     vookmarks = Image.objects.select_related('user')
-#     return render(request, 'vookmarks/image/vookmark_list.html', {'vookmarks': vookmarks})
-
 @csrf_exempt
 @login_required
 @require_POST

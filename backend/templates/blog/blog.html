@@ -18,10 +18,10 @@
 
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
-          {% for post in posts %}
+          <div id="post-list">
             {% include 'blog/post/cart.html' %}
-          {% endfor %}
-          {% include 'blog/includes/paginator.html' with page=posts %}
+          </div>
+          {% comment %} {% include 'blog/includes/paginator.html' with page=posts %} {% endcomment %}
       </div>
         <div class="col-xl-4">
           {% include 'blog/includes/search.html' %}
@@ -36,3 +36,31 @@
 </div>
 </div>
 {% endblock content %}
+{% block domready %}
+  var page = 1;
+  var emptyPage = false;
+  var blockRequest = false;
+  window.addEventListener('scroll', function(e) {
+    var margin = document.body.clientHeight - window.innerHeight - 200; 
+    if (window.pageYOffset > margin && !emptyPage && !blockRequest) { 
+      blockRequest = true; 
+      page += 1; 
+      fetch('?posts_only=1&page=' + page) 
+        .then(response => response.text()) 
+        .then(html => { 
+          if (html === '') { 
+            emptyPage = true; 
+          } 
+          else { 
+            var imageList = document.getElementById('post-list'); 
+            imageList.insertAdjacentHTML('beforeEnd', html); 
+            blockRequest = false; 
+          } 
+        }) 
+    } 
+  });
+
+  // Запустить события прокрутки 
+  const scrollEvent = new Event('scroll'); 
+  window.dispatchEvent(scrollEvent);
+{% endblock %}

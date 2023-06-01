@@ -4,7 +4,7 @@
 <div class="card">
   <div class="row g-0">
     <div class="col-md-4">
-      {% thumbnail image.image "500x300" crop="smart" as im %}
+      {% thumbnail image.image "500x300" crop="center" as im %}
       <a href="{{ image.get_absolute_url }}"><img src="{{ im.url }}" /></a>
       {% endthumbnail %}
     </div>
