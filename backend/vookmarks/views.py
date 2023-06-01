@@ -34,9 +34,9 @@ def image_detail(request, id, slug):
                   {'section': 'images', 'image': image})
 
 
-def image_list(request):
-    vookmarks = Image.objects.select_related('user')
-    return render(request, 'vookmarks/image/vookmark_list.html', {'vookmarks': vookmarks})
+# def image_list(request):
+#     vookmarks = Image.objects.select_related('user')
+#     return render(request, 'vookmarks/image/vookmark_list.html', {'vookmarks': vookmarks})
 
 @csrf_exempt
 @login_required
@@ -57,24 +57,24 @@ def image_like(request):
     return JsonResponse({'status': 'error'})
 
 
-# @login_required
-# def image_list(request):
-#     images = Image.objects.all()
-#     paginator = Paginator(images, 8)
-#     page = request.GET.get('page')
-#     images_only = request.GET.get('images_only')
-#     try:
-#         images = paginator.page(page)
-#     except PageNotAnInteger:
-#         images = paginator.page(1)
-#     except EmptyPage:
-#         if images_only:
-#             return HttpResponse('')
-
-#     # Если страница вне диапазона, то вернуть последнюю страницу результатов
-#     images = paginator.page(paginator.num_pages)
+@login_required
+def image_list(request):
+    images = Image.objects.select_related('user')
+    paginator = Paginator(images, 2)
+    page = request.GET.get('page')
+    images_only = request.GET.get('images_only')
+    try:
+        images = paginator.page(page)
+    except (PageNotAnInteger, EmptyPage):
+        if images_only:
+            return HttpResponse('')
+        images = paginator.page(1)
     
-#     if images_only:
-#         return render(request, 'images/image/list_images.html', {'section': 'images', 'images': images})
+    if images_only:
+        return render(request,
+                      'vookmarks/image/list_images.html',
+                      {'section': 'images', 'images': images})
 
-#     return render(request, 'images/image/list.html', {'section': 'images', 'images': images})
+    return render(request,
+                  'vookmarks/image/list.html',
+                  {'section': 'images', 'images': images})

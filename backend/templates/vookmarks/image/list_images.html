@@ -1,0 +1,26 @@
+{% load thumbnail %}
+{% load blog_tags %}
+{% for image in images %}
+<div class="card">
+  <div class="row g-0">
+    <div class="col-md-4">
+      {% thumbnail image.image "500x300" crop="smart" as im %}
+      <a href="{{ image.get_absolute_url }}"><img src="{{ im.url }}" /></a>
+      {% endthumbnail %}
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <a href="{{ image.get_absolute_url }}">
+          <h5 class="card-title my-title">{{ image.title }}
+            {% if image.users_like.count != 0 %}
+            | <i class="fa fa-heart" style="color: #d63384;"></i><spam class="small text-muted ms-1">{{ image.users_like.count }}</spam>
+            {% endif %}
+          </h5>
+        </a>
+        <p class="card-text my-text">{{ image.description|markdown|truncatewords_html:30 }}</p>
+        <p class="card-text"><small class="text-muted">{{ image.created }}</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
