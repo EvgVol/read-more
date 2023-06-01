@@ -40,22 +40,18 @@ def post_list(request, tag_slug=None, category_slug=None):
 
     # Получаем список всех тегов, связанных со статьями
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
-
-    # paginator = Paginator(post_list, 3)
-    # page_number = request.GET.get('page', 1)
-    # try:
-    #     posts = paginator.page(page_number)
-    # except PageNotAnInteger:
-    #     posts = paginator.page(1)
-    # except EmptyPage:
-    #     posts = paginator.page(paginator.num_pages)
-
-    paginator = Paginator(post_list, 1)
+    
+    # Разбивка списка статей на страницы
+    paginator = Paginator(post_list, 1) # Показывать 1 статью на странице
     page = request.GET.get('page')
     posts_only = request.GET.get('posts_only')
+
+    # Отображаем запрошенную страницу
     try:
         posts = paginator.page(page)
     except (PageNotAnInteger, EmptyPage):
+        # Если страница не является целым числом или недействительна, отображаем первую страницу
+        # Если параметр posts_only установлен в запросе, возвращаем только пустой ответ HTTP
         if posts_only:
             return HttpResponse('')
         posts = paginator.page(1)
