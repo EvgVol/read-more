@@ -3,27 +3,29 @@
 <div class="app-header header sticky">
   <div class="container-fluid main-container">
     <div class="d-flex">
+      <!-- sidebar-toggle-->
       <a
         aria-label="Hide Sidebar"
         class="app-sidebar__toggle"
         data-bs-toggle="sidebar"
         href="javascript:void(0)"
       ></a>
-      <!-- sidebar-toggle-->
+
+      <!-- LOGO -->
       <a class="logo-horizontal" href="{% url 'blog:post_list' %}">
         <img
-          src="{% static 'images/fav/favicon-32x32.png' %}"
+          src="{% static 'images/logo/white-logo-32x32.ico' %}"
           class="header-brand-img desktop-logo"
           alt="logo"
         />
         <img
-          src="{% static 'images/fav/favicon-32x32.png' %}"
+          src="{% static 'images/logo/black-logo-32x32.ico' %}"
           class="header-brand-img light-logo1"
           alt="logo"
         />
       </a>
 
-      <!-- LOGO -->
+      <!-- SEARCH -->
       <form
         class="main-header-center ms-3 d-none d-lg-block"
         action="{% url 'blog:post_search' %}"
@@ -43,7 +45,7 @@
       </form>
 
       <div class="d-flex order-lg-2 ms-auto header-right-icons">
-        <!-- SEARCH -->
+        
         <button
           class="navbar-toggler navresponsive-toggler d-lg-none ms-auto"
           type="button"
@@ -59,6 +61,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
             <div class="d-flex order-lg-2">
               {% if request.user.is_authenticated %}
+
               <div class="dropdown d-lg-none d-flex">
                 <a
                   href="javascript:void(0)"
@@ -80,19 +83,19 @@
                   </div>
                 </div>
               </div>
-              <div class="d-flex country">
+
+              <div class="dropdown d-flex header-settings">
                 <a
-                  class="nav-link icon text-center"
-                  data-bs-target="#country-selector"
-                  data-bs-toggle="modal"
+                  href="javascript:void(0);"
+                  class="nav-link icon"
+                  data-bs-toggle="sidebar-right"
+                  data-target=".sidebar-right"
                 >
-                  <i class="fe fe-globe"></i
-                  ><span class="fs-16 ms-2 d-none d-xl-block">English</span>
+                  <i class="fe fe-align-right"></i>
                 </a>
               </div>
-              <!-- COUNTRY -->
 
-              <!-- Theme-Layout -->
+              <!-- CART -->
               <div class="dropdown d-flex shopping-cart">
                 <a class="nav-link icon text-center" data-bs-toggle="dropdown">
                   <i class="fe fe-shopping-cart"></i
@@ -269,15 +272,15 @@
                   </div>
                 </div>
               </div>
-              <!-- CART -->
-
+              
+              <!-- FULL-SCREEN -->
               <div class="dropdown d-flex">
                 <a class="nav-link icon full-screen-link nav-link-bg">
                   <i class="fe fe-minimize fullscreen-button"></i>
                 </a>
               </div>
-              <!-- FULL-SCREEN -->
-
+              
+              <!-- NOTIFICATIONS -->
               <div class="dropdown d-flex notifications">
                 <a class="nav-link icon" data-bs-toggle="dropdown"
                   ><i class="fe fe-bell"></i><span class="pulse"></span>
@@ -353,7 +356,7 @@
                 </div>
               </div>
 
-              <!-- NOTIFICATIONS -->
+              <!-- MESSAGE-BOX -->
               <div class="dropdown d-flex message">
                 <a class="nav-link icon text-center" data-bs-toggle="dropdown">
                   <i class="fe fe-message-square"></i
@@ -461,8 +464,8 @@
                   >
                 </div>
               </div>
-              <!-- MESSAGE-BOX -->
-
+              
+              <!-- STYLE-MENU -->
               <div class="d-flex country">
                 <a
                   class="nav-link icon theme-layout nav-link-bg layout-setting"
@@ -472,6 +475,7 @@
                 </a>
               </div>
 
+              <!-- SIDE-MENU -->
               <div class="dropdown d-flex header-settings">
                 <a
                   href="javascript:void(0);"
@@ -482,8 +486,8 @@
                   <i class="fe fe-align-right"></i>
                 </a>
               </div>
-              <!-- SIDE-MENU -->
 
+              <!-- PROFILE -->
               <div class="dropdown d-flex profile-1">
                 {% load thumbnail %}
                 <a

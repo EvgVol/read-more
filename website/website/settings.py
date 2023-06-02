@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'core.apps.CoreConfig',
     'vookmarks.apps.VookmarksConfig',
+    'actions.apps.ActionsConfig',
     
     'sorl.thumbnail',
     'taggit', #https://github.com/jazzband/django-taggit
