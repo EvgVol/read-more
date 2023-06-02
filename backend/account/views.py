@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 
 from .forms import RegisterForm, UserEditForm, PasswordChangingForm
 from .models import Profile, Contact
@@ -34,10 +35,11 @@ def user_detail(request, username):
     """Отображает данные пользователя."""
     author = get_object_or_404(User, username=username, is_active=True)
     post_list = author.blog_posts.all()
+    followers = author.followers.order_by('-username').all()
     context = {
-        'section': 'people',
         'author': author,
         'post_list': post_list,
+        'followers': followers,
     }
     return render(request, 'account/profile.html', context)
 
@@ -77,6 +79,7 @@ def user_list(request):
                    'users': users})
 
 
+@csrf_exempt
 @require_POST
 @login_required
 def user_follow(request):
@@ -88,7 +91,8 @@ def user_follow(request):
             if action == 'follow':
                 Contact.objects.get_or_create(
                     user_from=request.user,
-                    user_to=user)
+                    user_to=user
+                )
             else:
                 Contact.objects.filter(
                     user_from=request.user, user_to=user
