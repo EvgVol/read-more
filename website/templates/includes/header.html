@@ -84,14 +84,12 @@
                 </div>
               </div>
 
-              <div class="dropdown d-flex header-settings">
+              <div class="dropdown d-flex">
                 <a
-                  href="javascript:void(0);"
-                  class="nav-link icon"
-                  data-bs-toggle="sidebar-right"
-                  data-target=".sidebar-right"
+                  href="javascript:{% include "bookmarklet_launcher.js" %}"
+                  class="nav-link icon button"
                 >
-                  <i class="fe fe-align-right"></i>
+                  <i class="fe fe-crosshair"></i>
                 </a>
               </div>
 
@@ -276,7 +274,7 @@
               <!-- FULL-SCREEN -->
               <div class="dropdown d-flex">
                 <a class="nav-link icon full-screen-link nav-link-bg">
-                  <i class="fe fe-minimize fullscreen-button"></i>
+                  <i class="fe fe-move fullscreen-button"></i>
                 </a>
               </div>
               
@@ -531,9 +529,11 @@
                       >5</span
                     >
                   </a>
-                  <a class="dropdown-item" href="#">
-                    <i class="dropdown-icon fe fe-lock"></i> Lockscreen
+                  {% if request.user.is_staff %}
+                  <a class="dropdown-item" href="{% url 'admin:index' %}">
+                    <i class="dropdown-icon fe fe-cpu"></i> Админ-зона
                   </a>
+                  {% endif %}
                   <a class="dropdown-item" href="{% url 'core:setting' %}">
                     <i class="dropdown-icon fe fe-settings"></i> Настройки
                   </a>

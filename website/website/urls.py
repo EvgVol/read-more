@@ -10,7 +10,7 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', include('account.urls')),
     path('auth/', include('social_django.urls', namespace='social')),
     path('', include('core.urls', namespace='core')),

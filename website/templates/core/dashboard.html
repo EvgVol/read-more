@@ -14,7 +14,7 @@
           <div>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="javascript:void(0)">READ MORE</a>
+                <a href="#">EV</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">Главная</li>
             </ol>
@@ -25,6 +25,22 @@
         <!-- ROW-1 -->
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+            {% if request.user.is_staff %}
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                <div class="card bg-primary img-card box-primary-shadow">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <div class="text-white">
+                                <h2 class="mb-0 number-font">{{ user_count }}</h2>
+                                <p class="text-white mb-0">Пользователей </p>
+                            </div>
+                            <div class="ms-auto"> <a href="{% url 'user_list' %}"><i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i></a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
             <div class="row">
               <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
                 <div class="card bg-primary img-card box-primary-shadow">
@@ -39,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             <!-- COL END -->
             <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
                 <div class="card bg-secondary img-card box-secondary-shadow">
