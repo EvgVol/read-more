@@ -232,3 +232,4 @@ if DEBUG:
 ABSOLUTE_URL_OVERRIDES = {
     'account.User': lambda u: reverse_lazy('profile', args=[u.username])
 }
+
