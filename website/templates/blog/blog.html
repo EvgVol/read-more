@@ -18,7 +18,7 @@
 
       <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-8">
-          <div id="post-list">
+          <div id="obj-list">
             {% include 'blog/post/cart.html' %}
           </div>
           {% comment %} {% include 'blog/includes/paginator.html' with page=posts %} {% endcomment %}
@@ -52,8 +52,8 @@
             emptyPage = true; 
           } 
           else { 
-            var imageList = document.getElementById('post-list'); 
-            imageList.insertAdjacentHTML('beforeEnd', html); 
+            var objList = document.getElementById('obj-list'); 
+            objList.insertAdjacentHTML('beforeEnd', html); 
             blockRequest = false; 
           } 
         }) 
@@ -64,3 +64,4 @@
   const scrollEvent = new Event('scroll'); 
   window.dispatchEvent(scrollEvent);
 {% endblock %}
+

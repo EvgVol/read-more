@@ -3,42 +3,67 @@
   EXP VIEW | Действия пользователей
 {% endblock %}
 {% block content %}
-{% load static %}
+  {% load static %}
 
-<div class="main-content app-content mt-0">
-    <div class="side-app ">
-
-        <!-- CONTAINER -->
-        <div class="main-container container-fluid">
-
-            <!-- PAGE-HEADER -->
-            <div class="page-header">
-                <h1 class="page-title">Действия пользователей</h1>
-                <div>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">EXP-VIEW</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Действия</li>
-                    </ol>
-                </div>
-            </div>
-            <!-- PAGE-HEADER END -->
-
-            <!-- Row -->
-            <!-- Container -->
-            <div class="container">
-                <ul id="action-list" class="notification">
-                    {% for action in actions %}
-                        {% include 'actions/action/detail.html' %}
-                    {% endfor %}
-                </ul>
-                <div class="text-center mb-4">
-                    <button class="btn ripple btn-primary w-md">Загрузить ещё</button>
-                </div>
-            </div>
-            <!-- End Container -->
-            <!-- /Row -->
+  <div class="main-content app-content mt-0">
+    <div class="side-app">
+      <!-- CONTAINER -->
+      <div class="main-container container-fluid">
+        <!-- PAGE-HEADER -->
+        <div class="page-header">
+          <h1 class="page-title">Действия пользователей</h1>
+          <div>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">EXP-VIEW</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Действия</li>
+            </ol>
+          </div>
         </div>
-        <!-- CONTAINER CLOSED -->
+        <!-- PAGE-HEADER END -->
+
+        <!-- Row -->
+        <!-- Container -->
+        <div class="container">
+          <ul id="obj-list" class="notification">
+            {% for action in actions %}
+              {% include 'actions/action/detail.html' %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- End Container -->
+        <!-- /Row -->
+      </div>
+      <!-- CONTAINER CLOSED -->
     </div>
-</div>
+  </div>
 {% endblock %}
+{% comment %} {% block domready %}
+  var page = 1;
+  var emptyPage = false;
+  var blockRequest = false;
+  window.addEventListener('scroll', function(e) {
+    var margin = document.body.clientHeight - window.innerHeight - 200; 
+    if (window.pageYOffset > margin && !emptyPage && !blockRequest) { 
+      blockRequest = true; 
+      page += 1; 
+      fetch('?posts_only=1&page=' + page) 
+        .then(response => response.text()) 
+        .then(html => { 
+          if (html === '') { 
+            emptyPage = true; 
+          } 
+          else { 
+            var objList = document.getElementById('obj-list'); 
+            objList.insertAdjacentHTML('beforeEnd', html); 
+            blockRequest = false; 
+          } 
+        }) 
+    } 
+  });
+
+  // Запустить события прокрутки 
+  const scrollEvent = new Event('scroll'); 
+  window.dispatchEvent(scrollEvent);
+{% endblock %} {% endcomment %}
