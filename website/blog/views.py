@@ -11,9 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
-
 from taggit.models import Tag
 
+from actions.utils import create_action
 from .models import Post, Category
 from .forms import EmailPostForm, CommentForm, SearchForm, PostForm
 
@@ -120,6 +120,7 @@ def post_share(request, post_id):
             message = f"Прочитайте статью \"{post.title}\" здесь: {post_url}\n\n" \
                       f"Комментарий от {cd['name']}: {cd['comments']}"
             send_mail(subject, message, 'volochek93@yandex.ru', [cd['to']])
+            create_action(request.user, 'поделился статьей')
             sent = True
     else:
         form = EmailPostForm()
@@ -140,6 +141,7 @@ def post_comment(request, post_id):
         comment = form.save(commit=False)
         comment.post = post
         comment.save()
+        create_action(request.user, 'прокомментировал')
     return render(request, 'blog/post/comment.html',
                   {'post': post,
                    'form': form,
@@ -190,6 +192,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            create_action(request.user, 'добавил статью')
             messages.success(request, 'Статья успешно добавлена')
             return redirect(post.get_absolute_url())
     else:
@@ -209,6 +212,7 @@ def post_like(request):
             post = Post.objects.get(id=post_id)
             if action == 'like':
                 post.users_like.add(request.user)
+                create_action(request.user, 'оценил', post)
             else:
                 post.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})

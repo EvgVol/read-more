@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model 
 
 from blog.models import Post, Comment
+from actions.models import Action
 
 class SettingView(TemplateView):
     """Отображает страницу со списком настроек."""
@@ -46,6 +47,7 @@ class HomePageView(TemplateView):
         context['user_count'] = get_user_model().objects.count()
         context['post_count'] = Post.objects.count()
         context['comment_count'] = Comment.objects.count()
+        context['actions'] = Action.objects.select_related('user')[:6]
         context['like_count'] = sum(post.users_like.count() for post in Post.objects.all())
         return context
 

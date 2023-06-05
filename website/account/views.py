@@ -97,12 +97,12 @@ def user_follow(request):
                     user_from=request.user,
                     user_to=user
                 )
-                create_action(request.user, 'подписался', user)
+                create_action(request.user, 'подписался на', user)
             else:
                 Contact.objects.filter(
                     user_from=request.user, user_to=user
                 ).delete()
-                create_action(request.user, 'отписался', user)
+                create_action(request.user, 'отписался от', user)
             return JsonResponse({'status':'ok'})
         except User.DoesNotExist:
             return JsonResponse({'status':'error'})
