@@ -6,9 +6,10 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 
+from actions.utils import create_action
 from .forms import RegisterForm, UserEditForm, PasswordChangingForm
 from .models import Profile, Contact
-
+from actions.models import Action
 
 User = get_user_model()
 
@@ -23,6 +24,7 @@ def register(request):
             new_user.save()
             login(request, new_user)
             Profile.objects.create(user=new_user)
+            create_action(new_user, 'зарегистрировался')
         return redirect('blog:post_list')
     else:
         form = RegisterForm()
@@ -57,11 +59,13 @@ def user_edit(request):
         if 'save-details' in request.POST:
             if form.is_valid():
                 form.save()
+                create_action(user, 'изменил свои данные')
                 messages.success(request, 'Данные профиля изменены')
         elif 'change-password' in request.POST:
             if form_password.is_valid():
                 form_password.save()
                 logout(request)
+                create_action(user, 'изменил свой пароль')
                 messages.success(request, 'Пароль успешно изменен')
                 return redirect('login')
     return render(request, 'account/profile-edit.html',
@@ -93,10 +97,12 @@ def user_follow(request):
                     user_from=request.user,
                     user_to=user
                 )
+                create_action(request.user, 'подписался', user)
             else:
                 Contact.objects.filter(
                     user_from=request.user, user_to=user
                 ).delete()
+                create_action(request.user, 'отписался', user)
             return JsonResponse({'status':'ok'})
         except User.DoesNotExist:
             return JsonResponse({'status':'error'})
