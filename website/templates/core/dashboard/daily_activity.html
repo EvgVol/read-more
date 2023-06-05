@@ -8,7 +8,7 @@
     <div class="card-body pb-0">
       <ul class="task-list">
         {% for action in actions %}
-        <li class="d-sm-flex">
+        <li class="d-sm-flex mb-1">
           <div>
             <i class="task-icon bg-primary"></i>
             <h6 class="fw-semibold">{{ user.username|capfirst }}<span class="text-muted fs-11 mx-2 fw-normal">{{ action.created|naturaltime }}</span></h6>
@@ -22,7 +22,7 @@
         {% endfor %}
       </ul>
     </div>
-    <a href="#" class="dropdown-item text-center p-3 text-muted">Посмотреть всю активность</a>
+    <a href="{% url 'actions:notification' %}" class="dropdown-item text-center p-3 text-muted">Посмотреть всю активность</a>
   </div>
 </div>
 {% endwith %}
