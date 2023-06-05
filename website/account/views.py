@@ -65,7 +65,7 @@ def user_edit(request):
             if form_password.is_valid():
                 form_password.save()
                 logout(request)
-                create_action(user, 'изменил свой пароль')
+                create_action(user, 'изменил свои данные')
                 messages.success(request, 'Пароль успешно изменен')
                 return redirect('login')
     return render(request, 'account/profile-edit.html',
