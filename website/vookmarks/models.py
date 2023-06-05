@@ -20,12 +20,14 @@ class Image(models.Model):
                                         related_name='images_liked',
                                         verbose_name='Понравилось',
                                         blank=True)
+    total_likes = models.PositiveIntegerField(default=0)
 
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
         indexes = [
             models.Index(fields=['-created']),
+            models.Index(fields=['-total_likes']),
         ]
         ordering = ['-created']
 
