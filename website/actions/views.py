@@ -11,21 +11,26 @@ def dashboard(request):
     """Отображает страницу с действиями пользователя."""
     
     if request.user.is_staff:
-        action_list = Action.objects.all()
+        action_list = Action.objects.select_related('user').prefetch_related('target')
     else:
-        action_list = Action.objects.filter(user=request.user)
+        action_list = Action.objects.filter(user=request.user).prefetch_related('target')
         
-    paginator = Paginator(action_list, 10) # Показывать 10 действий на странице
+    paginator = Paginator(action_list, 5)
     page = request.GET.get('page')
+    action_only = request.GET.get('posts_only')
 
     try:
         actions = paginator.page(page)
     except (PageNotAnInteger, EmptyPage):
+        if action_only:
+            return HttpResponse('')
         actions = paginator.page(1)
     
-    actions_only = request.GET.get('actions_only')
+    if action_only:
+        return render(request,
+                      'actions/action/detail.html',
+                      {'actions': actions})
     
-    if actions_only:
-        return render(request, 'actions/action/detail.html', {'actions': actions})
-    
-    return render(request, 'actions/user_actions.html', {'actions': actions})
+    return render(request,
+                  'actions/user_actions.html',
+                  {'actions': actions})

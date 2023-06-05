@@ -26,11 +26,12 @@
         <!-- Row -->
         <!-- Container -->
         <div class="container">
-          <ul id="obj-list" class="notification">
-            {% for action in actions %}
-              {% include 'actions/action/detail.html' %}
-            {% endfor %}
+          <ul id="action-list" class="notification">
+            {% include 'actions/action/detail.html' %}
           </ul>
+          <div class="text-center mb-4">
+            <button id="more-btn" class="btn ripple btn-primary w-md">Показать еще</button>
+          </div>
         </div>
         <!-- End Container -->
         <!-- /Row -->
@@ -39,31 +40,24 @@
     </div>
   </div>
 {% endblock %}
-{% comment %} {% block domready %}
+{% block domready %}
   var page = 1;
   var emptyPage = false;
   var blockRequest = false;
-  window.addEventListener('scroll', function(e) {
-    var margin = document.body.clientHeight - window.innerHeight - 200; 
-    if (window.pageYOffset > margin && !emptyPage && !blockRequest) { 
+  $('#more-btn').on('click', function() {
+    if (!emptyPage && !blockRequest) { 
       blockRequest = true; 
       page += 1; 
-      fetch('?posts_only=1&page=' + page) 
-        .then(response => response.text()) 
-        .then(html => { 
-          if (html === '') { 
-            emptyPage = true; 
-          } 
-          else { 
-            var objList = document.getElementById('obj-list'); 
-            objList.insertAdjacentHTML('beforeEnd', html); 
-            blockRequest = false; 
-          } 
-        }) 
-    } 
+      $.get('?posts_only=1&page=' + page, function(data) {
+        if (data === '') { 
+          emptyPage = true;
+          $('#more-btn').hide(); // Скрыть кнопку, если все записи уже загружены
+        } 
+        else { 
+          $('#action-list').append(data); 
+          blockRequest = false; 
+        } 
+      }); 
+    }
   });
-
-  // Запустить события прокрутки 
-  const scrollEvent = new Event('scroll'); 
-  window.dispatchEvent(scrollEvent);
-{% endblock %} {% endcomment %}
+{% endblock %}

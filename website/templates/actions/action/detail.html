@@ -1,29 +1,48 @@
 {% load thumbnail %}
 {% load humanize %}
-{% with user=action.user profile=action.user.profile target=action.target %}
+{% load static %}
+{% for action in actions %}
+{% with user=action.user  %}
 <li>
-    <div class="notification-time">
-        <span class="date">{{ action.created|date:"F j"|capfirst }}</span>
-        <span class="time">{{ action.created|time:"g:i" }}</span>
-    </div>
-    <div class="notification-icon">
-        <a href="javascript:void(0);"></a>
-    </div>
-    <div class="notification-body">
-        <div class="media mt-0">
-            <div class="main-avatar avatar-md online">
-                <img alt="avatar" class="br-7" src="{% thumbnail user.avatar "80x80" crop="center" %}">
-            </div>
-            <div class="media-body ms-3 d-flex">
-                <div class="">
-                    <p class="fs-15 text-dark fw-bold mb-0">{{ user.get_full_name }}</p>
-                    <p class="mb-0 fs-13 text-dark">{{ action.verb }} <a href="{{ target.get_absolute_url }}">{{ target }}</a></p>
-                </div>
-                <div class="notify-time">
-                    <p class="mb-0 text-muted fs-11">{{ action.created|naturaltime }}</p>
-                </div>
-            </div>
+  <div class="notification-time">
+    <span class="date">{{ action.created|date:"F j"|capfirst }}</span>
+    <span class="time">{{ action.created|time:"g:i" }}</span>
+  </div>
+  <div class="notification-icon">
+    <a href="javascript:void(0);"></a>
+  </div>
+  <div class="notification-body">
+    <div class="media mt-0">
+      <div class="main-avatar avatar-md online">
+        {% if user.avatar %}
+          {% thumbnail user.avatar "40x40" crop="center" as im %}
+          <img
+            alt="{{ user.username }}"
+            class="br-7"
+            src="{{ im.url }}"
+          >
+          {% endthumbnail %}
+        {% else %}
+          <img
+            alt="{{ user.username }}"
+            class="br-7"
+            src="{% static 'images/users/default-user.jpeg' %}"
+            >
+        {% endif %}
+      </div>
+      <div class="media-body ms-3 d-flex">
+        <div class="">
+          <p class="fs-15 text-dark fw-bold mb-0">{{ user.get_full_name }}</p>
+          {% with target=action.target %}
+          <p class="mb-0 fs-13 text-dark">{{ action.verb }} <a href="{{ target.get_absolute_url }}">{{ target }}</a></p>
+          {% endwith %}
         </div>
+        <div class="notify-time">
+            <p class="mb-0 text-muted fs-11">{{ action.created|naturaltime }}</p>
+        </div>
+      </div>
     </div>
+  </div>
 </li>
 {% endwith %}
+{% endfor %}
