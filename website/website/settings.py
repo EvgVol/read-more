@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     'actions.apps.ActionsConfig',
     
     'sorl.thumbnail',
-    'taggit', #https://github.com/jazzband/django-taggit
-    'social_django', 
-    'django_extensions',
+    'taggit', #TAGS # https://github.com/jazzband/django-taggit
+    'social_django', #OAUTH2
+    'django_extensions', #SSL #https://django-extensions.readthedocs.io/en/latest/
+    'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
@@ -233,3 +235,7 @@ ABSOLUTE_URL_OVERRIDES = {
     'account.User': lambda u: reverse_lazy('profile', args=[u.username])
 }
 
+# Setting Debug-toolbar:
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
