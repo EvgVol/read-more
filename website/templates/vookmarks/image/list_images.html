@@ -12,8 +12,9 @@
       <div class="card-body">
         <a href="{{ image.get_absolute_url }}">
           <h5 class="card-title my-title">{{ image.title }}
+            | <i class="fa fa-eye" style="color: #blue;"></i><spam class="small text-muted ms-1">{{ image.total_views }}   </spam>
             {% if image.total_likes != 0 %}
-            | <i class="fa fa-heart" style="color: #d63384;"></i><spam class="small text-muted ms-1">{{ image.total_likes }}</spam>
+            <i class="fa fa-heart" style="color: #d63384;"></i><spam class="small text-muted ms-1">{{ image.total_likes }}</spam>
             {% endif %}
           </h5>
         </a>
