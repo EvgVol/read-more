@@ -36,7 +36,7 @@
 			</div>
 			<div class="ms-auto">
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
-					<i class="fa fa-thumbs-o-up border brround">
+					<i class="fa fa-heart-o border brround text-danger">
 						{% if post.users_like.count != 0 %}
 						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-danger">
 							{{ post.users_like.count }}
@@ -45,7 +45,7 @@
 					</i>
 				</a>
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
-					<i class="fa fa-comments border brround">
+					<i class="fa fa-comments border brround text-success">
 						{% if post.comments.count != 0 %}
 						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-success">
 							{{ post.comments.count }}
@@ -54,7 +54,7 @@
 					</i>
 				</a>
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
-					<i class="fa fa-eye border brround">
+					<i class="fa fa-eye border brround text-info">
 						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-info">
 							{{ post.total_views }}
 						<span class="visually-hidden">просмотров</span>
