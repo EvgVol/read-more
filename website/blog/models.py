@@ -4,8 +4,10 @@ from django.utils import timezone
 from django.urls import reverse
 from django.conf import settings
 
+
 from taggit.managers import TaggableManager
 from pytils.translit import slugify
+
 
 class Category(models.Model):
     """Модель категорий."""

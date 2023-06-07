@@ -24,12 +24,14 @@ r = redis.Redis(host=settings.REDIS_HOST,
                 port=settings.REDIS_PORT,
                 db=settings.REDIS_DB)
 
-def post_list(request, tag_slug=None, category_slug=None):
+
+def post_list(request, tag_slug=None, category_slug=None, ranking=None):
     """Отображает список статей."""
     # Отображаем только опубликованные статьи(черновики не показываем)
     post_list = Post.published.select_related('author', 'category')
     tag = None
     category = None
+    most_viewed = None
 
     # Отображение статей с выбранным тегом
     if tag_slug:
@@ -40,6 +42,7 @@ def post_list(request, tag_slug=None, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         post_list = post_list.filter(category__in=[category])
+
 
     # Получаем 4 последние опубликованные статьи
     latest_posts = post_list.order_by('-publish')[:4]
@@ -68,6 +71,12 @@ def post_list(request, tag_slug=None, category_slug=None):
         # преобразуем total_views из bytes в int
         total_views = int(total_views) if total_views else 0
         post.total_views = total_views
+
+    if ranking == 1:
+        post_ranking = r.zrange('post_ranking', 0, -1, desc=True)[:10]
+        post_ranking_ids = [int(id) for id in post_ranking]
+        posts = list(Post.objects.filter(id__in=post_ranking_ids))
+        posts.sort(key=lambda x: post_ranking_ids.index(x.id))
 
     if posts_only:
         return render(request,
@@ -106,9 +115,11 @@ def post_detail(request, year, month, day, post):
     ).order_by('-same_tags','-publish')[:4]
     # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
-
+    # увеличить общее число просмотров статьи на 1
     total_views = r.incr(f'Статья:{post.id}:просмотрена')
-    
+    # увеличить рейтинг статьи на 1
+    r.zincrby('post_ranking', 1, post.id)
+
     return render(request, 'blog/blog-detail.html',
                   {'post': post,
                    'comments': comments,
