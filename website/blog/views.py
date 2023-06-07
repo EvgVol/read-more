@@ -1,5 +1,7 @@
 import time
 
+import redis
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
@@ -17,6 +19,10 @@ from actions.utils import create_action
 from .models import Post, Category
 from .forms import EmailPostForm, CommentForm, SearchForm, PostForm
 
+
+r = redis.Redis(host=settings.REDIS_HOST,
+                port=settings.REDIS_PORT,
+                db=settings.REDIS_DB)
 
 def post_list(request, tag_slug=None, category_slug=None):
     """Отображает список статей."""
@@ -55,7 +61,14 @@ def post_list(request, tag_slug=None, category_slug=None):
         if posts_only:
             return HttpResponse('')
         posts = paginator.page(1)
-    
+
+    for post in posts:
+        total_views = r.get(f'Статья:{post.id}:просмотрена')
+
+        # преобразуем total_views из bytes в int
+        total_views = int(total_views) if total_views else 0
+        post.total_views = total_views
+
     if posts_only:
         return render(request,
                       'blog/post/cart.html',
@@ -93,13 +106,16 @@ def post_detail(request, year, month, day, post):
     ).order_by('-same_tags','-publish')[:4]
     # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
+
+    total_views = r.incr(f'Статья:{post.id}:просмотрена')
     
     return render(request, 'blog/blog-detail.html',
                   {'post': post,
                    'comments': comments,
                    'form': form,
                    'similar_posts': similar_posts,
-                   'tag_list': tag_list})
+                   'tag_list': tag_list,
+                   'total_views': total_views})
 
 
 # Поделиться статьей

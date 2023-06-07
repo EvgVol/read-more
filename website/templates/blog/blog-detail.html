@@ -40,11 +40,9 @@
                       <div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">{{ post.author.username }}</div>
                   </a>
                   <div class="ms-auto">
-                    <a href="javascript:void(0);" class="d-flex mb-2"><i class="fe fe-message-square fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
+                    <a href="javascript:void(0);" class="d-flex mb-2"><i class="fe fe-eye fs-16 me-1 p-3 bg-success-transparent text-success bradius"></i>
                         <div class="mt-0 mt-3 ms-1 text-muted font-weight-semibold">
-                          {% with comments.count as total_comments %}
-                            {{ total_comments }} комментари{{ total_comments|ru_plural:"й,я,ев" }}
-                          {% endwith %}
+                          {{ total_views }} просмотр{{ total_views|ru_plural:" ,а,ов" }}
                         </div>
                     </a>
                   </div>

@@ -81,6 +81,7 @@ def image_list(request):
 
     for image in images:
         total_views = r.get(f'Изображение:{image.id}:просмотрено')
+
         # преобразуйте total_views из bytes в int
         total_views = int(total_views) if total_views else 0
         image.total_views = total_views
