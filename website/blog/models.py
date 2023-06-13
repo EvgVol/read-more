@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.urls import reverse
 from django.conf import settings
 
-
 from taggit.managers import TaggableManager
 from pytils.translit import slugify
 
@@ -22,6 +21,11 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 
 class PublishManager(models.Manager):
