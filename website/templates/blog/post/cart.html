@@ -35,31 +35,41 @@
 				<small class="d-block text-muted">{{ post.publish|naturaltime }}</small>
 			</div>
 			<div class="ms-auto">
+				{% with total_likes=post.users_like.count total_comments=post.comments.count total_views=post.total_views %}
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
-					<i class="fa fa-heart-o border brround text-danger">
-						{% if post.users_like.count != 0 %}
+					{% if total_likes != 0 %}
+					<i class="fa fa-heart border brround text-danger">
 						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-danger">
-							{{ post.users_like.count }}
+							{{ total_likes }}
 						<span class="visually-hidden">лайков</span>
-						{% endif %}
 					</i>
+					{% else %}
+					<i class="fa fa-heart-o border brround text-danger"></i>
+					{% endif %}
 				</a>
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
+					{% if total_comments != 0 %}
 					<i class="fa fa-comments border brround text-success">
-						{% if post.comments.count != 0 %}
 						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-success">
-							{{ post.comments.count }}
+							{{ total_comments }}
 						<span class="visually-hidden">комментариев</span>
-						{% endif %}
 					</i>
+					{% else %}
+					<i class="fa fa-comments-o border brround text-success"></i>
+					{% endif %}
 				</a>
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
+					{% if total_views != 0 %}
 					<i class="fa fa-eye border brround text-info">
 						<span class="position-absolute top-0 start-5 translate-middle badge rounded-pill bg-info">
-							{{ post.total_views }}
+							{{ total_views }}
 						<span class="visually-hidden">просмотров</span>
 					</i>
+					{% else %}
+					<i class="fa fa-eye-slash border brround text-info"></i>
+					{% endif %}
 				</a>
+				{% endwith %}
 			</div>
 		</div>
 	</div>
