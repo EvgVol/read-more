@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'vookmarks.apps.VookmarksConfig',
     'actions.apps.ActionsConfig',
+    'shop.apps.ShopConfig',
     
     'sorl.thumbnail',
     'taggit', #TAGS # https://github.com/jazzband/django-taggit
