@@ -9,10 +9,12 @@
       <div class="page-header">
           <h1 class="page-title">Блог</h1>
           <div>
+            
             <div class="breadcrumb">
               <a href="{% url 'blog:post_feed' %}" class="btn btn-danger d-inline-block mx-2"><i class="fa fa-rss me-2"></i>Подписаться</a>
               <a href="{% url 'blog:post_create' %}" class="btn btn-primary d-inline-block"><i class="fa fa-plus-square me-2"></i>Добавить пост</a>
-              <a href="{% url 'blog:post_list_ranking' ranking=1 %}" class="btn btn-primary d-inline-block"><i class="fa fa-plus-square me-2"></i>Сортировать</a>
+              
+              <a href="" class="btn btn-primary d-inline-block mx-2"><i class="fa fa-plus-square me-2"></i>Сортировать</a>
             </div>
           </div>
       </div>
@@ -29,6 +31,18 @@
           {% include 'blog/includes/top_comment_post.html' %}
           {% include 'blog/includes/last_posts.html' %}
           {% include 'blog/includes/tags.html' %}
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Сортировать</div>
+            </div>
+            <div class="card-body">
+              <div class="tags">
+                <a href="{% url 'blog:post_list_ranking' ranking="top" %}" class="tag text-primary">
+                  По просмотру
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,15 +61,16 @@
       page += 1; 
       fetch('?posts_only=1&page=' + page) 
         .then(response => response.text()) 
-        .then(html => { 
+        .then(html => {
+          var objList = document.getElementById('obj-list');
           if (html === '') { 
-            emptyPage = true; 
+            emptyPage = true;
+            objList.insertAdjacentHTML('beforeEnd', '<p>All posts have been loaded</p>');
           } 
           else { 
-            var objList = document.getElementById('obj-list'); 
             objList.insertAdjacentHTML('beforeEnd', html); 
-            blockRequest = false; 
-          } 
+          }
+          blockRequest = false;
         }) 
     } 
   });

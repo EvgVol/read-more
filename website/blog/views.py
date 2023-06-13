@@ -31,7 +31,6 @@ def post_list(request, tag_slug=None, category_slug=None, ranking=None):
     post_list = Post.published.select_related('author', 'category')
     tag = None
     category = None
-    most_viewed = None
 
     # Отображение статей с выбранным тегом
     if tag_slug:
@@ -49,7 +48,20 @@ def post_list(request, tag_slug=None, category_slug=None, ranking=None):
 
     # Получаем список всех тегов, связанных со статьями
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
-    
+
+    if ranking == 'top':
+        post_ranking = r.zrange('post_ranking', 0, -1, desc=True, withscores=True)
+        post_ids = [int(id) for id, score in post_ranking]
+        post_list = list(Post.objects.filter(id__in=post_ids))
+        post_list.sort(key=lambda x: post_ids.index(x.id))
+
+    for post in post_list:
+        total_views = r.get(f'Статья:{post.id}:просмотрена')
+
+        # преобразуем total_views из bytes в int
+        total_views = int(total_views) if total_views else 0
+        post.total_views = total_views
+
     # Разбивка списка статей на страницы
     paginator = Paginator(post_list, 1) # Показывать 1 статью на странице
     page = request.GET.get('page')
@@ -65,18 +77,6 @@ def post_list(request, tag_slug=None, category_slug=None, ranking=None):
             return HttpResponse('')
         posts = paginator.page(1)
 
-    for post in posts:
-        total_views = r.get(f'Статья:{post.id}:просмотрена')
-
-        # преобразуем total_views из bytes в int
-        total_views = int(total_views) if total_views else 0
-        post.total_views = total_views
-
-    if ranking == 1:
-        post_ranking = r.zrange('post_ranking', 0, -1, desc=True)[:10]
-        post_ranking_ids = [int(id) for id in post_ranking]
-        posts = list(Post.objects.filter(id__in=post_ranking_ids))
-        posts.sort(key=lambda x: post_ranking_ids.index(x.id))
 
     if posts_only:
         return render(request,
