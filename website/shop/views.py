@@ -14,7 +14,7 @@ def product_list(request, category_slug=None):
         products = products.filter(category=category)
 
     return render(request,
-                  'shop/product/list.html',
+                  'shop/shop.html',
                   {'category': category,
                    'categories': categories,
                    'products': products})
@@ -28,5 +28,5 @@ def product_detail(request, category_slug, product_slug):
                                 avalible=True)
 
     return render(request,
-                  'shop/product/detail.html',
+                  'shop/product-detail.html',
                   {'product': product})
