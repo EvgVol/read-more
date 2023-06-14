@@ -30,6 +30,14 @@ def cart_remove(request, product_id):
     return redirect('cart:cart_detail')
 
 
+@require_POST
+def cart_clear(request):
+    """Очищает корзину."""
+    cart = Cart(request)
+    cart.clear()
+    return redirect('cart:cart_detail')
+
+
 def cart_detail(request):
     """Выводит страницу корзину с её содержимым."""
     cart = Cart(request)
