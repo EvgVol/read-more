@@ -36,13 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
 
-    'blog.apps.BlogConfig',
+    'blog.apps.BlogConfig', 
     'core.apps.CoreConfig',
     'vookmarks.apps.VookmarksConfig',
-    'actions.apps.ActionsConfig',
+    'actions.apps.ActionsConfig', 
     'shop.apps.ShopConfig',
+    'cart.apps.CartConfig', 
     
-    'sorl.thumbnail',
+    'sorl.thumbnail', #IMAGE
     'taggit', #TAGS # https://github.com/jazzband/django-taggit
     'social_django', #OAUTH2
     'django_extensions', #SSL #https://django-extensions.readthedocs.io/en/latest/

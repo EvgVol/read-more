@@ -90,9 +90,9 @@
                                         <li><a href="javascript:void(0)" class="btn btn-danger"><i class="fe fe-x"></i></a></li>
                                     </ul>
                                     {% thumbnail product.image "250x200" crop="center" as im %}
-                                    <a href="{{ product.get_absolute_url }}" >
-                                        <img class="img-fluid br-7 w-100" src="{{ im.url }}" alt="img">
-                                    </a>
+                                      <a href="{{ product.get_absolute_url }}" >
+                                          <img class="img-fluid br-7 w-100" src="{% if product.image %}{{ im.url }}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img">
+                                      </a>
                                     {% endthumbnail %}
                                 </div>
                                 <div class="card-body pt-0">
@@ -156,7 +156,7 @@
                                                   </div>
                                                   <div class="br-be-0 br-te-0">
                                                     <a href="{{ product.get_absolute_url }}" class="">
-                                                        <img src="{% thumbnail product.image "200x200" %}" alt="img" class="cover-image br-7 w-100">
+                                                        <img src="{% if product.image %}{% thumbnail product.image "200x200" %}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img" class="cover-image br-7 w-100">
                                                     </a>
                                                   </div>
                                               </div>
