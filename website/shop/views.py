@@ -20,11 +20,11 @@ def product_list(request, category_slug=None):
                    'products': products})
 
 
-def product_detail(request, id, category_slug, product_slug):
+def product_detail(request, category_slug, product_slug):
     """Выводит отдельный товар"""
+    category = get_object_or_404(Category, slug=category_slug)
     product = get_object_or_404(Product,
-                                id=id,
-                                category=category_slug,
+                                category=category,
                                 slug=product_slug,
                                 available=True)
 
