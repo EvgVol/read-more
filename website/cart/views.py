@@ -33,4 +33,4 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     """Выводит страницу корзину с её содержимым."""
     cart = Cart(request)
-    return render(request, 'cart/detail.html', {'cart': cart})
+    return render(request, 'cart/cart.html', {'cart': cart})
