@@ -22,7 +22,7 @@
             <h6 class="fw-semibold">{{ user.username|capfirst }}<span class="text-muted fs-11 mx-2 fw-normal">{{ action.created|naturaltime }}</span></h6>
             {% with target=action.target %}
             <p class="text-muted fs-12">
-              {{ action.verb }}<a href="{{ target.get_absolute_url }}" class="fw-semibold"> {{ target|truncatechars:30 }}</a>
+              {{ action.verb }}<a href="{{ target.get_absolute_url }}" class="fw-semibold"> {% if not target %}{% else %}{{ target|truncatechars:30 }}{% endif %}</a>
             </p>
             {% endwith %}
           </div>

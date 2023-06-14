@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
+from actions.utils import create_action
 from .cart import Cart
 from .forms import CartAddProductForm
 from shop.models import Product
@@ -18,6 +19,7 @@ def cart_add(request, product_id):
         cart.add(product=product,
                  quantity=cd['quantity'],
                  override_quantity=cd['override'])
+        create_action(request.user, 'добавил в корзину', product)
     return redirect('cart:cart_detail')
 
 
@@ -27,6 +29,7 @@ def cart_remove(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
+    create_action(request.user, 'удалил из корзины', product)
     return redirect('cart:cart_detail')
 
 
@@ -35,6 +38,7 @@ def cart_clear(request):
     """Очищает корзину."""
     cart = Cart(request)
     cart.clear()
+    create_action(request.user, 'очистил корзину')
     return redirect('cart:cart_detail')
 
 
