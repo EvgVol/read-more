@@ -16,8 +16,8 @@
               <div>
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="javascript:void(0)">ExView</a></li>
-                  <li class="breadcrumb-item" aria-current="page">Интернет магазин</li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">Интернет магазин</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">{{ product.category.name }}</a></li>
                 </ol>
               </div>
           </div>
@@ -32,25 +32,28 @@
                               <div class="col-xl-5 col-lg-12 col-md-12">
                                   <div class="row">
                                       <div class="col-xl-12">
+                                          {% thumbnail product.image  "300x250" crop="center" as im %}
                                           <div class="product-carousel">
                                               <div id="Slider" class="carousel slide border" data-bs-ride="false">
                                                   <div class="carousel-inner">
-                                                      <div class="carousel-item active"><img src="{% static 'images/pngs/13.png' %}" alt="img" class="img-fluid mx-auto d-block">
+                                                        
+                                                      <div class="carousel-item active"><img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
                                                           <div class="text-center mt-5 mb-5 btn-list">
                                                           </div>
                                                       </div>
-                                                      <div class="carousel-item"> <img src="{% static 'images/pngs/14.png' %}" alt="img" class="img-fluid mx-auto d-block">
+                                                      <div class="carousel-item"> <img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
                                                           <div class="text-center mb-5 mt-5 btn-list">
                                                           </div>
                                                       </div>
-                                                      <div class="carousel-item"> <img src="{% static 'images/pngs/12.png' %}" alt="img" class="img-fluid mx-auto d-block">
+                                                      <div class="carousel-item"> <img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
                                                           <div class="text-center  mb-5 mt-5 btn-list">
                                                           </div>
                                                       </div>
-                                                      <div class="carousel-item"> <img src="{% static 'images/pngs/11.png' %}" alt="img" class="img-fluid mx-auto d-block">
+                                                      <div class="carousel-item"> <img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
                                                           <div class="text-center  mb-5 mt-5 btn-list">
                                                           </div>
                                                       </div>
+                                                      
                                                   </div>
                                               </div>
                                           </div>
@@ -58,16 +61,15 @@
                                               <div id="thumbcarousel" class="carousel slide" data-bs-interval="t">
                                                   <div class="carousel-inner">
                                                       <ul class="carousel-item active">
-                                                          {% thumbnail product.image  "300x250" crop="center" as im %}
                                                           <li data-bs-target="#Slider" data-bs-slide-to="0" class="thumb active m-2"><img src="{{ im.url }}" alt="img"></li>
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="1" class="thumb m-2"><img src="{% static 'images/pngs/14.png' %}" alt="img"></li>
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="2" class="thumb m-2"><img src="{% static 'images/pngs/12.png' %}" alt="img"></li>
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="3" class="thumb m-2"><img src="{% static 'images/pngs/11.png' %}" alt="img"></li>
-                                                          {% endthumbnail %}
+                                                          <li data-bs-target="#Slider" data-bs-slide-to="1" class="thumb m-2"><img src="{{ im.url }}" alt="img"></li>
+                                                          <li data-bs-target="#Slider" data-bs-slide-to="2" class="thumb m-2"><img src="{{ im.url }}" alt="img"></li>
+                                                          <li data-bs-target="#Slider" data-bs-slide-to="3" class="thumb m-2"><img src="{{ im.url }}" alt="img"></li>
                                                       </ul>
                                                   </div>
                                               </div>
                                           </div>
+                                          {% endthumbnail %}
                                       </div>
                                   </div>
                               </div>

@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 {% load thumbnail %}
-{% load blog_tags %}
+{% load shop_tags %}
 <!--app-content open-->
 <div class="main-content app-content mt-0">
     <div class="side-app">
@@ -28,7 +28,7 @@
             <div class="row">
               <div class="col-md-12 col-lg-12">
                 <!-- Categories -->
-                {% include 'shop/includes/categories.html' %}
+                {% show_categories %}
                 <!-- Categories-END -->
 
                 <!-- Price Range -->
