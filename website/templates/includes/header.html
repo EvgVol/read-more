@@ -97,7 +97,7 @@
               <div class="dropdown d-flex shopping-cart">
                 <a class="nav-link icon text-center" data-bs-toggle="dropdown">
                   <i class="fe fe-shopping-cart"></i
-                  ><span class="badge bg-secondary header-badge">4</span>
+                  ><span class="badge bg-secondary header-badge">{{ cart.get_unique_products }}</span>
                 </a>
                 <div
                   class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
@@ -105,12 +105,12 @@
                   <div class="drop-heading border-bottom">
                     <div class="d-flex">
                       <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark">
-                        My Shopping Cart
+                        Корзина
                       </h6>
                       <div class="ms-auto">
                         <span
                           class="badge bg-danger-transparent header-badge text-danger fs-14"
-                          >Hurry Up!</span
+                          >Торопись!</span
                         >
                       </div>
                     </div>
@@ -262,10 +262,10 @@
                     <a
                       class="btn btn-primary btn-pill w-sm btn-sm py-2"
                       href="checkout.html"
-                      ><i class="fe fe-check-circle"></i> Checkout</a
+                      ><i class="fe fe-check-circle"></i> Заказать</a
                     >
                     <span class="float-end p-2 fs-17 fw-semibold"
-                      >Total: $6789</span
+                      >Итого: {{ cart.get_total_price }} ₽</span
                     >
                   </div>
                 </div>

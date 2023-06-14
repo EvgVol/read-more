@@ -26,7 +26,8 @@ class Cart:
         """
         product_ids = self.cart.keys()
         # получить объекты product и добавить их в корзину
-        products = Product.objects.filter(id__in=product_ids)
+        products = Product.objects.filter(id__in=product_ids)\
+                                  .prefetch_related('category')
         cart = self.cart.copy()
         for product in products:
             cart[str(product.id)]['product'] = product
@@ -61,9 +62,17 @@ class Cart:
         """
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
+    @property
+    def get_total_quantity(self):
+        """
+        Общее количество товаров корзине.
+        """
+        return sum(item['quantity'] for item in self.cart.values())
+
+    @property
     def get_unique_products(self):
         """
-        Возвращает список уникальных товаров в корзине с их количеством.
+        Возвращает количество уникальных товаров в корзине.
         """
         product_ids = self.cart.keys()
         # получить объекты product и добавить их в корзину
@@ -75,7 +84,7 @@ class Cart:
         for item in cart.values():
             if item not in unique_products:
                 unique_products.append(item)
-        return unique_products
+        return len(unique_products)
 
     def increase_quantity(self, product_id):
         """
