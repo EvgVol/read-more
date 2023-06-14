@@ -18,6 +18,7 @@ urlpatterns = [
     path('vookmarks/', include('vookmarks.urls', namespace='vookmarks')),
     path('', include('actions.urls', namespace='actions')),
     path('shop/', include('shop.urls', namespace='shop')),
+    path('cart/', include('cart.urls', namespace='cart')),
     path('__debug__/', include('debug_toolbar.urls', namespace='debug')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
