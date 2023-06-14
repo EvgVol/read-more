@@ -45,4 +45,8 @@ def cart_clear(request):
 def cart_detail(request):
     """Выводит страницу корзину с её содержимым."""
     cart = Cart(request)
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(
+            initial={'quantity': item['quantity'], 'override': True}
+        )
     return render(request, 'cart/cart.html', {'cart': cart})

@@ -57,12 +57,17 @@
                           </td>
                           <td>{{ product.name }}</td>
                           <td class="fw-bold">{{ item.price }}</td>
-                          <td>{{ item.quantity }}
-                            {% comment %} <div class="handle-counter" id="handleCounter4">
-                              <button type="button" class="counter-minus btn btn-white lh-2 shadow-none"><i class="fa fa-minus text-muted"></i></button>
-                              <input type="text" value="{{ item.quantity }}" class="qty" />
-                              <button type="button" class="counter-plus btn btn-white lh-2 shadow-none"><i class="fa fa-plus text-muted"></i></button>
-                            </div> {% endcomment %}
+                          <td>
+                            <form action="{% url "cart:cart_add" product.id %}" method="post">
+                              
+                            <div class="handle-counter" id="handleCounter4">
+                              {{ item.update_quantity_form.quantity }}
+                              {{ item.update_quantity_form.override }}
+                              <input type="submit" value="Обновить">
+                            </div>
+                            
+                            {% csrf_token %}
+                            </form>
                           </td>
                           <td>{{ item.total_price }}</td>
                           <td>
