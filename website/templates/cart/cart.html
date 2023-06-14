@@ -68,15 +68,16 @@
                           <td>
                             <div class="d-flex g-2">
                               <a class="btn text-secondary bg-secondary-transparent btn-icon py-1 me-2" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="bi bi-heart fs-16"></span></a>
-                              <form 
-                                action="{% url "cart:cart_remove" product.id %}"
-                                method="post"
-                                class="btn text-danger bg-danger-transparent btn-icon py-1"
-                                data-bs-toggle="tooltip"
-                                data-bs-original-title="Удалить">
-                                <span class="bi bi-trash fs-16" type="submit"></span>
+                              <form action="{% url "cart:cart_remove" product.id %}" method="post">
                                 {% csrf_token %}
-                              </form>
+                                <button 
+                                  class="btn text-danger bg-danger-transparent btn-icon py-1"
+                                  data-bs-toggle="tooltip"
+                                  data-bs-original-title="Удалить"
+                                  type="submit">
+                                  <span class="bi bi-trash fs-16"></span>
+                                </button>
+                              </form> 
                             </div>
                           </td>
                         </tr>

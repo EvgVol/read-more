@@ -108,9 +108,10 @@
                         Корзина
                       </h6>
                       <div class="ms-auto">
-                        <span
-                          class="badge bg-danger-transparent header-badge text-danger fs-14"
-                          >Торопись!</span
+                        <a
+                          href="{% url 'cart:cart_detail' %}"
+                          class="badge bg-info-transparent header-badge fs-14"
+                          >Подробнее <i class="fa fa-arrow-right ms-1"></i></a
                         >
                       </div>
                     </div>
