@@ -86,24 +86,6 @@ class Cart:
                 unique_products.append(item)
         return len(unique_products)
 
-    def increase_quantity(self, product_id):
-        """
-        Увеличивает количество товаров в корзине на 1
-        """
-        if product_id in self.items:
-            self.items[product_id]['quantity'] += 1
-
-    def decrease_quantity(self, product_id):
-        """
-        Уменьшает количество товаров в корзине на 1. Если количество товаров 
-        равно 1, то товар удаляется из корзины.
-        """
-        if product_id in self.items:
-            if self.items[product_id]['quantity'] > 1:
-                self.items[product_id]['quantity'] -= 1
-            else:
-                del self.items[product_id]
-
     def has_product(self, product):
         """
         Проверить наличие товара в корзине.
