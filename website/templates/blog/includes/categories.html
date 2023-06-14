@@ -8,7 +8,7 @@
     <ul class="list-group">
       {% for category in categories %}
       <li class="list-group-item border-0 p-0">
-        <a href="{% url 'blog:post_list_by_category' category.slug %}"
+        <a href="{{ category.get_absolute_url  }}"
           ><i class="fe fe-chevron-right"></i> {{ category.name }}</a
         >
         <span class="product-label">{{ category.num_posts }}</span>

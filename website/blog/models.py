@@ -27,6 +27,9 @@ class Category(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('blog:post_list_by_category', args=[self.slug])
+    
 
 class PublishManager(models.Manager):
     def get_queryset(self) -> QuerySet:
