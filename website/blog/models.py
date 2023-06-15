@@ -9,7 +9,31 @@ from pytils.translit import slugify
 
 
 class Category(models.Model):
-    """Модель категорий."""
+    """
+    Model for categories of blog posts.
+    
+    Args:
+        models (django.db.models.Model): Django model class.
+    
+    Attributes:
+        name (str): Name of the category.
+        slug (str): Slug for the category.
+    
+    Meta:
+        ordering (list): Default ordering for the model.
+        verbose_name (str): Singular display name of the model.
+        verbose_name_plural (str): Plural display name of the model.
+    
+    Methods:
+        __str__(self) -> str:
+            Returns the name of the category.
+        
+        save(self, *args, **kwargs):
+            Overrides the save method to auto-generate slug.
+        
+        get_absolute_url(self) -> str:
+            Returns the URL for the post list with this category.
+    """
 
     name = models.CharField('Название', max_length=50)
     slug = models.SlugField('Slug', unique=True)
@@ -20,14 +44,33 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
     def __str__(self) -> str:
+        """
+        Returns the name of the category.
+        
+        Returns:
+            str: Name of the category.
+        """
         return self.name
 
     def save(self, *args, **kwargs):
+        """
+        Overrides the save method to auto-generate slug.
+        
+        Args:
+            *args: Positional arguments for the save method.
+            **kwargs: Keyword arguments for the save method.
+        """
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """
+        Returns the URL for the post list with this category.
+        
+        Returns:
+            str: URL for the post list with this category.
+        """
         return reverse('blog:post_list_by_category', args=[self.slug])
     
 
