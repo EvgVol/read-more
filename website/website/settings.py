@@ -147,9 +147,25 @@ LANGUAGES = [
     ('ru', _('Russian')),
     ('uk', _('Ukrainian')),
 ]
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
+
+ACCOUNT_LOCALE_PATHS = [BASE_DIR / 'account/locale']
+BLOG_LOCALE_PATHS = [BASE_DIR / 'blog/locale']
+CORE_LOCALE_PATHS = [BASE_DIR / 'core/locale']
+VOOKMARKS_LOCALE_PATHS = [BASE_DIR / 'vookmarks/locale']
+ACTIONS_LOCALE_PATHS = [BASE_DIR / 'actions/locale']
+SHOP_LOCALE_PATHS = [BASE_DIR / 'shop/locale']
+CART_LOCALE_PATHS = [BASE_DIR / 'cart/locale']
+ORDERS_LOCALE_PATHS = [BASE_DIR / 'orders/locale']
+
+LOCALE_PATHS = []
+LOCALE_PATHS.extend(ACCOUNT_LOCALE_PATHS)
+LOCALE_PATHS.extend(BLOG_LOCALE_PATHS)
+LOCALE_PATHS.extend(CORE_LOCALE_PATHS)
+LOCALE_PATHS.extend(VOOKMARKS_LOCALE_PATHS)
+LOCALE_PATHS.extend(ACTIONS_LOCALE_PATHS)
+LOCALE_PATHS.extend(SHOP_LOCALE_PATHS)
+LOCALE_PATHS.extend(CART_LOCALE_PATHS)
+LOCALE_PATHS.extend(ORDERS_LOCALE_PATHS)
 
 
 # Setting time-zone

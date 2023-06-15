@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 10:36+0400\n"
+"POT-Creation-Date: 2023-06-15 20:07+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,11 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
-"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
-"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
-"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
-#: .\orders\apps.py:8 .\orders\models.py:44
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\orders\apps.py:8 .\orders\models.py:50
 msgid "orders"
 msgstr ""
 
@@ -29,74 +26,90 @@ msgid "first name"
 msgstr ""
 
 #: .\orders\models.py:29
-msgid "last name"
+msgid "Enter your first name"
 msgstr ""
 
 #: .\orders\models.py:30
-msgid "email"
+msgid "last name"
 msgstr ""
 
 #: .\orders\models.py:31
-msgid "address"
+msgid "Enter your last name"
 msgstr ""
 
 #: .\orders\models.py:32
-msgid "postal code"
+msgid "email"
 msgstr ""
 
 #: .\orders\models.py:33
-msgid "city"
+msgid "Enter your email address"
 msgstr ""
 
 #: .\orders\models.py:34
-msgid "created"
+msgid "address"
 msgstr ""
 
 #: .\orders\models.py:35
-msgid "updated"
+msgid "Enter your shipping address"
 msgstr ""
 
 #: .\orders\models.py:36
+msgid "postal code"
+msgstr ""
+
+#: .\orders\models.py:37
+msgid "Enter your postal code"
+msgstr ""
+
+#: .\orders\models.py:38
+msgid "city"
+msgstr ""
+
+#: .\orders\models.py:39
+msgid "Enter your city"
+msgstr ""
+
+#: .\orders\models.py:40
+msgid "created"
+msgstr ""
+
+#: .\orders\models.py:41
+msgid "updated"
+msgstr ""
+
+#: .\orders\models.py:42
 msgid "paid"
 msgstr ""
 
-#: .\orders\models.py:43 .\orders\models.py:85
+#: .\orders\models.py:49 .\orders\models.py:91
 msgid "order"
 msgstr ""
 
-#: .\orders\models.py:47
+#: .\orders\models.py:53
 #, python-brace-format
 msgid "Order {self.id}"
 msgstr ""
 
-#: .\orders\models.py:88
+#: .\orders\models.py:94
 msgid "product"
 msgstr ""
 
-#: .\orders\models.py:90
+#: .\orders\models.py:96
 msgid "price"
 msgstr ""
 
-#: .\orders\models.py:93
+#: .\orders\models.py:99
 msgid "quantity"
 msgstr ""
 
-#: .\orders\models.py:96
+#: .\orders\models.py:102
 msgid "order item"
 msgstr ""
 
-#: .\orders\models.py:97
+#: .\orders\models.py:103
 msgid "order items"
 msgstr ""
 
-#: .\website\settings.py:146
-msgid "English"
-msgstr ""
-
-#: .\website\settings.py:147
-msgid "Russian"
-msgstr ""
-
-#: .\website\settings.py:148
-msgid "Ukrainian"
+#: .\orders\tests.py:30
+msgid "Success! Your order has been placed."
 msgstr ""
