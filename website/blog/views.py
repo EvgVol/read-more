@@ -57,7 +57,7 @@ def post_list(request, tag_slug=None, category_slug=None, ranking=None):
         post_list.sort(key=lambda x: post_ids.index(x.id))
 
     for post in post_list:
-        total_views = r.get(_(f'Article:{post.id}:viewed'))
+        total_views = r.get(f'Article:{post.id}:viewed')
 
         # преобразуем total_views из bytes в int
         total_views = int(total_views) if total_views else 0
