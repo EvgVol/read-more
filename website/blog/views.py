@@ -220,7 +220,7 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            create_action(request.user, _('added'), post)
+            create_action(request.user, _('added a new post:', post))
             messages.success(request, _('The post was added successfully'))
             return redirect(post.get_absolute_url())
     else:
@@ -240,7 +240,7 @@ def post_like(request):
             post = Post.objects.get(id=post_id)
             if action == 'like':
                 post.users_like.add(request.user)
-                create_action(request.user, _('liked'), post)
+                create_action(request.user, _('liked the post:'), post)
             else:
                 post.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})

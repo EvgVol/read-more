@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.utils import timezone
 from django.urls import reverse
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 from taggit.managers import TaggableManager
 from pytils.translit import slugify
@@ -35,13 +36,13 @@ class Category(models.Model):
             Returns the URL for the post list with this category.
     """
 
-    name = models.CharField('Название', max_length=50)
-    slug = models.SlugField('Slug', unique=True)
+    name = models.CharField(_('name'), max_length=50)
+    slug = models.SlugField(_('slug'), unique=True)
 
     class Meta:
         ordering = ['-name']
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
 
     def __str__(self) -> str:
         """
@@ -83,41 +84,41 @@ class Post(models.Model):
     """Модель поста."""
 
     class Status(models.TextChoices):
-        DRAFT = 'DF', 'Черновик'
-        PUBLISHED = 'PB', 'Опубликовано'
+        DRAFT = 'DF', _('draft')
+        PUBLISHED = 'PB', _('published')
 
-    title = models.CharField('Заголовок', max_length=250)
-    slug = models.SlugField('Slug', max_length=50,
+    title = models.CharField(_('title'), max_length=250)
+    slug = models.SlugField(_('slug'), max_length=50,
                             unique_for_date='publish')
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                on_delete=models.CASCADE,
                                related_name='blog_posts',
-                               verbose_name='Автор')
-    body = models.TextField('Контент')
+                               verbose_name=_('author'))
+    body = models.TextField(_('content'))
     tags = TaggableManager()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL,
                                  null=True, blank=False,
                                  related_name='posts',
-                                 verbose_name='Категория')
-    image = models.ImageField('Изображение', upload_to='blog/images/',)
-    publish = models.DateTimeField('Опубликовано', default=timezone.now)
-    created = models.DateTimeField('Дата создания', auto_now_add=True)
-    updated = models.DateTimeField('Дата изменения', auto_now=True)
-    status = models.CharField('Статус',
+                                 verbose_name=_('category'))
+    image = models.ImageField(_('image'), upload_to='blog/images/',)
+    publish = models.DateTimeField(_('publish'), default=timezone.now)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    updated = models.DateTimeField(_('updated'), auto_now=True)
+    status = models.CharField(_('status'),
                               max_length=2,
                               choices=Status.choices,
                               default=Status.PUBLISHED)
     objects = models.Manager()
     published = PublishManager()
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                        verbose_name='Понравилось',
+                                        verbose_name = _('liked'),
                                         related_name='posts_liked',
                                         blank=True)
 
     class Meta:
         ordering = ['-publish']
-        verbose_name = 'Статья'
-        verbose_name_plural = 'Статьи'
+        verbose_name = _('post')
+        verbose_name_plural = _('posts')
         indexes = [
             models.Index(fields=['-publish']),
         ]
@@ -144,21 +145,21 @@ class Comment(models.Model):
     post = models.ForeignKey(Post,
                              on_delete=models.CASCADE,
                              related_name='comments',
-                             verbose_name='Статья')
-    name = models.CharField('Имя отправителя', max_length=80)
-    email = models.EmailField('Электронный адрес(email)')
-    body = models.TextField('Комментарий')
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True, verbose_name='Активный')
+                             verbose_name = _('post'))
+    name = models.CharField(_('username'), max_length=80)
+    email = models.EmailField(_('email'))
+    body = models.TextField(_('message'))
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    updated = models.DateTimeField(_('updated'), auto_now=True)
+    active = models.BooleanField(default=True, verbose_name = _('active'))
 
     class Meta:
         ordering = ['created']
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
+        verbose_name = _('comment')
+        verbose_name_plural = _('comments')
         indexes = [
             models.Index(fields=['created']),
         ]
     
     def __str__(self):
-        return f'Комментарий от {self.name} к статье {self.post}'
+        return _(f'Comment from {self.name} on post "{self.post}"')
