@@ -224,12 +224,10 @@ class Comment(models.Model):
     )
     created = models.DateTimeField(
         _('created'),
-        auto_now_add=True,
-        help_text=_('The date and time that the comment was created.'))
+        auto_now_add=True)
     updated = models.DateTimeField(
         _('updated'),
-        auto_now=True,
-        help_text=_('The date and time that the comment was last updated.'))
+        auto_now=True)
     active = models.BooleanField(
         default=True,
         verbose_name = _('active'),
