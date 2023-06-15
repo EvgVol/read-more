@@ -37,9 +37,9 @@ class Order (models.Model):
                                    help_text=_("Enter your postal code"))
     city = models.CharField(_("city"), max_length=100,
                             help_text=_("Enter your city"))
-    created = models.DateTimeField(_("created"), auto_now_add=True,)
-    updated = models.DateTimeField(_("updated"), auto_now=True,)
-    paid = models.BooleanField(_("paid"), default=False,)
+    created = models.DateTimeField(_("created"), auto_now_add=True)
+    updated = models.DateTimeField(_("updated"), auto_now=True)
+    paid = models.BooleanField(_("paid"), default=False)
 
     class Meta:
         ordering = ['-created']
