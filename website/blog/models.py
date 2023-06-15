@@ -76,7 +76,19 @@ class Category(models.Model):
     
 
 class PublishManager(models.Manager):
+    """
+    Manager for retrieving published posts.
+
+    This manager extends the default manager for the Post model to only return
+    posts that have the PUBLISHED status.
+
+    Methods:
+        get_queryset(): Returns a queryset containing only published posts.
+    """
     def get_queryset(self) -> QuerySet:
+        """
+        Returns a queryset containing only published posts.
+        """
         return super().get_queryset().filter(status=Post.Status.PUBLISHED)
 
 
@@ -170,18 +182,61 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    """Модель комментариев."""
+    """
+    Model for comments.
+    
+    This model represents a comment left by a user on a specific blog post.
 
-    post = models.ForeignKey(Post,
-                             on_delete=models.CASCADE,
-                             related_name='comments',
-                             verbose_name = _('post'))
-    name = models.CharField(_('username'), max_length=80)
-    email = models.EmailField(_('email'))
-    body = models.TextField(_('message'))
-    created = models.DateTimeField(_('created'), auto_now_add=True)
-    updated = models.DateTimeField(_('updated'), auto_now=True)
-    active = models.BooleanField(default=True, verbose_name = _('active'))
+    Attributes:
+        post (ForeignKey): A reference to the post that the comment is 
+            associated with.
+        name (CharField): The name of the user who left the comment.
+        email (EmailField): The email address of the user who left 
+            the comment.
+        body (TextField): The text of the comment.
+        created (DateTimeField): The date and time that the comment was 
+            created.
+        updated (DateTimeField): The date and time that the comment was 
+            last updated.
+        active (BooleanField): A boolean field indicating whether the 
+            comment is active.
+    """
+
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name='comments',
+        verbose_name = _('post'),
+        help_text=_('Select a post to associate the comment with.')
+    )
+    name = models.CharField(
+        _('username'),
+        max_length=80,
+        help_text=_('Enter your name.')
+    )
+    email = models.EmailField(
+        _('email'),
+        help_text=_('Enter your email address.')
+    )
+    body = models.TextField(
+        _('message'),
+        help_text=_('Enter your comment.')
+    )
+    created = models.DateTimeField(
+        _('created'),
+        auto_now_add=True,
+        help_text=_('The date and time that the comment was created.'))
+    updated = models.DateTimeField(
+        _('updated'),
+        auto_now=True,
+        help_text=_('The date and time that the comment was last updated.'))
+    active = models.BooleanField(
+        default=True,
+        verbose_name = _('active'),
+        help_text=_(
+            'A boolean field indicating whether the comment is active.'
+        )
+    )
 
     class Meta:
         ordering = ['created']
