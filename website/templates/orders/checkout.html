@@ -37,37 +37,37 @@
                   <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                       <label for="id_first_name" class="form-label">{{ _('first name')|capfirst }}<span class="text-red">*</span></label>
-                      <input type="text" name="first_name" maxlength="50" required id="id_first_name" class="form-control" placeholder="Введите своё имя" />
+                      <input type="text" name="first_name" maxlength="50" required id="id_first_name" class="form-control" placeholder="{{ form.first_name.help_text }}" />
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                       <label for="id_last_name" class="form-label">{{ _('last name')|capfirst }}<span class="text-red">*</span></label>
-                      <input type="text" name="last_name" maxlength="50" required id="id_last_name" class="form-control" placeholder="Last name" />
+                      <input type="text" name="last_name" maxlength="50" required id="id_last_name" class="form-control" placeholder="{{ form.last_name.help_text }}" />
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="id_email" class="form-label">{{ _('email')|capfirst }}<span class="text-red">*</span></label>
-                      <input type="email" name="email" maxlength="254" required id="id_email" class="form-control" placeholder="Email" />
+                      <input type="email" name="email" maxlength="254" required id="id_email" class="form-control" placeholder="{{ form.email.help_text }}" />
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                       <label for="id_city" class="form-label">{{ _('city')|capfirst }}<span class="text-red">*</span></label>
-                      <input type="text" name="city" maxlength="100" required id="id_city" class="form-control" placeholder="City" />
+                      <input type="text" name="city" maxlength="100" required id="id_city" class="form-control" placeholder="{{ form.city.help_text }}" />
                     </div>
                   </div>
                   <div class="col-sm-6 col-md-6">
                     <div class="form-group">
                       <label for="id_postal_code" class="form-label">{{ _('postal code')|capfirst }}<span class="text-red">*</span></label>
-                      <input type="number" name="postal_code" maxlength="50" required id="id_postal_code" class="form-control" placeholder="ZIP Code" />
+                      <input type="number" name="postal_code" maxlength="50" required id="id_postal_code" class="form-control" placeholder="{{ form.postal_code.help_text }}" />
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="id_address" class="form-label">{{ _('address')|capfirst }}<span class="text-red">*</span></label>
-                      <input type="text" name="address" maxlength="250" required id="id_address" class="form-control" placeholder="Home Address" />
+                      <input type="text" name="address" maxlength="250" required id="id_address" class="form-control" placeholder="{{ form.address.help_text }}" />
                     </div>
                   </div>
                 </div>
