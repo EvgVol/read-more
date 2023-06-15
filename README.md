@@ -51,13 +51,19 @@ cd backend
 pip install -r requirements.txt
 ```
 
-6. Start the Django development server using the following command:
+6.  Start the Redis using the following command:
+```
+docker pull redis
+docker run -it --rm --name redis -p 6379:6379 redis
+```
+
+7. Start the Django development server using the following command:
 ```
 python manage.py runserver
 python manage.py runserver_plus --cert-file cert.crt #SSL
 ```
 
-7. Open your web browser and navigate to http://localhost:8000 to view the application.
+8. Open your web browser and navigate to http://localhost:8000 to view the application.
 
 
 ## Credits
