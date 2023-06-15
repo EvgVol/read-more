@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'vookmarks.apps.VookmarksConfig',
     'actions.apps.ActionsConfig', 
     'shop.apps.ShopConfig',
-    'cart.apps.CartConfig', 
+    'cart.apps.CartConfig',
+    'orders.app.OrdersConfig',
     
     'sorl.thumbnail', #IMAGE
     'taggit', #TAGS # https://github.com/jazzband/django-taggit
