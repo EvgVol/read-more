@@ -2,6 +2,7 @@ from pathlib import Path
 from decouple import Csv, config
 from dotenv import load_dotenv
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,6 +142,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Setting language code
 LANGUAGE_CODE = 'ru-RU'
 USE_I18N = True
+LANGUAGES = [
+    ('en', _('English')),
+    ('ru', _('Russian')),
+    ('uk', _('Ukrainian')),
+]
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
 
 # Setting time-zone
 TIME_ZONE = 'Europe/Samara'
