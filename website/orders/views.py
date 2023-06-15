@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
+from actions.utils import create_action
 from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import OrderItem
@@ -25,6 +28,7 @@ def order_create(request):
         OrderCreateForm template with the Cart and the form instance.
     """
     cart = Cart(request)
+
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
@@ -36,11 +40,14 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очистить корзину
             cart.clear()
+            # create_action(request.user, _('Order has been made'))
+            # messages.success(request,
+            #                  _('Your order has been placed successfully'))
             return render(request,
-                          'orders/order/created.html',
+                          'orders/invoice.html',
                           {'order': order})
     else:
         form = OrderCreateForm()
     return render(request,
-                  'orders/order/create.html',
+                  'orders/checkout.html',
                   {'cart': cart, 'form': form})

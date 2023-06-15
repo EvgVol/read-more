@@ -25,11 +25,11 @@ msgstr "заказы"
 
 #: .\orders\models.py:28
 msgid "first name"
-msgstr "фамилия"
+msgstr "имя"
 
 #: .\orders\models.py:29
 msgid "last name"
-msgstr "имя"
+msgstr "фамилия"
 
 #: .\orders\models.py:30
 msgid "email"
