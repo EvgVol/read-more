@@ -86,7 +86,7 @@ msgstr "элемент заказа"
 
 #: .\orders\models.py:97
 msgid "order items"
-msgstr "ээлементы заказа"
+msgstr "элементы заказа"
 
 #: .\website\settings.py:146
 msgid "English"
