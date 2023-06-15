@@ -81,19 +81,48 @@ class PublishManager(models.Manager):
 
 
 class Post(models.Model):
-    """Модель поста."""
+    """Model representing a blog post.
+
+    Attributes:
+        title (str): Title of the blog post.
+        slug (str): Slug for the blog post URL.
+        author (User): User representing the author of the blog post.
+        body (str): Body of the blog post.
+        tags (TaggableManager): Manager for tags related to the blog post.
+        category (Category): Category for the blog post.
+        image (ImageField): Image associated with the post.
+        publish (datetime): Date and time the blog post was published.
+        created (datetime): Date and time the blog post was created.
+        updated (datetime): Date and time the blog post was last updated.
+        status (str): Status of the blog post.
+        objects (Manager): Manager for accessing the database.
+        published (PublishManager): Manager for published blog posts.
+        users_like (ManyToManyField): Users who have liked the blog post.
+    """
 
     class Status(models.TextChoices):
+        """Choices for the status of the blog post."""
+
         DRAFT = 'DF', _('draft')
         PUBLISHED = 'PB', _('published')
 
-    title = models.CharField(_('title'), max_length=250)
-    slug = models.SlugField(_('slug'), max_length=50,
-                            unique_for_date='publish')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               on_delete=models.CASCADE,
-                               related_name='blog_posts',
-                               verbose_name=_('author'))
+    title = models.CharField(
+        _('title'),
+        max_length=250,
+        help_text=_('Enter the title of the blog post.')
+    )
+    slug = models.SlugField(
+        _('slug'),
+        max_length=50,
+        unique_for_date='publish',
+        help_text=_('Enter a URL-friendly slug for the blog post.')
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='blog_posts',
+        verbose_name=_('author'),
+    )
     body = models.TextField(_('content'))
     tags = TaggableManager()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL,
@@ -132,6 +161,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        """Returns the URL for the blog post."""
         return reverse('blog:post_detail',
                        args=[self.publish.year,
                              self.publish.month,
