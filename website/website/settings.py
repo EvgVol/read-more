@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'actions.apps.ActionsConfig', 
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
-    'orders.app.OrdersConfig',
+    'orders.apps.OrdersConfig',
     
     'sorl.thumbnail', #IMAGE
     'taggit', #TAGS # https://github.com/jazzband/django-taggit

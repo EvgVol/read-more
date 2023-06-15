@@ -25,15 +25,15 @@ class Order (models.Model):
         get_absolute_url(): Returns the URL for the list view of all orders.
     """
     
-    first_name = models.CharField(_("First name"), max_length=50)
-    last_name = models.CharField(_("Last name"), max_length=50)
-    email = models.EmailField(_("Email"))
-    address = models.CharField(_("Address"), max_length=250)
-    postal_code = models.CharField(_("Postal code"), max_length=50)
-    city = models.CharField(_("City"), max_length=100)
-    created = models.DateTimeField(_("Created"), auto_now_add=True)
-    updated = models.DateTimeField(_("Updated"), auto_now=True)
-    paid = models.BooleanField(_("Paid"), default=False)
+    first_name = models.CharField(_("first name"), max_length=50)
+    last_name = models.CharField(_("last name"), max_length=50)
+    email = models.EmailField(_("email"))
+    address = models.CharField(_("address"), max_length=250)
+    postal_code = models.CharField(_("postal code"), max_length=50)
+    city = models.CharField(_("city"), max_length=100)
+    created = models.DateTimeField(_("created"), auto_now_add=True)
+    updated = models.DateTimeField(_("updated"), auto_now=True)
+    paid = models.BooleanField(_("paid"), default=False)
 
     class Meta:
         ordering = ['-created']
