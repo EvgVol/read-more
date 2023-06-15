@@ -13,6 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 from taggit.models import Tag
 
 from actions.utils import create_action
@@ -56,7 +57,7 @@ def post_list(request, tag_slug=None, category_slug=None, ranking=None):
         post_list.sort(key=lambda x: post_ids.index(x.id))
 
     for post in post_list:
-        total_views = r.get(f'Статья:{post.id}:просмотрена')
+        total_views = r.get(_(f'Article:{post.id}:viewed'))
 
         # преобразуем total_views из bytes в int
         total_views = int(total_views) if total_views else 0
@@ -116,7 +117,7 @@ def post_detail(request, year, month, day, post):
     # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
     # увеличить общее число просмотров статьи на 1
-    total_views = r.incr(f'Статья:{post.id}:просмотрена')
+    total_views = r.incr(_(f'Article:{post.id}:viewed'))
     # увеличить рейтинг статьи на 1
     r.zincrby('post_ranking', 1, post.id)
 
@@ -143,11 +144,11 @@ def post_share(request, post_id):
             post_url = request.build_absolute_uri(
                 post.get_absolute_url()
             )
-            subject = f"{cd['name']} рекомендует вам прочитать статью \"{post.title}\""
-            message = f"Прочитайте статью \"{post.title}\" здесь: {post_url}\n\n" \
-                      f"Комментарий от {cd['name']}: {cd['comments']}"
+            subject = _(f"{cd['name']} recommends you to read the article \"{post.title}\"")
+            message = _(f"Read the article `{post.title}` here: {post_url}\n\n \
+                        Comment from {cd['name']}: {cd['comments']}")
             send_mail(subject, message, 'volochek93@yandex.ru', [cd['to']])
-            create_action(request.user, 'поделился статьей')
+            create_action(request.user, _('shared the article'))
             sent = True
     else:
         form = EmailPostForm()
@@ -168,7 +169,7 @@ def post_comment(request, post_id):
         comment = form.save(commit=False)
         comment.post = post
         comment.save()
-        create_action(request.user, 'прокомментировал')
+        create_action(request.user, _('commented'), post)
     return render(request, 'blog/post/comment.html',
                   {'post': post,
                    'form': form,
@@ -219,8 +220,8 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            create_action(request.user, 'добавил статью')
-            messages.success(request, 'Статья успешно добавлена')
+            create_action(request.user, _('added'), post)
+            messages.success(request, _('The post was added successfully'))
             return redirect(post.get_absolute_url())
     else:
         form = PostForm()
@@ -239,7 +240,7 @@ def post_like(request):
             post = Post.objects.get(id=post_id)
             if action == 'like':
                 post.users_like.add(request.user)
-                create_action(request.user, 'оценил', post)
+                create_action(request.user, _('liked'), post)
             else:
                 post.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})
