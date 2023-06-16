@@ -1,0 +1,116 @@
+{% extends 'includes/base.html' %}
+{% block title %}
+  ExView | Интернет магазин | Мой заказ
+{% endblock %}
+{% load static %}
+{% block content %}
+{% load shop_tags %}
+<div class="main-content app-content mt-0">
+    <div class="side-app ">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+
+            <!-- PAGE-HEADER -->
+            <div class="page-header">
+                <h1 class="page-title">Товарная накладная</h1>
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">ExView</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Интернет магазин</a></li>
+                    </ol>
+                </div>
+            </div>
+            <!-- PAGE-HEADER END -->
+
+            <!-- ROW-1 OPEN -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a class="header-brand" href="index.html">
+                                        <img src="{% static 'images/logo/black-50.png' %}" class="header-brand-img logo-3" alt="Sash logo">
+                                    </a>
+                                    <div>
+                                        <address class="pt-3">
+                                            Street Address, State, City, Region, Postal Code<br>
+                                            yourdomain@example.com
+                                        </address>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 text-end border-bottom border-lg-0">
+                                    <h3>Заказ № {{ order.id }}</h3>
+                                    <h5 class="text-info">{{ order.created }}</h5>
+                                </div>
+                            </div>
+                            <div class="row pt-5">
+                                <div class="col-lg-6">
+                                    <p class="h3">Заказ: </p>
+                                    <p class="fs-18 fw-semibold mb-0">{{ order.get_full_name }}</p>
+                                    <address>
+                                            {{ order.city }}<br>
+                                            {{ order.address }}<br>
+                                            {{ order.postal_code }}<br>
+                                            {{ order.email }}
+                                        </address>
+                                </div>
+                                <div class="col-lg-6 text-end">
+                                    <p class="h4 fw-semibold">Платежные реквизиты:</p>
+                                    <p class="mb-1">На сумму: {{ order.get_total_cost }} ₽</p>
+                                    <p class="mb-1">Название банка: Union Bank 0456</p>
+                                    <p class="mb-1">Номер счета: 543218769</p>
+                                    <p>Страна: USA</p>
+                                </div>
+                            </div>
+                            <div class="table-responsive push">
+                                <table class="table table-bordered table-hover mb-0 text-nowrap">
+                                    <tbody>
+                                        <tr class=" ">
+                                            <th class="text-center"></th>
+                                            <th>Товар</th>
+                                            <th class="text-center">Количество</th>
+                                            <th class="text-end">Цена</th>
+                                            <th class="text-end">Сумма</th>
+                                        </tr>
+                                        <!-- products -->
+                                        {% for item in order.orderitem_set.all  %}
+                                          <tr>
+                                              <td class="text-center">{{ forloop.counter }}</td>
+                                              <td>
+                                                  <p class="font-w600 mb-1">{{ item.product.name }}</p>
+                                                  <div class="text-muted">
+                                                      <div class="text-muted">{{ item.description|markdown|truncatewords_html:25 }}</div>
+                                                  </div>
+                                              </td>
+                                              <td class="text-center">{{ item.quantity }}</td>
+                                              <td class="text-end">{{ item.price }} ₽</td>
+                                              <td class="text-end">{{ item.get_cost }} ₽</td>
+                                          </tr>
+                                        {% endfor %}
+                                        <tr>
+                                          <td colspan="4" class="fw-bold text-uppercase text-end">ИТОГО</td>
+                                          <td class="fw-bold text-end h4">{{ order.get_total_cost }} ₽</td>
+                                        </tr>
+                                        <!-- products END -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer text-end">
+                            <button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Оплатить</button>
+                            {% comment %} <button type="button" class="btn btn-secondary mb-1" onclick=""><i class="fe fe-save"></i> Сохранить</button> {% endcomment %}
+                            <button type="button" class="btn btn-danger mb-1" onclick="javascript:window.print();"><i class="si si-printer"></i> Распечатать</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- COL-END -->
+            </div>
+            <!-- ROW-1 CLOSED -->
+
+        </div>
+        <!-- CONTAINER CLOSED -->
+    </div>
+</div>
+{% endblock %}

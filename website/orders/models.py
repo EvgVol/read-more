@@ -38,7 +38,18 @@ class Order (models.Model):
     @property
     def get_total_cost(self):
         """Calculates the total cost of the order."""
-        return sum(item.get_cost() for item in self.items.all())
+        return sum(item.get_cost for item in self.orderitem_set.all())
+
+    def get_items(self):
+        """Gets all items related to this order."""
+        return self.orderitem_set.all()
+
+    def get_full_name(self):
+        """
+        Return the first_name plus the last_name, with a space in between.
+        """
+        full_name = "%s %s" % (self.first_name, self.last_name)
+        return full_name.strip()
 
     def get_absolute_url(self):
         return reverse("orders:order_list", args=[self.id])
