@@ -33,9 +33,9 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очистить корзину
             cart.clear()
-            # create_action(request.user, _('Order has been made'))
-            # messages.success(request,
-            #                  _('Your order has been placed successfully'))
+            create_action(request.user, _('Order has been made'))
+            messages.success(request,
+                             _('Your order has been placed successfully'))
             return render(request,
                           'orders/invoice.html',
                           {'order': order})

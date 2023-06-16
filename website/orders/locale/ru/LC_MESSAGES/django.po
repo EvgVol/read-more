@@ -21,97 +21,97 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 #: .\orders\apps.py:8 .\orders\models.py:50
 msgid "orders"
-msgstr ""
+msgstr "заказы"
 
 #: .\orders\models.py:28
 msgid "first name"
-msgstr ""
+msgstr "имя"
 
 #: .\orders\models.py:29
 msgid "Enter your first name"
-msgstr ""
+msgstr "Введите ваше имя"
 
 #: .\orders\models.py:30
 msgid "last name"
-msgstr ""
+msgstr "фамилия"
 
 #: .\orders\models.py:31
 msgid "Enter your last name"
-msgstr ""
+msgstr "Введите вашу фамилию"
 
 #: .\orders\models.py:32
 msgid "email"
-msgstr ""
+msgstr "электронная почта"
 
 #: .\orders\models.py:33
 msgid "Enter your email address"
-msgstr ""
+msgstr "Введите ваш адрес электронной почты"
 
 #: .\orders\models.py:34
 msgid "address"
-msgstr ""
+msgstr "адрес"
 
 #: .\orders\models.py:35
 msgid "Enter your shipping address"
-msgstr ""
+msgstr "Введите ваш адрес доставки"
 
 #: .\orders\models.py:36
 msgid "postal code"
-msgstr ""
+msgstr "почтовый индекс"
 
 #: .\orders\models.py:37
 msgid "Enter your postal code"
-msgstr ""
+msgstr "Введите ваш почтовый индекс"
 
 #: .\orders\models.py:38
 msgid "city"
-msgstr ""
+msgstr "город"
 
 #: .\orders\models.py:39
 msgid "Enter your city"
-msgstr ""
+msgstr "Введите ваш город"
 
 #: .\orders\models.py:40
 msgid "created"
-msgstr ""
+msgstr "создан"
 
 #: .\orders\models.py:41
 msgid "updated"
-msgstr ""
+msgstr "обновлен"
 
 #: .\orders\models.py:42
 msgid "paid"
-msgstr ""
+msgstr "оплачен"
 
 #: .\orders\models.py:49 .\orders\models.py:91
 msgid "order"
-msgstr ""
+msgstr "заказ"
 
 #: .\orders\models.py:53
 #, python-brace-format
 msgid "Order {self.id}"
-msgstr ""
+msgstr "Заказ {self.id}"
 
 #: .\orders\models.py:94
 msgid "product"
-msgstr ""
+msgstr "продукт"
 
 #: .\orders\models.py:96
 msgid "price"
-msgstr ""
+msgstr "цена"
 
 #: .\orders\models.py:99
 msgid "quantity"
-msgstr ""
+msgstr "количество"
 
 #: .\orders\models.py:102
 msgid "order item"
-msgstr ""
+msgstr "товар заказа"
 
 #: .\orders\models.py:103
 msgid "order items"
-msgstr ""
+msgstr "товары заказа"
 
 #: .\orders\tests.py:30
 msgid "Success! Your order has been placed."
-msgstr ""
+msgstr "Успех! Ваш заказ размещен."

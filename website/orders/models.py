@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
 from shop.models import Product
@@ -8,21 +9,21 @@ from shop.models import Product
 class Order (models.Model):
     """Represents an order placed by a customer."""
     
-    first_name = models.CharField(_("first name"), max_length=50,
+    first_name = models.CharField(verbose_name=_("first name"), max_length=50,
                                   help_text=_("Enter your first name"))
-    last_name = models.CharField(_("last name"), max_length=50,
+    last_name = models.CharField(verbose_name=_("last name"), max_length=50,
                                  help_text=_("Enter your last name"))
-    email = models.EmailField(_("email"),
+    email = models.EmailField(verbose_name=_("email"),
                               help_text=_("Enter your email address"))
-    address = models.CharField(_("address"), max_length=250,
+    address = models.CharField(verbose_name=_("address"), max_length=250,
                                help_text=_("Enter your shipping address"))
-    postal_code = models.CharField(_("postal code"), max_length=50,
+    postal_code = models.CharField(verbose_name=_("postal code"), max_length=50,
                                    help_text=_("Enter your postal code"))
-    city = models.CharField(_("city"), max_length=100,
+    city = models.CharField(verbose_name=_("city"), max_length=100,
                             help_text=_("Enter your city"))
-    created = models.DateTimeField(_("created"), auto_now_add=True)
-    updated = models.DateTimeField(_("updated"), auto_now=True)
-    paid = models.BooleanField(_("paid"), default=False)
+    created = models.DateTimeField(verbose_name=_("created"), auto_now_add=True)
+    updated = models.DateTimeField(verbose_name=_("updated"), auto_now=True)
+    paid = models.BooleanField(verbose_name=_("paid"), default=False)
 
     class Meta:
         ordering = ['-created']
@@ -33,7 +34,7 @@ class Order (models.Model):
         verbose_name_plural = _("orders")
 
     def __str__(self):
-        return _(f"Order {self.id}")
+        return force_str(_(f"Order {self.id}"))
 
     @property
     def get_total_cost(self):
