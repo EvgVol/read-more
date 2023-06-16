@@ -6,24 +6,7 @@ from shop.models import Product
 
 
 class Order (models.Model):
-    """
-    Represents an order placed by a customer.
-
-    Fields:
-        first_name (CharField): The first name of the customer.
-        last_name (CharField): The last name of the customer.
-        email (EmailField): The email address of the customer.
-        address (CharField): The address where the order should be shipped.
-        postal_code (CharField): The postal code of the customer's address.
-        city (CharField): The city of the customer's address.
-        created (DateTimeField): The date and time when the order was created.
-        updated (DateTimeField): The date and time when the order was last updated.
-        paid (BooleanField): Indicates whether the order has been paid for.
-
-    Methods:
-        get_total_cost(): Calculates and returns the total cost of the order.
-        get_absolute_url(): Returns the URL for the list view of all orders.
-    """
+    """Represents an order placed by a customer."""
     
     first_name = models.CharField(_("first name"), max_length=50,
                                   help_text=_("Enter your first name"))
@@ -54,37 +37,16 @@ class Order (models.Model):
 
     @property
     def get_total_cost(self):
-        """
-        Calculates the total cost of the order.
-
-        Returns:
-            Decimal: Total cost of the order.
-        """
+        """Calculates the total cost of the order."""
         return sum(item.get_cost() for item in self.items.all())
 
     def get_absolute_url(self):
-        """
-        Gets the URL for the list view of all orders.
-
-        Returns:
-            str: The URL for the list view of all orders.
-        """
         return reverse("orders:order_list", args=[self.id])
 
 
 class OrderItem (models.Model):
     """
     Represents an item in an order that is linked to a corresponding product.
-
-    Fields:
-        order (ForeignKey): The order that this item belongs to.
-        product (ForeignKey): The product that this item represents.
-        price (Decimal): The price of the product.
-        quantity (PositiveIntegerField): The quantity of the product ordered.
-
-    Methods:
-        get_cost(): Calculates and returns the total cost of this item.
-        get_absolute_url(): Returns the URL for the detail view of the order that this item belongs to.
     """
 
     order = models.ForeignKey(Order,
@@ -107,19 +69,8 @@ class OrderItem (models.Model):
 
     @property
     def get_cost(self):
-        """
-        Calculates the total cost of this item.
-
-        Returns:
-            Decimal: Total cost of this item.
-        """
+        """Calculates the total cost of this item."""
         return self.price * self.quantity
 
     def get_absolute_url(self):
-        """
-        Gets the URL for the detail view of the order that this item belongs to.
-
-        Returns:
-            str: The URL for the detail view of the order.
-        """
         return reverse("orders:order_detail", args=[self.id])

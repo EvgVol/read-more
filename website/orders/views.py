@@ -19,13 +19,6 @@ def order_create(request):
 
     On GET request, it renders the OrderCreateForm with the Cart and returns 
     it as response.
-
-    Args:
-        request (HttpRequest): The HttpRequest for creating the Order.
-
-    Returns:
-        HttpResponse: The HttpReponse object that contains the rendered 
-        OrderCreateForm template with the Cart and the form instance.
     """
     cart = Cart(request)
 

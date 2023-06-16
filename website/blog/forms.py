@@ -1,7 +1,7 @@
 from django import forms
 from pytils.translit import slugify
 
-from .models import Comment, Post, Category
+from .models import Comment, Post
 
 
 class PostForm(forms.ModelForm):
