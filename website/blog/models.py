@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.utils import timezone
 from django.urls import reverse
 from django.conf import settings
+from django.utils.encoding import force_str
 from django.utils.translation import gettext_lazy as _
 
 from taggit.managers import TaggableManager
@@ -167,4 +168,4 @@ class Comment(models.Model):
         ]
     
     def __str__(self):
-        return _(f'Comment from {self.name} on post "{self.post}"')
+        return force_str(_(f'Comment from {self.name} on post "{self.post}"'))
