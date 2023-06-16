@@ -10,31 +10,7 @@ from pytils.translit import slugify
 
 
 class Category(models.Model):
-    """
-    Model for categories of blog posts.
-    
-    Args:
-        models (django.db.models.Model): Django model class.
-    
-    Attributes:
-        name (str): Name of the category.
-        slug (str): Slug for the category.
-    
-    Meta:
-        ordering (list): Default ordering for the model.
-        verbose_name (str): Singular display name of the model.
-        verbose_name_plural (str): Plural display name of the model.
-    
-    Methods:
-        __str__(self) -> str:
-            Returns the name of the category.
-        
-        save(self, *args, **kwargs):
-            Overrides the save method to auto-generate slug.
-        
-        get_absolute_url(self) -> str:
-            Returns the URL for the post list with this category.
-    """
+    """Model for categories of blog posts."""
 
     name = models.CharField(_('name'), max_length=50)
     slug = models.SlugField(_('slug'), unique=True)
@@ -45,33 +21,15 @@ class Category(models.Model):
         verbose_name_plural = _('categories')
 
     def __str__(self) -> str:
-        """
-        Returns the name of the category.
-        
-        Returns:
-            str: Name of the category.
-        """
         return self.name
 
     def save(self, *args, **kwargs):
-        """
-        Overrides the save method to auto-generate slug.
-        
-        Args:
-            *args: Positional arguments for the save method.
-            **kwargs: Keyword arguments for the save method.
-        """
+        """Overrides the save method to auto-generate slug."""
         if not self.slug:
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        """
-        Returns the URL for the post list with this category.
-        
-        Returns:
-            str: URL for the post list with this category.
-        """
         return reverse('blog:post_list_by_category', args=[self.slug])
     
 
@@ -81,9 +39,6 @@ class PublishManager(models.Manager):
 
     This manager extends the default manager for the Post model to only return
     posts that have the PUBLISHED status.
-
-    Methods:
-        get_queryset(): Returns a queryset containing only published posts.
     """
     def get_queryset(self) -> QuerySet:
         """
@@ -93,24 +48,7 @@ class PublishManager(models.Manager):
 
 
 class Post(models.Model):
-    """Model representing a blog post.
-
-    Attributes:
-        title (str): Title of the blog post.
-        slug (str): Slug for the blog post URL.
-        author (User): User representing the author of the blog post.
-        body (str): Body of the blog post.
-        tags (TaggableManager): Manager for tags related to the blog post.
-        category (Category): Category for the blog post.
-        image (ImageField): Image associated with the post.
-        publish (datetime): Date and time the blog post was published.
-        created (datetime): Date and time the blog post was created.
-        updated (datetime): Date and time the blog post was last updated.
-        status (str): Status of the blog post.
-        objects (Manager): Manager for accessing the database.
-        published (PublishManager): Manager for published blog posts.
-        users_like (ManyToManyField): Users who have liked the blog post.
-    """
+    """Model representing a blog post."""
 
     class Status(models.TextChoices):
         """Choices for the status of the blog post."""
@@ -184,30 +122,14 @@ class Post(models.Model):
 class Comment(models.Model):
     """
     Model for comments.
-    
     This model represents a comment left by a user on a specific blog post.
-
-    Attributes:
-        post (ForeignKey): A reference to the post that the comment is 
-            associated with.
-        name (CharField): The name of the user who left the comment.
-        email (EmailField): The email address of the user who left 
-            the comment.
-        body (TextField): The text of the comment.
-        created (DateTimeField): The date and time that the comment was 
-            created.
-        updated (DateTimeField): The date and time that the comment was 
-            last updated.
-        active (BooleanField): A boolean field indicating whether the 
-            comment is active.
     """
 
     post = models.ForeignKey(
         Post,
         on_delete=models.CASCADE,
         related_name='comments',
-        verbose_name = _('post'),
-        help_text=_('Select a post to associate the comment with.')
+        verbose_name = _('post')
     )
     name = models.CharField(
         _('username'),
