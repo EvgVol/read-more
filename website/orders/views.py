@@ -6,6 +6,7 @@ from actions.utils import create_action
 from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import OrderItem
+from .tasks import order_created
 
 
 def order_create(request):
@@ -33,6 +34,7 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очистить корзину
             cart.clear()
+            order_created.delay(order.id)
             create_action(request.user, _('Order has been made'))
             messages.success(request,
                              _('Your order has been placed successfully'))
