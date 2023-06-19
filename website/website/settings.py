@@ -280,9 +280,9 @@ REDIS_DB = 0
 CART_SESSION_ID = 'cart'
 
 # Setting Celery:
-CELERY_BROKER_URL = 'redis://localhost:6379' # URL брокера сообщений
-CELERY_RESULT_BACKEND = 'redis://localhost:6379' # URL бэкенда
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_BROKER_URL = 'redis://localhost:6379' # URL брокера сообщений
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379' # URL бэкенда
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
 
