@@ -56,7 +56,7 @@
                             </div>
                           </td>
                           <td>{{ product.name }}</td>
-                          <td class="fw-bold">{{ item.price }}</td>
+                          <td class="fw-bold">{{ item.price|floatformat:1 }}</td>
                           <td>
                             <form action="{% url "cart:cart_add" product.id %}" method="post">
                               
@@ -106,7 +106,6 @@
                       <p class="small text-muted">Применен промокод: <span class="text-success">{{ cart.coupon.code }}</span></p>
                     {% endif %}
                   </div>
-                  
                   <div class="col-md-6 col-sm-6 text-end">
                     <form action="{% url 'cart:cart_clear' %}" method="post">
                       {% csrf_token %}
@@ -133,24 +132,40 @@
                           <span class="fw-bold ms-auto">₽ {{ cart.get_total_price|floatformat:0 }}</span>
                         </td>
                       </tr>
-                      <tr>
+
+                      <!-- Seasonal offer -->
+                      {% comment %} <tr>
                         <td class="text-start">Сезонное предложение</td>
                         <td class="text-end">
                           <span class="fw-bold text-success">- $55</span>
                         </td>
-                      </tr>
-                      <tr>
+                      </tr> {% endcomment %}
+
+                      <!-- Delivery -->
+                      {% comment %} <tr>
                         <td class="text-start">Доставка</td>
                         <td class="text-end">
                           <span class="fw-bold text-green">0 (Free)</span>
                         </td>
-                      </tr>
-                      <tr>
+                      </tr> {% endcomment %}
+
+                      <!-- Organization fee -->
+                      {% comment %} <tr>
                         <td class="text-start">Орг. взнос</td>
                         <td class="text-end">
                           <span class="fw-bold text-danger">+ $39</span>
                         </td>
-                      </tr>
+                      </tr> {% endcomment %}
+
+                      <!-- Cash Back -->
+                      {% comment %} <tr>
+                        <td class="text-start">Вернется бонусами</td>
+                        <td class="text-end">
+                          <span class="fw-bold">+ $9</span>
+                        </td>
+                      </tr> {% endcomment %}
+
+                      <!-- Discount -->
                       {% if cart.coupon %}
                       <tr>
                         <td class="text-start">Скидка</td>
@@ -159,16 +174,17 @@
                         </td>
                       </tr>
                       {% endif %}
-                      <tr>
-                        <td class="text-start">Вернется бонусами</td>
-                        <td class="text-end">
-                          <span class="fw-bold">+ $9</span>
-                        </td>
-                      </tr>
+
                       <tr>
                         <td class="text-start fs-18">Итого</td>
                         <td class="text-end">
-                          <span class="ms-2 fw-bold fs-23">₽ {{ cart.get_total_price_after_discount|floatformat:0 }}</span>
+                          {% with cart.get_total_price_after_discount as final_cost %}
+                            {% if final_cost == 0 %}
+                              <span class="ms-2 fw-bold fs-23 text-success">БЕСПЛАТНО</span>
+                            {% else %}
+                              <span class="ms-2 fw-bold fs-23">₽ {{ cart.get_total_price_after_discount|floatformat:0 }}</span>
+                            {% endif %}
+                          {% endwith %}
                         </td>
                       </tr>
                     </tbody>

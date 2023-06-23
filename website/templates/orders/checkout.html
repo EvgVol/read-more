@@ -123,7 +123,7 @@
                   </li>
                   <li class="list-group-item border-0">
                     Скидка
-                    <span class="h6 fw-bold mb-0 float-end">5%</span>
+                    <span class="h6 fw-bold mb-0 float-end">{{ cart.coupon.discount }}%</span>
                   </li>
                   <li class="list-group-item border-0">
                     Доставка
@@ -131,7 +131,7 @@
                   </li>
                   <li class="list-group-item border-0">
                     Итого
-                    <span class="h4 fw-bold mb-0 float-end">$3,976</span>
+                    <span class="h4 fw-bold mb-0 float-end">{{ cart.get_total_price_after_discount|floatformat:0 }} ₽</span>
                   </li>
                 </ul>
               </div>

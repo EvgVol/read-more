@@ -133,10 +133,16 @@
                           <p class="fs-13 text-muted mb-0">Количество: {{ item.quantity }}</p>
                         </div>
                         <div class="ms-auto text-end d-flex fs-16">
+                          {% if cart.coupon %}
+                          <span class="fs-16 d-none d-sm-block px-4">
+                            <p class="text-danger text-decoration-line-through">{{ product.price|floatformat:0 }} ₽</p><p class="text-success">- {{ cart.coupon.discount }}%</p>
+                          </span>
+                          {% else %}
                           <span class="fs-16 text-dark d-none d-sm-block px-4">
                             {{ product.price }}
                           </span>
-                          <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                          {% endif %}
+                          {% comment %} <form action="{% url "cart:cart_remove" product.id %}" method="post">
                             {% csrf_token %}
                             <button
                             type="submit"
@@ -146,7 +152,7 @@
                                 class="fe fe-trash-2 border text-danger brround d-block p-2"
                               ></i>
                             </button>
-                          </form> 
+                          </form>  {% endcomment %}
                         </div>
                       </div>
                       {% endwith %}
@@ -160,7 +166,7 @@
                       ><i class="fe fe-check-circle"></i> Заказать</a
                     >
                     <span class="float-end p-2 fs-17 fw-semibold"
-                      >Итого: {{ cart.get_total_price }} ₽</span
+                      >Итого: {{ cart.get_total_price_after_discount|floatformat:0 }} ₽</span
                     >
                   </div>
                 </div>
