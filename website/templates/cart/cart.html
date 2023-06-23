@@ -95,11 +95,18 @@
               <div class="card-footer">
                 <div class="row">
                   <div class="col-md-6 col-sm-6">
-                    <div class="input-group mb-1">
-                      <input type="text" class="form-control" placeholder="Промокод" />
-                      <span class="input-group-text btn btn-primary">Применить</span>
-                    </div>
+                    <form action="{% url "coupons:apply" %}" method="post">
+                      <div class="input-group mb-1">
+                        <input type="text" name="code" required id="id_code" class="form-control" placeholder="Промокод" />
+                        {% csrf_token %}
+                        <button type="submit" class="input-group-text btn btn-primary">Применить</button>
+                      </div>
+                    </form>
+                    {% if cart.coupon %}
+                      <p class="small text-muted">Применен промокод: <span class="text-success">{{ cart.coupon.code }}</span></p>
+                    {% endif %}
                   </div>
+                  
                   <div class="col-md-6 col-sm-6 text-end">
                     <form action="{% url 'cart:cart_clear' %}" method="post">
                       {% csrf_token %}
@@ -123,7 +130,7 @@
                       <tr>
                         <td class="text-start">Стоимость </td>
                         <td class="text-end">
-                          <span class="fw-bold ms-auto">₽ {{ cart.get_total_price }}</span>
+                          <span class="fw-bold ms-auto">₽ {{ cart.get_total_price|floatformat:0 }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -144,12 +151,14 @@
                           <span class="fw-bold text-danger">+ $39</span>
                         </td>
                       </tr>
+                      {% if cart.coupon %}
                       <tr>
                         <td class="text-start">Скидка</td>
                         <td class="text-end">
-                          <span class="fw-bold text-success">- $15%</span>
+                          <span class="fw-bold text-success">- {{ cart.coupon.discount }}% </span>
                         </td>
                       </tr>
+                      {% endif %}
                       <tr>
                         <td class="text-start">Вернется бонусами</td>
                         <td class="text-end">
@@ -159,7 +168,7 @@
                       <tr>
                         <td class="text-start fs-18">Итого</td>
                         <td class="text-end">
-                          <span class="ms-2 fw-bold fs-23">$568</span>
+                          <span class="ms-2 fw-bold fs-23">₽ {{ cart.get_total_price_after_discount|floatformat:0 }}</span>
                         </td>
                       </tr>
                     </tbody>

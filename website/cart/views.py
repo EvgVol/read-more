@@ -5,6 +5,7 @@ from actions.utils import create_action
 from .cart import Cart
 from .forms import CartAddProductForm
 from shop.models import Product
+from coupons.forms import CouponApplyForm
 
 
 @require_POST
@@ -45,8 +46,13 @@ def cart_clear(request):
 def cart_detail(request):
     """Выводит страницу корзину с её содержимым."""
     cart = Cart(request)
+    coupon_apply_form = CouponApplyForm()
+
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(
             initial={'quantity': item['quantity'], 'override': True}
         )
-    return render(request, 'cart/cart.html', {'cart': cart})
+
+    return render(request, 'cart/cart.html',
+                  {'cart': cart,
+                   'coupon_apply_form': coupon_apply_form})
