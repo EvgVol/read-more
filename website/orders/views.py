@@ -49,7 +49,7 @@ def order_create(request):
             create_action(request.user, _('Order has been made'))
             if cart.coupon:
                 messages.info(request,
-                              (_('Your order has been placed successfully '
+                              (_('Your order has been placed successfully'
                                  'with the discount %(discount)s.') %
                               {'discount': f"{cart.coupon.discount}%"}))
             else:
