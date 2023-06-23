@@ -32,9 +32,12 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-            # очистить корзину
+            # Clear cart
             cart.clear()
+
+            # Add task to Celery queue to send email
             order_created.delay(order.id)
+
             create_action(request.user, _('Order has been made'))
             messages.success(request,
                              _('Your order has been placed successfully'))

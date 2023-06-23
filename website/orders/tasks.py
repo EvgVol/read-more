@@ -1,7 +1,5 @@
 from celery import shared_task
 from django.core.mail import send_mail
-from django.utils.translation import gettext_lazy as _
-from django.utils.encoding import force_str
 
 from .models import Order
 
