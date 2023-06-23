@@ -142,17 +142,6 @@
                             {{ product.price }}
                           </span>
                           {% endif %}
-                          {% comment %} <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                            {% csrf_token %}
-                            <button
-                            type="submit"
-                              class="fs-16 btn p-0 cart-trash"
-                            >
-                              <i
-                                class="fe fe-trash-2 border text-danger brround d-block p-2"
-                              ></i>
-                            </button>
-                          </form>  {% endcomment %}
                         </div>
                       </div>
                       {% endwith %}

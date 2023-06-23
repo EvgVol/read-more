@@ -89,9 +89,15 @@
                                               <td class="text-end">{{ item.get_cost }} ₽</td>
                                           </tr>
                                         {% endfor %}
+                                        {% if order.coupon %}
+                                        <tr>
+                                            <td colspan="4" class="fw-bold text-info text-end">Скидка по купону: <span class="text-info">{{ order.coupon.code }}</span></td>
+                                            <td class="fw-bold text-success text-end h4">-{{ order.get_discount|floatformat:2 }} ₽</td>
+                                        </tr>
+                                        {% endif %}
                                         <tr>
                                           <td colspan="4" class="fw-bold text-uppercase text-end">ИТОГО</td>
-                                          <td class="fw-bold text-end h4">{{ order.get_total_cost }} ₽</td>
+                                          <td class="fw-bold text-end h4">{{ order.get_total_cost|floatformat:2 }} ₽</td>
                                         </tr>
                                         <!-- products END -->
                                     </tbody>

@@ -7,6 +7,7 @@ from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import OrderItem
 from .tasks import order_created
+from coupons.models import Coupon
 
 
 def order_create(request):
@@ -26,21 +27,34 @@ def order_create(request):
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            order = form.save()
+            order = form.save(commit=False)
+            if cart.coupon:
+                coupon = Coupon.objects.get(code=cart.coupon.code)
+                order.coupon = cart.coupon
+                order.discount = cart.coupon.discount
+                coupon.used = True
+                coupon.save()
+            order.save()
             for item in cart:
                 OrderItem.objects.create(order=order,
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-            # Clear cart
+            # очищаем корзину
             cart.clear()
 
             # Add task to Celery queue to send email
             order_created.delay(order.id)
 
             create_action(request.user, _('Order has been made'))
-            messages.success(request,
-                             _('Your order has been placed successfully'))
+            if cart.coupon:
+                messages.info(request,
+                              (_('Your order has been placed successfully '
+                                 'with the discount %(discount)s.') %
+                              {'discount': f"{cart.coupon.discount}%"}))
+            else:
+                messages.success(request,
+                                 _('Your order has been placed successfully'))
             return render(request,
                           'orders/invoice.html',
                           {'order': order})
