@@ -417,3 +417,24 @@
 <script src="{% static 'js/index1.js' %}"></script>
 
 {% endblock add_script %} {% endcomment %}
+{% block domready %}
+  var page = 1;
+  var emptyPage = false;
+  var blockRequest = false;
+  $('#more-btn').on('click', function() {
+    if (!emptyPage && !blockRequest) { 
+      blockRequest = true; 
+      page += 1; 
+      $.get('?posts_only=1&page=' + page, function(data) {
+        if (data === '') { 
+          emptyPage = true;
+          $('#more-btn').hide(); // Скрыть кнопку, если все записи уже загружены
+        } 
+        else { 
+          $('#action-list').append(data); 
+          blockRequest = false; 
+        } 
+      }); 
+    }
+  });
+{% endblock %}

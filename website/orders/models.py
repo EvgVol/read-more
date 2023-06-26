@@ -77,7 +77,7 @@ class Order (models.Model):
         return full_name.strip()
 
     def get_absolute_url(self):
-        return reverse("orders:order_list", args=[self.id])
+        return reverse("orders:admin_order_detail", args=[self.id])
 
 
 class OrderItem (models.Model):

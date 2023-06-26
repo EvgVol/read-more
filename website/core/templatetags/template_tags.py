@@ -13,9 +13,5 @@ def addclass(field, css):
 
 @register.inclusion_tag('orders/order-list.html')
 def show_orders():
-    orders = Order.objects.all()
-    paid_orders = Order.objects.filter(paid=True)
-    nopaid_orders = Order.objects.filter(paid=False)
-    return {'orders': orders,
-            'paid_orders': paid_orders,
-            'nopaid_orders': nopaid_orders}
+    orders = Order.objects.all()[:6]
+    return {'orders': orders}
