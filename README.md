@@ -66,6 +66,15 @@ python manage.py runserver_plus --cert-file cert.crt #SSL
 8. Open your web browser and navigate to http://localhost:8000 to view the application.
 
 
+9. To add translations of your source code, use the following command:
+```
+python manage.py makemessages --all
+```
+10. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
+```
+python manage.py compilemessages
+```
+
 ## Credits
 This project was created by [Evgeniy Volochek](https://github.com/EvgVol). The Bootstrap framework was used to assist with the layout and styling of the website.
 

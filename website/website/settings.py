@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -143,30 +144,34 @@ AUTH_PASSWORD_VALIDATORS = [
 # Setting language code
 LANGUAGE_CODE = 'ru-RU'
 USE_I18N = True
+USE_L10N = True
 LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),
     ('uk', _('Ukrainian')),
 ]
 
-ACCOUNT_LOCALE_PATHS = [BASE_DIR / 'account/locale']
-BLOG_LOCALE_PATHS = [BASE_DIR / 'blog/locale']
-CORE_LOCALE_PATHS = [BASE_DIR / 'core/locale']
-VOOKMARKS_LOCALE_PATHS = [BASE_DIR / 'vookmarks/locale']
-ACTIONS_LOCALE_PATHS = [BASE_DIR / 'actions/locale']
-SHOP_LOCALE_PATHS = [BASE_DIR / 'shop/locale']
-CART_LOCALE_PATHS = [BASE_DIR / 'cart/locale']
-ORDERS_LOCALE_PATHS = [BASE_DIR / 'orders/locale']
+ACCOUNT_LOCALE_PATH = BASE_DIR / "account/locale"
+BLOG_LOCALE_PATH = BASE_DIR / "blog/locale"
+CORE_LOCALE_PATH = BASE_DIR / "core/locale"
+VOOKMARKS_LOCALE_PATH = BASE_DIR / "vookmarks/locale"
+ACTIONS_LOCALE_PATH = BASE_DIR / "actions/locale"
+SHOP_LOCALE_PATH = BASE_DIR / "shop/locale"
+CART_LOCALE_PATH = BASE_DIR / "cart/locale"
+ORDERS_LOCALE_PATH = BASE_DIR / "orders/locale"
+COUPONS_LOCALE_PATH = BASE_DIR / "orders/locale"
 
-LOCALE_PATHS = []
-LOCALE_PATHS.extend(ACCOUNT_LOCALE_PATHS)
-LOCALE_PATHS.extend(BLOG_LOCALE_PATHS)
-LOCALE_PATHS.extend(CORE_LOCALE_PATHS)
-LOCALE_PATHS.extend(VOOKMARKS_LOCALE_PATHS)
-LOCALE_PATHS.extend(ACTIONS_LOCALE_PATHS)
-LOCALE_PATHS.extend(SHOP_LOCALE_PATHS)
-LOCALE_PATHS.extend(CART_LOCALE_PATHS)
-LOCALE_PATHS.extend(ORDERS_LOCALE_PATHS)
+LOCALE_PATHS = [
+    ACCOUNT_LOCALE_PATH,
+    BLOG_LOCALE_PATH,
+    CORE_LOCALE_PATH,
+    VOOKMARKS_LOCALE_PATH,
+    ACTIONS_LOCALE_PATH,
+    SHOP_LOCALE_PATH,
+    CART_LOCALE_PATH,
+    ORDERS_LOCALE_PATH,
+    BASE_DIR / 'locale'
+]
 
 
 # Setting time-zone

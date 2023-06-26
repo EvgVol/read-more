@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 20:07+0400\n"
+"POT-Creation-Date: 2023-06-26 14:44+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,99 +17,121 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\orders\apps.py:8 .\orders\models.py:50
+
+#: .\orders\apps.py:8 .\orders\models.py:49
 msgid "orders"
 msgstr ""
 
-#: .\orders\models.py:28
+#: .\orders\models.py:15
 msgid "first name"
 msgstr ""
 
-#: .\orders\models.py:29
+#: .\orders\models.py:17
 msgid "Enter your first name"
 msgstr ""
 
-#: .\orders\models.py:30
+#: .\orders\models.py:18
 msgid "last name"
 msgstr ""
 
-#: .\orders\models.py:31
+#: .\orders\models.py:19
 msgid "Enter your last name"
 msgstr ""
 
-#: .\orders\models.py:32
+#: .\orders\models.py:20
 msgid "email"
 msgstr ""
 
-#: .\orders\models.py:33
+#: .\orders\models.py:21
 msgid "Enter your email address"
 msgstr ""
 
-#: .\orders\models.py:34
+#: .\orders\models.py:22
 msgid "address"
 msgstr ""
 
-#: .\orders\models.py:35
+#: .\orders\models.py:23
 msgid "Enter your shipping address"
 msgstr ""
 
-#: .\orders\models.py:36
+#: .\orders\models.py:24
 msgid "postal code"
 msgstr ""
 
-#: .\orders\models.py:37
+#: .\orders\models.py:26
 msgid "Enter your postal code"
 msgstr ""
 
-#: .\orders\models.py:38
+#: .\orders\models.py:27
 msgid "city"
 msgstr ""
 
-#: .\orders\models.py:39
+#: .\orders\models.py:28
 msgid "Enter your city"
 msgstr ""
 
-#: .\orders\models.py:40
+#: .\orders\models.py:29
 msgid "created"
 msgstr ""
 
-#: .\orders\models.py:41
+#: .\orders\models.py:31
 msgid "updated"
 msgstr ""
 
-#: .\orders\models.py:42
+#: .\orders\models.py:33
 msgid "paid"
 msgstr ""
 
-#: .\orders\models.py:49 .\orders\models.py:91
+#: .\orders\models.py:35
+msgid "coupon"
+msgstr ""
+
+#: .\orders\models.py:39
+msgid "discount"
+msgstr ""
+
+#: .\orders\models.py:48 .\orders\models.py:89
 msgid "order"
 msgstr ""
 
-#: .\orders\models.py:53
+#: .\orders\models.py:52
 #, python-brace-format
 msgid "Order {self.id}"
 msgstr ""
 
-#: .\orders\models.py:94
+#: .\orders\models.py:92
 msgid "product"
 msgstr ""
 
-#: .\orders\models.py:96
+#: .\orders\models.py:94
 msgid "price"
 msgstr ""
 
-#: .\orders\models.py:99
+#: .\orders\models.py:97
 msgid "quantity"
 msgstr ""
 
-#: .\orders\models.py:102
+#: .\orders\models.py:100
 msgid "order item"
 msgstr ""
 
-#: .\orders\models.py:103
+#: .\orders\models.py:101
 msgid "order items"
 msgstr ""
 
 #: .\orders\tests.py:30
 msgid "Success! Your order has been placed."
+msgstr ""
+
+#: .\orders\views.py:44
+msgid "Order has been made"
+msgstr ""
+
+#: .\orders\views.py:47
+#, python-format
+msgid "Your order has been placed successfullywith the discount %(discount)s."
+msgstr ""
+
+#: .\orders\views.py:52
+msgid "Your order has been placed successfully"
 msgstr ""

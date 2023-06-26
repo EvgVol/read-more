@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 21:10+0400\n"
+"POT-Creation-Date: 2023-06-26 14:44+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,150 +16,139 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
-#: .\blog\models.py:39
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\blog\models.py:16
 msgid "name"
-msgstr ""
+msgstr "название"
 
-#: .\blog\models.py:40 .\blog\models.py:127
+#: .\blog\models.py:17 .\blog\models.py:66
 msgid "slug"
-msgstr ""
+msgstr "slug"
 
-#: .\blog\models.py:44 .\blog\models.py:143
+#: .\blog\models.py:21 .\blog\models.py:82
 msgid "category"
-msgstr ""
+msgstr "категория"
 
-#: .\blog\models.py:45
+#: .\blog\models.py:22
 msgid "categories"
-msgstr ""
+msgstr "категории"
 
-#: .\blog\models.py:118
+#: .\blog\models.py:57
 msgid "draft"
-msgstr ""
+msgstr "черновик"
 
-#: .\blog\models.py:119
+#: .\blog\models.py:58
 msgid "published"
-msgstr ""
+msgstr "опубликовано"
 
-#: .\blog\models.py:122
+#: .\blog\models.py:61
 msgid "title"
-msgstr ""
+msgstr "заголовок"
 
-#: .\blog\models.py:124
+#: .\blog\models.py:63
 msgid "Enter the title of the blog post."
-msgstr ""
+msgstr "Введите название записи в блоге."
 
-#: .\blog\models.py:130
+#: .\blog\models.py:69
 msgid "Enter a URL-friendly slug for the blog post."
-msgstr ""
+msgstr "Введите удобный URL-адрес для записи в блоге."
+
+#: .\blog\models.py:75
+msgid "author"
+msgstr "автор"
+
+#: .\blog\models.py:77
+msgid "content"
+msgstr "контент"
+
+#: .\blog\models.py:83
+msgid "image"
+msgstr "изображение"
+
+#: .\blog\models.py:84
+msgid "publish"
+msgstr "опубликовано"
+
+#: .\blog\models.py:85 .\blog\models.py:149
+msgid "created"
+msgstr "создан"
+
+#: .\blog\models.py:86 .\blog\models.py:152
+msgid "updated"
+msgstr "изменен"
+
+#: .\blog\models.py:87
+msgid "status"
+msgstr "статус"
+
+#: .\blog\models.py:94
+msgid "liked"
+msgstr "понравилось"
+
+#: .\blog\models.py:100 .\blog\models.py:133
+msgid "post"
+msgstr "статья"
+
+#: .\blog\models.py:101
+msgid "posts"
+msgstr "статьи"
 
 #: .\blog\models.py:136
-msgid "author"
-msgstr ""
+msgid "username"
+msgstr "логин"
 
 #: .\blog\models.py:138
-msgid "content"
-msgstr ""
+msgid "Enter your name."
+msgstr "Введите свое имя."
 
-#: .\blog\models.py:144
-msgid "image"
-msgstr ""
+#: .\blog\models.py:141
+msgid "email"
+msgstr "электронная почта"
+
+#: .\blog\models.py:142
+msgid "Enter your email address."
+msgstr "Введите свой адрес электронной почты."
 
 #: .\blog\models.py:145
-msgid "publish"
-msgstr ""
-
-#: .\blog\models.py:146 .\blog\models.py:226
-msgid "created"
-msgstr ""
-
-#: .\blog\models.py:147 .\blog\models.py:230
-msgid "updated"
-msgstr ""
-
-#: .\blog\models.py:148
-msgid "status"
-msgstr ""
-
-#: .\blog\models.py:155
-msgid "liked"
-msgstr ""
-
-#: .\blog\models.py:161 .\blog\models.py:209
-msgid "post"
-msgstr ""
-
-#: .\blog\models.py:162
-msgid "posts"
-msgstr ""
-
-#: .\blog\models.py:210
-msgid "Select a post to associate the comment with."
-msgstr ""
-
-#: .\blog\models.py:213
-msgid "username"
-msgstr ""
-
-#: .\blog\models.py:215
-msgid "Enter your name."
-msgstr ""
-
-#: .\blog\models.py:218
-msgid "email"
-msgstr ""
-
-#: .\blog\models.py:219
-msgid "Enter your email address."
-msgstr ""
-
-#: .\blog\models.py:222
 msgid "message"
-msgstr ""
+msgstr "сообщение"
 
-#: .\blog\models.py:223
+#: .\blog\models.py:146
 msgid "Enter your comment."
-msgstr ""
+msgstr "Введите свой комментарий."
 
-#: .\blog\models.py:228
-msgid "The date and time that the comment was created."
-msgstr ""
-
-#: .\blog\models.py:232
-msgid "The date and time that the comment was last updated."
-msgstr ""
-
-#: .\blog\models.py:235
+#: .\blog\models.py:156
 msgid "active"
-msgstr ""
+msgstr "активный"
 
-#: .\blog\models.py:237
+#: .\blog\models.py:158
 msgid "A boolean field indicating whether the comment is active."
-msgstr ""
+msgstr "Логическое поле, указывающее, активен ли комментарий."
 
-#: .\blog\models.py:243
+#: .\blog\models.py:164
 msgid "comment"
-msgstr ""
+msgstr "комментарий"
 
-#: .\blog\models.py:244
+#: .\blog\models.py:165
 msgid "comments"
-msgstr ""
+msgstr "комментарии"
 
-#: .\blog\models.py:250
+#: .\blog\models.py:171
 #, python-brace-format
 msgid "Comment from {self.name} on post \"{self.post}\""
-msgstr ""
+msgstr "Комментарий от {self.name} в сообщении \"{self.post}\""
 
 #: .\blog\views.py:120
 #, python-brace-format
 msgid "Article:{post.id}:viewed"
-msgstr ""
+msgstr "Статья:{post.id}:просмотрена"
 
 #: .\blog\views.py:147
 msgid "{cd['name']} recommends you to read the article \"{post.title}\""
-msgstr ""
+msgstr "{cd['название']} рекомендует вам прочитать статью \"{post.title}\""
 
 #: .\blog\views.py:148
 msgid ""
@@ -170,20 +159,20 @@ msgstr ""
 
 #: .\blog\views.py:151
 msgid "shared the article"
-msgstr ""
+msgstr "поделился статьей"
 
 #: .\blog\views.py:172
 msgid "commented"
-msgstr ""
+msgstr "прокомментировал"
 
 #: .\blog\views.py:223
 msgid "added a new post:"
-msgstr ""
+msgstr "добавил новую статью:"
 
 #: .\blog\views.py:224
 msgid "The post was added successfully"
-msgstr ""
+msgstr "Статья была успешно добавлена"
 
 #: .\blog\views.py:243
 msgid "liked the post:"
-msgstr ""
+msgstr "лайкнул статью:"

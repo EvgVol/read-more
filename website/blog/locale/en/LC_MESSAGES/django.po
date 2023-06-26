@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 21:10+0400\n"
+"POT-Creation-Date: 2023-06-26 14:44+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,135 +17,124 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\blog\models.py:39
+
+#: .\blog\models.py:16
 msgid "name"
 msgstr ""
 
-#: .\blog\models.py:40 .\blog\models.py:127
+#: .\blog\models.py:17 .\blog\models.py:66
 msgid "slug"
 msgstr ""
 
-#: .\blog\models.py:44 .\blog\models.py:143
+#: .\blog\models.py:21 .\blog\models.py:82
 msgid "category"
 msgstr ""
 
-#: .\blog\models.py:45
+#: .\blog\models.py:22
 msgid "categories"
 msgstr ""
 
-#: .\blog\models.py:118
+#: .\blog\models.py:57
 msgid "draft"
 msgstr ""
 
-#: .\blog\models.py:119
+#: .\blog\models.py:58
 msgid "published"
 msgstr ""
 
-#: .\blog\models.py:122
+#: .\blog\models.py:61
 msgid "title"
 msgstr ""
 
-#: .\blog\models.py:124
+#: .\blog\models.py:63
 msgid "Enter the title of the blog post."
 msgstr ""
 
-#: .\blog\models.py:130
+#: .\blog\models.py:69
 msgid "Enter a URL-friendly slug for the blog post."
 msgstr ""
 
-#: .\blog\models.py:136
+#: .\blog\models.py:75
 msgid "author"
 msgstr ""
 
-#: .\blog\models.py:138
+#: .\blog\models.py:77
 msgid "content"
 msgstr ""
 
-#: .\blog\models.py:144
+#: .\blog\models.py:83
 msgid "image"
 msgstr ""
 
-#: .\blog\models.py:145
+#: .\blog\models.py:84
 msgid "publish"
 msgstr ""
 
-#: .\blog\models.py:146 .\blog\models.py:226
+#: .\blog\models.py:85 .\blog\models.py:149
 msgid "created"
 msgstr ""
 
-#: .\blog\models.py:147 .\blog\models.py:230
+#: .\blog\models.py:86 .\blog\models.py:152
 msgid "updated"
 msgstr ""
 
-#: .\blog\models.py:148
+#: .\blog\models.py:87
 msgid "status"
 msgstr ""
 
-#: .\blog\models.py:155
+#: .\blog\models.py:94
 msgid "liked"
 msgstr ""
 
-#: .\blog\models.py:161 .\blog\models.py:209
+#: .\blog\models.py:100 .\blog\models.py:133
 msgid "post"
 msgstr ""
 
-#: .\blog\models.py:162
+#: .\blog\models.py:101
 msgid "posts"
 msgstr ""
 
-#: .\blog\models.py:210
-msgid "Select a post to associate the comment with."
-msgstr ""
-
-#: .\blog\models.py:213
+#: .\blog\models.py:136
 msgid "username"
 msgstr ""
 
-#: .\blog\models.py:215
+#: .\blog\models.py:138
 msgid "Enter your name."
 msgstr ""
 
-#: .\blog\models.py:218
+#: .\blog\models.py:141
 msgid "email"
 msgstr ""
 
-#: .\blog\models.py:219
+#: .\blog\models.py:142
 msgid "Enter your email address."
 msgstr ""
 
-#: .\blog\models.py:222
+#: .\blog\models.py:145
 msgid "message"
 msgstr ""
 
-#: .\blog\models.py:223
+#: .\blog\models.py:146
 msgid "Enter your comment."
 msgstr ""
 
-#: .\blog\models.py:228
-msgid "The date and time that the comment was created."
-msgstr ""
-
-#: .\blog\models.py:232
-msgid "The date and time that the comment was last updated."
-msgstr ""
-
-#: .\blog\models.py:235
+#: .\blog\models.py:156
 msgid "active"
 msgstr ""
 
-#: .\blog\models.py:237
+#: .\blog\models.py:158
 msgid "A boolean field indicating whether the comment is active."
 msgstr ""
 
-#: .\blog\models.py:243
+#: .\blog\models.py:164
 msgid "comment"
 msgstr ""
 
-#: .\blog\models.py:244
+#: .\blog\models.py:165
 msgid "comments"
 msgstr ""
 
-#: .\blog\models.py:250
+#: .\blog\models.py:171
 #, python-brace-format
 msgid "Comment from {self.name} on post \"{self.post}\""
 msgstr ""
