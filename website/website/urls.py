@@ -21,6 +21,7 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('coupons/', include('coupons.urls', namespace='coupons')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('rosetta/', include('rosetta.urls')),
     path('__debug__/', include('debug_toolbar.urls', namespace='debug')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),

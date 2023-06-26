@@ -1,9 +1,10 @@
 {% extends 'includes/base.html' %}
-{% block title %}ExView | Интернет магазин{% endblock %}
+{% load i18n %}
+{% block title %}ExView | {% trans "Online store" %}{% endblock %}
 {% load static %}
-{% block content %}
 {% load thumbnail %}
 {% load shop_tags %}
+{% block content %}
 <!--app-content open-->
 <div class="main-content app-content mt-0">
     <div class="side-app">
@@ -12,11 +13,11 @@
 
         <!-- PAGE-HEADER -->
         <div class="page-header">
-          <h1 class="page-title">Интернет магазин</h1>
+          <h1 class="page-title">{% trans "Online store" %}</h1>
           <div>
               <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="javascript:void(0)">ExView</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Магазин</li>
+                  <li class="breadcrumb-item active" aria-current="page">{% trans "Online store" %}</li>
               </ol>
           </div>
         </div>
@@ -67,7 +68,7 @@
                                       </ul>
                                   </div>
                                   <div class="col-xl-3 col-lg-12">
-                                      <a href="add-product.html" class="btn btn-info btn-block float-end my-2"><i class="fa fa-plus-square me-2"></i>Добавить товар</a>
+                                      <a href="add-product.html" class="btn btn-info btn-block float-end my-2"><i class="fa fa-plus-square me-2"></i>{% trans "Add product" %}</a>
                                   </div>
                               </div>
                           </div>
@@ -113,9 +114,9 @@
                                     <form action="{% url "cart:cart_add" product.id %}" method="post">
                                       {% csrf_token %}
                                       <input type="hidden" name="quantity" value="1" style="display:none;">
-                                      <button type="submit" class="btn btn-primary mb-1"><i class="fe fe-shopping-cart mx-2"></i>Добавить в корзину</button>
+                                      <button type="submit" class="btn btn-primary mb-1"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</button>
                                     </form>
-                                    <a href="wishlist.html" class="btn btn-outline-danger mb-1"><i class="fe fe-heart mx-2 wishlist-icon"></i>Добавить в избранное</a>
+                                    <a href="wishlist.html" class="btn btn-outline-danger mb-1"><i class="fe fe-heart mx-2 wishlist-icon"></i>{% trans "Add to Favorites" %}</a>
                                 </div>
                               </div>
                             </div>
@@ -207,8 +208,8 @@
                                           <div class="col-xl-3 col-lg-12 col-md-12 my-auto">
                                               <div class="card-body p-0">
                                                   <div class="price h2 text-center mb-5 fw-bold">{{ product.price }} ₽</div>
-                                                  <a href="cart.html" class="btn btn-primary btn-block"><i class="fe fe-shopping-cart mx-2"></i>Добавить в корзину</a>
-                                                  <a href="wishlist.html" class="btn btn-outline-danger btn-block mt-2"><i class="fe fe-heart mx-2 wishlist-icon"></i>Добавить в избранное</a>
+                                                  <a href="cart.html" class="btn btn-primary btn-block"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</a>
+                                                  <a href="wishlist.html" class="btn btn-outline-danger btn-block mt-2"><i class="fe fe-heart mx-2 wishlist-icon"></i>{% trans "Add to Favorites" %}</a>
                                               </div>
                                           </div>
                                       </div>

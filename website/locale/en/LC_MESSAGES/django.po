@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 14:44+0400\n"
+"POT-Creation-Date: 2023-06-26 16:11+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\templates\orders\checkout.html:41
 msgid "first name"
 msgstr ""
@@ -41,14 +42,60 @@ msgstr ""
 msgid "address"
 msgstr ""
 
-#: .\website\settings.py:149
-msgid "English"
+#: .\templates\shop\product-detail.html:3
+#: .\templates\shop\product-detail.html:20 .\templates\shop\shop.html:3
+#: .\templates\shop\shop.html:16 .\templates\shop\shop.html:20
+msgid "Online store"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:88
+msgid "Description"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:92
+msgid "Availability"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:92
+msgid "Item is in stock"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:94
+msgid "Colors"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:125
+msgid "Quantity"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:146
+msgid "To Cart"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:148
+msgid "To Buy"
+msgstr ""
+
+#: .\templates\shop\shop.html:71
+msgid "Add product"
+msgstr ""
+
+#: .\templates\shop\shop.html:117 .\templates\shop\shop.html:211
+msgid "Add to Cart"
+msgstr ""
+
+#: .\templates\shop\shop.html:119 .\templates\shop\shop.html:212
+msgid "Add to Favorites"
 msgstr ""
 
 #: .\website\settings.py:150
-msgid "Russian"
+msgid "English"
 msgstr ""
 
 #: .\website\settings.py:151
+msgid "Russian"
+msgstr ""
+
+#: .\website\settings.py:152
 msgid "Ukrainian"
 msgstr ""

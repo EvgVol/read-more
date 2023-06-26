@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'social_django', #OAUTH2
     'django_extensions', #SSL #https://django-extensions.readthedocs.io/en/latest/
     'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
+    'rosetta', #https://django-rosetta.readthedocs.io/
 ]
 
 MIDDLEWARE = [
