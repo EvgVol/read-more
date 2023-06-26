@@ -45,44 +45,7 @@
                         </thead>
                         <tbody>
                           {% for order in orders %}
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">{{ order.id }}</h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">{{ order.get_full_name }}</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">{{ order.created }}</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">{{ order.get_total_cost }}</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">Online Payment</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ order.paid }}</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
+                            {% include 'orders/includes/list-orders.html' %}
                           {% endfor %}
                         </tbody>
                       </table>
@@ -104,44 +67,7 @@
                         </thead>
                         <tbody>
                           {% for order in paid_orders %}
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">{{ order.id }}</h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">{{ order.get_full_name }}</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">{{ order.created }}</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">{{ order.get_total_cost }}</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">Online Payment</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ order.paid }}</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
+                            {% include 'orders/includes/list-orders.html' %}
                           {% endfor %}
                         </tbody>
                       </table>
@@ -163,44 +89,7 @@
                         </thead>
                         <tbody>
                           {% for order in nopaid_orders %}
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">{{ order.id }}</h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">{{ order.get_full_name }}</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">{{ order.created }}</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">{{ order.get_total_cost }}</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">Online Payment</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ order.paid }}</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
+                            {% include 'orders/includes/list-orders.html' %}
                           {% endfor %}
                         </tbody>
                       </table>
@@ -222,44 +111,7 @@
                         </thead>
                         <tbody>
                           {% for order in orders %}
-                            <tr class="border-bottom">
-                              <td class="text-center">
-                                <div class="mt-0 mt-sm-2 d-block">
-                                  <h6 class="mb-0 fs-14 fw-semibold">{{ order.id }}</h6>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">{{ order.get_full_name }}</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <span class="mt-sm-2 d-block">{{ order.created }}</span>
-                              </td>
-                              <td>
-                                <span class="fw-semibold mt-sm-2 d-block">{{ order.get_total_cost }}</span>
-                              </td>
-                              <td>
-                                <div class="d-flex">
-                                  <div class="mt-0 mt-sm-3 d-block">
-                                    <h6 class="mb-0 fs-14 fw-semibold">Online Payment</h6>
-                                  </div>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="mt-sm-1 d-block">
-                                  <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">{{ order.paid }}</span>
-                                </div>
-                              </td>
-                              <td>
-                                <div class="g-2">
-                                  <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Edit"><span class="fe fe-edit fs-14"></span></a>
-                                  <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Delete"><span class="fe fe-trash-2 fs-14"></span></a>
-                                </div>
-                              </td>
-                            </tr>
+                            {% include 'orders/includes/list-orders.html' %}
                           {% endfor %}
                         </tbody>
                       </table>

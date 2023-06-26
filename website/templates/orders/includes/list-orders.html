@@ -1,0 +1,43 @@
+<tr class="border-bottom">
+  <td class="text-center">
+    <div class="mt-0 mt-sm-2 d-block">
+      <h6 class="mb-0 fs-14 fw-semibold">{{ order.id }}</h6>
+    </div>
+  </td>
+  <td>
+    <div class="d-flex">
+      <div class="mt-0 mt-sm-3 d-block">
+        <h6 class="mb-0 fs-14 fw-semibold">{{ order.get_full_name }}</h6>
+      </div>
+    </div>
+  </td>
+  <td>
+    <span class="mt-sm-2 d-block">{{ order.created }}</span>
+  </td>
+  <td>
+    <span class="fw-semibold mt-sm-2 d-block">{{ order.get_total_cost }} ₽</span>
+  </td>
+  <td>
+    <div class="d-flex">
+      <div class="mt-0 mt-sm-3 d-block">
+        <h6 class="mb-0 fs-14 fw-semibold">Online Payment</h6>
+      </div>
+    </div>
+  </td>
+  <td>
+    <div class="mt-sm-1 d-block">
+      {% if order.paid %}
+        <span class="badge bg-success-transparent rounded-pill text-success p-2 px-3">Оплачено</span>
+      {% else %}
+        <span class="badge bg-danger-transparent rounded-pill text-danger p-2 px-3">Не оплачено</span>
+      {% endif %}
+    </div>
+  </td>
+  <td>
+    <div class="g-2">
+      <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Счет-фактура"><span class="fa fa-shirtsinbulk fs-14"></span></a>
+      <a class="btn text-primary btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Изменить"><span class="fa fa-edit fs-14"></span></a>
+      <a class="btn text-danger btn-sm" data-bs-toggle="tooltip" data-bs-original-title="Удалить"><span class="fa fa-trash fs-14"></span></a>
+    </div>
+  </td>
+</tr>
