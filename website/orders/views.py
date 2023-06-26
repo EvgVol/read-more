@@ -7,7 +7,7 @@ from actions.utils import create_action
 from cart.cart import Cart
 from .forms import OrderCreateForm
 from .models import OrderItem, Order
-from .tasks import order_created
+# from .tasks import order_created
 from coupons.models import Coupon
 
 
@@ -40,9 +40,6 @@ def order_create(request):
                                          quantity=item['quantity'])
             # очищаем корзину
             cart.clear()
-
-            # Add task to Celery queue to send email
-            order_created.delay(order.id)
 
             create_action(request.user, _('Order has been made'))
             if cart.coupon:

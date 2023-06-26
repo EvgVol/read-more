@@ -392,49 +392,29 @@
 <script src="{% static 'plugins/chart/utils.js' %}"></script>
 
 <!-- INTERNAL SELECT2 JS -->
-<script src="{% static 'plugins/select2/select2.full.min.js' %}"></script>
+<script src="{% static 'plugins/select2/select2.full.min.js' %}"></script> {% endcomment %}
 
 <!-- INTERNAL Data tables js-->
-<script src="{% static 'plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+{% comment %} <script src="{% static 'plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'plugins/datatable/js/dataTables.bootstrap5.js' %}"></script>
-<script src="{% static 'plugins/datatable/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatable/dataTables.responsive.min.js' %}"></script> {% endcomment %}
+
 
 <!-- INTERNAL APEXCHART JS -->
-<script src="{% static 'js/apexcharts.js' %}"></script>
-<script src="{% static 'plugins/apexchart/irregular-data-series.js' %}"></script>
+{% comment %} <script src="{% static 'js/apexcharts.js' %}"></script>
+<script src="{% static 'plugins/apexchart/irregular-data-series.js' %}"></script> {% endcomment %}
 
 <!-- INTERNAL Flot JS -->
-<script src="{% static 'plugins/flot/jquery.flot.js' %}"></script>
+{% comment %} <script src="{% static 'plugins/flot/jquery.flot.js' %}"></script>
 <script src="{% static 'plugins/flot/jquery.flot.fillbetween.js' %}"></script>
 <script src="{% static 'plugins/flot/chart.flot.sampledata.js' %}"></script>
-<script src="{% static 'plugins/flot/dashboard.sampledata.js' %}"></script>
+<script src="{% static 'plugins/flot/dashboard.sampledata.js' %}"></script> {% endcomment %}
 
 <!-- INTERNAL Vector js -->
-<script src="{% static 'plugins/jvectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
-<script src="{% static 'plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+{% comment %} <script src="{% static 'plugins/jvectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
+<script src="{% static 'plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script> {% endcomment %}
 
 <!-- INTERNAL INDEX JS -->
-<script src="{% static 'js/index1.js' %}"></script>
+{% comment %} <script src="{% static 'js/index1.js' %}"></script> {% endcomment %}
 
-{% endblock add_script %} {% endcomment %}
-{% block domready %}
-  var page = 1;
-  var emptyPage = false;
-  var blockRequest = false;
-  $('#more-btn').on('click', function() {
-    if (!emptyPage && !blockRequest) { 
-      blockRequest = true; 
-      page += 1; 
-      $.get('?posts_only=1&page=' + page, function(data) {
-        if (data === '') { 
-          emptyPage = true;
-          $('#more-btn').hide(); // Скрыть кнопку, если все записи уже загружены
-        } 
-        else { 
-          $('#action-list').append(data); 
-          blockRequest = false; 
-        } 
-      }); 
-    }
-  });
-{% endblock %}
+{% comment %} {% endblock add_script %} {% endcomment %}

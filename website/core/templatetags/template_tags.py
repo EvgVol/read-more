@@ -11,7 +11,7 @@ def addclass(field, css):
     return field.as_widget(attrs={'class': css})
 
 
-@register.inclusion_tag('orders/order-list.html')
+@register.inclusion_tag('core/dashboard/order-list.html')
 def show_orders():
     orders = Order.objects.all()[:6]
     return {'orders': orders}
