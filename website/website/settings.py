@@ -174,7 +174,6 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale'
 ]
 
-
 # Setting time-zone
 TIME_ZONE = 'Europe/Samara'
 USE_TZ = True

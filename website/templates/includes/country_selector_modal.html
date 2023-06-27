@@ -1,0 +1,37 @@
+{% load static %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+<div class="modal fade" id="country-selector">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content country-select-modal">
+      <div class="modal-header">
+        <h6 class="modal-title">{% trans "Choose language" %}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"><span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body">
+        <ul class="row p-3">
+          {% for language in languages %}
+          <li class="col-lg-6 mb-2">
+            <a 
+              href="/{{ language.code }}/"
+              class="btn btn-country btn-lg btn-block {% if language.code == LANGUAGE_CODE %}active{% endif %}">
+                <span
+                  class="country-selector">
+                  <img
+                    alt=""
+                    {% if language.code == 'uk' %} src="{% static 'images/flags/spain_flag.jpg' %}"
+                    {% elif language.code == 'en' %} src="{% static 'images/flags/us_flag.jpg' %}"
+                    {% else %} src="{% static 'images/flags/russia_flag.jpg' %}"
+                    {% endif %}
+                    class="me-3 language" />
+                </span>
+                {{ language.name_local }}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
