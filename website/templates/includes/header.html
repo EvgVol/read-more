@@ -45,7 +45,21 @@
           <i class="fe fe-search" aria-hidden="true"></i>
         </button>
       </form>
-
+      <div class="d-flex country">
+        <a class="nav-link icon text-center" data-bs-target="#country-selector"
+            data-bs-toggle="modal">
+            <span class="country-selector">
+              <img
+                alt=""
+                {% if LANGUAGE_CODE == 'uk' %} src="{% static 'images/flags/spain_flag.jpg' %}"
+                {% elif LANGUAGE_CODE == 'en' %} src="{% static 'images/flags/us_flag.jpg' %}"
+                {% else %} src="{% static 'images/flags/russia_flag.jpg' %}"
+                {% endif %}
+                class="me-3 language">
+            </span>
+        </a>
+      </div>
+      {% include 'includes/country_selector_modal.html' %}
       <div class="d-flex order-lg-2 ms-auto header-right-icons">
         
         <button
@@ -72,7 +86,9 @@
                 >
                   <i class="fe fe-search"></i>
                 </a>
+                
                 <div class="dropdown-menu header-search dropdown-menu-start">
+                  
                   <div class="input-group w-100 p-2">
                     <input
                       type="text"
@@ -82,10 +98,13 @@
                     <div class="input-group-text btn btn-primary">
                       <i class="fa fa-search" aria-hidden="true"></i>
                     </div>
+                    
                   </div>
+                  
                 </div>
+                
               </div>
-
+              
               <div class="dropdown d-flex">
                 <a
                   href="javascript:{% include "bookmarklet_launcher.js" %}"
@@ -365,21 +384,7 @@
                 </a>
               </div>
 
-              <div class="d-flex country">
-                <a class="nav-link icon text-center" data-bs-target="#country-selector"
-                    data-bs-toggle="modal">
-                    <span class="country-selector">
-                      <img
-                        alt=""
-                        {% if LANGUAGE_CODE == 'uk' %} src="{% static 'images/flags/spain_flag.jpg' %}"
-                        {% elif LANGUAGE_CODE == 'en' %} src="{% static 'images/flags/us_flag.jpg' %}"
-                        {% else %} src="{% static 'images/flags/russia_flag.jpg' %}"
-                        {% endif %}
-                        class="me-3 language">
-                    </span>
-                </a>
-              </div>
-              {% include 'includes/country_selector_modal.html' %}
+              
               <!-- SIDE-MENU -->
               <div class="dropdown d-flex header-settings">
                 <a
