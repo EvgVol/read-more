@@ -45,13 +45,14 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'coupons.apps.CouponsConfig',
-    
-    'sorl.thumbnail', #IMAGE
-    'taggit', #TAGS # https://github.com/jazzband/django-taggit
-    'social_django', #OAUTH2
+
+    'sorl.thumbnail', #IMAGE #https://sorl-thumbnail.readthedocs.io/en/latest/
+    'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/
+    'social_django', #OAUTH2 #https://python-social-auth.readthedocs.io/en/latest/index.html
     'django_extensions', #SSL #https://django-extensions.readthedocs.io/en/latest/
     'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
-    'rosetta', #https://django-rosetta.readthedocs.io/
+    'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
+    'parler', #LOCALIZATION #https://django-parler.readthedocs.io/en/latest/
 ]
 
 MIDDLEWARE = [
