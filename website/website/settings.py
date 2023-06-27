@@ -175,6 +175,20 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale'
 ]
 
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en',},
+        {'code': 'ru',},
+        {'code': 'uk',},
+    ),
+    'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+        'fallbacks': ['en', 'fr', 'de'],
+    },
+}
+
+
 # Setting time-zone
 TIME_ZONE = 'Europe/Samara'
 USE_TZ = True
