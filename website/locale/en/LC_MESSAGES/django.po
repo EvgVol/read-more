@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 16:11+0400\n"
+"POT-Creation-Date: 2023-06-27 13:55+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\templates\includes\header.html:415
+msgid "Profile"
+msgstr ""
+
+#: .\templates\includes\header.html:418
+msgid "E-mail"
+msgstr ""
+
+#: .\templates\includes\header.html:425
+msgid "Admin zone"
+msgstr ""
+
+#: .\templates\includes\header.html:428
+msgid "Translator"
+msgstr ""
+
+#: .\templates\includes\header.html:432
+msgid "Settings"
+msgstr ""
+
+#: .\templates\includes\header.html:440
+msgid "Log Out"
+msgstr ""
 
 #: .\templates\orders\checkout.html:41
 msgid "first name"
@@ -98,4 +122,28 @@ msgstr ""
 
 #: .\website\settings.py:152
 msgid "Ukrainian"
+msgstr ""
+
+#: .\website\urls.py:20
+msgid "blog/"
+msgstr ""
+
+#: .\website\urls.py:21
+msgid "vookmarks/"
+msgstr ""
+
+#: .\website\urls.py:23
+msgid "shop/"
+msgstr ""
+
+#: .\website\urls.py:24
+msgid "cart/"
+msgstr ""
+
+#: .\website\urls.py:25
+msgid "coupons/"
+msgstr ""
+
+#: .\website\urls.py:26
+msgid "orders/"
 msgstr ""

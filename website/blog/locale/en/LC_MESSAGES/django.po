@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 14:44+0400\n"
+"POT-Creation-Date: 2023-06-27 13:55+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,6 +137,46 @@ msgstr ""
 #: .\blog\models.py:171
 #, python-brace-format
 msgid "Comment from {self.name} on post \"{self.post}\""
+msgstr ""
+
+#: .\blog\urls.py:11
+msgid "add/"
+msgstr ""
+
+#: .\blog\urls.py:12
+msgid "like/"
+msgstr ""
+
+#: .\blog\urls.py:13
+msgid "<int:year>/<int:month>/<int:day>/<slug:post>/"
+msgstr ""
+
+#: .\blog\urls.py:17
+msgid "share/"
+msgstr ""
+
+#: .\blog\urls.py:18
+msgid "comment/"
+msgstr ""
+
+#: .\blog\urls.py:20
+msgid "tag/<slug:tag_slug>/"
+msgstr ""
+
+#: .\blog\urls.py:21
+msgid "category/<slug:category_slug>/"
+msgstr ""
+
+#: .\blog\urls.py:22
+msgid "feed/"
+msgstr ""
+
+#: .\blog\urls.py:23
+msgid "search/"
+msgstr ""
+
+#: .\blog\urls.py:24
+msgid "ranking/<slug:ranking>"
 msgstr ""
 
 #: .\blog\views.py:120

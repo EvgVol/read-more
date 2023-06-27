@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 16:11+0400\n"
-"PO-Revision-Date: 2023-06-26 16:17+0400\n"
+"POT-Creation-Date: 2023-06-27 13:55+0400\n"
+"PO-Revision-Date: 2023-06-27 14:06+0400\n"
 "Last-Translator: Главный разработчик <admin@example.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -18,6 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
+
+#: .\templates\includes\header.html:415
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\templates\includes\header.html:418
+#| msgid "email"
+msgid "E-mail"
+msgstr "Почта"
+
+#: .\templates\includes\header.html:425
+msgid "Admin zone"
+msgstr "Админ-зона"
+
+#: .\templates\includes\header.html:428
+msgid "Translator"
+msgstr "Переводчик"
+
+#: .\templates\includes\header.html:432
+msgid "Settings"
+msgstr "Настройки"
+
+#: .\templates\includes\header.html:440
+msgid "Log Out"
+msgstr "Выйти"
 
 #: .\templates\orders\checkout.html:41
 msgid "first name"
@@ -100,3 +125,27 @@ msgstr "Русский"
 #: .\website\settings.py:152
 msgid "Ukrainian"
 msgstr "Украинский"
+
+#: .\website\urls.py:20
+msgid "blog/"
+msgstr "блог/"
+
+#: .\website\urls.py:21
+msgid "vookmarks/"
+msgstr "закладки/"
+
+#: .\website\urls.py:23
+msgid "shop/"
+msgstr "магазин/"
+
+#: .\website\urls.py:24
+msgid "cart/"
+msgstr "корзина/"
+
+#: .\website\urls.py:25
+msgid "coupons/"
+msgstr "купоны/"
+
+#: .\website\urls.py:26
+msgid "orders/"
+msgstr "заказы/"

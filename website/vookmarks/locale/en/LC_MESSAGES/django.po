@@ -17,19 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: .\cart\forms.py:14
-msgid "Quantity"
+#: .\vookmarks\urls.py:11
+msgid "create/"
 msgstr ""
 
-#: .\cart\urls.py:12
-msgid "add/<int:product_id>/"
+#: .\vookmarks\urls.py:13
+msgid "detail/<int:id>/<slug:slug>/"
 msgstr ""
 
-#: .\cart\urls.py:13
-msgid "remove/<int:product_id>/"
-msgstr ""
-
-#: .\cart\urls.py:14
-msgid "clear/"
+#: .\vookmarks\urls.py:14
+msgid "like/"
 msgstr ""

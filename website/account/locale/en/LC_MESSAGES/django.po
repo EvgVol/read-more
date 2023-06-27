@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 20:07+0400\n"
+"POT-Creation-Date: 2023-06-27 13:55+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\templates\orders\checkout.html:41
-msgid "first name"
+
+#: .\account\urls.py:8
+msgid "account/"
 msgstr ""
 
-#: .\templates\orders\checkout.html:47
-msgid "last name"
+#: .\account\urls.py:9
+msgid "register/"
 msgstr ""
 
-#: .\templates\orders\checkout.html:53
-msgid "email"
+#: .\account\urls.py:11
+msgid "edit/"
 msgstr ""
 
-#: .\templates\orders\checkout.html:59
-msgid "city"
+#: .\account\urls.py:14
+msgid "profile/"
 msgstr ""
 
-#: .\templates\orders\checkout.html:65
-msgid "postal code"
+#: .\account\urls.py:19
+msgid "users/"
 msgstr ""
 
-#: .\templates\orders\checkout.html:71
-msgid "address"
-msgstr ""
-
-#: .\website\settings.py:146
-msgid "English"
-msgstr ""
-
-#: .\website\settings.py:147
-msgid "Russian"
-msgstr ""
-
-#: .\website\settings.py:148
-msgid "Ukrainian"
+#: .\account\urls.py:20
+msgid "users/follow/"
 msgstr ""

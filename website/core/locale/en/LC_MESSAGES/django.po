@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 14:44+0400\n"
+"POT-Creation-Date: 2023-06-27 13:55+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\core\export_to_csv.py:29
 msgid "Export to CSV"
+msgstr ""
+
+#: .\core\urls.py:12
+msgid "home/"
+msgstr ""
+
+#: .\core\urls.py:13
+msgid "setting/"
+msgstr ""
+
+#: .\core\urls.py:14
+msgid "style/"
+msgstr ""
+
+#: .\core\urls.py:15
+msgid "countdown/"
 msgstr ""

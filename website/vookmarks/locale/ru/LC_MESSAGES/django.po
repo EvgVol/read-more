@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-27 13:55+0400\n"
-"PO-Revision-Date: 2023-06-27 14:05+0400\n"
+"PO-Revision-Date: 2023-06-27 14:07+0400\n"
 "Last-Translator: Главный разработчик <admin@example.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,22 +19,14 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\core\export_to_csv.py:29
-msgid "Export to CSV"
-msgstr "Экпорт в CSV"
+#: .\vookmarks\urls.py:11
+msgid "create/"
+msgstr "создать/"
 
-#: .\core\urls.py:12
-msgid "home/"
-msgstr "главная/"
+#: .\vookmarks\urls.py:13
+msgid "detail/<int:id>/<slug:slug>/"
+msgstr "подробно/<int:id>/<slug:slug>/"
 
-#: .\core\urls.py:13
-msgid "setting/"
-msgstr "настройки/"
-
-#: .\core\urls.py:14
-msgid "style/"
-msgstr "стиль/"
-
-#: .\core\urls.py:15
-msgid "countdown/"
-msgstr "обратный-отчет/"
+#: .\vookmarks\urls.py:14
+msgid "like/"
+msgstr "нравится/"

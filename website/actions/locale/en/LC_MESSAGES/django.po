@@ -17,19 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: .\cart\forms.py:14
-msgid "Quantity"
-msgstr ""
-
-#: .\cart\urls.py:12
-msgid "add/<int:product_id>/"
-msgstr ""
-
-#: .\cart\urls.py:13
-msgid "remove/<int:product_id>/"
-msgstr ""
-
-#: .\cart\urls.py:14
-msgid "clear/"
+#: .\actions\urls.py:11
+msgid "notification/"
 msgstr ""

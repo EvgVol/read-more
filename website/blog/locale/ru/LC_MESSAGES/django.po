@@ -2,23 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-26 14:44+0400\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2023-06-27 13:55+0400\n"
+"PO-Revision-Date: 2023-06-27 14:03+0400\n"
+"Last-Translator: Главный разработчик <admin@example.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Translated-Using: django-rosetta 0.9.8\n"
 
 #: .\blog\models.py:16
 msgid "name"
@@ -141,6 +140,48 @@ msgstr "комментарии"
 msgid "Comment from {self.name} on post \"{self.post}\""
 msgstr "Комментарий от {self.name} в сообщении \"{self.post}\""
 
+#: .\blog\urls.py:11
+msgid "add/"
+msgstr "добавить/"
+
+#: .\blog\urls.py:12
+#| msgid "liked"
+msgid "like/"
+msgstr "понравилось/"
+
+#: .\blog\urls.py:13
+msgid "<int:year>/<int:month>/<int:day>/<slug:post>/"
+msgstr "<int:year>/<int:month>/<int:day>/<slug:post>/"
+
+#: .\blog\urls.py:17
+msgid "share/"
+msgstr "поделиться/"
+
+#: .\blog\urls.py:18
+#| msgid "comment"
+msgid "comment/"
+msgstr "комментарий/"
+
+#: .\blog\urls.py:20
+msgid "tag/<slug:tag_slug>/"
+msgstr "тег/<slug:tag_slug>/"
+
+#: .\blog\urls.py:21
+msgid "category/<slug:category_slug>/"
+msgstr "категория/<slug:category_slug>/"
+
+#: .\blog\urls.py:22
+msgid "feed/"
+msgstr "лента/"
+
+#: .\blog\urls.py:23
+msgid "search/"
+msgstr "поиск/"
+
+#: .\blog\urls.py:24
+msgid "ranking/<slug:ranking>"
+msgstr "сортировка/<slug:ranking>"
+
 #: .\blog\views.py:120
 #, python-brace-format
 msgid "Article:{post.id}:viewed"
@@ -156,6 +197,9 @@ msgid ""
 "\n"
 "                         Comment from {cd['name']}: {cd['comments']}"
 msgstr ""
+"Прочитайте статью `{post.title}` здесь: {post_url}\n"
+"\n"
+"Прокомментировал {cd['name']}: {cd['comments']}"
 
 #: .\blog\views.py:151
 msgid "shared the article"

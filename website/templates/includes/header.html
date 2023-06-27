@@ -1,5 +1,6 @@
 {% load static %}
 {% load thumbnail %}
+{% load i18n %}
 <div class="app-header header sticky">
   <div class="container-fluid main-container">
     <div class="d-flex">
@@ -414,7 +415,7 @@
                     <i class="dropdown-icon fe fe-user"></i> {% trans "Profile" %}
                   </a>
                   <a class="dropdown-item" href="#">
-                    <i class="dropdown-icon fe fe-mail"></i> {% trans "Email" %}
+                    <i class="dropdown-icon fe fe-mail"></i> {% trans "E-mail" %}
                     <span class="badge bg-danger rounded-pill float-end"
                       >5</span
                     >
@@ -428,7 +429,7 @@
                   </a>
                   {% endif %}
                   <a class="dropdown-item" href="{% url 'core:setting' %}">
-                    <i class="dropdown-icon fe fe-settings"></i> {% trans "Setting" %}
+                    <i class="dropdown-icon fe fe-settings"></i> {% trans "Settings" %}
                   </a>
                   <a
                     class="dropdown-item"
