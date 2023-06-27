@@ -16,16 +16,13 @@
             <a 
               href="/{{ language.code }}/"
               class="btn btn-country btn-lg btn-block {% if language.code == LANGUAGE_CODE %}active{% endif %}">
-                <span
-                  class="country-selector">
-                  <img
-                    alt=""
-                    {% if language.code == 'uk' %} src="{% static 'images/flags/spain_flag.jpg' %}"
-                    {% elif language.code == 'en' %} src="{% static 'images/flags/us_flag.jpg' %}"
-                    {% else %} src="{% static 'images/flags/russia_flag.jpg' %}"
+              <span class="country-selector">
+                {% for lang_code, lang_name in LANGUAGES %}
+                    {% if lang_code == language.code %}
+                        <img src="{% static 'images/flags/'|add:lang_code|add:'.svg' %}" alt="{{ lang_name }}">
                     {% endif %}
-                    class="me-3 language" />
-                </span>
+                {% endfor %}
+              </span>
                 {{ language.name_local }}
             </a>
           </li>

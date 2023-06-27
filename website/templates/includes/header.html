@@ -2,6 +2,7 @@
 {% load thumbnail %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
 <div class="app-header header sticky">
   <div class="container-fluid main-container">
     <div class="d-flex">
@@ -49,13 +50,11 @@
         <a class="nav-link icon text-center" data-bs-target="#country-selector"
             data-bs-toggle="modal">
             <span class="country-selector">
-              <img
-                alt=""
-                {% if LANGUAGE_CODE == 'uk' %} src="{% static 'images/flags/spain_flag.jpg' %}"
-                {% elif LANGUAGE_CODE == 'en' %} src="{% static 'images/flags/us_flag.jpg' %}"
-                {% else %} src="{% static 'images/flags/russia_flag.jpg' %}"
+              {% for lang_code, lang_name in LANGUAGES %}
+                {% if lang_code == LANGUAGE_CODE %}
+                    <img src="{% static 'images/flags/'|add:lang_code|add:'.svg' %}" alt="{{ lang_name }}">
                 {% endif %}
-                class="me-3 language">
+              {% endfor %}
             </span>
         </a>
       </div>
@@ -77,7 +76,6 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
             <div class="d-flex order-lg-2">
               {% if request.user.is_authenticated %}
-
               <div class="dropdown d-lg-none d-flex">
                 <a
                   href="javascript:void(0)"
