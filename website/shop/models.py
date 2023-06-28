@@ -2,17 +2,14 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from parler.models import TranslatableModel, TranslatedFields
 from pytils.translit import slugify
 
 
-class Category(TranslatableModel):
+class Category(models.Model):
     """Модель категорий магазина."""
 
-    translations = TranslatedFields(
-        name = models.CharField(_('name'), max_length=50),
-        slug = models.SlugField(_('slug'), max_length=50, unique=True)
-    )
+    name = models.CharField(_('name'), max_length=50)
+    slug = models.SlugField(_('slug'), max_length=50, unique=True)
 
     class Meta:
         ordering = ['name']
@@ -37,23 +34,23 @@ class Category(TranslatableModel):
 class Product(models.Model):
     """Модель категорий товара."""
 
-    translations = TranslatedFields(
-        name = models.CharField(_('name'), max_length=200),
-        slug = models.SlugField(_('slug'), max_length=200, unique=True),
-        category = models.ForeignKey(Category,
-                                    related_name='products',
-                                    verbose_name=_('category'),
-                                    on_delete=models.CASCADE),
-        image = models.ImageField(_('image'),
-                                upload_to='products/%Y/%m/%d',
-                                blank=True),
-        description = models.TextField(_('description'), blank=True),
-        price = models.DecimalField(_('price'), max_digits=10,
-                                    decimal_places=2),
-        available = models.BooleanField(_('available'), default=True),
-        created = models.DateTimeField(_('created'), auto_now_add=True),
-        updated = models.DateTimeField(_('updated'), auto_now=True),
-    )
+    name = models.CharField(_('name'), max_length=200)
+    slug = models.SlugField(_('slug'), max_length=200, unique=True)
+    description = models.TextField(_('description'), blank=True)
+    category = models.ForeignKey(Category,
+                                related_name='products',
+                                verbose_name=_('category'),
+                                on_delete=models.CASCADE)
+    image = models.ImageField(_('image'),
+                            upload_to='products/%Y/%m/%d',
+                            blank=True)
+   
+    price = models.DecimalField(_('price'), max_digits=10,
+                                decimal_places=2)
+    available = models.BooleanField(_('available'), default=True)
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    updated = models.DateTimeField(_('updated'), auto_now=True)
+
     class Meta:
         ordering = ['name']
         indexes = [

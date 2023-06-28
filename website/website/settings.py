@@ -184,7 +184,6 @@ PARLER_LANGUAGES = {
     'default': {
         'fallback': 'en',
         'hide_untranslated': False,
-        'fallbacks': ['en', 'fr', 'de'],
     },
 }
 
