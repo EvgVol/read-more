@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 13:55+0400\n"
-"PO-Revision-Date: 2023-06-27 14:06+0400\n"
+"POT-Creation-Date: 2023-06-29 13:24+0400\n"
+"PO-Revision-Date: 2023-06-29 13:32+0400\n"
 "Last-Translator: Главный разработчик <admin@example.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,28 +19,134 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Translated-Using: django-rosetta 0.9.8\n"
 
-#: .\templates\includes\header.html:415
+#: .\courses\apps.py:8 .\courses\models.py:56
+msgid "courses"
+msgstr "курсы"
+
+#: .\courses\models.py:18 .\courses\models.py:47 .\courses\models.py:74
+#: .\courses\models.py:122
+msgid "title"
+msgstr "заголовок"
+
+#: .\courses\models.py:19
+msgid "Enter the subject title"
+msgstr "Введите название предмета"
+
+#: .\courses\models.py:20 .\courses\models.py:49
+msgid "slug"
+msgstr "slug"
+
+#: .\courses\models.py:24 .\courses\models.py:44
+msgid "subject"
+msgstr "предмет"
+
+#: .\courses\models.py:25
+msgid "subjects"
+msgstr "предметы"
+
+#: .\courses\models.py:40 .\courses\models.py:119
+msgid "owner"
+msgstr "владелец"
+
+#: .\courses\models.py:48
+msgid "Enter the course title"
+msgstr "Введите название курса"
+
+#: .\courses\models.py:50
+msgid "overview"
+msgstr "общее представление"
+
+#: .\courses\models.py:51 .\courses\models.py:124
+msgid "created"
+msgstr "создан"
+
+#: .\courses\models.py:55 .\courses\models.py:71
+msgid "course"
+msgstr "курс"
+
+#: .\courses\models.py:75
+msgid "Enter the module title"
+msgstr "Введите название модуля"
+
+#: .\courses\models.py:76
+#| msgid "Description"
+msgid "description"
+msgstr "описание"
+
+#: .\courses\models.py:78
+msgid "Enter a description of the module"
+msgstr "Введите описание модуля"
+
+#: .\courses\models.py:84 .\courses\models.py:95
+msgid "module"
+msgstr "модуль"
+
+#: .\courses\models.py:85
+msgid "modules"
+msgstr "модули"
+
+#: .\courses\models.py:99
+msgid "content type"
+msgstr "тип контента"
+
+#: .\courses\models.py:105
+msgid "object id"
+msgstr "идентификатор объекта"
+
+#: .\courses\models.py:111 .\courses\models.py:137
+msgid "content"
+msgstr "материал"
+
+#: .\courses\models.py:112
+msgid "contents"
+msgstr "материалы"
+
+#: .\courses\models.py:123
+msgid "Enter a title"
+msgstr "Введите название"
+
+#: .\courses\models.py:125
+msgid "updated"
+msgstr "изменен"
+
+#: .\courses\models.py:143
+#| msgid "Profile"
+msgid "file"
+msgstr "профиль"
+
+#: .\courses\models.py:149
+msgid "image"
+msgstr "изображение"
+
+#: .\courses\models.py:155
+msgid "url"
+msgstr "URL-адрес"
+
+#: .\templates\includes\country_selector_modal.html:10
+msgid "Choose language"
+msgstr "Выберите язык"
+
+#: .\templates\includes\header.html:434
 msgid "Profile"
 msgstr "Профиль"
 
-#: .\templates\includes\header.html:418
-#| msgid "email"
+#: .\templates\includes\header.html:437
 msgid "E-mail"
 msgstr "Почта"
 
-#: .\templates\includes\header.html:425
+#: .\templates\includes\header.html:444
 msgid "Admin zone"
 msgstr "Админ-зона"
 
-#: .\templates\includes\header.html:428
+#: .\templates\includes\header.html:447
 msgid "Translator"
 msgstr "Переводчик"
 
-#: .\templates\includes\header.html:432
+#: .\templates\includes\header.html:451
 msgid "Settings"
 msgstr "Настройки"
 
-#: .\templates\includes\header.html:440
+#: .\templates\includes\header.html:459
 msgid "Log Out"
 msgstr "Выйти"
 
@@ -114,15 +220,15 @@ msgstr "Добавить в корзину"
 msgid "Add to Favorites"
 msgstr "Добавить в избранное"
 
-#: .\website\settings.py:150
+#: .\website\settings.py:151
 msgid "English"
 msgstr "Английский"
 
-#: .\website\settings.py:151
+#: .\website\settings.py:152
 msgid "Russian"
 msgstr "Русский"
 
-#: .\website\settings.py:152
+#: .\website\settings.py:153
 msgid "Ukrainian"
 msgstr "Украинский"
 
@@ -149,3 +255,7 @@ msgstr "купоны/"
 #: .\website\urls.py:26
 msgid "orders/"
 msgstr "заказы/"
+
+#: .\website\urls.py:27
+msgid "courses/"
+msgstr "курсы/"
