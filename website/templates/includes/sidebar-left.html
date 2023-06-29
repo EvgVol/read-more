@@ -35,7 +35,7 @@
                         class="side-menu__label">Магазин</span></a>
             </li>
             <li class="slide">
-                <a class="side-menu__item {% if request.path == '/education/' %}active{% endif %}" data-bs-toggle="slide" href="#"><span
+                <a class="side-menu__item {% if request.path == '/courses/' %}active{% endif %}" data-bs-toggle="slide" href="{% url 'courses:manage_course_list' %}"><span
                         class="side-menu__label">Обучение</span></a>
             </li>
             

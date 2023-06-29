@@ -1,0 +1,87 @@
+{% extends 'includes/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+  ExView | {% trans 'Courses' %}
+{% endblock %}
+{% block content %}
+  <div class="main-content app-content mt-0">
+    <div class="side-app">
+      <div class="main-container container-fluid">
+        <!-- Header page -->
+        <div class="page-header">
+          <h1 class="page-title">{% trans 'Courses' %}</h1>
+          <div>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">ExView</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                {% trans 'Courses' %}
+              </li>
+            </ol>
+          </div>
+        </div>
+        <!-- /Header page -->
+
+        <!-- Cart courses -->
+        <div class="row">
+          <div class="pricing-tabs">
+            <div class="breadcrumb">
+              <a href="{% url 'courses:course_create' %}" class="btn btn-info d-inline-block"><i class="fa fa-plus-square me-2"></i>Добавить пост</a>
+            </div>
+            <div class="pri-tabs-heading text-center">
+              <ul class="nav nav-price mt-5">
+                <li>
+                  <a data-bs-toggle="tab" href="#all">{% trans "All courses" %}</a>
+                </li>
+                <li>
+                  <a class="active show" data-bs-toggle="tab" href="#junior">{% trans "Junior" %}</a>
+                </li>
+                <li>
+                  <a class="show" data-bs-toggle="tab" href="#midle">{% trans "Middle" %}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content">
+              <div class="tab-pane" id="all">
+                <div class="row d-flex align-items-center justify-content-center">
+                  {% for course in object_list %}
+                  <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
+                    <div class="card p-3 pricing-card">
+                      {% include 'courses/manage/course/includes/cart-courses.html' %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="tab-pane pb-0 active show" id="junior">
+                <div class="row d-flex align-items-center justify-content-center">
+                  {% for course in object_list %}
+                  <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
+                    <div class="card p-3 border-primary pricing-card advanced">
+                      {% include 'courses/manage/course/includes/cart-courses.html' %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="tab-pane" id="midle">
+                <div class="row d-flex align-items-center justify-content-center">
+                  {% for course in object_list %}
+                  <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
+                    <div class="card p-3 pricing-card">
+                      {% include 'courses/manage/course/includes/cart-courses.html' %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Cart courses -->
+      </div>
+    </div>
+  </div>
+{% endblock %}
