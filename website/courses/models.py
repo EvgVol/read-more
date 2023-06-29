@@ -1,4 +1,3 @@
-from typing import Iterable, Optional
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
@@ -7,12 +6,14 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 from pytils.translit import slugify
 
+from .fields import OrderField
+
 
 User = get_user_model()
 
 
 class Subject(models.Model):
-    """Модель предмета."""
+    """A model representing a subject."""
 
     title = models.CharField(_("title"), max_length=200,
                              help_text=_('Enter the subject title'))
@@ -33,7 +34,7 @@ class Subject(models.Model):
 
 
 class Course (models.Model):
-    """Модель курса."""
+    """A model representing a course."""
 
     owner = models.ForeignKey(User,
                               verbose_name=_("owner"),
@@ -64,7 +65,7 @@ class Course (models.Model):
 
 
 class Module (models.Model):
-    """Модель модуля."""
+    """A model representing a module."""
 
     course = models.ForeignKey(Course,
                                verbose_name=_("course"),
@@ -76,18 +77,19 @@ class Module (models.Model):
                                    help_text=_(
                                        'Enter a description of the module'
                                    ))
+    order = OrderField(blank=True, for_fields=['course'])
 
     class Meta:
-        ordering = ['-title']
+        ordering = ['order']
         verbose_name = _('module')
         verbose_name_plural = _('modules')
 
     def __str__(self):
-        return self.title
+        return f'{self.order}. {self.title}'
 
 
 class Content(models.Model):
-    """Модель контентента."""
+    """A model representing the content of a module."""
 
     module = models.ForeignKey(Module,
                                verbose_name=_('module'),
@@ -102,14 +104,16 @@ class Content(models.Model):
                                                                      'file')})
     object_id = models.PositiveIntegerField(_('object id'))
     item = GenericForeignKey('content_type', 'object_id')
+    order = OrderField(blank=True, for_fields=['module'])
 
     class Meta:
+        ordering = ['order']
         verbose_name = _('content')
         verbose_name_plural = _('contents')
 
 
 class ItemBase(models.Model):
-    """Абстрактная модель содержание контента."""
+    """An abstract base class for content items."""
 
     owner = models.ForeignKey(User,
                               verbose_name=_('owner'),
@@ -128,16 +132,24 @@ class ItemBase(models.Model):
 
 
 class Text(ItemBase):
+    """A model representing text content."""
+
     content = models.TextField(_('content'))
 
 
 class File(ItemBase):
+    """A model representing text content."""
+
     file = models.FileField(_('file'), upload_to='files')
 
 
 class Image(ItemBase):
+    """A model representing text content."""
+
     image = models.FileField(_('image'), upload_to='images')
 
 
 class Video(ItemBase):
+    """A model representing text content."""
+
     url = models.URLField(_('url'))
