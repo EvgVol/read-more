@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'coupons.apps.CouponsConfig',
+    'courses.apps.CoursesConfig',
 
     'sorl.thumbnail', #IMAGE #https://sorl-thumbnail.readthedocs.io/en/latest/
     'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/
