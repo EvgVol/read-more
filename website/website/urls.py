@@ -24,6 +24,7 @@ urlpatterns = i18n_patterns(
     path(_('cart/'), include('cart.urls', namespace='cart')),
     path(_('coupons/'), include('coupons.urls', namespace='coupons')),
     path(_('orders/'), include('orders.urls', namespace='orders')),
+    path(_('courses/'), include('courses.urls', namespace='courses')),
     path('rosetta/', include('rosetta.urls')),
     path('__debug__/', include('debug_toolbar.urls', namespace='debug')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},

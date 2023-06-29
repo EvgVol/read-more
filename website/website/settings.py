@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django_extensions', #SSL #https://django-extensions.readthedocs.io/en/latest/
     'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
     'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
-    'parler', #LOCALIZATION #https://django-parler.readthedocs.io/en/latest/
 ]
 
 MIDDLEWARE = [
