@@ -36,8 +36,8 @@ class OwnerCourseMixin(OwnerMixin,
     requires users to be logged in, and enforces the `view_course` permission.
     """
     model = Course
-    fields = ['subjects', 'title', 'slug', 'overview']
-    success_url = reverse_lazy('manage_course_list')
+    fields = ['subject', 'title', 'overview']
+    success_url = reverse_lazy('courses:manage_course_list')
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):

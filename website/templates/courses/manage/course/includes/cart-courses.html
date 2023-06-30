@@ -1,35 +1,43 @@
 {% load i18n %}
+
 <div class="card-header d-block text-justified pt-2">
-<p class="fs-18 fw-semibold mb-1">Basic</p>
-<p class="text-justify fw-semibold mb-1">
+  <div class="d-flex align-items-center justify-content-between">
+    <p class="fs-18 fw-semibold mb-1 me-3">Basic</p>
+    <div>
+      <a href="{% url 'courses:course_edit' course.id %}" class="me-2"><i class="fa fa-edit fs-18 text-dark"></i></a>
+      <a href="{% url 'courses:course_delete' course.id %}" class="me-0"><i class="fa fa-trash fs-18 text-dark"></i></a>
+    </div>
+  </div>
+  <p class="text-justify fw-semibold mb-1">
     <span class="fs-30 me-2">{{ course.title }}</span>
-</p>
-<p class="fs-13 mb-1">{{ course.overview }}</p>
-<p class="fs-13 mb-1 text-dark">Billed monthly on regular basis!</p>
-</div>
-<div class="card-body pt-2">
-<ul class="text-justify pricing-body ps-0">
-    <li>
-    <i class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>2 Free</strong> Domain Name
-    </li>
-    <li>
-    <i class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i> <strong>3</strong> One-Click Apps
-    </li>
-    <li class="text-muted">
-    <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>1</strong> Databases
-    </li>
-    <li class="text-muted">
-    <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>Unlimited</strong> Cloud Storage
-    </li>
-    <li class="text-muted">
-    <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>Money</strong> BackGuarantee
-    </li>
-    <li class="text-muted&quot;">
-    <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>24/7</strong> support
-    </li>
-</ul>
-</div>
-<div class="card-footer text-center border-top-0 pt-1">
-<button class="btn btn-lg btn-outline-dark btn-block"><span class="ms-4 me-4">{% trans "Select" %}</span></button>
+  </p>
+  <p class="fs-13 mb-1">{{ course.overview }}</p>
+  <p class="fs-13 mb-1 text-dark">Billed monthly on regular basis!</p>
+  
 </div>
 
+<div class="card-body pt-2">
+  <ul class="text-justify pricing-body ps-0">
+    <li>
+      <i class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>2 Free</strong> Domain Name
+    </li>
+    <li>
+      <i class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i> <strong>3</strong> One-Click Apps
+    </li>
+    <li class="text-muted">
+      <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>1</strong> Databases
+    </li>
+    <li class="text-muted">
+      <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>Unlimited</strong> Cloud Storage
+    </li>
+    <li class="text-muted">
+      <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>Money</strong> BackGuarantee
+    </li>
+    <li class="text-muted&quot;">
+      <i class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>24/7</strong> support
+    </li>
+  </ul>
+</div>
+<div class="card-footer text-center border-top-0 pt-1">
+  <button class="btn btn-lg btn-outline-dark btn-block"><span class="ms-4 me-4">{% trans 'Select' %}</span></button>
+</div>
