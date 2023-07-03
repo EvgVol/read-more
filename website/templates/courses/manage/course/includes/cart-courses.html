@@ -4,6 +4,7 @@
   <div class="d-flex align-items-center justify-content-between">
     <p class="fs-18 fw-semibold mb-1 me-3">Basic</p>
     <div>
+      <a href="{% url 'courses:module_update' course.id %}" class="me-2"><i class="fa fa-cubes fs-18 text-dark"></i></a>
       <a href="{% url 'courses:course_edit' course.id %}" class="me-2"><i class="fa fa-edit fs-18 text-dark"></i></a>
       <a href="{% url 'courses:course_delete' course.id %}" class="me-0"><i class="fa fa-trash fs-18 text-dark"></i></a>
     </div>

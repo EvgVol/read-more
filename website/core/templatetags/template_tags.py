@@ -6,7 +6,7 @@ from orders.models import Order
 register = template.Library()
 
 
-@register.filter
+@register.filter(name='addclass')
 def addclass(field, css):
     return field.as_widget(attrs={'class': css})
 
