@@ -34,32 +34,33 @@
                         <div class="card-body">
                             <div class="list-group">
                                 {% for form in formset %}
-                                    <div class="list-group-item">
-                                        {% for field in form.visible_fields %}
-                                            {% if field.name == 'title' or field.name == 'description' %}
-                                            <div class="form-group row p-3 my-1" 
-                                                {% if field.field.required %} 
-                                                aria-required="true" 
-                                                {% else %} 
-                                                aria-required="false" 
-                                                {% endif %}>
-                                                
-                                                <label for="{{ field.id_for_label }}">
+                                <div class="list-group-item">
+                                    {% for field in form.visible_fields %}
+                                        {% if field.name == "DELETE" %}
+                                            <div class="form-check">
+                                            {{ field|addclass:'form-checkbox' }}
+                                            <label class="form-check-label" for="{{ field.id_for_label }}">
+                                              {{ field.label }}
+                                            </label>
+                                          </div>
+                                        {% else %}
+                                            <div class="form-group row p-3 my-1" {% if field.field.required %} aria-required="true" {% else %} aria-required="false" {% endif %}>
+                                            <label for="{{ field.id_for_label }}">
                                                 {{ field.label }}
-                                                    {% if field.field.required %}
-                                                    <span class="required text-danger">*</span>
-                                                    {% endif %}
-                                                </label>
-                                                {{ field|addclass:'input150 border-start-0 form-control ms-0' }}
-                                                {% if field.help_text %}
-                                                    <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
-                                                    {{ field.help_text|safe }}
-                                                    </small>
+                                                {% if field.field.required %}
+                                                <span class="required text-danger">*</span>
                                                 {% endif %}
-                                            </div>
+                                            </label>
+                                            {{ field|addclass:'input150 border-start-0 form-control ms-0' }}
+                                            {% if field.help_text %}
+                                                <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                                                {{ field.help_text|safe }}
+                                                </small>
                                             {% endif %}
-                                        {% endfor %}
-                                    </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                                 {% endfor %}
                             </div>
                         </div>
