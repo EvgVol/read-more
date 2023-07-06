@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateResponseMixin, View
 from .forms import ModuleFormSet
 from django.urls import reverse_lazy
 
-from .models import Module, Course
+from .models import Module, Course, Content
 
 
 class OwnerMixin:
@@ -127,6 +127,25 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
                                                  'updated'])
         return Form(*args, **kwargs)
 
+    def get(self, request, module_id, model_name, id=None):
+        form = self.get_form(self.model, instance=self.obj)
+        return self.render_to_response({'form': form, 'object': self.obj})
+
+    def post(self, request, module_id, model_name, id=None):
+        form = self.get_form(self.model,
+                             instance=self.obj,
+                             data=request.POST,
+                             files=request.FILES)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = request.user
+            obj.save()
+            if not id:
+                # new content
+                Content.objects.create(module=self.module, item=obj)
+                return redirect('module_content_list', self.module.id)
+            return self.render_to_response({'form': form, 'object': self.obj})
+
     # обработка GET и POST запросов
     def dispatch(self, request, module_id, model_name, id=None):
         # получаем объект модуля
@@ -143,3 +162,14 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
                                          owner=request.user)
         # вызываем метод dispatch родительского класса и передаем аргументы
         return super().dispatch(request, module_id, model_name, id)
+
+
+class ContentDeleteView(View):
+    def post(self, request, id):
+        content = get_object_or_404(Content,
+                                    id=id,
+                                    module__course__owner=request.user)
+        module = content.module
+        content.item.delete()
+        content.delete()
+        return redirect('courses:module_content_list', module.id)

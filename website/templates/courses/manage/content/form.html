@@ -1,0 +1,73 @@
+{% extends 'includes/base.html' %}
+{% load i18n %}
+{% block title %}
+  ExView |
+  {% if object %}
+    {% trans 'Edit content' %}"{{ object.title }}"
+  {% else %}
+    {% trans 'Add a new content' %}
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class="main-content app-content mt-0">
+    <div class="side-app">
+      <!-- CONTAINER -->
+      <div class="main-container container-fluid">
+        <!-- PAGE-HEADER -->
+        <div class="page-header">
+          <h1 class="page-title">
+            {% if object %}
+              {% trans 'Edit content' %}"{{ object.title }}"
+            {% else %}
+              {% trans 'Add a new content' %}
+            {% endif %}
+          </h1>
+          <div>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="javascript:void(0)">ExView</a>
+              </li>
+              <li class="breadcrumb-item" aria-current="page">
+                {% trans 'Courses' %}
+              </li>
+              <li class="breadcrumb-item" aria-current="page">
+                {% trans 'Module' %}
+              </li>
+            </ol>
+          </div>
+        </div>
+        <!-- PAGE-HEADER END -->
+
+        <div class="row">
+          <div class="col-xl-8">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">
+                  {% if object %}
+                    {% trans 'Edit content' %}"{{ object.title }}"
+                  {% else %}
+                    {% trans 'Add a new content' %}
+                  {% endif %}
+                </div>
+              </div>
+
+              <form action="" method="POST" enctype="multipart/form-data">
+                <div class="card-body">
+                  {% include 'includes/cycle_forms.html' %}
+                </div>
+                {% csrf_token %}
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">{% trans "Save content" %}</button>
+                  <a href="#" class="btn btn-default float-end">Отмена</a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-xl-4">
+          </div>
+        </div>
+      </div>
+      <!-- CONTAINER CLOSED -->
+    </div>
+  </div>
+{% endblock %}
