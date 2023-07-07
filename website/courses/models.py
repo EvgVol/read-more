@@ -16,8 +16,13 @@ User = get_user_model()
 class Subject(models.Model):
     """A model representing a subject."""
 
-    title = models.CharField(_("title"), max_length=200,
+    title = models.CharField(_("title"), max_length=50,
                              help_text=_('Enter the subject title'))
+    description = models.CharField(_("description"), max_length=50,
+                                   help_text=_(
+                                       'Enter a description of the subject'
+                                   ))
+    image = models.ImageField(_('image'), upload_to='courses/images/',)
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
 
     class Meta:
