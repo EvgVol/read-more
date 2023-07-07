@@ -1,0 +1,47 @@
+{% extends 'includes/base.html' %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+  ExView | {% trans "Education" %}
+{% endblock %}
+{% block content %}
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+
+        <!-- CONTAINER -->
+        <div class="main-container container-fluid">
+            <div class="container">
+
+                <!-- PAGE-HEADER -->
+                <div class="page-header">
+                    <h1 class="page-title">{% trans "Education" %}</h1>
+                    <div>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)"><i class="ion-plus"></i> Create a subject</a></li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- PAGE-HEADER END -->
+
+                <!-- ROW-1 OPEN-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row py-5">
+                            <div class="text-center">
+                                <h4 class="display-5 fw-semibold">{% trans "Our mission is to make Work Meaningful." %}</h4>
+                                <p class="">{% trans "“Challenge yourself; it’s the only path which leads to growth.” – Morgan Freeman" %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ROW-1 CLOSED -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <img src="{% static 'images/3DFqGLCSyF4.jpg' %}" alt="" class="br-5">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -9,7 +9,12 @@ from django.views.generic.base import TemplateResponseMixin, View
 from .forms import ModuleFormSet
 from django.urls import reverse_lazy
 
-from .models import Module, Course, Content
+from .models import Module, Course, Content, Subject
+
+
+class SubjectView(ListView):
+    model = Subject
+    template_name = 'courses/subject_list.html'
 
 
 class OwnerMixin:
@@ -78,12 +83,6 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
     template_name = 'courses/manage/module/formset.html'
     course = None
 
-    # отображает форму для редактирования курса и всех его дочерних модулей
-    def get(self, request, *args, **kwargs):
-        formset = self.get_formset()
-        return self.render_to_response({'course': self.course,
-                                        'formset': formset})
-
     # возвращает форму дочерних модулей курса
     def get_formset(self, data=None):
         return ModuleFormSet(instance=self.course,
@@ -96,14 +95,20 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
                                         owner=request.user)
         return super().dispatch(request, pk)
 
+    # отображает форму для редактирования курса и всех его дочерних модулей
+    def get(self, request, *args, **kwargs):
+        formset = self.get_formset()
+        return self.render_to_response({'course': self.course,
+                                        'formset': formset})
+
     # обрабатывает POST запрос и сохраняет изменения, если форма действительна
     def post(self, request, *args, **kwargs):
         formset = self.get_formset(data=request.POST)
         if formset.is_valid():
             formset.save()
             return redirect('courses:manage_course_list')
-        return self.render_to_response({'course': self.course,
-                                        'formset': formset})
+        else:
+            return self.render_to_response({'course': self.course, 'formset': formset})
 
 
 class ContentCreateUpdateView(TemplateResponseMixin, View):
@@ -127,25 +132,6 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
                                                  'updated'])
         return Form(*args, **kwargs)
 
-    def get(self, request, module_id, model_name, id=None):
-        form = self.get_form(self.model, instance=self.obj)
-        return self.render_to_response({'form': form, 'object': self.obj})
-
-    def post(self, request, module_id, model_name, id=None):
-        form = self.get_form(self.model,
-                             instance=self.obj,
-                             data=request.POST,
-                             files=request.FILES)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            obj.owner = request.user
-            obj.save()
-            if not id:
-                # new content
-                Content.objects.create(module=self.module, item=obj)
-                return redirect('module_content_list', self.module.id)
-            return self.render_to_response({'form': form, 'object': self.obj})
-
     # обработка GET и POST запросов
     def dispatch(self, request, module_id, model_name, id=None):
         # получаем объект модуля
@@ -163,6 +149,25 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
         # вызываем метод dispatch родительского класса и передаем аргументы
         return super().dispatch(request, module_id, model_name, id)
 
+    def get(self, request, module_id, model_name, id=None):
+        form = self.get_form(self.model, instance=self.obj)
+        return self.render_to_response({'form': form, 'object': self.obj})
+
+    def post(self, request, module_id, model_name, id=None):
+        form = self.get_form(self.model,
+                             instance=self.obj,
+                             data=request.POST,
+                             files=request.FILES)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.owner = request.user
+            obj.save()
+            if not id:
+                # new content
+                Content.objects.create(module=self.module, item=obj)
+                return redirect('courses:content_list', self.module.id)
+            return self.render_to_response({'form': form, 'object': self.obj})
+
 
 class ContentDeleteView(View):
     def post(self, request, id):
@@ -172,7 +177,7 @@ class ContentDeleteView(View):
         module = content.module
         content.item.delete()
         content.delete()
-        return redirect('courses:module_content_list', module.id)
+        return redirect('courses:content_list', module.id)
 
 
 class ModuleContentListView(TemplateResponseMixin, View):
