@@ -1,6 +1,7 @@
 {% extends 'includes/base.html' %}
 {% load i18n %}
 {% load static %}
+{% load thumbnail %}
 {% block title %}
   ExView | {% trans "Education" %}
 {% endblock %}
@@ -42,12 +43,14 @@
 
             <div class="row mt-5">
                 {% for subject in object_list %}
-                <div class="col-xl-4 col-md-12 ">
-                    <div class="card card-blog-overlay1 overflow-hidden">
-                        <img src="{% static 'images/3DFqGLCSyF4.jpg' %}" class="card-img-top" alt="img">
-                        <div class="card-body text-white">
+                <div class="col-xl-3 col-md-12 ">
+                    <div class="card card-blog overflow-hidden">
+                        {% thumbnail subject.image "500x333" crop="center" as im %}
+                        <a href="#"><img class="card-img-top" src="{{ im.url }}"></a>
+                        {% endthumbnail %}
+                        <div class="card-body">
                             <h3 class="card-title text-white">{{ subject.title }}</h3>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                            <p>{{ subject.description }}</p>
                         </div>
                     </div>
                 </div>
