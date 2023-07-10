@@ -23,13 +23,85 @@
           </div>
         </div>
         <!-- /Header page -->
-
+        <div class="row">
+          <div class="col">
+            <div class="card card-headpills">
+                <div class="card-header border-bottom">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#activepills">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#linkpills">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" data-bs-toggle="tab" href="#disablepills" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="activepills">
+                          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 card-body card-end">
+                            <div class="d-flex">
+                                <a href="javascript:void(0)" class="file-manager-image"><img src="{% static 'images/media/folder1.png' %}" alt="img"></a>
+                                <h3 class="ms-3 mt-5 fw-semibold">{{ object_list.count }} курсов </h3>
+                                <div class="ms-5 ms-auto">
+                                    <a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fe fe-more-vertical fs-18"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{% url 'courses:course_create' %}">Добавить курс</a></li>
+                                        <li><a href="javascript:void(0)">External Storage</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="progress progress-xs mb-3">
+                                <div class="progress-bar bg-warning" style="width: 60%;"></div>
+                            </div>
+                            <div class="">
+                                <div class="d-flex">
+                                    <div class="d-flex">
+                                        <div>
+                                            <h6 class="mt-2"><i class="fe fe-circle text-success fs-12"></i> Total Storage</h6>
+                                            <span class="text-muted">128 GB</span>
+                                        </div>
+                                    </div>
+                                    <div class="ms-auto my-auto">
+                                        <h6 class="mt-2"><i class="fe fe-circle text-danger fs-12"></i> Used</h6>
+                                        <span class="text-muted">100 GB</span>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div class="tab-pane" id="linkpills">
+                          <div class="row">
+                            <a href="{% url 'courses:course_create' %}" class="col-sm-12 col-md-6 col-lg-6 col-xl-2 ">
+                              <div class="card service">
+                                <div class="card-body">
+                                    <div class="item-box text-center">
+                                        <div class=" text-center  mb-4 text-primary"><i class="icon icon-plus"></i></div>
+                                        <div class="item-box-wrap">
+                                            <h5 class="mb-2">Добавить курс</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="tab-pane disabled" id="disablepills"></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
         <!-- Cart courses -->
         <div class="row">
           <div class="pricing-tabs">
-            <div class="breadcrumb">
-              <a href="{% url 'courses:course_create' %}" class="btn btn-info d-inline-block"><i class="fa fa-plus-square me-2"></i>Добавить курс</a>
-            </div>
+            
             <div class="pri-tabs-heading text-center">
               <ul class="nav nav-price mt-5">
                 <li>
@@ -59,7 +131,7 @@
                 <div class="row d-flex align-items-center justify-content-center">
                   {% for course in object_list %}
                   <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
-                    <div class="card p-3 border-primary pricing-card advanced">
+                    <div class="card p-3 pricing-card">
                       {% include 'courses/manage/course/includes/cart-courses.html' %}
                     </div>
                   </div>

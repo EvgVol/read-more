@@ -22,7 +22,7 @@ class Subject(models.Model):
                                    help_text=_(
                                        'Enter a description of the subject'
                                    ))
-    image = models.ImageField(_('image'), upload_to='courses/images/',)
+    image = models.ImageField(_('image'), upload_to='subjects/images/',)
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
 
     class Meta:
@@ -37,9 +37,6 @@ class Subject(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
-
-    # def get_absolute_url(self):
-    #     return reverse("courses:manage_course_list", args={self.slug})
 
 
 class Course(models.Model):
@@ -58,6 +55,7 @@ class Course(models.Model):
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
     overview = models.TextField(_("overview"))
     created = models.DateTimeField(_("created"), auto_now_add=True)
+    image = models.ImageField(_('image'), upload_to='courses/images/',)
 
     class Meta:
         ordering = ['-created']

@@ -68,7 +68,6 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
     template_name = 'courses/manage/course/list.html'
     permission_required = 'courses.view_course'
     
-
     def get_queryset(self):
         subject_name = self.kwargs['subject_name']
         return super().get_queryset().filter(subject__slug=subject_name)

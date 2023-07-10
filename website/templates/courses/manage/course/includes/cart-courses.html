@@ -1,20 +1,52 @@
 {% load i18n %}
 {% load static %}
-<div class="card-header d-block text-justified pt-2">
-  <div class="d-flex align-items-center justify-content-between">
-    <p class="fs-15 fw-semibold mb-1 me-3">Basic</p>
-    <div>
-      <a href="{% url 'courses:module_update' course.id %}" class="me-2"><i class="fa fa-cubes fs-18 text-dark"></i></a>
-      {% if course.modules.count > 0 %}
-      <a href="{% url 'courses:content_list' course.modules.first.id %}" class="me-2"><i class="fa fa-edit fs-18 text-dark"></i></a>
-      {% endif %}
-      <a href="{% url 'courses:course_edit' course.id %}" class="me-2"><i class="fa fa-edit fs-18 text-dark"></i></a>
-      <a href="{% url 'courses:course_delete' course.id %}" class="me-0"><i class="fa fa-trash fs-18 text-dark"></i></a>
+{% load thumbnail %}
+<div class="card">
+  <div class="product-grid6">
+    <div class="product-image6 p-5">
+        <ul class="icons">
+          {% if request.user.is_staff %}
+            <li><a href="{% url 'courses:module_update' course.id %}" class="btn btn-primary"> <i class="fe fe-sliders"></i> </a></li>
+            {% if course.modules.count > 0 %}
+            <li><a href="{% url 'courses:content_list' course.modules.first.id %}" class="btn btn-dark"><i  class="fe fe-server"></i></a></li>
+            {% endif %}
+            <li><a href="{% url 'courses:course_edit' course.id %}" class="btn btn-warning"><i class="fe fe-edit"></i></a></li>
+            <li><a href="{% url 'courses:course_delete' course.id %}" class="btn btn-danger"><i class="fe fe-trash-2"></i></a></li>
+            <li><a href="#" class="btn btn-success"><i class="fe fe-star"></i></a></li>
+            <li><a href="#" class="btn btn-info"><i class="fe fe-paperclip"></i></a></li>
+          {% else %}
+            <li><a href="#" class="btn btn-success"><i class="fe fe-star"></i></a></li>
+            <li><a href="#" class="btn btn-info"><i class="fe fe-paperclip"></i></a></li>
+          {% endif %}
+        </ul>
+        {% thumbnail course.image "200x120" crop="center" as im %}
+          <a href="#" >
+              <img class="img-fluid br-7 w-100" src="{% if course.image %}{{ im.url }}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img">
+          </a>
+        {% endthumbnail %}
     </div>
+    <div class="card-body pt-0">
+        <div class="product-content text-center">
+            <h2 class="title fw-bold fs-20"><a href="#">{{ course.title }}</a></h2>
+            <p class="fs-10 mb-1">{{ course.overview }}</p>
+            <div class="mb-2 text-warning mt-1">
+                <i class="fa fa-star text-warning"></i>
+                <i class="fa fa-star text-warning"></i>
+                <i class="fa fa-star text-warning"></i>
+                <i class="fa fa-star-half-o text-warning"></i>
+                <i class="fa fa-star-o text-warning"></i>
+            </div>
+            <div class="price">500 ₽<span class="ms-4">799 ₽</span>
+            </div>
+        </div>
+    </div>
+    {% comment %} <div class="card-footer text-center">
+        <form action="#" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="quantity" value="1" style="display:none;">
+          <button type="submit" class="btn btn-primary mb-1"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</button>
+        </form>
+        <a href="wishlist.html" class="btn btn-outline-danger mb-1"><i class="fe fe-heart mx-2 wishlist-icon"></i>{% trans "Add to Favorites" %}</a>
+    </div> {% endcomment %}
   </div>
-  <p class="text-justify fw-semibold mb-1">
-    <span class="fs-25 me-2">{{ course.title }}</span>
-  </p>
-  <p class="fs-10 mb-1">{{ course.overview }}</p>
-  <img class="card-img-top" src="{% static 'images/dali.jpg' %}">
 </div>
