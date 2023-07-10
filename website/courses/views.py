@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.base import TemplateResponseMixin, View
 from .forms import ModuleFormSet
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from .models import Module, Course, Content, Subject
 
@@ -44,9 +44,6 @@ class OwnerCourseMixin(OwnerMixin,
     fields = ['subject', 'title', 'overview']
     success_url = reverse_lazy('courses:manage_course_list')
 
-    # def get_queryset(self):
-    #     subject_name = self.kwargs['subject_name']
-    #     return super().get_queryset().filter(subject__slug=subject_name)
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
@@ -54,12 +51,21 @@ class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
 
     template_name = 'courses/manage/course/form.html'
 
+    def form_valid(self, form):
+        super().form_valid(form)
+        return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        subject_name = self.object.subject.slug  # Assuming you have a subject_name field in your model
+        return reverse('courses:manage_course_list', kwargs={'subject_name': subject_name})
+
 
 class ManageCourseListView(OwnerCourseMixin, ListView):
     """A view for displaying a list of courses."""
 
     template_name = 'courses/manage/course/list.html'
     permission_required = 'courses.view_course'
+    
 
     def get_queryset(self):
         subject_name = self.kwargs['subject_name']
