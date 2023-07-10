@@ -38,11 +38,11 @@ class Subject(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        return reverse("courses:manage_course_list", args={self.slug})
+    # def get_absolute_url(self):
+    #     return reverse("courses:manage_course_list", args={self.slug})
 
 
-class Course (models.Model):
+class Course(models.Model):
     """A model representing a course."""
 
     owner = models.ForeignKey(User,
@@ -73,7 +73,7 @@ class Course (models.Model):
         super().save(*args, **kwargs)
 
 
-class Module (models.Model):
+class Module(models.Model):
     """A model representing a module."""
 
     course = models.ForeignKey(Course,

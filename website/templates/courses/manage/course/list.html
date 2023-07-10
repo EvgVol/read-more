@@ -14,10 +14,10 @@
           <div>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="javascript:void(0)">ExView</a>
+                <a href="{% url 'core:home' %}">ExView</a>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
-                {% trans 'Courses' %}
+              <li class="breadcrumb-item" aria-current="page">
+                <a href="{% url 'courses:subject_list' %}">{% trans 'Education' %}</a>
               </li>
             </ol>
           </div>
@@ -28,7 +28,7 @@
         <div class="row">
           <div class="pricing-tabs">
             <div class="breadcrumb">
-              <a href="{% url 'courses:course_create' %}" class="btn btn-info d-inline-block"><i class="fa fa-plus-square me-2"></i>Добавить пост</a>
+              <a href="{% url 'courses:course_create' %}" class="btn btn-info d-inline-block"><i class="fa fa-plus-square me-2"></i>Добавить курс</a>
             </div>
             <div class="pri-tabs-heading text-center">
               <ul class="nav nav-price mt-5">
@@ -48,7 +48,6 @@
                 <div class="row d-flex align-items-center justify-content-center">
                   {% for course in object_list %}
                   <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
-                    
                     <div class="card p-3 pricing-card">
                       {% include 'courses/manage/course/includes/cart-courses.html' %}
                     </div>

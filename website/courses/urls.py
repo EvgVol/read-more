@@ -14,7 +14,7 @@ app_name = 'courses'
 urlpatterns = [
     # Курс
     path("", SubjectView.as_view(), name="subject_list"),
-    path("<str:subject_name>/", ManageCourseListView.as_view(), name="manage_course_list"),
+    path("courses/<subject_name>/", ManageCourseListView.as_view(), name="manage_course_list"),
     path("create/", CourseCreateView.as_view(), name="course_create"),
     path("<pk>/", include([
         path("edit/", CourseUpdateView.as_view(), name="course_edit"),
