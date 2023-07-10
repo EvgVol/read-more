@@ -42,6 +42,13 @@ class Subject(models.Model):
 class Course(models.Model):
     """A model representing a course."""
 
+    class Complexity(models.TextChoices):
+        """Choices for the complexity of the course"""
+
+        JUNIOR = 'JN', _('junior')
+        MIDDLE = 'MD', _('middle')
+        SENIOR = 'SN', _('senior')
+
     owner = models.ForeignKey(User,
                               verbose_name=_("owner"),
                               related_name='courses_created',
@@ -50,6 +57,10 @@ class Course(models.Model):
                                 verbose_name=_("subject"),
                                 related_name='courses',
                                 on_delete=models.CASCADE)
+    complexity = models.CharField(_('complexity'),
+                              max_length=2,
+                              choices=Complexity.choices,
+                              default=Complexity.JUNIOR)
     title = models.CharField(_("title"), max_length=200,
                              help_text=_('Enter the course title'))
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
