@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, get_list_or_404
 from django.views.generic.base import TemplateResponseMixin, View
 from .forms import ModuleFormSet
 from django.urls import reverse_lazy
@@ -43,6 +43,11 @@ class OwnerCourseMixin(OwnerMixin,
     model = Course
     fields = ['subject', 'title', 'overview']
     success_url = reverse_lazy('courses:manage_course_list')
+
+    def get_queryset(self):
+        subject_name = self.kwargs['subject_name']
+        queryset = super().get_queryset().filter(subject__slug=subject_name)
+        return queryset
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):

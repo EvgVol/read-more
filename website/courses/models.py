@@ -38,6 +38,9 @@ class Subject(models.Model):
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse("courses:manage_course_list", args={self.slug})
+
 
 class Course (models.Model):
     """A model representing a course."""
