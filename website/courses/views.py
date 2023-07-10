@@ -74,10 +74,12 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['all_courses'] = Course.objects.all()
-        context['junior_courses'] = Course.objects.filter(complexity=Course.Complexity.JUNIOR)
-        context['middle_courses'] = Course.objects.filter(complexity=Course.Complexity.MIDDLE)
-        context['senior_courses'] = Course.objects.filter(complexity=Course.Complexity.SENIOR)
+        subject_name = self.kwargs['subject_name']
+        subject = Subject.objects.get(slug=subject_name)
+        context['all_courses'] = Course.objects.filter(subject=subject)
+        context['junior_courses'] = Course.objects.filter(subject=subject, complexity=Course.Complexity.JUNIOR)
+        context['middle_courses'] = Course.objects.filter(subject=subject, complexity=Course.Complexity.MIDDLE)
+        context['senior_courses'] = Course.objects.filter(subject=subject, complexity=Course.Complexity.SENIOR)
         return context
 
 
