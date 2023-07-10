@@ -72,6 +72,14 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
         subject_name = self.kwargs['subject_name']
         return super().get_queryset().filter(subject__slug=subject_name)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all_courses'] = Course.objects.all()
+        context['junior_courses'] = Course.objects.filter(complexity=Course.Complexity.JUNIOR)
+        context['middle_courses'] = Course.objects.filter(complexity=Course.Complexity.MIDDLE)
+        context['senior_courses'] = Course.objects.filter(complexity=Course.Complexity.SENIOR)
+        return context
+
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
     """A view for creating a new course."""
