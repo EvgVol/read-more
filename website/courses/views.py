@@ -42,7 +42,11 @@ class OwnerCourseMixin(OwnerMixin,
 
     model = Course
     fields = ['subject', 'title', 'overview']
-    success_url = reverse_lazy('courses:manage_course_list')
+
+    def get_success_url(self):
+        subject_name = self.object.subject.slug
+        return reverse('courses:manage_course_list',
+                       kwargs={'subject_name': subject_name})
 
 
 
@@ -55,9 +59,7 @@ class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
         super().form_valid(form)
         return redirect(self.get_success_url())
 
-    def get_success_url(self):
-        subject_name = self.object.subject.slug  # Assuming you have a subject_name field in your model
-        return reverse('courses:manage_course_list', kwargs={'subject_name': subject_name})
+    
 
 
 class ManageCourseListView(OwnerCourseMixin, ListView):
@@ -91,6 +93,7 @@ class CourseDeleteView(OwnerCourseMixin, DeleteView):
     permission_required = 'courses.delete_course'
 
 
+
 class CourseModuleUpdateView(TemplateResponseMixin, View):
     """A view for updating a module the course."""
 
@@ -122,7 +125,8 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
             formset.save()
             return redirect('courses:manage_course_list')
         else:
-            return self.render_to_response({'course': self.course, 'formset': formset})
+            return self.render_to_response({'course': self.course,
+                                            'formset': formset})
 
 
 class ContentCreateUpdateView(TemplateResponseMixin, View):
