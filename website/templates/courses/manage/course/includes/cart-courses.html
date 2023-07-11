@@ -20,14 +20,14 @@
           {% endif %}
         </ul>
         {% thumbnail course.image "200x120" crop="center" as im %}
-          <a href="#" >
+          <a href="{{ course.get_absolute_url }}" >
               <img class="img-fluid br-7 w-100" src="{% if course.image %}{{ im.url }}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img">
           </a>
         {% endthumbnail %}
     </div>
     <div class="card-body pt-0">
         <div class="product-content text-center">
-            <h2 class="title fw-bold fs-20"><a href="#">{{ course.title }}</a></h2>
+            <h2 class="title fw-bold fs-20"><a href="{{ course.get_absolute_url }}">{{ course.title }}</a></h2>
             <p class="fs-10 mb-1">{{ course.overview }}</p>
             <div class="mb-2 text-warning mt-1">
                 <i class="fa fa-star text-warning"></i>

@@ -5,7 +5,7 @@ from .views import (ManageCourseListView, CourseCreateView,
                     CourseUpdateView, CourseDeleteView,
                     CourseModuleUpdateView, ContentCreateUpdateView,
                     ContentDeleteView, ModuleContentListView,
-                    SubjectView)
+                    SubjectView, CourseDetailView,)
 
 
 app_name = 'courses'
@@ -14,9 +14,10 @@ app_name = 'courses'
 urlpatterns = [
     # Курс
     path("", SubjectView.as_view(), name="subject_list"),
-    path("courses/<subject_name>/", ManageCourseListView.as_view(), name="manage_course_list"),
     path("create/", CourseCreateView.as_view(), name="course_create"),
-    path("<pk>/", include([
+    path("courses/<subject_name>/", ManageCourseListView.as_view(), name="manage_course_list"),
+    path("course/<int:pk>/", CourseDetailView.as_view(), name="course_detail"),
+    path("courses/<pk>/", include([
         path("edit/", CourseUpdateView.as_view(), name="course_edit"),
         path("delete/", CourseDeleteView.as_view(), name="course_delete"),
 

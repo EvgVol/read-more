@@ -34,7 +34,7 @@
   </head>
 
   <!-- PAGE -->
-  <body class="app ltr {% if request.path == '/' %}landing-page horizontal{% else %}sidebar-mini light-mode{% endif %}">
+  <body class="{{ body_class }}">
     <div class="{% if request.path == '/countdown/' %}login-img{% endif %}"> 
       <div id="global-loader">
         <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">

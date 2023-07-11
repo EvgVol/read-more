@@ -2,6 +2,7 @@ from django.apps import apps
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         PermissionRequiredMixin)
+from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404
@@ -9,11 +10,11 @@ from django.views.generic.base import TemplateResponseMixin, View
 from .forms import ModuleFormSet
 from django.urls import reverse_lazy, reverse
 
-from .models import Module, Course, Content, Subject
+from courses.models import subject, course, module, content
 
 
 class SubjectView(ListView):
-    model = Subject
+    model = subject.Subject
     template_name = 'courses/subject_list.html'
 
 
@@ -40,7 +41,7 @@ class OwnerCourseMixin(OwnerMixin,
                        PermissionRequiredMixin):
     """A mixin for views that deal with Course instances."""
 
-    model = Course
+    model = course.Course
     fields = ['subject', 'title', 'overview']
 
     def get_success_url(self):
@@ -60,8 +61,6 @@ class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
         return redirect(self.get_success_url())
 
     
-
-
 class ManageCourseListView(OwnerCourseMixin, ListView):
     """A view for displaying a list of courses."""
 
@@ -75,12 +74,12 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         subject_name = self.kwargs['subject_name']
-        subject = get_object_or_404(Subject, slug=subject_name)
+        subject_id = get_object_or_404(subject.Subject, slug=subject_name)
 
-        all_courses = Course.objects.filter(subject=subject)
-        junior_courses = Course.objects.filter(subject=subject, complexity=Course.Complexity.JUNIOR)
-        middle_courses = Course.objects.filter(subject=subject, complexity=Course.Complexity.MIDDLE)
-        senior_courses = Course.objects.filter(subject=subject, complexity=Course.Complexity.SENIOR)
+        all_courses = course.Course.objects.filter(subject=subject_id)
+        junior_courses = course.Course.objects.filter(subject=subject_id, complexity=course.Course.Complexity.JUNIOR)
+        middle_courses = course.Course.objects.filter(subject=subject_id, complexity=course.Course.Complexity.MIDDLE)
+        senior_courses = course.Course.objects.filter(subject=subject_id, complexity=course.Course.Complexity.SENIOR)
 
         total_count = all_courses.count()
         junior_count = junior_courses.count()
@@ -122,6 +121,12 @@ class CourseDeleteView(OwnerCourseMixin, DeleteView):
     permission_required = 'courses.delete_course'
 
 
+class CourseDetailView(DetailView):
+    """A view a detail course."""
+
+    model = course.Course
+    template_name = 'courses/manage/course/detail.html'
+
 
 class CourseModuleUpdateView(TemplateResponseMixin, View):
     """A view for updating a module the course."""
@@ -136,7 +141,7 @@ class CourseModuleUpdateView(TemplateResponseMixin, View):
 
     # получает объект курса для редактирования модулей
     def dispatch(self, request, pk):
-        self.course = get_object_or_404(Course,
+        self.course = get_object_or_404(course.Course,
                                         id=pk,
                                         owner=request.user)
         return super().dispatch(request, pk)
@@ -182,7 +187,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
     # обработка GET и POST запросов
     def dispatch(self, request, module_id, model_name, id=None):
         # получаем объект модуля
-        self.module = get_object_or_404(Module,
+        self.module = get_object_or_404(module.Module,
                                         id=module_id,
                                         course__owner=request.user)
         # получаем модель контента
@@ -211,27 +216,27 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
             obj.save()
             if not id:
                 # new content
-                Content.objects.create(module=self.module, item=obj)
+                content.Content.objects.create(module=self.module, item=obj)
                 return redirect('courses:content_list', self.module.id)
             return self.render_to_response({'form': form, 'object': self.obj})
 
 
 class ContentDeleteView(View):
     def post(self, request, id):
-        content = get_object_or_404(Content,
-                                    id=id,
-                                    module__course__owner=request.user)
-        module = content.module
-        content.item.delete()
-        content.delete()
+        content_id = get_object_or_404(content.Content,
+                                       id=id,
+                                       module__course__owner=request.user)
+        module = content_id.module
+        content_id.item.delete()
+        content_id.delete()
         return redirect('courses:content_list', module.id)
 
 
 class ModuleContentListView(TemplateResponseMixin, View):
     template_name = 'courses/manage/module/content_list.html'
 
-    def get(self, request, module_id):
-        module = get_object_or_404(Module,
-                                   id=module_id,
-                                   course__owner=request.user)
-        return self.render_to_response({'module': module})
+    def get(self, request, id):
+        module_id = get_object_or_404(module.Module,
+                                      id=id,
+                                      course__owner=request.user)
+        return self.render_to_response({'module': module_id})

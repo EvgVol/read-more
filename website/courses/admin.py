@@ -1,19 +1,19 @@
 from django.contrib import admin
 
-from .models import Subject, Course, Module
+from courses.models import subject, course, module
 
 
-@admin.register(Subject)
+@admin.register(subject.Subject)
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug']
     prepopulated_fields = {'slug': ('title',)}
 
 
 class ModuleInLine(admin.StackedInline):
-    model = Module
+    model = module.Module
 
 
-@admin.register(Course)
+@admin.register(course.Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['title', 'subject', 'created', 'complexity']
     list_filter = ['created', 'subject']
