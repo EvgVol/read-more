@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from pytils.translit import slugify
 
 from .subject import Subject
+from .technology import Technology
 
 
 User = get_user_model()
@@ -35,6 +36,9 @@ class Course(models.Model):
                                   default=Complexity.JUNIOR)
     description = models.TextField(_("description"), max_length=650,
                                    help_text=_('Enter a description'))
+    technologies = models.ManyToManyField(Technology,
+                                          verbose_name=_("technologies"),
+                                          related_name='courses')
     title = models.CharField(_("title"), max_length=200,
                              help_text=_('Enter the course title'))
     slug = models.SlugField(_("slug"), max_length=200, unique=True)

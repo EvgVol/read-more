@@ -209,60 +209,19 @@
                                             ready-to-use features that are completely easy-to-use for any user, even for
                                             a beginner.</p>
                                         <div class="row mt-7">
+                                            {% for technology in course.technologies.all %}
                                             <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-1 wow fadeInUp reveal revealleft"
+                                                <div class="card features main-features main-features-7 wow fadeInUp reveal revealleft"
                                                     data-wow-delay="0.1s">
                                                     <div class="d-flex align-items-center px-0">
-                                                        <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
-                                                    class="avatar-xl profile-user brround cover-image me-3"><h4 class="fs-20 fw-bold">Текст</h4>
+                                                        {% thumbnail technology.image "100x100" crop="center" upscale=True as im %}
+                                                            <img class="avatar-xl profile-user brround cover-image me-3" src="{{ im.url }}" />
+                                                        {% endthumbnail %}
+                                                        <h4 class="fs-20 fw-bold">{{ technology.name }}</h4>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-6 wow fadeInUp reveal revealleft"
-                                                    data-wow-delay="0.1s">
-                                                    <div class="d-flex align-items-center px-0">
-                                                        <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
-                                                    class="avatar-xl profile-user brround cover-image me-3"><h4 class="fs-20 fw-bold">Текст</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-11 wow fadeInUp reveal revealleft"
-                                                    data-wow-delay="0.1s">
-                                                    <div class="d-flex align-items-center px-0">
-                                                        <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
-                                                    class="avatar-xl profile-user brround cover-image me-3"><h4 class="fs-20 fw-bold">Текст</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-10 wow fadeInUp reveal revealleft"
-                                                    data-wow-delay="0.1s">
-                                                    <div class="d-flex align-items-center px-0">
-                                                        <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
-                                                    class="avatar-xl profile-user brround cover-image me-3"><h4 class="fs-20 fw-bold">Текст</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-9 wow fadeInUp reveal revealleft"
-                                                    data-wow-delay="0.1s">
-                                                    <div class="d-flex align-items-center px-0">
-                                                        <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
-                                                    class="avatar-xl profile-user brround cover-image me-3"><h4 class="fs-20 fw-bold">Текст</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-12 mb-4 wow fadeInUp reveal revealleft"
-                                                    data-wow-delay="0.1s">
-                                                    <div class="d-flex align-items-center px-0">
-                                                        <img src="{% static 'images/users/21.jpg' %}" alt="profile-user"
-                                                    class="avatar-xl profile-user brround cover-image me-3"><h4 class="fs-20 fw-bold">Текст</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>

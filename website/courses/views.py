@@ -1,3 +1,5 @@
+import random
+
 from django.apps import apps
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -75,6 +77,7 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
         context = super().get_context_data(**kwargs)
         subject_name = self.kwargs['subject_name']
         subject_id = get_object_or_404(subject.Subject, slug=subject_name)
+        
 
         all_courses = course.Course.objects.filter(subject=subject_id)
         junior_courses = course.Course.objects.filter(subject=subject_id, complexity=course.Course.Complexity.JUNIOR)
@@ -98,7 +101,6 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
         context['percent_junior'] = percent_junior
         context['percent_middle'] = percent_middle
         context['percent_senior'] = percent_senior
-
         return context
 
 
