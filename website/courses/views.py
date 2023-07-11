@@ -76,10 +76,30 @@ class ManageCourseListView(OwnerCourseMixin, ListView):
         context = super().get_context_data(**kwargs)
         subject_name = self.kwargs['subject_name']
         subject = get_object_or_404(Subject, slug=subject_name)
-        context['all_courses'] = Course.objects.filter(subject=subject)
-        context['junior_courses'] = Course.objects.filter(subject=subject, complexity=Course.Complexity.JUNIOR)
-        context['middle_courses'] = Course.objects.filter(subject=subject, complexity=Course.Complexity.MIDDLE)
-        context['senior_courses'] = Course.objects.filter(subject=subject, complexity=Course.Complexity.SENIOR)
+
+        all_courses = Course.objects.filter(subject=subject)
+        junior_courses = Course.objects.filter(subject=subject, complexity=Course.Complexity.JUNIOR)
+        middle_courses = Course.objects.filter(subject=subject, complexity=Course.Complexity.MIDDLE)
+        senior_courses = Course.objects.filter(subject=subject, complexity=Course.Complexity.SENIOR)
+
+        total_count = all_courses.count()
+        junior_count = junior_courses.count()
+        middle_count = middle_courses.count()
+        senior_count = senior_courses.count()
+
+        # Calculate percentages
+        percent_junior = (junior_count / total_count) * 100
+        percent_middle = (middle_count / total_count) * 100
+        percent_senior = (senior_count / total_count) * 100
+
+        context['all_courses'] = all_courses
+        context['junior_courses'] = junior_courses
+        context['middle_courses'] = middle_courses
+        context['senior_courses'] = senior_courses
+        context['percent_junior'] = percent_junior
+        context['percent_middle'] = percent_middle
+        context['percent_senior'] = percent_senior
+
         return context
 
 
