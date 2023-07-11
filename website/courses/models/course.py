@@ -33,17 +33,17 @@ class Course(models.Model):
                                   max_length=2,
                                   choices=Complexity.choices,
                                   default=Complexity.JUNIOR)
-    description = models.CharField(_("description"), max_length=600,
+    description = models.TextField(_("description"), max_length=650,
                                    help_text=_('Enter a description'))
     title = models.CharField(_("title"), max_length=200,
                              help_text=_('Enter the course title'))
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
-    overview = models.TextField(_("overview"), max_length=50)
+    overview = models.CharField(_("overview"), max_length=100)
     created = models.DateTimeField(_("created"), auto_now_add=True)
     image = models.ImageField(_('image'), upload_to='courses/images/',)
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['created']
         verbose_name = _('course')
         verbose_name_plural = _('courses')
 
