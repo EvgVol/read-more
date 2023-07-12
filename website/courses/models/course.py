@@ -23,6 +23,13 @@ class Course(models.Model):
         MIDDLE = 'MD', _('middle')
         SENIOR = 'SN', _('senior')
 
+    class Load(models.TextChoices):
+        LITE = 'LT', _('lite')
+        INTENSIVE = 'IS', _('intensive')
+        MODERATE = 'MR', _('moderate')
+        HIGH = 'HG', _('high')
+        HIGHEST = 'HH', _('highest')
+
     owner = models.ForeignKey(User,
                               verbose_name=_("owner"),
                               related_name='courses_created',
@@ -49,6 +56,14 @@ class Course(models.Model):
     overview = models.CharField(_("overview"), max_length=100)
     created = models.DateTimeField(_("created"), auto_now_add=True)
     image = models.ImageField(_('image'), upload_to='courses/images/',)
+    load = models.CharField(_('load'),
+                            max_length=2,
+                            choices=Load.choices,
+                            default=Load.LITE)
+    period = models.PositiveSmallIntegerField(
+        _("period"), help_text='Enter the training period'
+    )
+    count_projects = models.PositiveSmallIntegerField(_("count projects"))
 
     class Meta:
         ordering = ['created']
@@ -67,4 +82,4 @@ class Course(models.Model):
         return reverse("courses:course_detail", kwargs={"pk": self.pk})
 
     def get_complexity_full_name(self):
-        return dict(Course.Complexity.choices)[self.complexity]
+        return self.get_complexity_display()
