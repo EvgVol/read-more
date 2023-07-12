@@ -1,20 +1,31 @@
 from django.contrib import admin
 from django.db import models
-from django.forms import CheckboxSelectMultiple
+from django.forms import SelectMultiple
 from django.utils.html import format_html
 
-from courses.models import subject, course, module, technology
+from courses.models import subject, course, module, advantage, technology
+from .forms import CourseForm
 
-
-class TechnologyAdmin(admin.ModelAdmin):
+@admin.register(advantage.Advantage)
+class AdvantageAdmin(admin.ModelAdmin):
+    
+    list_display = ('image_tag','name',)
+    
     def image_tag(self, obj):
         return format_html('<img src="{}" width="50" height="50" />'.format(obj.image.url))
 
     image_tag.short_description = 'Image'
 
-    list_display = ('image_tag','name',)
 
-admin.site.register(technology.Technology, TechnologyAdmin)
+@admin.register(technology.Technology)
+class TechnologyAdmin(admin.ModelAdmin):
+    
+    list_display = ('image_tag','name',)
+    
+    def image_tag(self, obj):
+        return format_html('<img src="{}" width="50" height="50" />'.format(obj.url))
+
+    image_tag.short_description = 'Image'
 
 
 @admin.register(subject.Subject)
@@ -34,6 +45,5 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ['title', 'overview']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ModuleInLine]
-    formfield_overrides = {
-        models.ManyToManyField: {'widget': CheckboxSelectMultiple},
-    }
+    filter_horizontal = ('technologies', 'advantages')
+    form = CourseForm

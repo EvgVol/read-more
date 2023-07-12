@@ -110,15 +110,15 @@
                                         <span class="landing-title"></span>
                                         <h2 class="fw-semibold text-center">Основные характистики</h2>
                                         <div class="row mt-7">
-                                            {% for technology in course.technologies.all %}
+                                            {% for advantage in course.advantages.all %}
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="card features main-features main-features-7 wow fadeInUp reveal revealleft"
                                                     data-wow-delay="0.1s">
                                                     <div class="d-flex align-items-center px-0">
-                                                        {% thumbnail technology.image "100x100" crop="center" upscale=True as im %}
+                                                        {% thumbnail advantage.image "100x100" crop="center" upscale=True as im %}
                                                             <img class="avatar-xl profile-user brround cover-image me-3" src="{{ im.url }}" />
                                                         {% endthumbnail %}
-                                                        <h4 class="fs-20 fw-bold">{{ technology.name }}</h4>
+                                                        <h4 class="fs-20 fw-bold">{{ advantage.name }}</h4>
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@
                                         <h4 class="text-center fw-semibold">НУЖНО ЗНАТЬ</h4>
                                         <span class="landing-title"></span>
                                         <div class="text-center">
-                                            <h2 class="text-center fw-semibold">Главное о профессии
+                                            <h2 class="text-center fw-semibold">Чему вы научитесь
                                             </h2>
                                         </div>
                                         <div class="col-lg-12">

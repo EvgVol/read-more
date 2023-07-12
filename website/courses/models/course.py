@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from pytils.translit import slugify
 
 from .subject import Subject
+from .advantage import Advantage
 from .technology import Technology
 
 
@@ -36,6 +37,9 @@ class Course(models.Model):
                                   default=Complexity.JUNIOR)
     description = models.TextField(_("description"), max_length=650,
                                    help_text=_('Enter a description'))
+    advantages = models.ManyToManyField(Advantage,
+                                        verbose_name=_("advantages"),
+                                        related_name='courses')
     technologies = models.ManyToManyField(Technology,
                                           verbose_name=_("technologies"),
                                           related_name='courses')
