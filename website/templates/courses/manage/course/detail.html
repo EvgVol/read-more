@@ -213,50 +213,24 @@
                                             <span class="landing-title"></span>
                                             <div class="demo-screen-skin code-quality" id="dependencies">
                                                 <div class="text-center p-0">
-                                                    <h2 class="text-center fw-semibold text-white">Какие инструменты и технологии нужно знать</h2>
+                                                    <h2 class="text-center fw-semibold text-white">Какие инструменты и технологии будете использовать</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-lg-12 px-0">
                                                             <div class="feature-logos mt-5">
+                                                                {% for technology in course.technologies.all %}
                                                                 <div class="slide">
-                                                                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg">
-                                                                    <h5 class="mt-3 text-white">Bootstrap5</h5>
+                                                                    <img
+                                                                      src="{{ technology.url }}"
+                                                                      data-bs-toggle="tooltip"
+                                                                      data-bs-trigger="click"
+                                                                      title="{{ technology.hints }}"
+                                                                    >
+                                                                    <h5 
+                                                                      class="mt-3 text-white">
+                                                                      {{ technology.name }}
+                                                                    </h5>
                                                                 </div>
-                                                                <div class="slide">
-                                                                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg">
-                                                                    <h5 class="mt-3 text-white">HTML5</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg">
-                                                                    <h5 class="mt-3 text-white">PostgreSQL</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://www.vectorlogo.zone/logos/sqlite/sqlite-icon.svg">
-                                                                    <h5 class="mt-3 text-white">SQLite3</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg">
-                                                                    <h5 class="mt-3 text-white">GitHub</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg">
-                                                                    <h5 class="mt-3 text-white">Docker</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nginx/nginx-original.svg">
-                                                                    <h5 class="mt-3 text-white">Nginx</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://cdn.worldvectorlogo.com/logos/django.svg">
-                                                                    <h5 class="mt-3 text-white">Django</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://cdn.iconscout.com/icon/free/png-256/django-2-282855.png">
-                                                                    <h5 class="mt-3 text-white">Django Rest Framework</h5>
-                                                                </div>
-                                                                <div class="slide">
-                                                                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
-                                                                    <h5 class="mt-3 text-white">Python</h5>
-                                                                </div>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -269,547 +243,547 @@
                             <!-- ROW-4 CLOSED -->
 
                             <!-- ROW-5 OPEN -->
-                            <div class="section">
-                                <div class="container">
-                                    <div class="row">
-                                        <section class="sptb demo-screen-demo" id="faqs">
-                                            <div class="container">
-                                                <div class="row align-items-center">
-                                                    <h4 class="text-center fw-semibold">Highlights</h4>
-                                                    <span class="landing-title"></span>
-                                                    <h2 class="text-center fw-semibold">Template Highlights</h2>
-                                                    <div class="col-lg-12">
-                                                        <div class="row justify-content-center">
-                                                            <p class="col-lg-9 text-default sub-text mb-7">
-                                                                The Sash admin template is one of the modern dashboard
-                                                                templates.
-                                                                It is also a premium admin dashboard with high-end
-                                                                features, where users can easily customize
-                                                                or change their projects according to their choice.
-                                                                Please take a quick look at our template highlights.
-                                                            </p>
-                                                        </div>
-                                                        <div class="row" id="grid">
-                                                            <div class="col-lg-6">
-                                                                <div class="col-md-12 grid-item px-0">
-                                                                    <div
-                                                                        class="card card-collapsed bg-primary-transparent p-0 reveal">
-                                                                        <div class="card-header grid-link"
-                                                                            data-bs-toggle="card-collapse">
-                                                                            <a href="#"
-                                                                                class="card-options-collapse h5 fw-bold card-title mb-0 text-primary"><span
-                                                                                    class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From Vertical to Horizontal
-                                                                                Menu</a>
-                                                                        </div>
-                                                                        <div class="card-body pt-0">
-                                                                            <p>
-                                                                                The Sash – Bootstrap 5 Admin & Dashboard
-                                                                                Template is available in both vertical
-                                                                                and horizontal menus.
-                                                                                Both menus are managed by single assets.
-                                                                                Where users can easily switch from
-                                                                                vertical to horizontal menus.
-                                                                            </p>
-                                                                            <p class="mt-2 mb-3">
-                                                                                <span class="fw-bold">Note:
-                                                                                </span>Please Refer full Documentation
-                                                                                for more details.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-outline-primary tx-13">Click
-                                                                                here</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 grid-item  px-0">
-                                                                    <div
-                                                                        class="card card-collapsed bg-success-transparent p-0 reveal">
-                                                                        <div class="card-header grid-link"
-                                                                            data-bs-toggle="card-collapse">
-                                                                            <a href="#"
-                                                                                class="card-options-collapse  h5 fw-bold card-title mb-0 text-success"><span
-                                                                                    class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From LTR to RTL Version</a>
-                                                                        </div>
-                                                                        <div class="card-body pt-0">
-                                                                            <p class="mb-3">
-                                                                                The Sash – Bootstrap 5 Admin & Dashboard
-                                                                                Template is available in LRT & RTL
-                                                                                versions with single assets.
-                                                                                Using those single assets, it’s very
-                                                                                easy to switch from one version to
-                                                                                another version.
-                                                                            </p>
-                                                                            <p class="mt-2 mb-3">
-                                                                                <span class="fw-bold">Note:
-                                                                                </span>Please Refer full Documentation
-                                                                                for more details.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-outline-success tx-13">Click
-                                                                                here</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 grid-item  px-0">
-                                                                    <div
-                                                                        class="card card-collapsed bg-info-transparent p-0 reveal">
-                                                                        <div class="card-header grid-link"
-                                                                            data-bs-toggle="card-collapse">
-                                                                            <a href="#"
-                                                                                class="card-options-collapse  h5 fw-bold card-title mb-0 text-info"><span
-                                                                                    class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From One Color to Another Color
-                                                                                style</a>
-                                                                        </div>
-                                                                        <div class="card-body pt-0">
-                                                                            <p class="mb-3">
-                                                                                The Sash – Bootstrap 5 Admin & Dashboard
-                                                                                Template is available in different types
-                                                                                of color styles.
-                                                                                Where the users can change their
-                                                                                template completely with those color
-                                                                                styles.
-                                                                            </p>
-                                                                            <p class="mt-2 mb-3">
-                                                                                <span class="fw-bold">Note:
-                                                                                </span>Please Refer full Documentation
-                                                                                for more details.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-outline-info tx-13">Click
-                                                                                here</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <div class="col-md-12 grid-item  px-0">
-                                                                    <div
-                                                                        class="card card-collapsed bg-secondary-transparent p-0 reveal">
-                                                                        <div class="card-header grid-link"
-                                                                            data-bs-toggle="card-collapse">
-                                                                            <a href="#"
-                                                                                class="card-options-collapse  h5 fw-bold card-title mb-0 text-secondary"><span
-                                                                                    class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From Full Width to Boxed
-                                                                                Layout</a>
-                                                                        </div>
-                                                                        <div class="card-body pt-0">
-                                                                            <p>
-                                                                                The Sash – Bootstrap 5 Admin & Dashboard
-                                                                                Template is also available in two
-                                                                                different types of layouts
-                                                                                “Full Width” and “Boxed” Layouts. So
-                                                                                that user can switch their dashboard
-                                                                                from one layout to another
-                                                                                layout effortlessly.
-                                                                            </p>
-                                                                            <p class="mt-2 mb-3">
-                                                                                <span class="fw-bold">Note:
-                                                                                </span>Please Refer full Documentation
-                                                                                for more details.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-outline-secondary tx-13">Click
-                                                                                here</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 grid-item  px-0">
-                                                                    <div
-                                                                        class="card card-collapsed bg-warning-transparent p-0 reveal">
-                                                                        <div class="card-header grid-link"
-                                                                            data-bs-toggle="card-collapse">
-                                                                            <a href="#"
-                                                                                class="card-options-collapse  h5 fw-bold card-title mb-0 text-warning"><span
-                                                                                    class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Change
-                                                                                Easily Side Menu Styles</a>
-                                                                        </div>
-                                                                        <div class="card-body pt-0">
-                                                                            <p>
-                                                                                The Sash – Bootstrap 5 Admin & Dashboard
-                                                                                Template is also available in different
-                                                                                types of Side Menu Styles.
-                                                                                Where the users can change their Side
-                                                                                Menu styles by using single assets.
-                                                                            </p>
-                                                                            <p class="mt-2 mb-3">
-                                                                                <span class="fw-bold">Note:
-                                                                                </span>Please Refer full Documentation
-                                                                                for more details.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-outline-warning tx-13">Click
-                                                                                here</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-12 grid-item  px-0">
-                                                                    <div
-                                                                        class="card card-collapsed bg-danger-transparent p-0 reveal">
-                                                                        <div class="card-header grid-link"
-                                                                            data-bs-toggle="card-collapse">
-                                                                            <a href="#"
-                                                                                class="card-options-collapse  h5 fw-bold card-title mb-0 text-danger"><span
-                                                                                    class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>
-                                                                                Easily From Fixed to Scrollable
-                                                                                Layout</a>
-                                                                        </div>
-                                                                        <div class="card-body pt-0">
-                                                                            <p>
-                                                                                The Sash – Bootstrap 5 Admin & Dashboard
-                                                                                Template is also available in two
-                                                                                different types of layouts "Fixed
-                                                                                Layout" and "Scrollable Layout". Here
-                                                                                users
-                                                                                can switch their Template from one
-                                                                                layout to another layout easily.
-                                                                            </p>
-                                                                            <p class="mt-2 mb-3">
-                                                                                <span class="fw-bold">Note:
-                                                                                </span>Please Refer full Documentation
-                                                                                for more details.
-                                                                            </p>
-                                                                            <a href="javascript:void(0)"
-                                                                                class="btn btn-outline-danger tx-13">Click
-                                                                                here</a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </div>
-                                </div>
+                            <div class="bg-landing section bg-image-style">
+                              <div class="container">
+                                  <div class="row">
+                                      <h4 class="text-center fw-semibold">Choose a plan </h4>
+                                      <span class="landing-title"></span>
+                                      <h2 class="text-center fw-semibold">Explore the <span class="text-primary">Perfect
+                                              Plan</span> for your Learning Journey.</h2>
+                                      <div class="pricing-tabs">
+                                          <div class="pri-tabs-heading text-center">
+                                              <ul class="nav nav-price">
+                                                  <li><a data-bs-toggle="tab" href="#month">Monthly</a></li>
+                                                  <li><a class="active show" data-bs-toggle="tab"
+                                                          href="#annualyear">Annual</a></li>
+                                              </ul>
+                                          </div>
+                                          <div class="tab-content">
+                                              <div class="tab-pane pb-0 active show" id="annualyear">
+                                                  <div class="row d-flex align-items-center justify-content-center">
+                                                      <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
+                                                          <div class="card p-3 pricing-card reveal revealrotate">
+                                                              <div class="card-header d-block text-justified pt-2">
+                                                                  <p class="fs-18 fw-semibold mb-1">Basic</p>
+                                                                  <p class="text-justify fw-semibold mb-1"> <span
+                                                                          class="fs-30 me-2">$</span><span
+                                                                          class="fs-30 me-1">399</span><span
+                                                                          class="fs-25"><span
+                                                                              class="op-0-5 text-muted text-20">/</span>
+                                                                          year</span></p>
+                                                                  <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
+                                                                      consectetur adipisicing elit. Iure quos debitis
+                                                                      aliquam .</p>
+                                                                  <p class="fs-13 mb-1 text-secondary">Billed monthly
+                                                                      on regular basis!</p>
+                                                              </div>
+                                                              <div class="card-body pt-2">
+                                                                  <ul class="text-justify pricing-body ps-0">
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
+                                                                              2 Free</strong> Domain Name</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
+                                                                          <strong>3 </strong> One-Click Apps
+                                                                      </li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              1 </strong> Databases</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              Unlimited </strong> Cloud Storage</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              Money </strong> BackGuarantee</li>
+                                                                      <li class=text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              24/7</strong> support</li>
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="card-footer text-center border-top-0 pt-1">
+                                                                  <button
+                                                                      class="btn btn-lg btn-outline-secondary btn-block">
+                                                                      <span class="ms-4 me-4">Select</span>
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
+                                                          <div
+                                                              class="card p-3 border-primary pricing-card advanced reveal revealrotate">
+                                                              <div class="card-header d-block text-justified pt-2">
+                                                                  <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
+                                                                          class="tag bg-primary text-white float-end">Limited
+                                                                          Deal</span></p>
+                                                                  <p class="text-justify fw-semibold mb-1"> <span
+                                                                          class="fs-30 me-2">$</span><span
+                                                                          class="fs-30 me-1">1,299</span><span
+                                                                          class="fs-25"><span
+                                                                              class="op-0-5 text-muted text-20">/</span>
+                                                                          year</span></p>
+                                                                  <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
+                                                                      consectetur adipisicing elit. Iure quos debitis
+                                                                      aliquam .</p>
+                                                                  <p class="fs-13 mb-1 text-primary">Billed monthly on
+                                                                      regular basis!</p>
+                                                              </div>
+                                                              <div class="card-body pt-2">
+                                                                  <ul class="text-justify pricing-body ps-0">
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
+                                                                          <strong> 5 Free</strong> Domain Name
+                                                                      </li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
+                                                                          </strong> One-Click Apps</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              3 </strong> Databases</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              Unlimited </strong> Cloud Storage</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              Money </strong> BackGuarantee</li>
+                                                                      <li class="mb-6"><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              24/7</strong> support</li>
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="card-footer text-center border-top-0 pt-1">
+                                                                  <button
+                                                                      class="btn btn-lg btn-primary-gradient text-white btn-block">
+                                                                      <span class="ms-4 me-4">Select</span>
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
+                                                          <div class="card p-3 pricing-card reveal revealrotate">
+                                                              <div class="card-header d-block text-justified pt-2">
+                                                                  <p class="fs-18 fw-semibold mb-1">Regular</p>
+                                                                  <p class="text-justify fw-semibold mb-1"> <span
+                                                                          class="fs-30 me-2">$</span><span
+                                                                          class="fs-30 me-1">899</span><span
+                                                                          class="fs-25"><span
+                                                                              class="op-0-5 text-muted text-20">/</span>
+                                                                          year</span></p>
+                                                                  <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
+                                                                      consectetur adipisicing elit. Iure quos debitis
+                                                                      aliquam .</p>
+                                                                  <p class="fs-13 mb-1  text-danger">Billed monthly on
+                                                                      regular basis!</p>
+                                                              </div>
+                                                              <div class="card-body pt-2">
+                                                                  <ul class="text-justify pricing-body ps-0">
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                              1 Free</strong> Domain Name</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
+                                                                          </strong> One-Click Apps</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                              2 </strong> Databases</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                                              Unlimited </strong> Cloud Storage</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                                              Money </strong> BackGuarantee</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                                              24/7</strong> support</li>
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="card-footer text-center border-top-0 pt-1">
+                                                                  <button
+                                                                      class="btn btn-lg btn-outline-danger btn-block">
+                                                                      <span class="ms-4 me-4">Select</span>
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="tab-pane" id="month">
+                                                  <div class="row d-flex align-items-center justify-content-center">
+                                                      <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
+                                                          <div class="card p-3 pricing-card">
+                                                              <div class="card-header d-block text-justified pt-2">
+                                                                  <p class="fs-18 fw-semibold mb-1">Basic</p>
+                                                                  <p class="text-justify fw-semibold mb-1"> <span
+                                                                          class="fs-30 me-2">$</span><span
+                                                                          class="fs-30 me-1">39</span><span
+                                                                          class="fs-25"><span
+                                                                              class="op-0-5 text-muted text-20">/</span>
+                                                                          month</span></p>
+                                                                  <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
+                                                                      consectetur adipisicing elit. Iure quos debitis
+                                                                      aliquam .</p>
+                                                                  <p class="fs-13 mb-1 text-secondary">Billed monthly
+                                                                      on regular basis!</p>
+                                                              </div>
+                                                              <div class="card-body pt-2">
+                                                                  <ul class="text-justify pricing-body ps-0">
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
+                                                                              2 Free</strong> Domain Name</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
+                                                                          <strong>3 </strong> One-Click Apps
+                                                                      </li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              1 </strong> Databases</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              Unlimited </strong> Cloud Storage</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              Money </strong> BackGuarantee</li>
+                                                                      <li class=text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
+                                                                              24/7</strong> support</li>
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="card-footer text-center border-top-0 pt-1">
+                                                                  <button
+                                                                      class="btn btn-lg btn-outline-secondary btn-block">
+                                                                      <span class="ms-4 me-4">Select</span>
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
+                                                          <div class="card p-3 border-primary pricing-card advanced">
+                                                              <div class="card-header d-block text-justified pt-2">
+                                                                  <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
+                                                                          class="tag bg-primary text-white float-end">Limited
+                                                                          Deal</span></p>
+                                                                  <p class="text-justify fw-semibold mb-1"> <span
+                                                                          class="fs-30 me-2">$</span><span
+                                                                          class="fs-30 me-1">199</span><span
+                                                                          class="fs-25"><span
+                                                                              class="op-0-5 text-muted text-20">/</span>
+                                                                          month</span></p>
+                                                                  <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
+                                                                      consectetur adipisicing elit. Iure quos debitis
+                                                                      aliquam .</p>
+                                                                  <p class="fs-13 mb-1 text-primary">Billed monthly on
+                                                                      regular basis!</p>
+                                                              </div>
+                                                              <div class="card-body pt-2">
+                                                                  <ul class="text-justify pricing-body ps-0">
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
+                                                                          <strong> 5 Free</strong> Domain Name
+                                                                      </li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
+                                                                          </strong> One-Click Apps</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              3 </strong> Databases</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              Unlimited </strong> Cloud Storage</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              Money </strong> BackGuarantee</li>
+                                                                      <li class="mb-6"><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
+                                                                              24/7</strong> support</li>
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="card-footer text-center border-top-0 pt-1">
+                                                                  <button
+                                                                      class="btn btn-lg btn-primary-gradient text-white btn-block">
+                                                                      <span class="ms-4 me-4">Select</span>
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
+                                                          <div class="card p-3 pricing-card">
+                                                              <div class="card-header d-block text-justified pt-2">
+                                                                  <p class="fs-18 fw-semibold mb-1">Regular</p>
+                                                                  <p class="text-justify fw-semibold mb-1"> <span
+                                                                          class="fs-30 me-2">$</span><span
+                                                                          class="fs-30 me-1">69</span><span
+                                                                          class="fs-25"><span
+                                                                              class="op-0-5 text-muted text-20">/</span>
+                                                                          month</span></p>
+                                                                  <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
+                                                                      consectetur adipisicing elit. Iure quos debitis
+                                                                      aliquam .</p>
+                                                                  <p class="fs-13 mb-1  text-danger">Billed monthly on
+                                                                      regular basis!</p>
+                                                              </div>
+                                                              <div class="card-body pt-2">
+                                                                  <ul class="text-justify pricing-body ps-0">
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                              1 Free</strong> Domain Name</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
+                                                                          </strong> One-Click Apps</li>
+                                                                      <li><i
+                                                                              class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
+                                                                              2 </strong> Databases</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                                              Unlimited </strong> Cloud Storage</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                                              Money </strong> BackGuarantee</li>
+                                                                      <li class="text-muted"><i
+                                                                              class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
+                                                                              24/7</strong> support</li>
+                                                                  </ul>
+                                                              </div>
+                                                              <div class="card-footer text-center border-top-0 pt-1">
+                                                                  <button
+                                                                      class="btn btn-lg btn-outline-danger btn-block">
+                                                                      <span class="ms-4 me-4">Select</span>
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
                             <!-- ROW-5 CLOSED -->
 
                             <!-- ROW-6 OPEN -->
-                            <div class="bg-landing section bg-image-style">
-                                <div class="container">
-                                    <div class="row">
-                                        <h4 class="text-center fw-semibold">Choose a plan </h4>
-                                        <span class="landing-title"></span>
-                                        <h2 class="text-center fw-semibold">Find the <span class="text-primary">Perfect
-                                                Plan</span> for your Business.</h2>
-                                        <div class="pricing-tabs">
-                                            <div class="pri-tabs-heading text-center">
-                                                <ul class="nav nav-price">
-                                                    <li><a data-bs-toggle="tab" href="#month">Monthly</a></li>
-                                                    <li><a class="active show" data-bs-toggle="tab"
-                                                            href="#annualyear">Annual</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="tab-content">
-                                                <div class="tab-pane pb-0 active show" id="annualyear">
-                                                    <div class="row d-flex align-items-center justify-content-center">
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card reveal revealrotate">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Basic</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">399</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            year</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-secondary">Billed monthly
-                                                                        on regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                                                2 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                                            <strong>3 </strong> One-Click Apps
-                                                                        </li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                1 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class=text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-secondary btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div
-                                                                class="card p-3 border-primary pricing-card advanced reveal revealrotate">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                                            class="tag bg-primary text-white float-end">Limited
-                                                                            Deal</span></p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">1,299</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            year</span></p>
-                                                                    <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-primary">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                            <strong> 5 Free</strong> Domain Name
-                                                                        </li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                3 </strong> Databases</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="mb-6"><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-primary-gradient text-white btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card reveal revealrotate">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Regular</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">899</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            year</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1  text-danger">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                1 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                2 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-danger btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane" id="month">
-                                                    <div class="row d-flex align-items-center justify-content-center">
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Basic</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">39</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-secondary">Billed monthly
-                                                                        on regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                                                2 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                                            <strong>3 </strong> One-Click Apps
-                                                                        </li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                1 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class=text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-secondary btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 border-primary pricing-card advanced">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                                            class="tag bg-primary text-white float-end">Limited
-                                                                            Deal</span></p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">199</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-primary">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                            <strong> 5 Free</strong> Domain Name
-                                                                        </li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                3 </strong> Databases</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="mb-6"><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-primary-gradient text-white btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Regular</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">69</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1  text-danger">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                1 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                2 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-danger btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="section">
+                              <div class="container">
+                                  <div class="row">
+                                      <section class="sptb demo-screen-demo" id="faqs">
+                                          <div class="container">
+                                              <div class="row align-items-center">
+                                                  <h4 class="text-center fw-semibold">Highlights</h4>
+                                                  <span class="landing-title"></span>
+                                                  <h2 class="text-center fw-semibold">Template Highlights</h2>
+                                                  <div class="col-lg-12">
+                                                      <div class="row justify-content-center">
+                                                          <p class="col-lg-9 text-default sub-text mb-7">
+                                                              The Sash admin template is one of the modern dashboard
+                                                              templates.
+                                                              It is also a premium admin dashboard with high-end
+                                                              features, where users can easily customize
+                                                              or change their projects according to their choice.
+                                                              Please take a quick look at our template highlights.
+                                                          </p>
+                                                      </div>
+                                                      <div class="row" id="grid">
+                                                          <div class="col-lg-6">
+                                                              <div class="col-md-12 grid-item px-0">
+                                                                  <div
+                                                                      class="card card-collapsed bg-primary-transparent p-0 reveal">
+                                                                      <div class="card-header grid-link"
+                                                                          data-bs-toggle="card-collapse">
+                                                                          <a href="#"
+                                                                              class="card-options-collapse h5 fw-bold card-title mb-0 text-primary"><span
+                                                                                  class="badge"><i
+                                                                                      class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
+                                                                              Easily From Vertical to Horizontal
+                                                                              Menu</a>
+                                                                      </div>
+                                                                      <div class="card-body pt-0">
+                                                                          <p>
+                                                                              The Sash – Bootstrap 5 Admin & Dashboard
+                                                                              Template is available in both vertical
+                                                                              and horizontal menus.
+                                                                              Both menus are managed by single assets.
+                                                                              Where users can easily switch from
+                                                                              vertical to horizontal menus.
+                                                                          </p>
+                                                                          <p class="mt-2 mb-3">
+                                                                              <span class="fw-bold">Note:
+                                                                              </span>Please Refer full Documentation
+                                                                              for more details.
+                                                                          </p>
+                                                                          <a href="javascript:void(0)"
+                                                                              class="btn btn-outline-primary tx-13">Click
+                                                                              here</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-md-12 grid-item  px-0">
+                                                                  <div
+                                                                      class="card card-collapsed bg-success-transparent p-0 reveal">
+                                                                      <div class="card-header grid-link"
+                                                                          data-bs-toggle="card-collapse">
+                                                                          <a href="#"
+                                                                              class="card-options-collapse  h5 fw-bold card-title mb-0 text-success"><span
+                                                                                  class="badge"><i
+                                                                                      class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
+                                                                              Easily From LTR to RTL Version</a>
+                                                                      </div>
+                                                                      <div class="card-body pt-0">
+                                                                          <p class="mb-3">
+                                                                              The Sash – Bootstrap 5 Admin & Dashboard
+                                                                              Template is available in LRT & RTL
+                                                                              versions with single assets.
+                                                                              Using those single assets, it’s very
+                                                                              easy to switch from one version to
+                                                                              another version.
+                                                                          </p>
+                                                                          <p class="mt-2 mb-3">
+                                                                              <span class="fw-bold">Note:
+                                                                              </span>Please Refer full Documentation
+                                                                              for more details.
+                                                                          </p>
+                                                                          <a href="javascript:void(0)"
+                                                                              class="btn btn-outline-success tx-13">Click
+                                                                              here</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-md-12 grid-item  px-0">
+                                                                  <div
+                                                                      class="card card-collapsed bg-info-transparent p-0 reveal">
+                                                                      <div class="card-header grid-link"
+                                                                          data-bs-toggle="card-collapse">
+                                                                          <a href="#"
+                                                                              class="card-options-collapse  h5 fw-bold card-title mb-0 text-info"><span
+                                                                                  class="badge"><i
+                                                                                      class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
+                                                                              Easily From One Color to Another Color
+                                                                              style</a>
+                                                                      </div>
+                                                                      <div class="card-body pt-0">
+                                                                          <p class="mb-3">
+                                                                              The Sash – Bootstrap 5 Admin & Dashboard
+                                                                              Template is available in different types
+                                                                              of color styles.
+                                                                              Where the users can change their
+                                                                              template completely with those color
+                                                                              styles.
+                                                                          </p>
+                                                                          <p class="mt-2 mb-3">
+                                                                              <span class="fw-bold">Note:
+                                                                              </span>Please Refer full Documentation
+                                                                              for more details.
+                                                                          </p>
+                                                                          <a href="javascript:void(0)"
+                                                                              class="btn btn-outline-info tx-13">Click
+                                                                              here</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-lg-6">
+                                                              <div class="col-md-12 grid-item  px-0">
+                                                                  <div
+                                                                      class="card card-collapsed bg-secondary-transparent p-0 reveal">
+                                                                      <div class="card-header grid-link"
+                                                                          data-bs-toggle="card-collapse">
+                                                                          <a href="#"
+                                                                              class="card-options-collapse  h5 fw-bold card-title mb-0 text-secondary"><span
+                                                                                  class="badge"><i
+                                                                                      class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
+                                                                              Easily From Full Width to Boxed
+                                                                              Layout</a>
+                                                                      </div>
+                                                                      <div class="card-body pt-0">
+                                                                          <p>
+                                                                              The Sash – Bootstrap 5 Admin & Dashboard
+                                                                              Template is also available in two
+                                                                              different types of layouts
+                                                                              “Full Width” and “Boxed” Layouts. So
+                                                                              that user can switch their dashboard
+                                                                              from one layout to another
+                                                                              layout effortlessly.
+                                                                          </p>
+                                                                          <p class="mt-2 mb-3">
+                                                                              <span class="fw-bold">Note:
+                                                                              </span>Please Refer full Documentation
+                                                                              for more details.
+                                                                          </p>
+                                                                          <a href="javascript:void(0)"
+                                                                              class="btn btn-outline-secondary tx-13">Click
+                                                                              here</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-md-12 grid-item  px-0">
+                                                                  <div
+                                                                      class="card card-collapsed bg-warning-transparent p-0 reveal">
+                                                                      <div class="card-header grid-link"
+                                                                          data-bs-toggle="card-collapse">
+                                                                          <a href="#"
+                                                                              class="card-options-collapse  h5 fw-bold card-title mb-0 text-warning"><span
+                                                                                  class="badge"><i
+                                                                                      class="fe fe-chevron-up fs-15 me-3"></i></span>Change
+                                                                              Easily Side Menu Styles</a>
+                                                                      </div>
+                                                                      <div class="card-body pt-0">
+                                                                          <p>
+                                                                              The Sash – Bootstrap 5 Admin & Dashboard
+                                                                              Template is also available in different
+                                                                              types of Side Menu Styles.
+                                                                              Where the users can change their Side
+                                                                              Menu styles by using single assets.
+                                                                          </p>
+                                                                          <p class="mt-2 mb-3">
+                                                                              <span class="fw-bold">Note:
+                                                                              </span>Please Refer full Documentation
+                                                                              for more details.
+                                                                          </p>
+                                                                          <a href="javascript:void(0)"
+                                                                              class="btn btn-outline-warning tx-13">Click
+                                                                              here</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="col-md-12 grid-item  px-0">
+                                                                  <div
+                                                                      class="card card-collapsed bg-danger-transparent p-0 reveal">
+                                                                      <div class="card-header grid-link"
+                                                                          data-bs-toggle="card-collapse">
+                                                                          <a href="#"
+                                                                              class="card-options-collapse  h5 fw-bold card-title mb-0 text-danger"><span
+                                                                                  class="badge"><i
+                                                                                      class="fe fe-chevron-up fs-15 me-3"></i></span>
+                                                                              Easily From Fixed to Scrollable
+                                                                              Layout</a>
+                                                                      </div>
+                                                                      <div class="card-body pt-0">
+                                                                          <p>
+                                                                              The Sash – Bootstrap 5 Admin & Dashboard
+                                                                              Template is also available in two
+                                                                              different types of layouts "Fixed
+                                                                              Layout" and "Scrollable Layout". Here
+                                                                              users
+                                                                              can switch their Template from one
+                                                                              layout to another layout easily.
+                                                                          </p>
+                                                                          <p class="mt-2 mb-3">
+                                                                              <span class="fw-bold">Note:
+                                                                              </span>Please Refer full Documentation
+                                                                              for more details.
+                                                                          </p>
+                                                                          <a href="javascript:void(0)"
+                                                                              class="btn btn-outline-danger tx-13">Click
+                                                                              here</a>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </section>
+                                  </div>
+                              </div>
+                           </div>
                             <!-- ROW-6 CLOSED -->
 
                             <!-- ROW-7 OPEN -->
@@ -1471,6 +1445,8 @@
 {% endblock base %}
 {% block script %}
 
+
+
 <!-- BACK-TO-TOP -->
 <a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
@@ -1503,4 +1479,6 @@
 
 <!-- CUSTOM JS  -->
 <script src="{% static 'js/landing.js' %}"></script>
+
+<script src="{% static 'js/helper.js' %}"></script>
 {% endblock script %}

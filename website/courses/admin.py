@@ -20,7 +20,8 @@ class AdvantageAdmin(admin.ModelAdmin):
 @admin.register(technology.Technology)
 class TechnologyAdmin(admin.ModelAdmin):
     
-    list_display = ('image_tag','name',)
+    list_display = ('image_tag', 'name', 'hints')
+    search_fields = ['name']
     
     def image_tag(self, obj):
         return format_html('<img src="{}" width="50" height="50" />'.format(obj.url))
