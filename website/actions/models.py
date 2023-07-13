@@ -14,10 +14,10 @@ class Action(models.Model):
     verb = models.CharField('Действие', max_length=255)
     created = models.DateTimeField('Дата и время действия', auto_now_add=True)
     target_ct = models.ForeignKey(ContentType, 
-                                  blank=True, null=True,
+                                  blank=True,
                                   related_name='target_obj',
                                   on_delete=models.CASCADE)
-    target_id = models.PositiveIntegerField(null=True, blank=True)
+    target_id = models.PositiveIntegerField(blank=True)
     target = GenericForeignKey('target_ct', 'target_id')
 
     class Meta:

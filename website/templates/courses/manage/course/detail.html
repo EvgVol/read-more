@@ -68,32 +68,33 @@
             </div>
             <!--/APP-SIDEBAR-->
         </div>
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
-                    <div class="container px-sm-0">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                                <h4 class="fw-semibold mt-3">Курс <span
-                                    class="badge bg-danger me-1 mb-1 mt-1"> {{ course.get_complexity_full_name }}</span></h4>
-                                <h1 class="text-start fw-bold">{{ course.title }}</h1>
-                                <p class="pb-1">{{ course.description|linebreaks }}</p>
+              <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
+                  <div class="container px-sm-0">
+                      <div class="row">
+                          <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
+                              <h4 class="fw-semibold mt-3">Курс <span
+                                  class="badge bg-danger me-1 mb-1 mt-1"> {{ course.get_complexity_full_name }}</span></h4>
+                              <h1 class="text-start fw-bold">{{ course.title }}</h1>
+                              <p class="pb-1">{{ course.description|linebreaks }}</p>
 
-                                <a href="#"
-                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fe fe-play me-2"></i> Начать учиться
-                                </a>
-                                <a href="#"
-                                    class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fe fe-eye me-2"></i>Узнать больше
-                                </a>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="{% static 'images/landing/cyber.jpg' %}" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                              <a href="#"
+                                  target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
+                                      class="fe fe-play me-2"></i> Начать учиться
+                              </a>
+                              <a href="#"
+                                  class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
+                                      class="fe fe-eye me-2"></i>Узнать больше
+                              </a>
+                          </div>
+                          {% thumbnail course.image "600x370" crop="center" as im %}
+                          <div class="col-xl-6 col-lg-6 my-auto">
+                              <img src="{{ im.url }}" alt="">
+                          </div>
+                          {% endthumbnail %}
+                      </div>
+                  </div>
+              </div>
             </div>
-
             <!--app-content open-->
             <div class="main-content mt-0">
                 <div class="side-app">
@@ -436,7 +437,7 @@
                             </div>
                             <!-- CARDS CLOSED -->
 
-                            <!-- ROW-7 OPEN -->
+                            <!-- PROGRAMMS OPEN -->
                             <div class="section" id="Faqs">
                                 <div class="container">
                                     <div class="row">
@@ -586,9 +587,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- ROW-7 CLOSED -->
+                            <!-- PROGRAMMS CLOSED -->
 
-                            <!-- ROW-8 OPEN -->
+                            <!-- BLOG OPEN -->
                             <div class="section bg-landing" id="Blog">
                                 <div class="container">
                                     <div class="row">
@@ -692,7 +693,7 @@
                             </div>
                             <!-- ROW-8 CLOSED -->
 
-                            <!-- ROW-9 OPEN -->
+                            <!-- REVIEWS OPEN -->
                             <div class="testimonial-owl-landing section pb-0" id="Clients">
                                 <div class="container">
                                     <div class="row">
@@ -830,7 +831,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- ROW-9 CLOSED -->
+                            <!-- REVIEWS CLOSED -->
 
                             <!-- QUESTIONS OPEN -->
                             <div class="section">
