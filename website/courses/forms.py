@@ -21,6 +21,10 @@ class CourseForm(forms.ModelForm):
         queryset=technology.Technology.objects.all(),
         widget=FilteredSelectMultiple(verbose_name='Technologies', is_stacked=False)
     )
+    cards = forms.ModelMultipleChoiceField(
+        queryset=course.Card.objects.all(),
+        widget=FilteredSelectMultiple(verbose_name='Cards', is_stacked=False)
+    )
 
     class Meta:
         model = course.Course

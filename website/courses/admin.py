@@ -55,12 +55,12 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ['title', 'overview']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ModuleInLine]
-    filter_horizontal = ('technologies', 'advantages')
+    filter_horizontal = ('technologies', 'advantages', 'cards')
     form = CourseForm
 
     @admin.display(description=_('technologies'))
     def get_technologies(self, obj):
-        return ',\n '.join([
+        return ',\n '.join([ 
             f'{item.name}'
             for item in obj.technologies.all()])
 
@@ -70,3 +70,7 @@ class CourseAdmin(admin.ModelAdmin):
             '<img src="{}" width="100" height="70" />'
             .format(obj.image.url)
         )
+
+@admin.register(course.Card)
+class CardAdmin(admin.ModelAdmin):
+    list_display = ['title', 'course']

@@ -46,10 +46,12 @@ class Course(models.Model):
                                    help_text=_('Enter a description'))
     advantages = models.ManyToManyField(Advantage,
                                         verbose_name=_("advantages"),
-                                        related_name='courses')
+                                        related_name='courses',
+                                        blank=True)
     technologies = models.ManyToManyField(Technology,
                                           verbose_name=_("technologies"),
-                                          related_name='courses')
+                                          related_name='courses',
+                                          blank=True)
     title = models.CharField(_("title"), max_length=200,
                              help_text=_('Enter the course title'))
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
@@ -63,7 +65,13 @@ class Course(models.Model):
     period = models.PositiveSmallIntegerField(
         _("period"), help_text='Enter the training period'
     )
-    count_projects = models.PositiveSmallIntegerField(_("count projects"))
+    count_projects = models.PositiveSmallIntegerField(_("count projects"), blank=True)
+    price_per_mouth = models.PositiveIntegerField(_("price per mouth"))
+    price_immediately = models.PositiveIntegerField(_("price immediately"))
+    cards = models.ManyToManyField("Card",
+                                   verbose_name=_("cards"),
+                                   related_name='courses',
+                                   blank=True)
 
     class Meta:
         ordering = ['created']
@@ -83,3 +91,21 @@ class Course(models.Model):
 
     def get_complexity_full_name(self):
         return self.get_complexity_display()
+
+
+class Card(models.Model):
+
+    title = models.CharField(_("title"), max_length=100)
+    course = models.ForeignKey(Course,
+                               verbose_name=_("course"),
+                               on_delete=models.CASCADE,
+                               related_name='card_courses')
+    additional_text = models.TextField(_("additional text"))
+
+    class Meta:
+        verbose_name = _("card")
+        verbose_name_plural = _("cards")
+
+    def __str__(self):
+        return self.title
+    
