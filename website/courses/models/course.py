@@ -92,6 +92,15 @@ class Course(models.Model):
     def get_complexity_full_name(self):
         return self.get_complexity_display()
 
+    def get_load_full_name(self):
+        return self.get_load_display()
+
+    def benefit(self):
+        total_cost = self.period * self.price_per_mouth
+        benefit = total_cost - self.price_immediately
+        benefit_percentage = (benefit / total_cost) * 100
+        return benefit_percentage
+
 
 class Card(models.Model):
 
@@ -99,8 +108,9 @@ class Card(models.Model):
     course = models.ForeignKey(Course,
                                verbose_name=_("course"),
                                on_delete=models.CASCADE,
-                               related_name='card_courses')
+                               related_name='courses')
     additional_text = models.TextField(_("additional text"))
+    status = models.CharField(_("status"), max_length=10, blank=True)
 
     class Meta:
         verbose_name = _("card")
@@ -108,4 +118,3 @@ class Card(models.Model):
 
     def __str__(self):
         return self.title
-    
