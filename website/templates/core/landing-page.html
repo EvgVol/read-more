@@ -47,7 +47,8 @@
     <div class="landing-top-header overflow-hidden">
         <div class="top sticky overflow-hidden">
             <!--APP-SIDEBAR-->
-            <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+            <div class="app-sidebar__overlay" data-bs-toggle="sidebar">
+            </div>
             <div class="app-sidebar bg-transparent horizontal-main">
                 <div class="container">
                     <div class="row">
@@ -125,32 +126,34 @@
             </div>
             <!--/APP-SIDEBAR-->
         </div>
-                <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
-                    <div class="container px-sm-0">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                                <h4 class="fw-semibold mt-3">Backend-developers</h4>
-                                <h1 class="text-start fw-bold">Welcome, <span
-                                        class="text-primary animate-heading">Each</span></h1>
-                                <p class="pb-3">
-                                  Добро пожаловать на мой персональный сайт-песочницу! Здесь я практикую свои навыки программирования на языке Python. Отрабатываю множество интересных проектов и идей, а также пишу статьи и руководства для начинающих разработчиков. Я буду рад видеть вас на моем сайте и надеюсь, что вам понравится здесь проводить время.</p>
-
-                                <a href="#"
-                                    target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                        class="fe fe-play me-2"></i> Посмотреть
-                                </a>
-                                <a href="#"
-                                    class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                        class="fe fe-eye me-2"></i>Узнать больше
-                                </a>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 my-auto">
-                                <img src="{% static 'images/landing/cyber.jpg' %}" alt="">
-                            </div>
-                        </div>
+        <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">
+            <div class="container px-sm-0">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
+                        <h4 class="fw-semibold mt-3">Я - Волочек Евгений</h4>
+                        <h1 class="text-start fw-bold">Привествую 
+                            <span class="text-primary"> Вас!</span></h1> 
+                        
+                        <p class="pb-3">Моя платформа предоставляет уникальную возможность объединить различные сервисы в одном месте. Она создана для тех, кто стремится развиваться, коммуницировать, делиться опытом и, возможно, найти новых друзей или даже партнера для создания семьи.</p>
+                        <p>Я являюсь выпускником курсов Яндекс.Практикум и специализируюсь на разработке на Python. Именно здесь я создал платформу, основанную на концепции объединенного продукта. Она предлагает широкий спектр сервисов, включая форум для обмена информацией, чат для общения, библиотеку с полезными материалами, обучающие курсы, магазин с интересными товарами, а также возможность проведения видео-конференций как в индивидуальном, так и в групповом формате.</p>
+                        <p>С помощью моей платформы вы сможете находить все необходимое в одном месте и легко взаимодействовать с единомышленниками, находясь в одном комфортном интернет-пространстве. Будьте готовы к новым возможностям и расширению своих горизонтов!</p>
+                        <a href="#"
+                            target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
+                                class="fe fe-play me-2"></i> Посмотреть
+                        </a>
+                        <a href="#"
+                            class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
+                                class="fe fe-eye me-2"></i>Узнать больше
+                        </a>
+                    </div>
+                    
+                    <div class="col-xl-6 col-lg-6 my-auto">
+                        <img src="{% static 'images/photo.png' %}" alt="" class="br-5 mt-3">
+                        {% comment %} <img src="{% static 'images/photo.png' %}" alt="" class="br-5"> {% endcomment %}
                     </div>
                 </div>
             </div>
+        </div>
 
             <!--app-content open-->
             <div class="main-content mt-0">
