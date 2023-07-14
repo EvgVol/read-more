@@ -53,3 +53,7 @@ class HomePageView(TemplateView):
 
 def countdown_view(request):
     return render(request, 'core/countdown.html')
+
+
+class TestPageView(TemplateView):
+    template_name = 'courses/manage/lessons/lesson.html'

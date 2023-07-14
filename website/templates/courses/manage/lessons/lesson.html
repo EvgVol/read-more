@@ -1,0 +1,176 @@
+{% extends "includes/base.html" %}
+{% load course %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    ExView | {% trans "Test" %}
+{% endblock %}
+
+{% block content %}
+<div class="main-content app-content mt-0">
+	<div class="side-app">
+		<div class="main-container container-fluid">
+			<div class="page-header">
+				<h1 class="page-title">Manager Course</h1>
+				<div>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="javascript:void(0)">Manager Courses</a></li>
+					</ol>
+				</div>
+			</div>
+			<div class="row row-sm">
+					<div class="col-md-5 col-lg-5 col-xl-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex">
+									<h3 class="text-info fw-semibold">Python-разработчик плюс</h3>
+									<div class="ms-5 ms-auto">
+										<a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											<i class="fe fe-more-vertical fs-18"></i>
+										</a>
+										<ul class="dropdown-menu" role="menu">
+											<li><a href="javascript:void(0)">Изменить</a></li>
+											<li><a href="javascript:void(0)">Удалить</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-5 ps-sm-0">
+									<div class="d-flex align-items-end justify-content-between mb-1">
+											<h6 class="mb-1">Modules</h6>
+											<h6 class="fw-semibold mb-1">5</h6>
+									</div>
+									<div class="progress h-2 mb-3">
+											<div class="progress-bar bg-primary" style="width:10%;"
+													role="progressbar"></div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ps-sm-0">
+									<div class="d-flex align-items-end justify-content-between mb-1">
+											<h6 class="mb-1">Lessons</h6>
+											<h6 class="fw-semibold mb-1">10</h6>
+									</div>
+									<div class="progress h-2 mb-3">
+											<div class="progress-bar bg-primary" style="width:15%;"
+													role="progressbar"></div>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 ps-sm-0">
+									<div class="d-flex align-items-end justify-content-between mb-1">
+											<h6 class="mb-1">Students</h6>
+											<h6 class="fw-semibold mb-1">100</h6>
+									</div>
+									<div class="progress h-2 mb-3">
+											<div class="progress-bar bg-primary" style="width:75%;"
+													role="progressbar"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- MODULES OPEN -->
+						<div class="card">
+							<div class="card-header">
+								<h3 class="card-title">Modules</h3>
+								<div class="ms-5 ms-auto">
+									<a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fe fe-more-vertical fs-18"></i>
+									</a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="javascript:void(0)">Добавить модуль</a></li>
+										<li><a href="javascript:void(0)">Настроить</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="card-body">
+								<div class="">
+									<div class="list-group">
+										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+											<div class="d-flex w-100 justify-content-between">
+												<h5 class="mb-1">Как всё устроено</h5>
+												<small class="text-muted">3 days ago</small>
+											</div>
+											<small class="text-muted">1 тема</small>
+										</a>
+										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+											<div class="d-flex w-100 justify-content-between">
+												<h5 class="mb-1">Основы Python </h5>
+												<small class="text-muted">16 days ago</small>
+											</div>
+											<small class="text-muted">8 тем</small>
+										</a>
+										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+											<div class="d-flex w-100 justify-content-between">
+												<h5 class="mb-1">Курс Django</h5>
+												<small class="text-muted">23 days ago</small>
+											</div>
+											<small class="text-muted">31 тема</small>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- MODULES END -->
+					<div class="col-md-7 col-lg-7 col-xl-9">
+						<div class="card">
+							<div class="card-body">
+									<div class="panel panel-primary">
+											<div class="tab-menu-heading tab-menu-heading-boxed">
+													<div class="tabs-menu-boxed">
+															<!-- Tabs -->
+															<ul class="nav panel-tabs fs-14">
+																	<li><a href="#activetabs" class="active" data-bs-toggle="tab">Тема 1</a> </li>
+																	<li><a href="#linktabs" data-bs-toggle="tab">Тема 2</a></li>
+																	<li><a href="#disabletabs" data-bs-toggle="tab">Тема 3</a></li>
+															</ul>
+													</div>
+													
+											</div>
+											
+											<div class="panel-body tabs-menu-body">
+													<div class="tab-content">
+															<div class="tab-pane active" id="activetabs">
+																	<h3 class="card-title mt-3 fs-3"><i class="fa fa-edit text-danger"></i> Lorem ipsum dolor sit amet</h3>
+																	<div class="card">
+																		<div class="list-group">
+																			<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+																				<div class="d-flex w-100 justify-content-between">
+																					<h5 class="mb-1">Как всё устроено</h5>
+																					<small class="text-muted">3 days ago</small>
+																				</div>
+																				<small class="text-muted">1 тема</small>
+																			</a>
+																			<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+																				<div class="d-flex w-100 justify-content-between">
+																					<h5 class="mb-1">Основы Python </h5>
+																					<small class="text-muted">16 days ago</small>
+																				</div>
+																				<small class="text-muted">8 тем</small>
+																			</a>
+																			<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+																				<div class="d-flex w-100 justify-content-between">
+																					<h5 class="mb-1">Курс Django</h5>
+																					<small class="text-muted">23 days ago</small>
+																				</div>
+																				<small class="text-muted">31 тема</small>
+																			</a>
+																		</div>
+																	</div>
+															</div>
+															<div class="tab-pane" id="linktabs">
+																	<h5 class="card-title">Special title treatment 02</h5>
+																	<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+																	<a href="javascript:void(0)" class="btn btn-primary">Go somewhere</a>
+															</div>
+															<div class="tab-pane disabled" id="disabletabs"></div>
+													</div>
+											</div>
+									</div>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
