@@ -705,6 +705,7 @@
                                                     <h2 class="text-center fw-semibold text-white mb-7">What People Are
                                                         Saying About Our Product.</h2>
                                                     <div class="testimonial-carousel">
+                                                        {% for review in reviews %}
                                                         <div class="slide text-center">
                                                             <div class="row">
                                                                 <div class="col-xl-8 col-md-12 d-block mx-auto">
@@ -712,118 +713,29 @@
                                                                         <p class="text-white-80">
                                                                             <i
                                                                                 class="fa fa-quote-left fs-20 text-white-80"></i>
-                                                                            Lorem ipsum dolor sit amet,
-                                                                            consectetur adipisicing elit. Quod eos id
-                                                                            officiis hic tenetur quae quaerat
-                                                                            ad velit ab. Lorem ipsum dolor sit amet,
-                                                                            consectetur adipisicing elit.
-                                                                            Dolore cum accusamus eveniet molestias
-                                                                            voluptatum inventore laboriosam
-                                                                            labore sit, aspernatur praesentium iste
-                                                                            impedit quidem dolor veniam.
+                                                                            {{ review.comment }}
                                                                         </p>
-                                                                        <h3 class="title">Elizabeth</h3>
-                                                                        <span class="post">Web Developer</span>
-                                                                        <div class="rating-stars block my-rating-5 mb-5"
-                                                                            data-rating="4"></div>
-                                                                        <div class="owl-controls clickable">
-                                                                            <div class="owl-pagination">
-                                                                                <div class="owl-page active">
-                                                                                    <span class=""></span>
-                                                                                </div>
-                                                                                <div class="owl-page ">
-                                                                                    <span class=""></span>
-                                                                                </div>
-                                                                                <div class="owl-page">
-                                                                                    <span class=""></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                        <a href="{{ review.author.get_absolute_url}}">
+                                                                          {% if review.author.avatar %}
+                                                                            {% thumbnail review.author.avatar "216x226" crop="center" upscale=True as im %}
+                                                                            <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
+                                                                            {% endthumbnail %}
+                                                                          {% else %}
+                                                                            <img
+                                                                              class="avatar profile-user brround cover-image"
+                                                                              src="{% static 'images/users/default-user.jpeg' %}"
+                                                                              alt="Аватар"
+                                                                            />
+                                                                          {% endif %}
+                                                                          <h3 class="title mt-3">{{ review.author }}</h3>
+                                                                          {% comment %} <span class="post">Web Developer</span> {% endcomment %}
+                                                                          <div class="rating-stars block my-rating-7 mb-5" data-rating="{{ review.rating }}" data-read-only="true"></div>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80"><i
-                                                                                class="fa fa-quote-left fs-20"></i> Nemo
-                                                                            enim ipsam
-                                                                            voluptatem quia voluptas sit aspernatur aut
-                                                                            odit aut fugit, sed quia
-                                                                            consequuntur magni dolores eos qui ratione
-                                                                            voluptatem sequi nesciunt. Neque
-                                                                            porro quisquam est, qui dolorem ipsum quia
-                                                                            dolor sit amet, consectetur,
-                                                                            adipisci velit, sed quia non numquam eius
-                                                                            modi tempora incidunt ut labore.
-                                                                        </p>
-                                                                        <div class="testimonia-data">
-                                                                            <h3 class="title">williamson</h3>
-                                                                            <span class="post">Web Developer</span>
-                                                                            <div class="rating-stars">
-                                                                                <div class="rating-stars block my-rating-5 mb-5"
-                                                                                    data-rating="5"></div>
-                                                                                <div class="owl-controls clickable">
-                                                                                    <div class="owl-pagination">
-                                                                                        <div class="owl-page ">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page active">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80"><i
-                                                                                class="fa fa-quote-left fs-20"></i> Duis
-                                                                            aute irure dolor
-                                                                            in reprehenderit in voluptate velit esse
-                                                                            cillum dolore eu fugiat nulla
-                                                                            pariatur. Excepteur sint occaecat cupidatat
-                                                                            non proident, sunt in culpa qui
-                                                                            officia deserunt mollit anim id est laborum.
-                                                                            Sed ut perspiciatis unde omnis
-                                                                            iste natus error sit voluptatem accusantium
-                                                                            doloremque laudantium.</p>
-                                                                        <div class="testimonia-data">
-                                                                            <h3 class="title">Sophie Carr</h3>
-                                                                            <span class="post">Web Developer</span>
-                                                                            <div class="rating-stars">
-                                                                                <div class="rating-stars block my-rating-5 mb-5"
-                                                                                    data-rating="5"></div>
-                                                                                <div class="owl-controls clickable">
-                                                                                    <div class="owl-pagination">
-                                                                                        <div class="owl-page ">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page active">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>

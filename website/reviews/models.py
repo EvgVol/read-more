@@ -28,7 +28,6 @@ class Review(models.Model):
     content_type = models.ForeignKey(ContentType,
                                      verbose_name=_('content type'),
                                      on_delete=models.CASCADE,
-                                     related_name='reviews',
                                      db_index=True)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')

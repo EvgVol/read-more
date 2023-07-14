@@ -1,5 +1,3 @@
-import random
-
 from django.apps import apps
 from django.forms.models import modelform_factory
 from django.contrib.auth.mixins import (LoginRequiredMixin,
@@ -10,9 +8,11 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.base import TemplateResponseMixin, View
 from .forms import ModuleFormSet
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
+from django.contrib.contenttypes.models import ContentType
 
 from courses.models import subject, course, module, content
+from reviews.models import Review
 
 
 class SubjectView(ListView):
@@ -50,7 +50,6 @@ class OwnerCourseMixin(OwnerMixin,
         subject_name = self.object.subject.slug
         return reverse('courses:manage_course_list',
                        kwargs={'subject_name': subject_name})
-
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
@@ -128,6 +127,14 @@ class CourseDetailView(DetailView):
 
     model = course.Course
     template_name = 'courses/manage/course/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        course_content_type = ContentType.objects.get_for_model(course.Course)
+        reviews = Review.objects.filter(content_type=course_content_type,
+                                        object_id=self.object.pk)
+        context['reviews'] = reviews
+        return context
 
 
 class CourseModuleUpdateView(TemplateResponseMixin, View):
