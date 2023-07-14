@@ -1,0 +1,50 @@
+{% extends "includes/base.html" %}
+{% load course %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    ExView | {% trans "Module" %}
+{% endblock %}
+
+{% block content %}
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+        <div class="main-container container-fluid">
+            <div class="page-header">
+                <h1 class="page-title">{% trans "Education" %}</h1>
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)"><i class="ion-plus"></i> Create a subject</a></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="text-center">
+                    <h2 class="fw-semibold mb-2">Meet our creative minds</h2>
+                    <h5>Our Leadership</h5>
+                </div>
+                <!-- COL-OPEN -->
+                <div class="card mt-5 mx-auto" style="max-width: 50%;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <a href="#"><img src="{% static 'images/media/8.jpg' %}" class="img-fluid" alt="Image"></a>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <a href="{{ image.get_absolute_url }}">
+                                    <h5 class="card-title my-title">Card title</h5>
+                                </a>
+                                <p class="card-text my-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text"><small class="text-muted">Go somewhere</small></p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

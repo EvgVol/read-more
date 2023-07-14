@@ -45,9 +45,54 @@
                           <ul class="icons">
                             <li><a href="#" class="btn btn-danger"> <i class="fe fe-lock"></i> </a></li>
                           </ul>
-                          <a href="#"><img src="{% static 'images/media/8.jpg' %}" class="card-img-top" alt="img"></a>
+                          <a href="#" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><img src="{% static 'images/media/8.jpg' %}" class="card-img-top" alt="img"></a>
                           <h3 class="mb-0 text-start mt-5">Mike Rowe-Soft</h3>
                           <p class="card-text text-start mt-7"><small class="text-muted">Last updated 3 mins ago</small></p>
+                          <div class="container">
+                            <div class="sidebar sidebar-right sidebar-animate">
+                              <div class="panel panel-primary card mb-0 shadow-none border-0">
+                                  <div class="tab-menu-heading border-0 d-flex p-3">
+                                      <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Notifications</div>
+                                      <div class="card-options ms-auto">
+                                          <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i class="fe fe-x text-white"></i></a>
+                                      </div>
+                                  </div>
+                                  <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
+                                    <div class="text-start">
+                                      <ul class="list-group">
+                                          <a href="">
+                                            <li class="list-group-item">
+                                              <i class="fe fe-log-in text-primary me-2" aria-hidden="true">
+                                              </i>Введение. Что предстоит в платной части?
+                                            </li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Структура и сроки</li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Как устроена поддержка</li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Что такое переход и зачем он нужен</li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Правила</li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Убедимся, что правильно друг друга поняли</li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Что для вас важно?</li>
+                                          </a>
+                                          <a href="">
+                                            <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Что получится в результате</li>
+                                          </a>
+                                      </ul>
+                                  </div>
+                                  </div>
+                              </div>
+                            </div>
+                          <div class="container">
                       </div>
                   </div>
               </div>
@@ -55,4 +100,5 @@
         </div>
     </div>
 </div>
+
 {% endblock content %}
