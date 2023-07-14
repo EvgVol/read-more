@@ -38,24 +38,32 @@
                             </a>
                             <ul class="side-menu">
                                 <li class="slide">
-                                    <a class="side-menu__item active" data-bs-toggle="slide" href="#About"><span
+                                    <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
                                             class="side-menu__label">О профессии</span></a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#howlearn"><span
-                                            class="side-menu__label">Как учим</span></a>
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Advantages"><span
+                                            class="side-menu__label">Преимущества</span></a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#helper"><span
-                                            class="side-menu__label">Поддержка</span></a>
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Howlearn"><span
+                                            class="side-menu__label">Что вас ждет</span></a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#jobs"><span
-                                            class="side-menu__label">Трудоустройство</span></a>
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Technologies"><span
+                                            class="side-menu__label">Навыки</span></a>
                                 </li>
                                 <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#programs"><span
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Price"><span
+                                            class="side-menu__label">Стоимость</span></a>
+                                </li>
+                                <li class="slide">
+                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Programms"><span
                                             class="side-menu__label">Программа</span></a>
+                                </li>
+                                <li class="slide">
+                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Blog"><span
+                                          class="side-menu__label">Блог</span></a>
                                 </li>
                             </ul>
                             <a class="slide" href="{% url 'courses:manage_course_list' subject_name=course.subject.slug %}">
@@ -104,7 +112,7 @@
                         <div class="">
 
                             <!-- ADVANTAGES OPEN -->
-                            <div class="sptb section" id="Features">
+                            <div class="sptb section" id="Advantages">
                                 <div class="container">
                                     <div class="row">
                                         <h4 class="text-center fw-semibold">ПРЕИМУЩЕСТВА</h4>
@@ -131,7 +139,7 @@
                             <!-- ADVANTAGES CLOSED -->
 
                             <!-- ABOUT COURSE OPEN -->
-                            <div class="section bg-landing pb-0 bg-image-style" id="About">
+                            <div class="section bg-landing pb-0 bg-image-style" id="Howlearn">
                                 <div class="container">
                                     <div class="row">
                                         <h4 class="text-center fw-semibold">НУЖНО ЗНАТЬ</h4>
@@ -201,7 +209,7 @@
                             <!-- ABOUT COURSE CLOSED -->
 
                             <!-- TECHNOLOGIES OPEN -->
-                            <div class="section testimonial-owl-landing">
+                            <div class="section testimonial-owl-landing" id="Technologies">
                                 <div class="container">
                                     <div class="row">
                                         <div class="card bg-transparent mb-0">
@@ -239,7 +247,7 @@
                             <!-- TECHNOLOGIES CLOSED -->
 
                             <!-- CARDS OPEN -->
-                            <div class="bg-landing section bg-image-style">
+                            <div class="bg-landing section bg-image-style" id="Price">
                               <div class="container">
                                   <div class="row">
                                       <h4 class="text-center fw-semibold">Choose a plan </h4>
@@ -438,7 +446,7 @@
                             <!-- CARDS CLOSED -->
 
                             <!-- PROGRAMMS OPEN -->
-                            <div class="section" id="Faqs">
+                            <div class="section" id="Programms">
                                 <div class="container">
                                     <div class="row">
                                         <h4 class="text-center fw-semibold">ПРОГРАММА</h4>
@@ -694,7 +702,7 @@
                             <!-- ROW-8 CLOSED -->
 
                             <!-- REVIEWS OPEN -->
-                            <div class="testimonial-owl-landing section pb-0" id="Clients">
+                            <div class="testimonial-owl-landing section pb-0" id="Reviews">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -746,10 +754,10 @@
                             <!-- REVIEWS CLOSED -->
 
                             <!-- QUESTIONS OPEN -->
-                            <div class="section">
+                            <div class="section" id="Questions">
                               <div class="container">
                                   <div class="row">
-                                      <section class="sptb demo-screen-demo" id="faqs">
+                                      <section class="sptb demo-screen-demo">
                                           <div class="container">
                                               <div class="row align-items-center">
                                                   <h4 class="text-center fw-semibold">ОТВЕТЫ</h4>
