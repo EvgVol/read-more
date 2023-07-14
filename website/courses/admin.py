@@ -74,6 +74,7 @@ class CourseAdmin(admin.ModelAdmin):
             .format(obj.image.url)
         )
 
+
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ['title', 'course']

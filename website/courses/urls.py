@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.utils.translation import gettext_lazy as _
 
 from courses.views.generic.list import (CourseListView, SubjectView,
-                                        ContentListView,)
+                                        ContentListView, ModuleListView)
 from courses.views.generic.detail import CourseDetailView
 from courses.views.generic.create import (CourseCreateView,
                                           ContentCreateUpdateView,)
@@ -60,4 +60,5 @@ urlpatterns = [
     path('module/<int:module_id>/content/<str:model_name>/create/',
          ContentCreateUpdateView.as_view(),
          name='content_create'),
+    path('modules/', ModuleListView.as_view(), name='module_list'),
 ]

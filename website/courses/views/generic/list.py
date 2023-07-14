@@ -60,6 +60,11 @@ class CourseListView(OwnerCourseMixin, ListView):
         return context
 
 
+class ModuleListView(ListView):
+    model = Module
+    template_name = 'courses/manage/module/module_list.html'
+
+
 class ContentListView(TemplateResponseMixin, View):
     template_name = 'courses/manage/module/content_list.html'
 
@@ -68,3 +73,5 @@ class ContentListView(TemplateResponseMixin, View):
                                       id=id,
                                       course__owner=request.user)
         return self.render_to_response({'module': module_id})
+
+

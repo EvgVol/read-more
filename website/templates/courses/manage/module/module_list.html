@@ -1,0 +1,58 @@
+{% extends "includes/base.html" %}
+{% load course %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    ExView | {% trans "Module" %}
+{% endblock %}
+
+{% block content %}
+<div class="main-content app-content mt-0">
+    <div class="side-app">
+        <div class="main-container container-fluid">
+            <div class="page-header">
+                <h1 class="page-title">{% trans "Education" %}</h1>
+                <div>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)"><i class="ion-plus"></i> Create a subject</a></li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="text-center">
+                    <h2 class="fw-semibold mb-2">Meet our creative minds</h2>
+                    <h5>Our Leadership</h5>
+                </div>
+                <!-- COL-OPEN -->
+                <div class="col-xl-3 col-md-6 col-lg-6 mt-3">
+                    <div class="card product-grid6">
+                        <div class="card-status bg-primary br-te-7 br-ts-7"></div>
+                        <div class="card-body text-center product-image6">
+                            <ul class="icons">
+                              <li><a href="#" class="btn btn-success"> <i class="fe fe-log-in"></i> </a></li>
+                            </ul>
+                            <a href="#"><img src="{% static 'images/media/8.jpg' %}" class="card-img-top" alt="img"></a>
+                            <h3 class="mb-0 text-start mt-5">Mike Rowe-Soft</h3>
+                            <p class="card-text text-start mt-7"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 col-lg-6 mt-3">
+                  <div class="card product-grid6">
+                      <div class="card-status bg-secondary br-te-7 br-ts-7"></div>
+                      <div class="card-body text-center product-image6">
+                          <ul class="icons">
+                            <li><a href="#" class="btn btn-danger"> <i class="fe fe-lock"></i> </a></li>
+                          </ul>
+                          <a href="#"><img src="{% static 'images/media/8.jpg' %}" class="card-img-top" alt="img"></a>
+                          <h3 class="mb-0 text-start mt-5">Mike Rowe-Soft</h3>
+                          <p class="card-text text-start mt-7"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
