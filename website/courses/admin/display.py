@@ -1,13 +1,16 @@
 from django.contrib import admin
-from django.db import models
-from django.forms import SelectMultiple
 from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
-from courses.models import subject, course, module, advantage, technology
 from .forms import CourseForm
+from courses.models.advantage import Advantage
+from courses.models.technology import Technology
+from courses.models.subject import Subject
+from courses.models.module import Module
+from courses.models.course import Course, Card
 
-@admin.register(advantage.Advantage)
+
+@admin.register(Advantage)
 class AdvantageAdmin(admin.ModelAdmin):
     
     list_display = ('image_tag','name',)
@@ -21,7 +24,7 @@ class AdvantageAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
 
-@admin.register(technology.Technology)
+@admin.register(Technology)
 class TechnologyAdmin(admin.ModelAdmin):
     
     list_display = ('image_tag', 'name', 'hints')
@@ -36,17 +39,17 @@ class TechnologyAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
 
-@admin.register(subject.Subject)
+@admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug']
     prepopulated_fields = {'slug': ('title',)}
 
 
 class ModuleInLine(admin.StackedInline):
-    model = module.Module
+    model = Module
 
 
-@admin.register(course.Course)
+@admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['icon_course','title', 'subject', 'created',
                     'complexity', 'get_technologies', 'period',
@@ -71,6 +74,6 @@ class CourseAdmin(admin.ModelAdmin):
             .format(obj.image.url)
         )
 
-@admin.register(course.Card)
+@admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ['title', 'course']

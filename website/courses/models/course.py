@@ -65,7 +65,8 @@ class Course(models.Model):
     period = models.PositiveSmallIntegerField(
         _("period"), help_text='Enter the training period'
     )
-    count_projects = models.PositiveSmallIntegerField(_("count projects"), blank=True)
+    count_projects = models.PositiveSmallIntegerField(_("count projects"),
+                                                      blank=True)
     price_per_mouth = models.PositiveIntegerField(_("price per mouth"))
     price_immediately = models.PositiveIntegerField(_("price immediately"))
     cards = models.ManyToManyField("Card",
