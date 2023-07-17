@@ -1,0 +1,191 @@
+{% extends 'main.html' %}
+{% load i18n %}
+{% block title %}READ MORE | Сайт для разработчиков и о разработчиках, и ещё кое о чем...{% endblock %}
+{% block base %}
+{% load static %}
+{% load thumbnail %}
+<div class="page">
+  <div class="page-main">
+    <div class="hor-header header">
+        <div class="container main-container">
+            <div class="d-flex">
+                <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
+                    href="javascript:void(0)"></a>
+                <!-- sidebar-toggle-->
+                <!-- LOGO -->
+            </div>
+        </div>
+    </div>
+    <div class="landing-top-header overflow-hidden">
+      <div class="top sticky">
+          <!--APP-SIDEBAR-->
+        <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+        <div class="app-sidebar bg-dark">
+            <div class="row">
+              <div class="">
+                  <ul class="col">
+                      <li class="col-12 mt-7"><i
+                          class="icon-home text-white fa-2x"></i>
+                      </li>
+                      <li class="col-12 mt-7"><i
+                          class="icon-book-open text-white fa-2x"></i>
+                      </li>
+                      <li class="col-12 mt-7"><i
+                          class="icon-magnifier text-white fa-2x"></i>
+                      </li>
+                      <li class="col-12 mt-7"><i
+                          class="icon-notebook text-white fa-2x"></i>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+          <!--app-content open-->
+      <div class="main-content app-content mt-0">
+        <div class="side-app">
+          <!-- CONTAINER -->
+          <div class="main-container container-fluid">
+              <!-- PAGE-HEADER -->
+              <div class="text-center mt-8 d-flex justify-content-center flex-column">
+                <div class="row justify-content-center mt-3">
+                    <div class="col col-md-1 progress me-1 bg-dark"></div>
+                    <div class="col col-md-1 progress me-1 bg-dark"></div>
+                    <div class="col col-md-1 progress me-1 bg-dark"></div>
+                    <div class="col col-md-1 progress me-1 bg-dark"></div>
+                    <div class="col col-md-1 progress me-1 bg-dray"></div>
+                    <div class="col col-md-1 progress me-1 bg-dray"></div>
+                    <div class="col col-md-1 progress me-1 bg-dray"></div>
+                    <div class="col col-md-1 progress me-1 bg-dray"></div>
+                </div>
+              </div>
+              <div class="card col-md-10 mt-5">
+                <div class="">
+                  <h1 class="mt-7">Pagination Samples</h1>
+                </div>
+                <div class="col-md-10">
+                  <img src="{% static 'images/3DFqGLCSyF4.jpg' %}" alt="" class="br-5 mt-5">
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique aliquet ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">urpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique aliquet ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">t ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <img src="{% static 'images/3DFqGLCSyF4.jpg' %}" alt="" class="br-5 mt-5">
+                </div>
+                <div class="col-md-10 custom-card">
+                  <ul id="lightgallery" class="list-unstyled row mt-5">
+                    <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="{% static 'images/media/files/01.jpg' %}" data-src="{% static 'images/media/files/01.jpg' %}" data-sub-html="<h4>Gallery Image 1</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                        <a href="javascript:void(0)">
+                            <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-1">
+                        </a>
+                    </li>
+                    <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="{% static 'images/media/files/01.jpg' %}" data-src="{% static 'images/media/files/01.jpg' %}" data-sub-html="<h4>Gallery Image 2</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                        <a href="javascript:void(0)">
+                            <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-2">
+                        </a>
+                    </li>
+                    <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="{% static 'images/media/files/01.jpg' %}" data-src="{% static 'images/media/files/01.jpg' %}" data-sub-html="<h4>Gallery Image 3</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                        <a href="javascript:void(0)">
+                            <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-1">
+                        </a>
+                    </li>
+                    <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="{% static 'images/media/files/01.jpg' %}" data-src="{% static 'images/media/files/01.jpg' %}" data-sub-html=" <h4>Gallery Image 4</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                        <a href="javascript:void(0)">
+                            <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-2">
+                        </a>
+                    </li>
+                    <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="{% static 'images/media/files/01.jpg' %}" data-src="{% static 'images/media/files/01.jpg' %}" data-sub-html="<h4>Gallery Image 5</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                        <a href="javascript:void(0)">
+                            <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-1">
+                        </a>
+                    </li>
+                    <li class="col-xs-6 col-sm-4 col-md-4 col-xl-4 mb-5 border-bottom-0" data-responsive="{% static 'images/media/files/01.jpg' %}" data-src="{% static 'images/media/files/01.jpg' %}" data-sub-html="<h4>Gallery Image 6</h4><p> Many desktop publishing packages and web page editors now use Lorem Ipsum</p>">
+                        <a href="javascript:void(0)">
+                            <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-2">
+                        </a>
+                    </li>
+                </ul>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique aliquet ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">urpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique aliquet ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">t ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <p class="text fs-20 br-5 mt-5">vel auctor lectus hendrerit.</p>
+                </div>
+                <div class="col-md-10">
+                  <img src="{% static 'images/3DFqGLCSyF4.jpg' %}" alt="" class="br-5 mt-5">
+                </div>
+                <div class="col-md-10 text-center d-flex justify-content-center align-items-center mt-8 my-5">
+                  <button class="btn btn-outline-dark btn-lg btn-pill fa-2x">К следующей теме</button>
+                </div>
+              </div>
+          </div>
+          <!-- CONTAINER CLOSED -->
+        </div>
+      </div>
+            <!--app-content closed-->
+    </div>
+  </div>
+</div>
+
+{% endblock base %}
+{% block script %}
+
+
+
+<!-- BACK-TO-TOP -->
+<a href="#top" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<!-- JQUERY JS -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="{% static 'plugins/bootstrap/js/popper.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- COUNTERS JS -->
+<script src="{% static 'plugins/counters/counterup.min.js' %}"></script>
+<script src="{% static 'plugins/counters/waypoints.min.js' %}"></script>
+<script src="{% static 'plugins/counters/counters-1.js' %}"></script>
+
+<!-- Perfect SCROLLBAR JS -->
+<script src="{% static 'plugins/owl-carousel/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/company-slider/slider.js' %}"></script>
+
+<!-- Star Rating Js -->
+<script src="{% static 'plugins/rating/jquery-rate-picker.js' %}"></script>
+<script src="{% static 'plugins/rating/rating-picker.js' %}"></script>
+
+<!-- Star Rating-1 Js -->
+<script src="{% static 'plugins/ratings-2/jquery.star-rating.js' %}"></script>
+<script src="{% static 'plugins/ratings-2/star-rating.js' %}"></script>
+
+<!-- Sticky js -->
+<script src="{% static 'js/sticky.js' %}"></script>
+
+<!-- CUSTOM JS  -->
+<script src="{% static 'js/landing.js' %}"></script>
+
+<script src="{% static 'js/helper.js' %}"></script>
+{% endblock script %}
