@@ -64,23 +64,15 @@
                                 </li>
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="#Features"><span
-                                            class="side-menu__label">Особенности</span></a>
+                                            class="side-menu__label">Стек</span></a>
                                 </li>
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="#About"><span
-                                            class="side-menu__label">О проекте</span></a>
+                                            class="side-menu__label">О себе</span></a>
                                 </li>
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="#Faqs"><span
                                             class="side-menu__label">FAQ</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Blog"><span
-                                            class="side-menu__label">Блог</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Clients"><span
-                                            class="side-menu__label">Портфолио</span></a>
                                 </li>
                                 <li class="slide">
                                     <a class="side-menu__item" data-bs-toggle="slide" href="#Contact"><span
@@ -88,27 +80,15 @@
                                 </li>
                             </ul>
                             {% if request.user.is_authenticated %}
-                              <div class="dropdown d-flex profile">
-                                {% load thumbnail %}
-                                <a class='text-muted' href="{% url 'profile' user.username %}"> Здравствуй, {{ user.username }}
-                                <a
-                                  href="javascript:void(0)"
-                                  data-bs-toggle="dropdown"
-                                  class="nav-link leading-none d-flex"
-                                >
-                                {% if request.user.avatar %}
-                                  {% thumbnail request.user.avatar "216x226" crop="center" upscale=True as im %}
-                                  <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
-                                  {% endthumbnail %}
-                                {% else %}
-                                  <img
-                                    class="avatar profile-user brround cover-image"
-                                    src="{% static 'images/users/default-user.jpeg' %}"
-                                    alt="Аватар"
-                                  />
-                                {% endif %}
-                                </a>
-                              </div>
+                                <div class="header-nav-right d-none d-lg-flex">
+                                    <a href="#"
+                                        class="btn ripple btn-min w-sm btn-outline-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                        target="_blank">Выйти
+                                    </a>
+                                    <a href="#" class="btn ripple btn-min w-sm btn-primary me-2 my-auto d-lg-none d-xl-block d-block"
+                                        target="_blank">Профиль
+                                    </a>
+                                </div>
                             {% else %}
                               <div class="header-nav-right d-none d-lg-flex">
                                   <a href="{% url 'signup' %}"
@@ -130,13 +110,11 @@
             <div class="container px-sm-0">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 mb-5 pb-5 animation-zidex pos-relative">
-                        <h4 class="fw-semibold mt-3">Я - Волочек Евгений</h4>
-                        <h1 class="text-start fw-bold">Привествую 
-                            <span class="text-primary"> Вас!</span></h1> 
+                        <h4 class="fw-semibold mt-3">Hi, everybody</h4>
+                        <h1 class="text-start fw-bold">I'm
+                            <span class="text-primary">Developer</span></h1> 
                         
-                        <p class="pb-3">Моя платформа предоставляет уникальную возможность объединить различные сервисы в одном месте. Она создана для тех, кто стремится развиваться, коммуницировать, делиться опытом и, возможно, найти новых друзей или даже партнера для создания семьи.</p>
-                        <p>Я являюсь выпускником курсов Яндекс.Практикум и специализируюсь на разработке на Python. Именно здесь я создал платформу, основанную на концепции объединенного продукта. Она предлагает широкий спектр сервисов, включая форум для обмена информацией, чат для общения, библиотеку с полезными материалами, обучающие курсы, магазин с интересными товарами, а также возможность проведения видео-конференций как в индивидуальном, так и в групповом формате.</p>
-                        <p>С помощью моей платформы вы сможете находить все необходимое в одном месте и легко взаимодействовать с единомышленниками, находясь в одном комфортном интернет-пространстве. Будьте готовы к новым возможностям и расширению своих горизонтов!</p>
+                        <p>Меня зовут Евгений, я WEB-разработчик. Я занимаюсь созданием полноценных веб-приложений от начала до конца, объединяя фронтенд и бэкенд разработку в рамках Django фреймворка. </p>
                         <a href="#"
                             target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
                                 class="fe fe-play me-2"></i> Посмотреть
@@ -263,12 +241,9 @@
                             <div class="sptb section bg-white" id="Features">
                                 <div class="container">
                                     <div class="row">
-                                        <h4 class="text-center fw-semibold">Особенности</h4>
+                                        <h4 class="text-center fw-semibold">Технологии</h4>
                                         <span class="landing-title"></span>
-                                        <h2 class="fw-semibold text-center">Основные характистики</h2>
-                                        <p class="text-default mb-5 text-center">The Sash admin template comes with
-                                            ready-to-use features that are completely easy-to-use for any user, even for
-                                            a beginner.</p>
+                                        <h2 class="fw-semibold text-center">Освоенные навыки</h2>
                                         <div class="row mt-7">
                                             <div class="col-lg-6 col-md-12">
                                                 <div class="card features main-features main-features-1 wow fadeInUp reveal revealleft"
@@ -292,9 +267,10 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Quality &amp; Clean Code</h4>
-                                                        <p class="mb-0">The Sash admin code is maintained very cleanly
-                                                            and well-structured with proper comments.</p>
+                                                        <h4 class="fw-bold">Разработка и настройка веб-приложений</h4>
+                                                        <p class="mb-0">
+                                                            с использованием Django и Django Rest Framework
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -349,10 +325,9 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Multiple Demos</h4>
+                                                        <h4 class="fw-bold">Разработка пользовательских интерфейсов</h4>
                                                         <p class="mb-0">
-                                                            We included multiple demos, preview video, and screen shots
-                                                            to give a quick overview of our Sash admin template.
+                                                            с использованием HTML, CSS, Bootstrap, JS
                                                         </p>
                                                     </div>
                                                 </div>
@@ -427,10 +402,9 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Validation Forms</h4>
+                                                        <h4 class="fw-bold">Работа с базами данных</h4>
                                                         <p class="mb-0">
-                                                            Different types of “Form Validation” are implemented in this
-                                                            Sash admin template and used strict validation rules.
+                                                            SQLite3, PostgreSQL, Redis
                                                         </p>
                                                     </div>
                                                 </div>
@@ -480,11 +454,9 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Widgets</h4>
+                                                        <h4 class="fw-bold">Использование Docker</h4>
                                                         <p class="mb-0">
-                                                            30+ widgets are included in this template. Please check out
-                                                            the best option that suits you and implement it in your
-                                                            projects.
+                                                            для развертывания и управления приложениями
                                                         </p>
                                                     </div>
                                                 </div>
@@ -550,11 +522,9 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">9 Types of Charts</h4>
+                                                        <h4 class="fw-bold">Настройка CI/CD</h4>
                                                         <p class="mb-0">
-                                                            We included nine (9) types of the best possible chart
-                                                            options for your project. You can customize with your
-                                                            requirement.
+                                                            с использованием Github Actions
                                                         </p>
                                                     </div>
                                                 </div>
@@ -588,11 +558,9 @@
                                                         </svg>
                                                     </div>
                                                     <div class="text-left">
-                                                        <h4 class="fw-bold">Documentation</h4>
+                                                        <h4 class="fw-bold">Автоматическое тестирование приложенией </h4>
                                                         <p class="mb-0">
-                                                            The documentation provides clear-cut material for the Sash
-                                                            admin template. The documentation is explained or instructed
-                                                            in such a way that every user can understand.
+                                                            с использованием Pytest, Unit-тестов
                                                         </p>
                                                     </div>
                                                 </div>
@@ -604,85 +572,15 @@
                             <!-- ROW-2 CLOSED -->
 
                             <!-- ROW-3 OPEN -->
-                            <div class="section bg-landing pb-0 bg-image-style" id="About">
-                                <div class="container">
-                                    <div class="row">
-                                        <h4 class="text-center fw-semibold">О проекте</h4>
-                                        <span class="landing-title"></span>
-                                        <div class="text-center">
-                                            <h2 class="text-center fw-semibold">Our mission is to make work meaningful.
-                                            </h2>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="card bg-transparent">
-                                                <div class="card-body text-dark">
-                                                    <div class="statistics-info">
-                                                        <div class="row">
-                                                            <div class="col-xl-6 col-lg-6 ps-0">
-                                                                <div class="text-center reveal revealleft mb-3">
-                                                                    <img src="../assets/images/landing/business-team-working-on-business-plan.png"
-                                                                        alt="" class="br-5">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xl-6 col-lg-6 pe-0 my-auto">
-
-                                                                <div class="ps-5 reveal revealright">
-                                                                    <h2 class="text-start fw-semibold fs-25 mb-6">We are
-                                                                        a creative agency with a passion for design.
-                                                                    </h2>
-                                                                    <div class="d-flex">
-                                                                        <span><svg style="width:20px;height:20px"
-                                                                                viewBox="0 0 24 24">
-                                                                                <path fill="#6c5ffc"
-                                                                                    d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
-                                                                            </svg></span>
-                                                                        <div class="ms-5 mb-4">
-                                                                            <h5 class="fw-bold">Quality & Clean Code
-                                                                            </h5>
-                                                                            <p>The Sash admin code is maintained very
-                                                                                cleanly and well-structured with proper
-                                                                                comments.</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="d-flex">
-                                                                        <span><svg style="width:20px;height:20px"
-                                                                                viewBox="0 0 24 24">
-                                                                                <path fill="#6c5ffc"
-                                                                                    d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z" />
-                                                                            </svg></span>
-                                                                        <div class="ms-5 mb-4">
-                                                                            <h5 class="fw-bold">Well Documented</h5>
-                                                                            <p>
-                                                                                The documentation provides clear-cut
-                                                                                material for the Sash admin template.
-                                                                                The documentation is explained or
-                                                                                instructed in such a way that every user
-                                                                                can understand.
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ROW-3 CLOSED -->
 
                             <!-- ROW-4 OPEN -->
                             <div class="section testimonial-owl-landing">
                                 <div class="container">
                                     <div class="row">
                                         <div class="card bg-transparent mb-0">
-                                            <h4 class="text-center fw-semibold text-white">Навыки</h4>
                                             <span class="landing-title"></span>
                                             <div class="demo-screen-skin code-quality" id="dependencies">
                                                 <div class="text-center p-0">
-                                                    <h2 class="text-center fw-semibold text-white">Технологии используемые в проекте</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-lg-12 px-0">
                                                             <div class="feature-logos mt-5">
@@ -738,25 +636,14 @@
                             <!-- ROW-4 CLOSED -->
 
                             <!-- ROW-5 OPEN -->
-                            <div class="section">
+                            <div class="section" id="About">
                                 <div class="container">
                                     <div class="row">
                                         <section class="sptb demo-screen-demo" id="faqs">
                                             <div class="container">
                                                 <div class="row align-items-center">
-                                                    <h4 class="text-center fw-semibold">Highlights</h4>
-                                                    <span class="landing-title"></span>
-                                                    <h2 class="text-center fw-semibold">Template Highlights</h2>
                                                     <div class="col-lg-12">
                                                         <div class="row justify-content-center">
-                                                            <p class="col-lg-9 text-default sub-text mb-7">
-                                                                The Sash admin template is one of the modern dashboard
-                                                                templates.
-                                                                It is also a premium admin dashboard with high-end
-                                                                features, where users can easily customize
-                                                                or change their projects according to their choice.
-                                                                Please take a quick look at our template highlights.
-                                                            </p>
                                                         </div>
                                                         <div class="row" id="grid">
                                                             <div class="col-lg-6">
@@ -768,9 +655,7 @@
                                                                             <a href="#"
                                                                                 class="card-options-collapse h5 fw-bold card-title mb-0 text-primary"><span
                                                                                     class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From Vertical to Horizontal
-                                                                                Menu</a>
+                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Образование</a>
                                                                         </div>
                                                                         <div class="card-body pt-0">
                                                                             <p>
@@ -800,8 +685,7 @@
                                                                             <a href="#"
                                                                                 class="card-options-collapse  h5 fw-bold card-title mb-0 text-success"><span
                                                                                     class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From LTR to RTL Version</a>
+                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Опыт работы</a>
                                                                         </div>
                                                                         <div class="card-body pt-0">
                                                                             <p class="mb-3">
@@ -831,9 +715,7 @@
                                                                             <a href="#"
                                                                                 class="card-options-collapse  h5 fw-bold card-title mb-0 text-info"><span
                                                                                     class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From One Color to Another Color
-                                                                                style</a>
+                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Семейное положение</a>
                                                                         </div>
                                                                         <div class="card-body pt-0">
                                                                             <p class="mb-3">
@@ -865,9 +747,7 @@
                                                                             <a href="#"
                                                                                 class="card-options-collapse  h5 fw-bold card-title mb-0 text-secondary"><span
                                                                                     class="badge"><i
-                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Switch
-                                                                                Easily From Full Width to Boxed
-                                                                                Layout</a>
+                                                                                        class="fe fe-chevron-up fs-15 me-3"></i></span>Интересы</a>
                                                                         </div>
                                                                         <div class="card-body pt-0">
                                                                             <p>
@@ -964,328 +844,11 @@
                             </div>
                             <!-- ROW-5 CLOSED -->
 
-                            <!-- ROW-6 OPEN -->
-                            <div class="bg-landing section bg-image-style">
-                                <div class="container">
-                                    <div class="row">
-                                        <h4 class="text-center fw-semibold">Choose a plan </h4>
-                                        <span class="landing-title"></span>
-                                        <h2 class="text-center fw-semibold">Find the <span class="text-primary">Perfect
-                                                Plan</span> for your Business.</h2>
-                                        <div class="pricing-tabs">
-                                            <div class="pri-tabs-heading text-center">
-                                                <ul class="nav nav-price">
-                                                    <li><a data-bs-toggle="tab" href="#month">Monthly</a></li>
-                                                    <li><a class="active show" data-bs-toggle="tab"
-                                                            href="#annualyear">Annual</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="tab-content">
-                                                <div class="tab-pane pb-0 active show" id="annualyear">
-                                                    <div class="row d-flex align-items-center justify-content-center">
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card reveal revealrotate">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Basic</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">399</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            year</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-secondary">Billed monthly
-                                                                        on regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                                                2 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                                            <strong>3 </strong> One-Click Apps
-                                                                        </li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                1 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class=text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-secondary btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div
-                                                                class="card p-3 border-primary pricing-card advanced reveal revealrotate">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                                            class="tag bg-primary text-white float-end">Limited
-                                                                            Deal</span></p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">1,299</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            year</span></p>
-                                                                    <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-primary">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                            <strong> 5 Free</strong> Domain Name
-                                                                        </li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                3 </strong> Databases</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="mb-6"><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-primary-gradient text-white btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card reveal revealrotate">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Regular</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">899</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            year</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1  text-danger">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                1 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                2 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-danger btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane" id="month">
-                                                    <div class="row d-flex align-items-center justify-content-center">
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Basic</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">39</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-secondary">Billed monthly
-                                                                        on regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i><strong>
-                                                                                2 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline p-2 fs-16 text-secondary"></i>
-                                                                            <strong>3 </strong> One-Click Apps
-                                                                        </li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                1 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class=text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline p-2 fs-16 text-gray"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-secondary btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 border-primary pricing-card advanced">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1 pe-0">Advanced<span
-                                                                            class="tag bg-primary text-white float-end">Limited
-                                                                            Deal</span></p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">199</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-2">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1 text-primary">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                            <strong> 5 Free</strong> Domain Name
-                                                                        </li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>5
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                3 </strong> Databases</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="mb-6"><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-primary-gradient text-white btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                            <div class="card p-3 pricing-card">
-                                                                <div class="card-header d-block text-justified pt-2">
-                                                                    <p class="fs-18 fw-semibold mb-1">Regular</p>
-                                                                    <p class="text-justify fw-semibold mb-1"> <span
-                                                                            class="fs-30 me-2">$</span><span
-                                                                            class="fs-30 me-1">69</span><span
-                                                                            class="fs-25"><span
-                                                                                class="op-0-5 text-muted text-20">/</span>
-                                                                            month</span></p>
-                                                                    <p class="fs-13 mb-1">Lorem ipsum dolor sit amet
-                                                                        consectetur adipisicing elit. Iure quos debitis
-                                                                        aliquam .</p>
-                                                                    <p class="fs-13 mb-1  text-danger">Billed monthly on
-                                                                        regular basis!</p>
-                                                                </div>
-                                                                <div class="card-body pt-2">
-                                                                    <ul class="text-justify pricing-body ps-0">
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                1 Free</strong> Domain Name</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>4
-                                                                            </strong> One-Click Apps</li>
-                                                                        <li><i
-                                                                                class="mdi mdi-checkbox-marked-circle-outline text-danger p-2 fs-16"></i><strong>
-                                                                                2 </strong> Databases</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Unlimited </strong> Cloud Storage</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                Money </strong> BackGuarantee</li>
-                                                                        <li class="text-muted"><i
-                                                                                class="mdi mdi-close-circle-outline text-gray p-2 fs-16"></i><strong>
-                                                                                24/7</strong> support</li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="card-footer text-center border-top-0 pt-1">
-                                                                    <button
-                                                                        class="btn btn-lg btn-outline-danger btn-block">
-                                                                        <span class="ms-4 me-4">Select</span>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ROW-6 CLOSED -->
-
                             <!-- ROW-7 OPEN -->
                             <div class="section" id="Faqs">
                                 <div class="container">
                                     <div class="row">
-                                        <h4 class="text-center fw-semibold">FAQ'S ?</h4>
+                                        <h4 class="text-center fw-semibold">Вопросы и ответы</h4>
                                         <span class="landing-title"></span>
                                         <h2 class="text-center fw-semibold">We are here to help you</h2>
                                         <div class="row justify-content-center">
@@ -1434,247 +997,9 @@
                             <!-- ROW-7 CLOSED -->
 
                             <!-- ROW-8 OPEN -->
-                            <div class="section bg-landing" id="Blog">
-                                <div class="container">
-                                    <div class="row">
-                                        <h4 class="text-center fw-semibold">Статьи</h4>
-                                        <span class="landing-title"></span>
-                                        <h2 class="text-center fw-semibold mb-7">Последнее из блога</h2>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="../assets/images/media/12.jpg"
-                                                            style="background: url(&quot;../assets/images/media/12.jpg&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span
-                                                                class="badge bg-primary me-1 mb-1 mt-1">Business</span>
-                                                            <h3><a href="blog-details.html">Voluptatem quia
-                                                                    voluptas...</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="../assets/images/media/22.jpg"
-                                                            style="background: url(&quot;../assets/images/media/22.jpg&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span
-                                                                class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                                                            <h3><a href="blog-details.html">Generator on the
-                                                                    Internet..</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- COL-END -->
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="../assets/images/media/about.jpg"
-                                                            style="background: url(&quot;../assets/images/media/about.jpg&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span
-                                                                class="badge bg-secondary me-1 mb-1 mt-1">Travel</span>
-                                                            <h3><a href="blog-details.html">Generator on the
-                                                                    Internet..</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- COL-END -->
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="../assets/images/media/25.jpg"
-                                                            style="background: url(&quot;../assets/images/media/25.jpg&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span class="badge bg-success me-1 mb-1 mt-1">Meeting</span>
-                                                            <h3><a href="blog-details.html">Voluptatem quia
-                                                                    voluptas...</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- COL-END -->
-                                        </div>
-                                        <div class="text-center">
-                                            <a href="{% url 'blog:post_list' %}" target="_blank"
-                                                class="btn btn-outline-primary pt-2 pb-2"><i
-                                                    class="fe fe-arrow-right me-2"></i>Посмотреть ещё
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- ROW-8 CLOSED -->
 
                             <!-- ROW-9 OPEN -->
-                            <div class="testimonial-owl-landing section pb-0" id="Clients">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="card bg-transparent">
-                                                <div class="card-body pt-5">
-                                                    <h4 class="text-center fw-semibold text-white-80">Testimonials </h4>
-                                                    <span class="landing-title"></span>
-                                                    <h2 class="text-center fw-semibold text-white mb-7">What People Are
-                                                        Saying About Our Product.</h2>
-                                                    <div class="testimonial-carousel">
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80">
-                                                                            <i
-                                                                                class="fa fa-quote-left fs-20 text-white-80"></i>
-                                                                            Lorem ipsum dolor sit amet,
-                                                                            consectetur adipisicing elit. Quod eos id
-                                                                            officiis hic tenetur quae quaerat
-                                                                            ad velit ab. Lorem ipsum dolor sit amet,
-                                                                            consectetur adipisicing elit.
-                                                                            Dolore cum accusamus eveniet molestias
-                                                                            voluptatum inventore laboriosam
-                                                                            labore sit, aspernatur praesentium iste
-                                                                            impedit quidem dolor veniam.
-                                                                        </p>
-                                                                        <h3 class="title">Elizabeth</h3>
-                                                                        <span class="post">Web Developer</span>
-                                                                        <div class="rating-stars block my-rating-5 mb-5"
-                                                                            data-rating="4"></div>
-                                                                        <div class="owl-controls clickable">
-                                                                            <div class="owl-pagination">
-                                                                                <div class="owl-page active">
-                                                                                    <span class=""></span>
-                                                                                </div>
-                                                                                <div class="owl-page ">
-                                                                                    <span class=""></span>
-                                                                                </div>
-                                                                                <div class="owl-page">
-                                                                                    <span class=""></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80"><i
-                                                                                class="fa fa-quote-left fs-20"></i> Nemo
-                                                                            enim ipsam
-                                                                            voluptatem quia voluptas sit aspernatur aut
-                                                                            odit aut fugit, sed quia
-                                                                            consequuntur magni dolores eos qui ratione
-                                                                            voluptatem sequi nesciunt. Neque
-                                                                            porro quisquam est, qui dolorem ipsum quia
-                                                                            dolor sit amet, consectetur,
-                                                                            adipisci velit, sed quia non numquam eius
-                                                                            modi tempora incidunt ut labore.
-                                                                        </p>
-                                                                        <div class="testimonia-data">
-                                                                            <h3 class="title">williamson</h3>
-                                                                            <span class="post">Web Developer</span>
-                                                                            <div class="rating-stars">
-                                                                                <div class="rating-stars block my-rating-5 mb-5"
-                                                                                    data-rating="5"></div>
-                                                                                <div class="owl-controls clickable">
-                                                                                    <div class="owl-pagination">
-                                                                                        <div class="owl-page ">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page active">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80"><i
-                                                                                class="fa fa-quote-left fs-20"></i> Duis
-                                                                            aute irure dolor
-                                                                            in reprehenderit in voluptate velit esse
-                                                                            cillum dolore eu fugiat nulla
-                                                                            pariatur. Excepteur sint occaecat cupidatat
-                                                                            non proident, sunt in culpa qui
-                                                                            officia deserunt mollit anim id est laborum.
-                                                                            Sed ut perspiciatis unde omnis
-                                                                            iste natus error sit voluptatem accusantium
-                                                                            doloremque laudantium.</p>
-                                                                        <div class="testimonia-data">
-                                                                            <h3 class="title">Sophie Carr</h3>
-                                                                            <span class="post">Web Developer</span>
-                                                                            <div class="rating-stars">
-                                                                                <div class="rating-stars block my-rating-5 mb-5"
-                                                                                    data-rating="5"></div>
-                                                                                <div class="owl-controls clickable">
-                                                                                    <div class="owl-pagination">
-                                                                                        <div class="owl-page ">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                        <div class="owl-page active">
-                                                                                            <span class=""></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- ROW-9 CLOSED -->
 
                             <!-- ROW-10 OPEN -->
@@ -1704,7 +1029,7 @@
                                                                                             </div>
                                                                                             <h4
                                                                                                 class="mb-2 fw-semibold">
-                                                                                                Main Branch</h4>
+                                                                                                Локация</h4>
                                                                                             <p>Самара, РФ </p>
                                                                                         </div>
                                                                                     </div>
@@ -1721,7 +1046,7 @@
                                                                                             </div>
                                                                                             <h4
                                                                                                 class="mb-2 fw-semibold">
-                                                                                                Телефон & Email</h4>
+                                                                                                Телефон</h4>
                                                                                             <p class="mb-0"> +7-987-957-71-30 </p>
                                                                                             <p>volochek93@yandex.ru</p>
                                                                                         </div>
@@ -1739,10 +1064,9 @@
                                                                                             </div>
                                                                                             <h4
                                                                                                 class="mb-2 fw-semibold">
-                                                                                                Contact</h4>
+                                                                                                Email</h4>
                                                                                             <p class="mb-0">
-                                                                                                www.example.com</p>
-                                                                                            <p>example@dev.com</p>
+                                                                                                volochek93@yandex.ru</p>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1809,36 +1133,6 @@
                             </div>
                             <!-- ROW-10 CLOSED -->
 
-                            <!-- ROW-11 OPEN -->
-                            <div class="">
-                                <div class="container">
-                                    <div class="testimonial-owl-landing buynow-landing reveal revealrotate">
-                                        <div class="row pt-6">
-                                            <div class="col-md-12">
-                                                <div class="card bg-transparent">
-                                                    <div class="card-body pt-5 px-7">
-                                                        <div class="row">
-                                                            <div class="col-lg-9">
-                                                                <h1 class="fw-semibold text-white">Хотите поддержать?</h1>
-                                                                <p class="text-white">Вы всегда можете помочь развитию проекта. Или хотя бы купить мне кофе...</p>
-                                                            </div>
-                                                            <div class="col-lg-3 text-end my-auto">
-                                                                <a href="https://themeforest.net/item/sash-bootstrap-5-admin-dashboard-template/35183671"
-                                                                    target="_blank"
-                                                                    class="btn btn-info w-lg pt-2 pb-2"><i
-                                                                        class="fe fe-shopping-cart me-2"></i>Купить
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- ROW-11 CLOSED -->
-
                         </div>
                     </div>
                     <!-- CONTAINER CLOSED-->
@@ -1856,29 +1150,26 @@
                             <div class="top-footer">
                                 <div class="row">
                                     <div class="col-lg-4 col-sm-12 col-md-12 reveal revealleft">
-                                        <h6>О проекте</h6>
-                                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
-                                            doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
-                                            veritatis et quasi architecto beatae vitae dicta sunt
-                                            explicabo.
+                                        <h6>О себе</h6>
+                                        <p>Я человек, который ставит перед собой амбициозные цели и всеми силами достигает их.
                                         </p>
-                                        <p class="mb-5 mb-lg-2">Duis aute irure dolor in reprehenderit in voluptate
-                                            velit esse cillum dolore eu fugiat nulla pariatur Excepteur sint occaecat .
+                                        <p class="mb-5 mb-lg-1">Одним из моих главных качеств является гибкость в действиях и быстрое включение в процесс.
+                                        </p>
+                                        <p class="mb-5 mb-lg-1">Делать профессиональный, качественный продукт - это моя мотивация.
                                         </p>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 reveal revealleft">
-                                        <h6>Pages</h6>
+                                        <h6>Навигация</h6>
                                         <ul class="list-unstyled mb-5 mb-lg-0">
-                                            <li><a href="index.html">Dashboard</a></li>
-                                            <li><a href="alerts.html">Elements</a></li>
-                                            <li><a href="form-elements.html">Forms</a></li>
-                                            <li><a href="charts.html">Charts</a></li>
-                                            <li><a href="datatable.html">Tables</a></li>
-                                            <li><a href="file-attachments.html">Other Pages</a></li>
+                                            <li><a href="#">Главная</a></li>
+                                            <li><a href="#">Курсы</a></li>
+                                            <li><a href="#">Магазин</a></li>
+                                            <li><a href="#">Блог</a></li>
+                                            <li><a href="#">Закладки</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-2 col-sm-6 col-md-4 reveal revealleft">
-                                        <h6>Information</h6>
+                                        <h6>Прочее</h6>
                                         <ul class="list-unstyled mb-5 mb-lg-0">
                                             <li><a href="about.html">Our Team</a></li>
                                             <li><a href="about.html">Contact US</a></li>
@@ -1930,6 +1221,7 @@
                             </footer>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
