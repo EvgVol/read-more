@@ -14,6 +14,7 @@ services:
     restart: always
     volumes:
       – ./data/cache:/data
+
   web:
     build:
       context: ./website
@@ -24,6 +25,7 @@ services:
       - media_value:/app/media/
     depends_on:
       - db
+      - cache
     env_file:
       - ./.env
 

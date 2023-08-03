@@ -59,8 +59,10 @@ docker run -it --rm --name redis -p 6379:6379 redis
 
 7. Start the Django development server using the following command:
 ```
-python manage.py runserver
-python manage.py runserver_plus --cert-file cert.crt #SSL
+python manage.py runserver --settings=website.settings.local
+
+#If you need a SSL using the command below:
+python manage.py runserver_plus --cert-file cert.crt
 ```
 
 8. Open your web browser and navigate to http://localhost:8000 to view the application.
