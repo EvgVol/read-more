@@ -36,17 +36,9 @@
                 <i class="fa fa-star-half-o text-warning"></i>
                 <i class="fa fa-star-o text-warning"></i>
             </div>
-            <div class="price">500 ₽<span class="ms-4">799 ₽</span>
+            <div class="price">{{ course.price_per_mouth }} ₽<span class="">/ мес.</span>
             </div>
         </div>
     </div>
-    {% comment %} <div class="card-footer text-center">
-        <form action="#" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="quantity" value="1" style="display:none;">
-          <button type="submit" class="btn btn-primary mb-1"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</button>
-        </form>
-        <a href="wishlist.html" class="btn btn-outline-danger mb-1"><i class="fe fe-heart mx-2 wishlist-icon"></i>{% trans "Add to Favorites" %}</a>
-    </div> {% endcomment %}
   </div>
 </div>

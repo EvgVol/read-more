@@ -366,9 +366,132 @@
         <!-- ROW-3 END -->
 
         <!-- ROW-4 -->
-        
         {% show_orders %}
         <!-- ROW-4 END -->
+        <div class="row">
+          <div class="col">
+            <div class="card card-headpills">
+                <div class="card-header border-bottom">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#activepills">Active</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#linkpills">Link</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" data-bs-toggle="tab" href="#disablepills" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="activepills">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2 ">
+                              <div class="card service">
+                                <div class="card-body">
+                                    <div class="text-center">
+                                      <p class="ms-3 fs-20 fw-semibold">Всего {{ all_courses.count }} курсов</p>
+                                    </div>
+                                    <div class="row mb-4"> 
+                                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12 ps-sm-0">
+                                          <div class="d-flex align-items-end justify-content-between mb-1">
+                                              <h6 class="mb-1">Junior</h6>
+                                              <h6 class="fw-semibold mb-1">{% if junior_courses %}{{ junior_courses.count }}{% else %}0{% endif %}</h6>
+                                          </div>
+                                          <div class="progress h-2 mb-3">
+                                              <div class="progress-bar bg-primary" style="width:{{ percent_junior|floatformat:0 }}%;"
+                                                  role="progressbar"></div>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12 ps-sm-0">
+                                          <div class="d-flex align-items-end justify-content-between mb-1">
+                                              <h6 class="mb-1">Middle</h6>
+                                              <h6 class="fw-semibold mb-1">{% if middle_courses %}{{ middle_courses.count }}{% else %}0{% endif %}</h6>
+                                          </div>
+                                          <div class="progress h-2 mb-3">
+                                              <div class="progress-bar bg-secondary" style="width: {{ percent_middle|floatformat:0 }}%;"
+                                                  role="progressbar"></div>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between mb-1">
+                                            <h6 class="mb-1">Senior</h6>
+                                            <h6 class="fw-semibold mb-1">{% if senior_course %}{{ senior_course.count }}{% else %}0{% endif %}</h6>
+                                        </div>
+                                        <div class="progress h-2 mb-3">
+                                            <div class="progress-bar bg-success" style="width: {{ percent_senior|floatformat:0 }}%;"
+                                                role="progressbar"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="text-center">
+                                      <a href="{% url 'courses:course_create' %}"><i class="ti-plus fa-4x" aria-hidden="true"></i></a>
+                                      <i class="ti-settings fa-4x" aria-hidden="true"></i>
+                                      <i class="ti-settings fa-4x" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="linkpills">
+                          <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2 ">
+                              <div class="card service">
+                                <div class="card-body">
+                                    <div class="text-center">
+                                      <p class="ms-3 fs-20 fw-semibold">Всего {{ all_courses.count }} курсов</p>
+                                    </div>
+                                    <div class="row mb-4"> 
+                                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12 ps-sm-0">
+                                          <div class="d-flex align-items-end justify-content-between mb-1">
+                                              <h6 class="mb-1">Junior</h6>
+                                              <h6 class="fw-semibold mb-1">{% if junior_courses %}{{ junior_courses.count }}{% else %}0{% endif %}</h6>
+                                          </div>
+                                          <div class="progress h-2 mb-3">
+                                              <div class="progress-bar bg-primary" style="width:{{ percent_junior|floatformat:0 }}%;"
+                                                  role="progressbar"></div>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12 ps-sm-0">
+                                          <div class="d-flex align-items-end justify-content-between mb-1">
+                                              <h6 class="mb-1">Middle</h6>
+                                              <h6 class="fw-semibold mb-1">{% if middle_courses %}{{ middle_courses.count }}{% else %}0{% endif %}</h6>
+                                          </div>
+                                          <div class="progress h-2 mb-3">
+                                              <div class="progress-bar bg-secondary" style="width: {{ percent_middle|floatformat:0 }}%;"
+                                                  role="progressbar"></div>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 col-xxl-12 ps-sm-0">
+                                        <div class="d-flex align-items-end justify-content-between mb-1">
+                                            <h6 class="mb-1">Senior</h6>
+                                            <h6 class="fw-semibold mb-1">{% if senior_course %}{{ senior_course.count }}{% else %}0{% endif %}</h6>
+                                        </div>
+                                        <div class="progress h-2 mb-3">
+                                            <div class="progress-bar bg-success" style="width: {{ percent_senior|floatformat:0 }}%;"
+                                                role="progressbar"></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="text-center">
+                                      <a href="href="{% url 'courses:course_create' %}" "><i class="fa fa-plus fa-4x" aria-hidden="true"></i></a>
+                                      <i class="fa fa-stats fa-4x" aria-hidden="true"></i>
+                                      <i class="fa fa-circle fa-4x" aria-hidden="true"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane disabled" id="disablepills"></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- CONTAINER END -->
     </div>

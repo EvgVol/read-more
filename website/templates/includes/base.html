@@ -3,14 +3,9 @@
 {% block base %}
 <div class="page">
   <div class="page-main">
-    <header>
-      {% include 'includes/header.html' %}
-      {% include 'includes/sidebar-left.html' %} 
-    </header>
-    <main>
+      {% include 'includes/sidebar-left.html' %}
       {% block content %}{% endblock %}
-    </main>
-    <footer>{% include 'includes/footer.html' %}</footer>
+      {% include 'includes/footer.html' %}
   </div>
 </div>
 {% endblock base %}

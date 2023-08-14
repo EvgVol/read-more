@@ -226,10 +226,10 @@ DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yan
 SERVER_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 
 # Action Users LOGIN and LOGOUT
-LOGIN_REDIRECT_URL = reverse_lazy("blog:post_list")
+LOGIN_REDIRECT_URL = reverse_lazy("courses:manage_course_list")
 LOGIN_URL = reverse_lazy("login")
 LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'blog:post_list'
+LOGOUT_REDIRECT_URL = 'courses:manage_course_list'
 
 # Setting password hashers
 PASSWORD_HASHERS = [

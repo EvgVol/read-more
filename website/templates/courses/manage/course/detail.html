@@ -13,7 +13,7 @@
                 <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar"
                     href="javascript:void(0)"></a>
                 <!-- sidebar-toggle-->
-                <a class="logo-horizontal " href="{% url 'core:index' %}">
+                <a class="logo-horizontal " href="{% url 'courses:subject_list' %}">
                     <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img desktop-logo" alt="logo">
                     <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img light-logo1"
                         alt="logo">
@@ -27,53 +27,53 @@
     <div class="landing-top-header overflow-hidden">
         <div class="top sticky overflow-hidden">
             <!--APP-SIDEBAR-->
-            <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
-            <div class="app-sidebar bg-transparent horizontal-main">
-                <div class="container">
-                    <div class="row">
-                        <div class="main-sidemenu navbar px-0">
-                            <a class="navbar-brand ps-0 d-none d-lg-block" href="{% url 'core:index' %}">
-                                <img alt="" class="logo-2" src="{% static 'images/fav/favicon-32x32.png' %}">
-                                <img src="{% static 'images/fav/favicon-32x32.png' %}" class="logo-3" alt="logo">
-                            </a>
-                            <ul class="side-menu">
-                                <li class="slide">
-                                    <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
-                                            class="side-menu__label">О профессии</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Advantages"><span
-                                            class="side-menu__label">Преимущества</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Howlearn"><span
-                                            class="side-menu__label">Что вас ждет</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Technologies"><span
-                                            class="side-menu__label">Навыки</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Price"><span
-                                            class="side-menu__label">Стоимость</span></a>
-                                </li>
-                                <li class="slide">
-                                    <a class="side-menu__item" data-bs-toggle="slide" href="#Programms"><span
-                                            class="side-menu__label">Программа</span></a>
-                                </li>
-                                <li class="slide">
-                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Blog"><span
-                                          class="side-menu__label">Блог</span></a>
-                                </li>
-                            </ul>
-                            <a class="slide" href="{% url 'courses:manage_course_list' subject_name=course.subject.slug %}">
-                                <i class="fe fe-corner-up-left me-2"></i>
-                                <span class="side-menu__label">Назад к курсам</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
+          <div class="app-sidebar bg-transparent horizontal-main">
+              <div class="container">
+                  <div class="row">
+                      <div class="main-sidemenu navbar px-0">
+                          <a class="navbar-brand ps-0 d-none d-lg-block" href="{% url 'courses:subject_list' %}">
+                              <img alt="" class="logo-2" src="{% static 'images/fav/favicon-32x32.png' %}">
+                              <img src="{% static 'images/fav/favicon-32x32.png' %}" class="logo-3" alt="logo">
+                          </a>
+                          <ul class="side-menu">
+                              <li class="slide">
+                                  <a class="side-menu__item active" data-bs-toggle="slide" href="#home"><span
+                                          class="side-menu__label">О профессии</span></a>
+                              </li>
+                              <li class="slide">
+                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Advantages"><span
+                                          class="side-menu__label">Преимущества</span></a>
+                              </li>
+                              <li class="slide">
+                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Howlearn"><span
+                                          class="side-menu__label">Что вас ждет</span></a>
+                              </li>
+                              <li class="slide">
+                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Technologies"><span
+                                          class="side-menu__label">Навыки</span></a>
+                              </li>
+                              <li class="slide">
+                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Price"><span
+                                          class="side-menu__label">Стоимость</span></a>
+                              </li>
+                              <li class="slide">
+                                  <a class="side-menu__item" data-bs-toggle="slide" href="#Programms"><span
+                                          class="side-menu__label">Программа</span></a>
+                              </li>
+                              <li class="slide">
+                                <a class="side-menu__item" data-bs-toggle="slide" href="#Blog"><span
+                                        class="side-menu__label">Блог</span></a>
+                              </li>
+                          </ul>
+                          <a class="slide" href="{% url 'courses:manage_course_list' subject_name=course.subject.slug %}">
+                              <i class="fe fe-corner-up-left me-2"></i>
+                              <span class="side-menu__label">Назад к курсам</span>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
             <!--/APP-SIDEBAR-->
         </div>
               <div class="demo-screen-headline main-demo main-demo-1 spacing-top overflow-hidden reveal" id="home">

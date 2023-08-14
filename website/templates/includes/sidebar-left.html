@@ -1,48 +1,65 @@
 {% load static %}
+{% load thumbnail %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
 <div class="sticky">
   <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
   <div class="app-sidebar is-expanded ps ps--active-y sidemenu-scroll horizontal-main">
-    <div class="side-header active">
-      <a class="header-brand1" href="{% url 'blog:post_list' %}">
-          <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img desktop-logo" alt="logo">
-          <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img toggle-logo" alt="logo">
-          <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img light-logo" alt="logo">
-          <img src="{% static 'images/fav/favicon-32x32.png' %}" class="header-brand-img light-logo1" alt="logo">
-      </a>
-    </div>
-      <div class="main-sidemenu is-expanded container">
-          <div class="slide-left disabled active" id="slide-left"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"/></svg></div>
-          <ul class="side-menu">
-            <li class="slide">
-                <a class="side-menu__item {% if request.path == '/home/' %}active{% endif %}" data-bs-toggle="slide" href="{% url 'core:home' %}"><span
-                        class="side-menu__label">Главная</span></a>
-            </li>
-            <li class="slide">
-              <a class="side-menu__item {% if request.path == '/blog/' %}active{% endif %}" data-bs-toggle="slide" href="{% url 'blog:post_list' %}"><span
-                      class="side-menu__label">Блог</span></a>
-            </li>
-            <li class="slide">
-              <a class="side-menu__item {% if request.path == '/vookmarks/' %}active{% endif %}" data-bs-toggle="slide" href="{% url 'vookmarks:list' %}"><span
-                      class="side-menu__label">Закладки</span></a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item {% if request.path == '/shop/' %}active{% endif %}" data-bs-toggle="slide" href="{% url 'shop:product_list' %}"><span
-                        class="side-menu__label">Магазин</span></a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item {% if request.path == '/courses/' %}active{% endif %}" data-bs-toggle="slide" href="{% url 'courses:subject_list' %}"><span
-                        class="side-menu__label">Обучение</span></a>
-            </li>
+    <div class="main-sidemenu navbar px-0">
+      <div class="d-flex justify-content-between px-0 navbar">
+        <div class="d-flex">
+            <a class="navbar-brand d-none d-lg-block px-0" href="{% url 'courses:subject_list' %}">
+                <img alt="" class="logo-2" src="{% static 'images/fav/favicon-32x32.png' %}">
+                <img src="{% static 'images/fav/favicon-32x32.png' %}" class="logo-3" alt="logo">
+            </a>
+            <form class="d-none d-lg-flex align-items-center px-1 ms-3"
+                  action="{% url 'blog:post_search' %}"
+                  method="get">
+                <input
+                        type="text"
+                        name="query"
+                        class="form-control"
+                        id="typehead"
+                        placeholder="Найти на сайте..."
+                        autocomplete="off"/>
+                </button>
+            </form>
+            <a class="nav-link icon text-center" data-bs-target="#country-selector" data-bs-toggle="modal">
+              <span class="country-selector">
+                {% for lang_code, lang_name in LANGUAGES %}
+                  {% if lang_code == LANGUAGE_CODE %}
+                      <img src="{% static 'images/flags/'|add:lang_code|add:'.svg' %}" alt="{{ lang_name }}">
+                  {% endif %}
+                {% endfor %}
+              </span>
+            </a>
+        </div>
             
-            <li class="slide">
-                <a class="side-menu__item {% if request.path == '/chat/' %}active{% endif %}" data-bs-toggle="slide" href="#"><span
-                        class="side-menu__label">Чат</span></a>
-            </li>
-            <li class="slide">
-                <a class="side-menu__item {% if request.path == '/help/' %}active{% endif %}" data-bs-toggle="slide" href="#"><span
-                        class="side-menu__label">Поддержать</span></a>
-            </li>
-          </ul>
-          <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24"><path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z"/></svg></div>
+
       </div>
+      {% if request.user.is_authenticated %}
+        <div class="header-nav-right d-none d-lg-flex align-items-center">
+            <a href="{{ user.get_absolute_url }}"
+               class="btn ripple btn-min w-sm btn-dark me-2 my-auto d-lg-none d-xl-block d-block"
+               target="_blank"
+            >В профиль
+            </a>
+        </div>
+        {% else %}
+        <div class="header-nav-right d-none d-lg-flex align-items-center">
+            <a href="{% url 'signup' %}"
+               class="btn ripple btn-min w-sm btn-outline-dark me-2 my-auto d-lg-none d-xl-block d-block"
+               target="_blank"
+            >Зарегистрироваться
+            </a>
+            <a href="{% url 'login' %}"
+               class="btn ripple btn-min w-sm btn-dark me-2 my-auto d-lg-none d-xl-block d-block"
+               target="_blank"
+            >ВОЙТИ
+            </a>
+        </div>
+        {% endif %}
+    </div>
   </div>
+  {% include 'includes/country_selector_modal.html' %}

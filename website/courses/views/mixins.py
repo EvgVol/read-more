@@ -30,7 +30,10 @@ class OwnerCourseMixin(OwnerMixin,
     """A mixin for views that deal with Course instances."""
 
     model = Course
-    fields = ['subject', 'title', 'overview']
+    fields = ('subject', 'title', 'overview', 'description',
+              'complexity', 'advantages', 'technologies', 'load',
+              'period', 'count_projects', 'price_per_mouth',
+              'price_immediately', 'cards',)
 
     def get_success_url(self):
         subject_name = self.object.subject.slug

@@ -29,16 +29,10 @@ class CourseListView(OwnerCourseMixin, ListView):
         subject_id = get_object_or_404(Subject, slug=subject_name)
         
 
-        all_courses = Course.objects.filter(subject=subject_id)
-        junior_courses = Course.objects.filter(
-            subject=subject_id, complexity=Course.Complexity.JUNIOR
-        )
-        middle_courses = Course.objects.filter(
-            subject=subject_id, complexity=Course.Complexity.MIDDLE
-        )
-        senior_courses = Course.objects.filter(
-            subject=subject_id, complexity=Course.Complexity.SENIOR
-        )
+        all_courses = Course.objects.all()
+        junior_courses = Course.objects.filter(complexity=Course.Complexity.JUNIOR)
+        middle_courses = Course.objects.filter(complexity=Course.Complexity.MIDDLE)
+        senior_courses = Course.objects.filter(complexity=Course.Complexity.SENIOR)
 
         total_count = all_courses.count()
         junior_count = junior_courses.count()
@@ -46,9 +40,14 @@ class CourseListView(OwnerCourseMixin, ListView):
         senior_count = senior_courses.count()
 
         # Calculate percentages
-        percent_junior = (junior_count / total_count) * 100
-        percent_middle = (middle_count / total_count) * 100
-        percent_senior = (senior_count / total_count) * 100
+        if total_count > 0:
+            percent_junior = (junior_count / total_count) * 100
+            percent_middle = (middle_count / total_count) * 100
+            percent_senior = (senior_count / total_count) * 100
+        else:
+            percent_junior = 0
+            percent_middle = 0
+            percent_senior = 0
 
         context['all_courses'] = all_courses
         context['junior_courses'] = junior_courses
