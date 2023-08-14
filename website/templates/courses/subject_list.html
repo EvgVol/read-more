@@ -29,7 +29,7 @@
                     <h5>Cреда, где всё получится: и новая IT-профессия, и новая жизнь</h5>
                 </div>
                 {% for subject in object_list %}
-                <div class="col-xl-3 col-md-12 mt-7">
+                <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6 mt-7">
                     <div class="card pricing-card card-blog overflow-hidden">
                         {% thumbnail subject.image "500x333" crop="center" as im %}
                         <a href="{% url 'courses:manage_course_list' subject_name=subject.slug %}"><img class="card-img-top" src="{{ im.url }}"></a>
@@ -53,8 +53,7 @@
                                             <h2 class="fw-bold">Серьезный <span class="text-info"> тест</span> по профориентации</h2>
                                             <p>Данный тест на профориентацию представляет собой комплексный инструмент, который поможет вам лучше понять свои навыки, интересы и предпочтения в выборе профессии.</p>
                                             <p>Пройдя этот тест, вы сможете получить ценные рекомендации по выбору карьерного пути, основанные на ваших сильных сторонах и предпочтениях. </p>
-                                            <p> Тест содержит разнообразные вопросы и задания, которые охватывают различные сферы деятельности, подробно изучая ваше поведение, личностные черты и умения. Пройдите этот тест на профориентацию, чтобы получить ценные исходные данные для принятия важного решения о своей будущей карьере.</p>
-                                                <a href="javascript:void(0)" class="btn btn-info  mt-2">Пройти тест</a>
+                                            <a href="javascript:void(0)" class="btn btn-info  mt-2">Пройти тест</a>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
