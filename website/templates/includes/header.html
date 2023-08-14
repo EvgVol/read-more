@@ -3,8 +3,8 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% get_available_languages as LANGUAGES %}
-<div class="app-header header sticky">
-  <div class="container-fluid main-container">
+<div class="hor-header header sticky fixed-header visible-title">
+  <div class="main-container container">
     <div class="d-flex">
       <!-- sidebar-toggle-->
       <a
@@ -17,12 +17,12 @@
       <!-- LOGO -->
       <a class="logo-horizontal" href="{% url 'blog:post_list' %}">
         <img
-          src="{% static 'images/logo/white-logo-32x32.ico' %}"
+          src="{% static 'images/fav/favicon-32x32.png' %}"
           class="header-brand-img desktop-logo"
           alt="logo"
         />
         <img
-          src="{% static 'images/logo/black-logo-32x32.ico' %}"
+          src="{% static 'images/fav/favicon-32x32.png' %}"
           class="header-brand-img light-logo1"
           alt="logo"
         />

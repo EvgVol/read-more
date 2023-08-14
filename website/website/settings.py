@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config(
     'SECRET_KEY',
@@ -37,16 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
 
-    'blog.apps.BlogConfig', 
-    'core.apps.CoreConfig',
-    'vookmarks.apps.VookmarksConfig',
-    'actions.apps.ActionsConfig', 
-    'shop.apps.ShopConfig',
-    'cart.apps.CartConfig',
-    'orders.apps.OrdersConfig',
-    'coupons.apps.CouponsConfig',
-    'courses.apps.CoursesConfig',
-    'reviews.apps.ReviewsConfig',
+    'blog', 
+    'core',
+    'vookmarks',
+    'actions', 
+    'shop',
+    'cart',
+    'orders',
+    'coupons',
+    'courses',
+    'reviews',
 
     'sorl.thumbnail', #IMAGE #https://sorl-thumbnail.readthedocs.io/en/latest/
     'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/
