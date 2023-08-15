@@ -9,7 +9,6 @@ from courses.views.generic.create import (CourseCreateView,
 from courses.views.generic.update import CourseUpdateView, ModuleUpdateView
 from courses.views.generic.delete import CourseDeleteView, ContentDeleteView
 
-
 app_name = 'courses'
 
 
@@ -21,9 +20,11 @@ urlpatterns = [
          CourseCreateView.as_view(), name="course_create"),
     path("courses/<subject_name>/",
          CourseListView.as_view(), name="manage_course_list"),
-    path("course/<int:pk>/",
-         CourseDetailView.as_view(), name="course_detail"),
-    path("courses/<pk>/", include([
+    path("course/<int:pk>/", include([
+        path("", CourseDetailView.as_view(), name="course_detail"),
+        path('modules/', ModuleListView.as_view(), name='module_list'),
+    ])),
+    path("courses/<int:pk>/", include([
         path("edit/",
              CourseUpdateView.as_view(), name="course_edit"),
         path("delete/",
@@ -35,30 +36,31 @@ urlpatterns = [
                  ModuleUpdateView.as_view(),
                  name="module_update"),
 
-            # Контент
+     #        # Контент
             path('<int:module_id>/', include([
-                # path('', ModuleContentListView.as_view(), name='content_list'),
                 
-                path('content/<str:model_name>/<int:id>/', include([
-                    # path('', ContentCreateUpdateView.as_view(), name='content_update'),
-                    path('delete/',
-                         ContentDeleteView.as_view(),
-                         name='content_delete'),
+                
+                path('content/<str:model_name>/', include([
+                    path('create/', ContentCreateUpdateView.as_view(), name='content_create'),
+                    path('<int:id>/', ContentCreateUpdateView.as_view(), name='content_update'),
+     #                path('delete/',
+     #                     ContentDeleteView.as_view(),
+     #                     name='content_delete'),
                 ])),
             ])),
         ])),
     ])),
-    path('<pk>/module/',
-         ModuleUpdateView.as_view(),
-         name='module_update'),
-    path('module/<int:module_id>/content/<model_name>/<id>/',
-         ContentCreateUpdateView.as_view(),
-         name='content_update'),
-    path('content/<int:module_id>/',
-         ContentListView.as_view(),
-         name='content_list'),
-    path('module/<int:module_id>/content/<str:model_name>/create/',
-         ContentCreateUpdateView.as_view(),
-         name='content_create'),
-    path('modules/', ModuleListView.as_view(), name='module_list'),
+#     path('<pk>/module/',
+#          ModuleUpdateView.as_view(),
+#          name='module_update'),
+#     path('module/<int:module_id>/content/<model_name>/<id>/',
+#          ContentCreateUpdateView.as_view(),
+#          name='content_update'),
+#     path('content/<int:module_id>/',
+#          ContentListView.as_view(),
+#          name='content_list'),
+#     path('module/<int:module_id>/content/<str:model_name>/create/',
+#          ContentCreateUpdateView.as_view(),
+#          name='content_create'),
+#     path('modules/', ModuleListView.as_view(), name='module_list'),
 ]

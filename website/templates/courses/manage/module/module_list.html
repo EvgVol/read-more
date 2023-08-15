@@ -2,9 +2,9 @@
 {% load course %}
 {% load i18n %}
 {% load static %}
-
+{% load thumbnail %}
 {% block title %}
-    ExView | {% trans "Test" %}
+    READ MORE | {% trans "The course programm of" %} {{ course_title }}
 {% endblock %}
 
 {% block content %}
@@ -12,45 +12,46 @@
     <div class="side-app">
         <div class="main-container container-fluid">
             <div class="page-header">
-                <h1 class="page-title">{% trans "Education" %}</h1>
+                <h1 class="page-title">{{ course_title }}</h1>
                 <div>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)"><i class="ion-plus"></i> Create a subject</a></li>
-                    </ol>
+                      <li class="breadcrumb-item">
+                        <a href="javascript:void(0)">READ MORE</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }}</a>
+                      </li>
                 </div>
             </div>
             <div class="row mt-5">
                 <div class="text-center">
-                    <h2 class="fw-semibold mb-2">Meet our creative minds</h2>
-                    <h5>Our Leadership</h5>
+                    <h2 class="fw-semibold mb-2">Программа курса</h2>
+                    <h5>{{ course_title }}</h5>
                 </div>
                 <!-- COL-OPEN -->
-                <div class="col-xl-3 col-md-6 col-lg-6 mt-7">
+                {% for module_with_lessons in modules_lessons %}
+                <div class="col-xl-3 col-md-6 col-lg-6 mt-7" data-id="{{ module_with_lessons.module.id }}" data-module-title="{{ module_with_lessons.module.title }}">
                     <div class="card product-grid6">
-                        <div class="card-status bg-primary br-te-7 br-ts-7"></div>
+                        <div class="card-status bg-gray br-te-7 br-ts-7"></div>
                         <div class="card-body text-center product-image6">
                             <ul class="icons">
                               <li><a href="#" class="btn btn-success"> <i class="fe fe-log-in"></i> </a></li>
                             </ul>
+                            {% if module_with_lessons.module.image %}
+                              {% thumbnail module_with_lessons.module.image "200x120" crop="center" as im %}
+                                <a href="#" data-bs-toggle="sidebar-right" data-target=".sidebar-right">
+                                    <img class="card-img-top" src="{{ im.url }}" alt="img">
+                                </a>
+                              {% endthumbnail %}
+                            {% else %}
                             <a href="#" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><img src="{% static 'images/media/8.jpg' %}" class="card-img-top" alt="img"></a>
-                            <h3 class="mb-0 text-start mt-5">Mike Rowe-Soft</h3>
+                            {% endif %}
+                            <h3 class="mb-0 text-start mt-5">{{ module_with_lessons.module.title }}</h3>
                             <p class="card-text text-start mt-7"><small class="text-muted">Last updated 3 mins ago</small></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 col-lg-6 mt-7">
-                  <div class="card product-grid6">
-                      <div class="card-status bg-secondary br-te-7 br-ts-7"></div>
-                      <div class="card-body text-center product-image6">
-                          <ul class="icons">
-                            <li><a href="#" class="btn btn-danger"> <i class="fe fe-lock"></i> </a></li>
-                          </ul>
-                          <a href="#" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><img src="{% static 'images/media/8.jpg' %}" class="card-img-top" alt="img"></a>
-                          <h3 class="mb-0 text-start mt-5">Mike Rowe-Soft</h3>
-                          <p class="card-text text-start mt-7"><small class="text-muted">Last updated 3 mins ago</small></p>
-                      </div>
-                  </div>
-              </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -59,7 +60,7 @@
 <div class="sidebar sidebar-right sidebar-animate">
   <div class="panel panel-primary card mb-0 shadow-none border-0">
       <div class="tab-menu-heading border-0 d-flex p-3">
-          <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span>Notifications</div>
+          <div class="card-title mb-0"><i class="fe fe-bell me-2"></i><span class=" pulse"></span></div>
           <div class="card-options ms-auto">
               <a href="javascript:void(0);" class="sidebar-icon text-end float-end me-3 mb-1" data-bs-toggle="sidebar-right" data-target=".sidebar-right"><i class="fe fe-x text-white"></i></a>
           </div>
@@ -67,36 +68,30 @@
       <div class="panel-body tabs-menu-body latest-tasks p-0 border-0">
         <div class="text-start">
           <ul class="list-group">
-              <a href="">
-                <li class="list-group-item">
-                  <i class="fe fe-log-in text-primary me-2" aria-hidden="true">
-                  </i>Введение. Что предстоит в платной части?
-                </li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Структура и сроки</li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Как устроена поддержка</li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Что такое переход и зачем он нужен</li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Правила</li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Убедимся, что правильно друг друга поняли</li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Что для вас важно?</li>
-              </a>
-              <a href="">
-                <li class="list-group-item"><i class="fa fa-lock text-primary me-2" aria-hidden="true"></i> Что получится в результате</li>
-              </a>
+            {% for module_with_lessons in modules_lessons %}
+              {% for lesson in module_with_lessons.lessons %}
+              <div class="accordion accordion-flush" id="accordion">
+                <div class="list-group-item accordion-item" data-module-id="{{ module_with_lessons.module.id }}">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      <i class="fe fe-lock text-primary me-2" aria-hidden="true"></i>{{ lesson.title }}
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                    <li class="list-group-item" data-module-id="{{ module_with_lessons.module.id }}">
+                      <a href=""><i class="fe fe-lock text-primary me-2" aria-hidden="true"></i>{{ lesson.title }}</a>
+                    </li>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            {% endfor %}
           </ul>
       </div>
       </div>
   </div>
 </div>
 {% endblock content %}
+{% block add_script %}
+<script src="{% static 'js/load-lessons.js' %}"></script>
+{% endblock add_script %}

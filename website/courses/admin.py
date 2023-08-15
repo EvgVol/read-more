@@ -8,6 +8,8 @@ from courses.models.technology import Technology
 from courses.models.subject import Subject
 from courses.models.module import Module
 from courses.models.course import Course, Card
+from courses.models.lessons import Lesson
+
 
 
 @admin.register(Advantage)
@@ -45,9 +47,34 @@ class SubjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+
+
+class LessonInline(admin.StackedInline):  
+    model = Lesson
+    extra = 2
+
+
+@admin.register(Module)
+class ModuleAdmin(admin.ModelAdmin):
+    list_display = ['icon_module','title']
+    inlines = [LessonInline]
+
+    @admin.display(description=_('icon module'))
+    def icon_module(self, obj):
+        if obj.image and hasattr(obj.image, 'url'):
+            return format_html(
+                '<img src="{}" width="100" height="70" />'
+                .format(obj.image.url)
+            )
+        else:
+            return _('No image')
+
 class ModuleInLine(admin.StackedInline):
     model = Module
-
+    extra = 2
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):

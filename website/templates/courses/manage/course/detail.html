@@ -85,7 +85,7 @@
                               <h1 class="text-start fw-bold">{{ course.title }}</h1>
                               <p class="pb-1">{{ course.description|linebreaks }}</p>
 
-                              <a href="#"
+                              <a href="{% url 'courses:module_list' course.id %}"
                                   target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
                                       class="fe fe-play me-2"></i> Начать учиться
                               </a>
@@ -916,8 +916,7 @@
                                                                 <h1 class="fw-semibold text-white">Начать учиться бесплатно</h1>
                                                             </div>
                                                             <div class="col-lg-3 text-end my-auto">
-                                                                <a href="#"
-                                                                    target="_blank"
+                                                                <a href="{% url 'courses:module_list' course.id %}"
                                                                     class="btn btn-info w-lg pt-2 pb-2"><i
                                                                         class="fe fe-arrow-right me-2"></i>Вперед
                                                                 </a>

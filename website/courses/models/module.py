@@ -12,13 +12,15 @@ class Module(models.Model):
                                verbose_name=_("course"),
                                related_name='modules',
                                on_delete=models.CASCADE)
-    title = models.CharField(_("title"), max_length=200,
+    title = models.CharField(_("title"), max_length=50,
                              help_text=_('Enter the module title'))
     description = models.TextField(_("description"), blank=True,
                                    help_text=_(
                                        'Enter a description of the module'
                                    ))
     order = OrderField(blank=True, for_fields=['course'])
+    image = models.ImageField(_("image"), upload_to='module_images/',
+                              blank=True, help_text=_('Upload a .webp image'))
 
     class Meta:
         ordering = ['order']

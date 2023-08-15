@@ -6,6 +6,7 @@ from blog.models import Post, Comment
 from actions.models import Action
 from courses.models.course import Course
 
+
 class SettingView(TemplateView):
     """Отображает страницу со списком настроек."""
 
@@ -84,4 +85,4 @@ def countdown_view(request):
 
 
 class TestPageView(TemplateView):
-    template_name = 'courses/manage/lessons/detail.html'
+    template_name = 'courses/manage/module/module_list.html'

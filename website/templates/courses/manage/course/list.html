@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% block title %}
-  ExView | {% trans 'Courses' %}
+  READ MORE | {% trans 'Courses' %}
 {% endblock %}
 {% block content %}
   <div class="main-content app-content mt-0">
@@ -17,7 +17,7 @@
                 <a href="{% url 'courses:subject_list' %}">Read more</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
-                <a href="{% url 'courses:subject_list' %}">{% trans 'Education' %}</a>
+                <a href="{% url 'courses:subject_list' %}">{{ subject_id }}</a>
               </li>
             </ol>
           </div>

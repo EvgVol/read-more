@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from courses.models.subject import Subject
 from courses.models.course import Course
 from courses.models.module import Module
+from courses.models.lessons import Lesson
 from courses.views.mixins import OwnerCourseMixin
 
 
@@ -29,10 +30,16 @@ class CourseListView(OwnerCourseMixin, ListView):
         subject_id = get_object_or_404(Subject, slug=subject_name)
         
 
-        all_courses = Course.objects.all()
-        junior_courses = Course.objects.filter(complexity=Course.Complexity.JUNIOR)
-        middle_courses = Course.objects.filter(complexity=Course.Complexity.MIDDLE)
-        senior_courses = Course.objects.filter(complexity=Course.Complexity.SENIOR)
+        all_courses = Course.objects.filter(subject=subject_id)
+        junior_courses = Course.objects.filter(
+            subject=subject_id, complexity=Course.Complexity.JUNIOR
+        )
+        middle_courses = Course.objects.filter(
+            subject=subject_id, complexity=Course.Complexity.MIDDLE
+        )
+        senior_courses = Course.objects.filter(
+            subject=subject_id, complexity=Course.Complexity.SENIOR
+        )
 
         total_count = all_courses.count()
         junior_count = junior_courses.count()
@@ -49,6 +56,7 @@ class CourseListView(OwnerCourseMixin, ListView):
             percent_middle = 0
             percent_senior = 0
 
+        context['subject_id'] = subject_id
         context['all_courses'] = all_courses
         context['junior_courses'] = junior_courses
         context['middle_courses'] = middle_courses
@@ -63,6 +71,19 @@ class ModuleListView(ListView):
     model = Module
     template_name = 'courses/manage/module/module_list.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        course_id = self.kwargs.get('pk')
+        course = get_object_or_404(Course, id=course_id)
+        context["course_title"] = course.title
+        context["subject"] = course.subject
+        context['modules_lessons'] = []
+        for module in context["object_list"]:
+            lessons = Lesson.objects.filter(module=module).order_by('order')
+            context['modules_lessons'].append({'module': module, 'lessons': lessons})
+        return context
+    
+
 
 class ContentListView(TemplateResponseMixin, View):
     template_name = 'courses/manage/module/content_list.html'
@@ -72,5 +93,3 @@ class ContentListView(TemplateResponseMixin, View):
                                       id=id,
                                       course__owner=request.user)
         return self.render_to_response({'module': module_id})
-
-

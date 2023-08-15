@@ -3,9 +3,11 @@
 {% block base %}
 <div class="page">
   <div class="page-main">
+    <div class="landing-top-header overflow-hidden">
       {% include 'includes/sidebar-left.html' %}
       {% block content %}{% endblock %}
       {% include 'includes/footer.html' %}
+    </div>
   </div>
 </div>
 {% endblock base %}
@@ -64,4 +66,17 @@
 
 <!-- Switcher js -->
 <script src="{% static 'switcher/js/switcher.js' %}"></script>
+
+<script src="{% static 'js/helper.js' %}"></script>
+
+<!-- Perfect SCROLLBAR JS -->
+<script src="{% static 'plugins/owl-carousel/owl.carousel.js' %}"></script>
+<script src="{% static 'plugins/company-slider/slider.js' %}"></script>
+
+<!-- COUNTERS JS -->
+<script src="{% static 'plugins/counters/counterup.min.js' %}"></script>
+<script src="{% static 'plugins/counters/waypoints.min.js' %}"></script>
+<script src="{% static 'plugins/counters/counters-1.js' %}"></script>
+
+
 {% endblock script %}
