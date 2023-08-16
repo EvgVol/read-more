@@ -8,12 +8,8 @@
           {% if request.user.is_staff %}
             <li><a href="{% url 'courses:module_update' course.id %}" class="btn btn-primary"> <i class="fe fe-sliders"></i> </a></li>
             {% if course.modules.count > 0 %}
-            <li><a href="{% url 'courses:module_list' course.id %}" class="btn btn-dark"><i  class="fe fe-server"></i></a></li>
+            <li><a href="{% url 'courses:content_list' course.modules.first.id %}" class="btn btn-dark"><i  class="fe fe-server"></i></a></li>
             {% endif %}
-            <li><a href="{% url 'courses:course_edit' course.id %}" class="btn btn-warning"><i class="fe fe-edit"></i></a></li>
-            <li><a href="{% url 'courses:course_delete' course.id %}" class="btn btn-danger"><i class="fe fe-trash-2"></i></a></li>
-            <li><a href="#" class="btn btn-success"><i class="fe fe-star"></i></a></li>
-            <li><a href="#" class="btn btn-info"><i class="fe fe-paperclip"></i></a></li>
           {% else %}
             <li><a href="#" class="btn btn-success"><i class="fe fe-star"></i></a></li>
             <li><a href="#" class="btn btn-info"><i class="fe fe-paperclip"></i></a></li>

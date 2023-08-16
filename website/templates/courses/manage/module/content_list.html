@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    {% with course=module.course %}
+    {% with course=lesson.module.course %}
         <h1>Course "{{ course.title }}"</h1>
         <div class="contents">
             <h3>Modules</h3>
@@ -24,7 +24,8 @@
                     <li>No modules yet.</li>
                 {% endfor %}
             </ul>
-            <p><a href="{% url 'courses:module_update' course.id %}">Edit modules</a></p>
+            <p><a href="#">Edit modules</a></p>
+            {% comment %} <p><a href="{% url 'courses:module_update' course.id %}">Edit modules</a></p> {% endcomment %}
         </div>
         <div class="module">
             <h2>Module {{ module.order|add:1 }}: {{ module.title }}</h2>
@@ -47,10 +48,14 @@
             </div>
             <h3>Add new content:</h3>
             <ul class="content-types">
-                <li><a href="{% url 'courses:content_create' module.id 'text' %}"> Text </a></li>
+                <li><a href="#"> Text </a></li>
+                <li><a href="#"> Image </a></li>
+                <li><a href="#"> Video </a></li>
+                <li><a href="#"> File </a></li>
+                {% comment %} <li><a href="{% url 'courses:content_create' module.id 'text' %}"> Text </a></li>
                 <li><a href="{% url 'courses:content_create' module.id 'image' %}"> Image </a></li>
                 <li><a href="{% url 'courses:content_create' module.id 'video' %}"> Video </a></li>
-                <li><a href="{% url 'courses:content_create' module.id 'file' %}"> File </a></li>
+                <li><a href="{% url 'courses:content_create' module.id 'file' %}"> File </a></li> {% endcomment %}
             </ul>
         </div>
     {% endwith %}

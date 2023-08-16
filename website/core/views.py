@@ -85,4 +85,4 @@ def countdown_view(request):
 
 
 class TestPageView(TemplateView):
-    template_name = 'courses/manage/module/module_list.html'
+    template_name = 'courses/manage/course/manager_courses.html'

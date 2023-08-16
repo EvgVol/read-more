@@ -8,7 +8,8 @@ from ..fields import OrderField
 class Lesson(models.Model):
 
     module = models.ForeignKey(Module, verbose_name=_("module"),
-                               on_delete=models.CASCADE)
+                               related_name='lessons',
+                               on_delete=models.CASCADE,)
     title = models.CharField(_("title"), max_length=50,
                              help_text=_('Enter the lesson title'))
     order = OrderField(blank=True, for_fields=['module'])

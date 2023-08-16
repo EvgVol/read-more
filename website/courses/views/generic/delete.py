@@ -4,7 +4,7 @@ from courses.views.mixins import OwnerCourseMixin
 from django.shortcuts import redirect, get_object_or_404
 
 
-from courses.models.content import Content
+from courses.models.module import Content
 
 
 class CourseDeleteView(OwnerCourseMixin, DeleteView):
@@ -16,10 +16,10 @@ class CourseDeleteView(OwnerCourseMixin, DeleteView):
 
 class ContentDeleteView(View):
     def post(self, request, id):
-        content_id = get_object_or_404(Content,
-                                       id=id,
-                                       module__course__owner=request.user)
-        module = content_id.module
-        content_id.item.delete()
-        content_id.delete()
+        content = get_object_or_404(Content,
+                                    id=id,
+                                    module__course__owner=request.user)
+        module = content.lesson
+        content.item.delete()
+        content.delete()
         return redirect('courses:content_list', module.id)

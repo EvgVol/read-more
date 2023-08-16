@@ -13,7 +13,6 @@ app_name = 'courses'
 
 
 urlpatterns = [
-    # Курс
     path("",
          SubjectView.as_view(), name="subject_list"),
     path("create/", 
@@ -29,38 +28,13 @@ urlpatterns = [
              CourseUpdateView.as_view(), name="course_edit"),
         path("delete/",
              CourseDeleteView.as_view(), name="course_delete"),
-
-        # Модуль
         path('module/', include([
-            path('',
-                 ModuleUpdateView.as_view(),
-                 name="module_update"),
-
-     #        # Контент
-            path('<int:module_id>/', include([
-                
-                
-                path('content/<str:model_name>/', include([
-                    path('create/', ContentCreateUpdateView.as_view(), name='content_create'),
-                    path('<int:id>/', ContentCreateUpdateView.as_view(), name='content_update'),
-     #                path('delete/',
-     #                     ContentDeleteView.as_view(),
-     #                     name='content_delete'),
-                ])),
-            ])),
+            path('', ModuleUpdateView.as_view(), name="module_update"),
+            # path('<int:module_id>', ContentListView.as_view(), name="content_list"),
         ])),
     ])),
-#     path('<pk>/module/',
-#          ModuleUpdateView.as_view(),
-#          name='module_update'),
-#     path('module/<int:module_id>/content/<model_name>/<id>/',
-#          ContentCreateUpdateView.as_view(),
-#          name='content_update'),
-#     path('content/<int:module_id>/',
-#          ContentListView.as_view(),
-#          name='content_list'),
-#     path('module/<int:module_id>/content/<str:model_name>/create/',
-#          ContentCreateUpdateView.as_view(),
-#          name='content_create'),
-#     path('modules/', ModuleListView.as_view(), name='module_list'),
+    path('module/<int:module_id>/', ContentListView.as_view(), name="content_list"),
+    path('module/<int:module_id>/content/<model_name>/create/', ContentCreateUpdateView.as_view(), name='content_create'),
+    path('module/<int:module_id>/content/<model_name>/<int:id>/', ContentCreateUpdateView.as_view(), name='content_update'),
+    path('content/<int:id>/delete/', ContentDeleteView.as_view(), name='module_content_delete'),
 ]

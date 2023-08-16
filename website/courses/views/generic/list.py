@@ -80,16 +80,19 @@ class ModuleListView(ListView):
         context['modules_lessons'] = []
         for module in context["object_list"]:
             lessons = Lesson.objects.filter(module=module).order_by('order')
-            context['modules_lessons'].append({'module': module, 'lessons': lessons})
+            lesson_count = lessons.count()
+            context['modules_lessons'].append({'module': module,
+                                               'lessons': lessons,
+                                               'lesson_count': lesson_count})
         return context
     
 
 
 class ContentListView(TemplateResponseMixin, View):
-    template_name = 'courses/manage/module/content_list.html'
+    template_name = 'courses/manage/course/manager_courses.html'
 
-    def get(self, request, id):
-        module_id = get_object_or_404(Module,
-                                      id=id,
-                                      course__owner=request.user)
-        return self.render_to_response({'module': module_id})
+    def get(self, request, module_id):
+        module = get_object_or_404(Module,
+                                   id=module_id,
+                                   course__owner=request.user)
+        return self.render_to_response({'module': module})

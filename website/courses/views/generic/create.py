@@ -1,12 +1,11 @@
-from django.apps import apps
 from django.forms.models import modelform_factory
+from django.apps import apps
 from django.views.generic.base import TemplateResponseMixin, View
 from django.views.generic.edit import CreateView
 from courses.views.mixins import OwnerCourseEditMixin
 from django.shortcuts import redirect, get_object_or_404
 
-from courses.models.content import Content
-from courses.models.module import Module
+from courses.models.module import Module, Content
 
 
 class CourseCreateView(OwnerCourseEditMixin, CreateView):
