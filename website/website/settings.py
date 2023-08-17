@@ -37,16 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
 
-    'blog', 
-    'core',
-    'vookmarks',
-    'actions', 
-    'shop',
-    'cart',
-    'orders',
-    'coupons',
-    'courses',
-    'reviews',
+    'blog.apps.BlogConfig', 
+    'core.apps.CoreConfig',
+    'vookmarks.apps.VookmarksConfig',
+    'actions.apps.ActionsConfig', 
+    'shop.apps.ShopConfig',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'coupons.apps.CouponsConfig',
+    'courses.apps.CoursesConfig',
+    'reviews.apps.ReviewsConfig',
 
     'sorl.thumbnail', #IMAGE #https://sorl-thumbnail.readthedocs.io/en/latest/
     'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/

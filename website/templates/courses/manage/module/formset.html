@@ -38,7 +38,7 @@
                             <div class="list-group">
                                 {% for form in formset %}
                                 <div class="list-group-item">
-                                    {% for field in form.visible_fields %}
+                                    {% for field in form %}
                                         {% if field.name == "DELETE" %}
                                             <div class="form-check">
                                             {{ field|addclass:'form-checkbox' }}
@@ -67,13 +67,14 @@
                                 {% endfor %}
                             </div>
                         </div>
-                        {% csrf_token %}
+                        
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">{% trans "Save modules" %}</button>
+                            <input type="submit" class="btn btn-primary" value="Save modules">
                             <a href="{% url 'courses:manage_course_list' course.subject.slug %}" class="btn btn-default float-end">Отмена</a>
                         </div>
                     </div>
                     {{ formset.management_form }}
+                    {% csrf_token %}
                 </form>
             </div>
         </div>

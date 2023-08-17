@@ -115,7 +115,7 @@
 											<h3 class="card-title">Настройка уроков</h3>
 											<div class="ms-5 ms-auto">
 												<a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													<i class="fa fa-edit fs-18"></i>
+													<i class="fa fa-wrench fs-18"></i>
 												</a>
 												<ul class="dropdown-menu" role="menu">
 													<li class="dropdown-plus-title"> Добавить блок <b class="fa fa-angle-down" aria-hidden="true"></b> </li>
@@ -129,111 +129,40 @@
 										{% for content in module.contents.all %}
                     <div data-id="{{ content.id }}">
                         {% with item=content.item %}
-                            <p>{{ item }} ({{ item|model_name }})</p>
-                            <a href="{% url "courses:content_update" module.id item|model_name item.id %}">Edit</a>
-                            <form action="{% url 'courses:content_delete' content.id %}" method="post">
-                                <input type="submit" value="Delete">
-                                {% csrf_token %}
-                            </form>
+												<div class="card-body mt-1">
+													<div class="panel-group1" id="accordion1">
+															<div class="panel panel-default" data-id="{{ content.id }}">
+																	<div class="panel-heading1 ">
+																			<h4 class="panel-title1">
+																					<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion" href="#collapseFour" aria-expanded="false"><i class="{% if item|model_name == "text" %}pe-7s-note2 {% elif item|model_name == "image" %}pe-7s-photo{% elif item|model_name == "video" %}pe-7s-video{% elif item|model_name == "file" %}pe-7s-file{% endif %} me-2 text-white"></i> {{ item }}</a>
+																			</h4>
+																	</div>
+																	<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
+
+																			<div class="panel-body">
+																					<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
+																					
+																					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+																							and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure
+																							him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+																						<div class="btn-group fs-1">
+																							<a href="{% url "courses:content_update" module.id item|model_name item.id %}" class="btn btn-outline-dark"  aria-current="page">Изменить</a>
+																							<form action="{% url 'courses:content_delete' content.id %}" method="post" class="btn btn-outline-dark" >
+																								<button type="submit" style="display: inline; border: none; background: none; color: inherit;">Удалить</button>
+																								{% csrf_token %}
+																							</form>
+																						</div>
+																			</div>
+																	</div>
+															</div>
+													</div>
+													
+											</div>
                         {% endwith %}
                     </div>
 										{% empty %}
 												<p>This module has no contents yet.</p>
 										{% endfor %}
-										{% comment %} <div class="panel-body tabs-menu-body">
-												<div class="tab-content">
-														<div class="tab-pane active" id="activetabs">
-															<div class="card">
-																<div class="card-header">
-																		<h3 class="card-title">Accordion style</h3>
-																		<div class="ms-5 ms-auto">
-																			<a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																				<i class="fa fa-edit fs-18"></i>
-																			</a>
-																			<ul class="dropdown-menu" role="menu">
-																				<li><a href="javascript:void(0)">Изменить</a></li>
-																				<li><a href="javascript:void(0)">Настроить</a></li>
-																			</ul>
-																		</div>
-																</div>
-																<div class="card-body">
-																		<div class="panel-group1" id="accordion1">
-																				<div class="panel panel-default mb-4" data-id="{{ content.id }}">
-																						<div class="panel-heading1 ">
-																								<h4 class="panel-title1">
-																										<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion" href="#collapseFour" aria-expanded="false"><i class="pe-7s-note2 me-2 text-white"></i> {{ item }}</a>
-																								</h4>
-																						</div>
-																						<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-
-																								<div class="panel-body">
-																										<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-																										
-																										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-																												and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure
-																												him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
-																								</div>
-																						</div>
-																				</div>
-																		</div>
-																		<div class="mt-5 text-start">
-																			<button type="button" class="btn btn-icon  btn-dark me-2 bradius" data-bs-toggle="dropdown"><i class="fe fe-plus"></i></button>
-																			<ul class="dropdown-menu" role="menu">
-																				<li class="dropdown-plus-title"> Добавить блок <b class="fa fa-angle-down" aria-hidden="true"></b> </li>
-																				<li><a href="javascript:void(0)"> <i class="pe-7s-note2 me-2"> </i>Text</a></li>
-																				<li><a href="javascript:void(0)"> <i class="pe-7s-photo me-2"> </i>Image</a></li>
-																				<li><a href="javascript:void(0)"> <i class="pe-7s-video me-2"> </i>Video</a></li>
-																				<li><a href="javascript:void(0)"> <i class="pe-7s-file me-2"> </i>File</a></li>
-																			</ul>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<div class="tab-pane" id="linktabs">
-															<div class="card">
-																<div class="card-header">
-																		<h3 class="card-title">Accordion style</h3>
-																</div>
-																<div class="card-body">
-																		<div class="panel-group1" id="accordion1">
-																				<div class="panel panel-default mb-4">
-																						<div class="panel-heading1 ">
-																								<h4 class="panel-title1">
-																										<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion" href="#collapseFour" aria-expanded="false">Content 1</a>
-																								</h4>
-																						</div>
-																						<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-																								<div class="panel-body">
-																										<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-																										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-																												and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure
-																												him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
-																								</div>
-																						</div>
-																				</div>
-																				<div class="panel panel-default">
-																						<div class="panel-heading1">
-																								<h4 class="panel-title1">
-																										<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion" href="#collapseFive" aria-expanded="false">Content 2</a>
-																								</h4>
-																						</div>
-																						<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-																								<div class="panel-body">
-																										<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-																										<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-																												and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure
-																												him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
-																								</div>
-																						</div>
-																				</div>
-																		</div>
-																</div>
-															</div>
-														</div>
-														<div class="tab-pane disabled" id="disabletabs">
-														</div>
-												</div>
-										</div> {% endcomment %}
 									</div>
 							</div>
 						</div>
@@ -244,3 +173,4 @@
 </div>
 {% endwith %}
 {% endblock content %}
+

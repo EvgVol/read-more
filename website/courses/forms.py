@@ -3,7 +3,7 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from courses.models.advantage import Advantage
 from courses.models.technology import Technology
-from courses.models.course import Course, Card
+from courses.models.course import Course
 
 
 class CourseForm(forms.ModelForm):
@@ -15,10 +15,10 @@ class CourseForm(forms.ModelForm):
         queryset=Technology.objects.all(),
         widget=FilteredSelectMultiple(verbose_name='Technologies', is_stacked=False)
     )
-    cards = forms.ModelMultipleChoiceField(
-        queryset=Card.objects.all(),
-        widget=FilteredSelectMultiple(verbose_name='Cards', is_stacked=False)
-    )
+    # cards = forms.ModelMultipleChoiceField(
+    #     queryset=Card.objects.all(),
+    #     widget=FilteredSelectMultiple(verbose_name='Cards', is_stacked=False)
+    # )
 
     class Meta:
         model = Course

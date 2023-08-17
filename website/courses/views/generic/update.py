@@ -42,7 +42,7 @@ class ModuleUpdateView(TemplateResponseMixin, View):
         formset = self.get_formset(data=request.POST)
         if formset.is_valid():
             formset.save()
-            return redirect('courses:manage_course_list', self.course.subject)
+            return redirect('courses:manage_course_list', self.course.subject.slug)
         else:
             return self.render_to_response({'course': self.course,
                                             'formset': formset})

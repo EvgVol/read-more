@@ -53,26 +53,26 @@ class Course(models.Model):
                                           related_name='courses',
                                           blank=True)
     title = models.CharField(_("title"), max_length=200,
-                             help_text=_('Enter the course title'))
+                             help_text=_('Enter the course title'), blank=True)
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
-    overview = models.CharField(_("overview"), max_length=100)
+    overview = models.CharField(_("overview"), max_length=100, blank=True)
     created = models.DateTimeField(_("created"), auto_now_add=True)
-    image = models.ImageField(_('image'), upload_to='courses/images/',)
+    image = models.ImageField(_('image'), upload_to='courses/images/')
     load = models.CharField(_('load'),
                             max_length=2,
                             choices=Load.choices,
                             default=Load.LITE)
     period = models.PositiveSmallIntegerField(
-        _("period"), help_text='Enter the training period'
+        _("period"), help_text='Enter the training period', blank=True
     )
     count_projects = models.PositiveSmallIntegerField(_("count projects"),
                                                       blank=True)
-    price_per_mouth = models.PositiveIntegerField(_("price per mouth"))
-    price_immediately = models.PositiveIntegerField(_("price immediately"))
-    cards = models.ManyToManyField("Card",
-                                   verbose_name=_("cards"),
-                                   related_name='courses',
-                                   blank=True)
+    price_per_mouth = models.PositiveIntegerField(_("price per mouth"), blank=True)
+    price_immediately = models.PositiveIntegerField(_("price immediately"), blank=True)
+    # cards = models.ManyToManyField("Card",
+    #                                verbose_name=_("cards"),
+    #                                related_name='courses',
+    #                                blank=True)
 
     class Meta:
         ordering = ['created']
@@ -101,21 +101,3 @@ class Course(models.Model):
         benefit = total_cost - self.price_immediately
         benefit_percentage = (benefit / total_cost) * 100
         return benefit_percentage
-
-
-class Card(models.Model):
-
-    title = models.CharField(_("title"), max_length=100)
-    course = models.ForeignKey(Course,
-                               verbose_name=_("course"),
-                               on_delete=models.CASCADE,
-                               related_name='courses')
-    additional_text = models.TextField(_("additional text"))
-    status = models.CharField(_("status"), max_length=10, blank=True)
-
-    class Meta:
-        verbose_name = _("card")
-        verbose_name_plural = _("cards")
-
-    def __str__(self):
-        return self.title
