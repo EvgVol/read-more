@@ -26,6 +26,28 @@
           <div class="pricing-tabs">
             <div class="container">
               <div class="row">
+                <div class="col-2 col-md-3 mt-2 mb-3 ">
+                  <button type="button" class="btn btn-default btn-pill dropdown-toggle" data-bs-toggle="dropdown">
+                      {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %}<span class="caret"></span>
+                      </button>
+                  <ul class="dropdown-menu" role="menu">
+                      <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Все курсы <small class="text-primary">({% if courses.count > 0 %}{{ courses.count }} курс{{ courses.count|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                      {% for subject in subjects %}
+                      <li><a href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }} <small class="text-primary">({% if subject.total_courses > 0 %}{{ subject.total_courses }} курс{{ subject.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                      {% endfor %}
+                  </ul>
+                </div>
+                <div class="col-1 col-md-3 mt-2 mb-3 my-2">
+                  <button type="button" class="btn btn-default btn-pill dropdown-toggle" data-bs-toggle="dropdown">
+                      {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %}<span class="caret"></span>
+                      </button>
+                  <ul class="dropdown-menu" role="menu">
+                      <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Все курсы <small class="text-primary">({% if courses.count > 0 %}{{ courses.count }} курс{{ courses.count|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                      {% for subject in subjects %}
+                      <li><a href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }} <small class="text-primary">({% if subject.total_courses > 0 %}{{ subject.total_courses }} курс{{ subject.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                      {% endfor %}
+                  </ul>
+                </div>
                 <div class="col-2 col-md-3 nav nav-price dropdown">
                   <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %} </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
