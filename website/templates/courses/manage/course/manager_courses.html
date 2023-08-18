@@ -17,7 +17,12 @@
 				<h1 class="page-title">Manager Course</h1>
 				<div>
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Manager Courses</a></li>
+						<li class="breadcrumb-item">
+							<a href="{% url 'courses:subject_list' %}">Read more</a>
+						</li>
+						<li class="breadcrumb-item" aria-current="page">
+							<a href="{% url 'courses:manage_course_list' course.subject.slug %}">{{ course.subject }}</a>
+						</li>
 					</ol>
 				</div>
 			</div>
@@ -40,7 +45,7 @@
 								<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mt-5 ps-sm-0">
 									<div class="d-flex align-items-end justify-content-between mb-1">
 											<h6 class="mb-1">Modules</h6>
-											<h6 class="fw-semibold mb-1">5</h6>
+											<h6 class="fw-semibold mb-1">{{ course.modules.count }}</h6>
 									</div>
 									<div class="progress h-2 mb-3">
 											<div class="progress-bar bg-primary" style="width:10%;"
@@ -84,16 +89,19 @@
 							</div>
 							<div class="card-body">
 								<div class="">
-									<div class="list-group">
+									<ul class="list-group" id="modules">
 										{% for m in course.modules.all %}
-										<div data-id="{{ m.id }}" >
+										<li data-id="{{ m.id }}" >
 											<a href="{% url 'courses:content_list' m.id %}" class="list-group-item list-group-item-action flex-column align-items-start {% if m == module %}active{% endif %}">
+												<span>
+													Module <span class="order">{{ m.order|add:1 }}</span>
+												</span>
 												<div class="d-flex w-100 justify-content-between ">
-													<h5 class="mb-1">{{ forloop.counter }}. {{ m.title }}</h5>
+													<h5 class="mb-1">{{ m.title }}</h5>
 												</div>
-												<small class="text-muted">1 тема</small>
 											</a>
-										</div>
+											
+										</li>
 										{% empty %}
 										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
 											<div class="d-flex w-100 justify-content-between">
@@ -101,7 +109,7 @@
 											</div>
 										</a>
 										{% endfor %}
-									</div>
+									</ul>
 								</div>
 							</div>
 						</div>
@@ -110,60 +118,49 @@
 					<div class="col-md-7 col-lg-7 col-xl-9">
 						<div class="card">
 							<div class="card-body">
-									<div class="panel panel-primary">
-										<div class="card-header">
-											<h3 class="card-title">Настройка уроков</h3>
-											<div class="ms-5 ms-auto">
-												<a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-													<i class="fa fa-wrench fs-18"></i>
-												</a>
-												<ul class="dropdown-menu" role="menu">
-													<li class="dropdown-plus-title"> Добавить блок <b class="fa fa-angle-down" aria-hidden="true"></b> </li>
-													<li><a href="{% url 'courses:content_create' module.id 'text' %}"> <i class="pe-7s-note2 me-2"> </i>Text</a></li>
-													<li><a href="{% url 'courses:content_create' module.id 'image' %}"> <i class="pe-7s-photo me-2"> </i>Image</a></li>
-													<li><a href="{% url 'courses:content_create' module.id 'video' %}"> <i class="pe-7s-video me-2"> </i>Video</a></li>
-													<li><a href="{% url 'courses:content_create' module.id 'file' %}"> <i class="pe-7s-file me-2"> </i>File</a></li>
-												</ul>
-											</div>
+								<div class="panel panel-primary">
+									<div class="card-header">
+										<h3 class="card-title">Настройка уроков</h3>
+										<div class="ms-5 ms-auto">
+											<a href="javascript:void(0)" class="text-muted" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<i class="fa fa-plus fs-18"></i>
+											</a>
+											<ul class="dropdown-menu" role="menu">
+												<li class="dropdown-plus-title"> Добавить блок <b class="fa fa-angle-down" aria-hidden="true"></b> </li>
+												<li><a href="{% url 'courses:content_create' module.id 'text' %}"> <i class="pe-7s-note2 me-2"> </i>Text</a></li>
+												<li><a href="{% url 'courses:content_create' module.id 'image' %}"> <i class="pe-7s-photo me-2"> </i>Image</a></li>
+												<li><a href="{% url 'courses:content_create' module.id 'video' %}"> <i class="pe-7s-video me-2"> </i>Video</a></li>
+												<li><a href="{% url 'courses:content_create' module.id 'file' %}"> <i class="pe-7s-file me-2"> </i>File</a></li>
+											</ul>
 										</div>
+									</div>
+									<ul>
+										<div class="mt-5" id="module-contents">
 										{% for content in module.contents.all %}
-                    <div data-id="{{ content.id }}">
-                        {% with item=content.item %}
-												<div class="card-body mt-1">
-													<div class="panel-group1" id="accordion1">
-															<div class="panel panel-default" data-id="{{ content.id }}">
-																	<div class="panel-heading1 ">
-																			<h4 class="panel-title1">
-																					<a class="accordion-toggle collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion" href="#collapseFour" aria-expanded="false"><i class="{% if item|model_name == "text" %}pe-7s-note2 {% elif item|model_name == "image" %}pe-7s-photo{% elif item|model_name == "video" %}pe-7s-video{% elif item|model_name == "file" %}pe-7s-file{% endif %} me-2 text-white"></i> {{ item }}</a>
-																			</h4>
-																	</div>
-																	<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-
-																			<div class="panel-body">
-																					<p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-																					
-																					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-																							and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure
-																							him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
-																						<div class="btn-group fs-1">
-																							<a href="{% url "courses:content_update" module.id item|model_name item.id %}" class="btn btn-outline-dark"  aria-current="page">Изменить</a>
-																							<form action="{% url 'courses:content_delete' content.id %}" method="post" class="btn btn-outline-dark" >
-																								<button type="submit" style="display: inline; border: none; background: none; color: inherit;">Удалить</button>
-																								{% csrf_token %}
-																							</form>
-																						</div>
-																			</div>
-																	</div>
-															</div>
-													</div>
-													
-											</div>
-                        {% endwith %}
-                    </div>
+										<li data-id="{{ content.id }}" class="contents" >
+											{% with item=content.item %}
+											<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+												
+												<span>
+													<i class="{% if item|model_name == "text" %}pe-7s-note2 {% elif item|model_name == "image" %}pe-7s-photo{% elif item|model_name == "video" %}pe-7s-video{% elif item|model_name == "file" %}pe-7s-file{% endif %} me-2 text-dark"></i> Content <span class="order">{{ content.order|add:1 }}</span>
+												</span>
+												
+												<div class="d-flex w-100 justify-content-between ">
+													<h5 class="mb-1">{{ item }}</h5>
+												</div>
+											</a>
+											{% endwith %}
+										</li>
 										{% empty %}
-												<p>This module has no contents yet.</p>
+										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+											<div class="d-flex w-100 justify-content-between">
+												<h5 class="mb-1">No contents yet.</h5>
+											</div>
+										</a>
 										{% endfor %}
 									</div>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -174,3 +171,62 @@
 {% endwith %}
 {% endblock content %}
 
+{% block add_script %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5sortable/0.13.3/html5sortable.min.js"></script>
+{% endblock add_script %}
+
+{% block domready %}
+	var options = {
+		method: 'POST',
+		mode: 'same-origin'
+	}
+
+	const moduleOrderUrl = '{% url "courses:module_order" %}';
+
+	sortable('#modules', {
+		forcePlaceholderSize: true,
+		placeholderClass: 'placeholder'
+		})[0].addEventListener('sortupdate', function(e) {
+
+			modulesOrder = {};
+			var modules = document.querySelectorAll('#modules li');
+			modules.forEach(function (module, index) {
+				// обновить индекс модуля
+				modulesOrder[module.dataset.id] = index;
+	
+				// обновить индекс в HTML-элементе
+				module.querySelector('.order').innerHTML = index + 1;
+
+				// добавить новый порядок в опции HTTP-запроса
+				options['body'] = JSON.stringify(modulesOrder);
+
+				// отправить HTTP-запрос
+				fetch(moduleOrderUrl, options)
+			});
+		});
+
+	const contentOrderUrl = '{% url "courses:content_order" %}'
+
+	sortable('#module-contents', {
+		forcePlaceholderSize: true,
+		placeholderClass: 'placeholder'
+		})[0].addEventListener('sortupdate', function(e) {
+
+			contentOrder = {};
+			var contents = document.querySelectorAll('#module-contents li');
+			contents.forEach(function (content, index) {
+
+			// обновить индекс контента
+			contentOrder[content.dataset.id] = index;
+
+			// обновить индекс в HTML-элементе
+			content.querySelector('.order').innerHTML = index + 1;
+
+			// добавить новый порядок в опции HTTP-запроса
+			options['body'] = JSON.stringify(contentOrder);
+
+			// отправить HTTP-запрос
+			fetch(contentOrderUrl, options)
+			});
+		});
+{% endblock %}

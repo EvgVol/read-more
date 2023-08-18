@@ -33,7 +33,7 @@ class OwnerCourseMixin(OwnerMixin,
     fields = ('subject', 'title', 'overview', 'description',
               'complexity', 'advantages', 'technologies', 'load',
               'period', 'count_projects', 'price_per_mouth',
-              'price_immediately', 'cards',)
+              'price_immediately')
 
     def get_success_url(self):
         subject_name = self.object.subject.slug

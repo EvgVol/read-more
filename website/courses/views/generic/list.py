@@ -1,10 +1,12 @@
 from django.views.generic.base import TemplateResponseMixin, View
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
+from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 
 from courses.models.subject import Subject
 from courses.models.course import Course
 from courses.models.module import Module
+from courses.models.content import Content
 from courses.models.lessons import Lesson
 from courses.views.mixins import OwnerCourseMixin
 
@@ -67,6 +69,8 @@ class CourseListView(OwnerCourseMixin, ListView):
         return context
 
 
+
+
 class ModuleListView(ListView):
     model = Module
     template_name = 'courses/manage/module/module_list.html'
@@ -87,7 +91,6 @@ class ModuleListView(ListView):
         return context
     
 
-
 class ContentListView(TemplateResponseMixin, View):
     template_name = 'courses/manage/course/manager_courses.html'
 
@@ -96,3 +99,17 @@ class ContentListView(TemplateResponseMixin, View):
                                    id=module_id,
                                    course__owner=request.user)
         return self.render_to_response({'module': module})
+
+
+class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id, order in self.request_json.items():
+            Module.objects.filter(id=id, course__owner=request.user).update(order=order)
+        return self.render_json_response({'saved': 'OK'})
+
+
+class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
+    def post(self, request):
+        for id, order in self.request_json.items():
+            Content.objects.filter(id=id, module__course__owner=request.user).update(order=order)
+        return self.render_json_response({'saved': 'OK'})
