@@ -2,6 +2,7 @@ from django.views.generic.base import TemplateResponseMixin, View
 from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
+from django.db.models import Count
 
 from courses.models.subject import Subject
 from courses.models.course import Course
@@ -21,51 +22,29 @@ class CourseListView(OwnerCourseMixin, ListView):
 
     template_name = 'courses/manage/course/list.html'
     permission_required = 'courses.view_course'
-    
-    def get_queryset(self):
-        subject_name = self.kwargs['subject_name']
-        return super().get_queryset().filter(subject__slug=subject_name)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        subject_name = self.kwargs['subject_name']
-        subject_id = get_object_or_404(Subject, slug=subject_name)
+        subject_name = self.kwargs.get('subject_name', None)
+        complexity_name = self.kwargs.get('complexity_name', None)
+        subjects = Subject.objects.annotate(total_courses=Count('courses'))
+        all_course = Course.objects.all()
+        courses = Course.objects.all()
+
+        if subject_name:
+            subject_id = get_object_or_404(Subject, slug=subject_name)
+            courses = courses.filter(subject=subject_id)
+            context['subject_id'] = subject_id
+
+        if complexity_name:
+            courses = Course.objects.filter(complexity=complexity_name)
+
+            
         
-
-        all_courses = Course.objects.filter(subject=subject_id)
-        junior_courses = Course.objects.filter(
-            subject=subject_id, complexity=Course.Complexity.JUNIOR
-        )
-        middle_courses = Course.objects.filter(
-            subject=subject_id, complexity=Course.Complexity.MIDDLE
-        )
-        senior_courses = Course.objects.filter(
-            subject=subject_id, complexity=Course.Complexity.SENIOR
-        )
-
-        total_count = all_courses.count()
-        junior_count = junior_courses.count()
-        middle_count = middle_courses.count()
-        senior_count = senior_courses.count()
-
-        # Calculate percentages
-        if total_count > 0:
-            percent_junior = (junior_count / total_count) * 100
-            percent_middle = (middle_count / total_count) * 100
-            percent_senior = (senior_count / total_count) * 100
-        else:
-            percent_junior = 0
-            percent_middle = 0
-            percent_senior = 0
-
-        context['subject_id'] = subject_id
-        context['all_courses'] = all_courses
-        context['junior_courses'] = junior_courses
-        context['middle_courses'] = middle_courses
-        context['senior_courses'] = senior_courses
-        context['percent_junior'] = percent_junior
-        context['percent_middle'] = percent_middle
-        context['percent_senior'] = percent_senior
+        context['complexity_name'] = complexity_name
+        context['all_course'] = all_course
+        context['courses'] = courses
+        context['subjects'] = subjects
         return context
 
 

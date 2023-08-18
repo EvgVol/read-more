@@ -18,8 +18,12 @@ urlpatterns = [
          SubjectView.as_view(), name="subject_list"),
     path("create/", 
          CourseCreateView.as_view(), name="course_create"),
+    path("courses/",
+         CourseListView.as_view(), name="course_list"),
     path("courses/<subject_name>/",
          CourseListView.as_view(), name="manage_course_list"),
+    path("courses/<subject_name>/<complexity_name>/",
+         CourseListView.as_view(), name="manage_course_list_by_complexity"),
     path("course/<int:pk>/", include([
         path("", CourseDetailView.as_view(), name="course_detail"),
         path('modules/', ModuleListView.as_view(), name='module_list'),

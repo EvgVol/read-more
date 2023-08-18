@@ -1,6 +1,7 @@
 {% extends 'includes/base.html' %}
 {% load i18n %}
 {% load static %}
+{% load ending_num %}
 {% block title %}
   READ MORE | {% trans 'Courses' %}
 {% endblock %}
@@ -10,14 +11,11 @@
       <div class="main-container container-fluid">
         <!-- Header page -->
         <div class="page-header">
-          <h1 class="page-title">{% trans 'Courses' %}</h1>
+          <h1 class="page-title">{% if subject_id %}{{ subject_id }}{% else %}Все курсы READ MORE{% endif %}</h1>
           <div>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="{% url 'courses:subject_list' %}">Read more</a>
-              </li>
-              <li class="breadcrumb-item" aria-current="page">
-                <a href="{% url 'courses:subject_list' %}">{{ subject_id }}</a>
+                <a href="{% url 'courses:subject_list' %}">READ MORE</a>
               </li>
             </ol>
           </div>
@@ -26,14 +24,43 @@
         <!-- Cart courses -->
         <div class="row">
           <div class="pricing-tabs">
-            
-            <div class="pri-tabs-heading text-center">
+            <div class="container">
+              <div class="row">
+                <div class="col-2 col-md-3 nav nav-price dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %} </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="{% url 'courses:course_list' %}">Все курсы <small class="text-primary">({% if courses.count > 0 %}{{ courses.count }} курс{{ courses.count|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                    {% for subject in subjects %}
+                    <li><a class="dropdown-item" href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }} <small class="text-primary">({% if subject.total_courses > 0 %}{{ subject.total_courses }} курс{{ subject.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <div class="col-2 col-md-3 nav nav-price dropdown">
+                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> Сложность </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    {% for c in all_course %}
+                    <li><a class="dropdown-item" href="{% url 'courses:manage_course_list_by_complexity' c.subject.slug c.complexity  %}">{{ c.get_complexity_full_name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex align-items-center justify-content-center">
+              {% for course in courses %}
+              <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
+                <div class="card p-3 pricing-card">
+                  {% include 'courses/manage/course/includes/cart-courses.html' %}
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% comment %} <div class="pri-tabs-heading text-center">
               <ul class="nav nav-price">
                 <li>
                   <a data-bs-toggle="tab" href="#all">{% trans "All courses" %}</a>
                 </li>
                 <li>
-                  <a class="active show" data-bs-toggle="tab" href="#junior">{% trans "Junior" %}</a>
+                  <a class="active show" data-bs-toggle="tab" href="#junior">{% trans "Junior" %} </a>
                 </li>
                 <li>
                   <a class="show" data-bs-toggle="tab" href="#middle">{% trans "Middle" %}</a>
@@ -74,7 +101,7 @@
                   {% endfor %}
                 </div>
               </div>
-            </div>
+            </div> {% endcomment %}
           </div>
         </div>
         <!-- /Cart courses -->

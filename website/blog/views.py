@@ -148,7 +148,7 @@ def post_share(request, post_id):
             message = _(f"Read the article `{post.title}` here: {post_url}\n\n \
                         Comment from {cd['name']}: {cd['comments']}")
             send_mail(subject, message, 'volochek93@yandex.ru', [cd['to']])
-            create_action(request.user, _('shared the article'))
+            # create_action(request.user, _('shared the article'))
             sent = True
     else:
         form = EmailPostForm()
@@ -169,7 +169,7 @@ def post_comment(request, post_id):
         comment = form.save(commit=False)
         comment.post = post
         comment.save()
-        create_action(request.user, _('commented'), post)
+        # create_action(request.user, _('commented'), post)
     return render(request, 'blog/post/comment.html',
                   {'post': post,
                    'form': form,
@@ -220,8 +220,8 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            create_action(request.user, _('added a new post:', post))
-            messages.success(request, _('The post was added successfully'))
+            # create_action(request.user, _('added a new post:', post))
+            # messages.success(request, _('The post was added successfully'))
             return redirect(post.get_absolute_url())
     else:
         form = PostForm()
@@ -240,7 +240,7 @@ def post_like(request):
             post = Post.objects.get(id=post_id)
             if action == 'like':
                 post.users_like.add(request.user)
-                create_action(request.user, _('liked the post:'), post)
+                # create_action(request.user, _('liked the post:'), post)
             else:
                 post.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})
