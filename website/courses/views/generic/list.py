@@ -38,16 +38,16 @@ class CourseListView(OwnerCourseMixin, ListView):
 
         if complexity_name:
             courses = Course.objects.filter(complexity=complexity_name)
-
+            complexity = all_course.first().Complexity(complexity_name).label
+            context['complexity_full_name'] = complexity
             
-        
+
         context['complexity_name'] = complexity_name
+        
         context['all_course'] = all_course
         context['courses'] = courses
         context['subjects'] = subjects
         return context
-
-
 
 
 class ModuleListView(ListView):
@@ -57,7 +57,8 @@ class ModuleListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         course_id = self.kwargs.get('pk')
-        course = get_object_or_404(Course, id=course_id)
+        subject_name = self.kwargs.get('subject_name', None)
+        course = get_object_or_404(Course, id=course_id, subject=subject_name)
         context["course_title"] = course.title
         context["subject"] = course.subject
         context['modules_lessons'] = []
@@ -83,12 +84,18 @@ class ContentListView(TemplateResponseMixin, View):
 class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     def post(self, request):
         for id, order in self.request_json.items():
-            Module.objects.filter(id=id, course__owner=request.user).update(order=order)
+            Module.objects.filter(
+                id=id,
+                course__owner=request.user
+            ).update(order=order)
         return self.render_json_response({'saved': 'OK'})
 
 
 class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     def post(self, request):
         for id, order in self.request_json.items():
-            Content.objects.filter(id=id, module__course__owner=request.user).update(order=order)
+            Content.objects.filter(
+                id=id,
+                module__course__owner=request.user
+            ).update(order=order)
         return self.render_json_response({'saved': 'OK'})

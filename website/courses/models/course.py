@@ -53,7 +53,8 @@ class Course(models.Model):
                                           related_name='courses',
                                           blank=True)
     title = models.CharField(_("title"), max_length=200,
-                             help_text=_('Enter the course title'), blank=True)
+                             help_text=_('Enter the course title'),
+                             blank=True)
     slug = models.SlugField(_("slug"), max_length=200, unique=True)
     overview = models.CharField(_("overview"), max_length=100, blank=True)
     created = models.DateTimeField(_("created"), auto_now_add=True)
@@ -67,12 +68,14 @@ class Course(models.Model):
     )
     count_projects = models.PositiveSmallIntegerField(_("count projects"),
                                                       blank=True)
-    price_per_mouth = models.PositiveIntegerField(_("price per mouth"), blank=True)
-    price_immediately = models.PositiveIntegerField(_("price immediately"), blank=True)
-    # cards = models.ManyToManyField("Card",
-    #                                verbose_name=_("cards"),
-    #                                related_name='courses',
-    #                                blank=True)
+    price_per_mouth = models.PositiveIntegerField(_("price per mouth"),
+                                                  blank=True)
+    price_immediately = models.PositiveIntegerField(_("price immediately"),
+                                                    blank=True)
+    students = models.ManyToManyField(User,
+                                      verbose_name=_("students"), 
+                                      related_name='courses_joined',
+                                      blank=True)
 
     class Meta:
         ordering = ['created']

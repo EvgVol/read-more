@@ -26,43 +26,26 @@
           <div class="pricing-tabs">
             <div class="container">
               <div class="row">
-                <div class="col-2 col-md-3 mt-2 mb-3 ">
+                <div class="col-1 col-sm-3 col-xl-3 col-md-2 col-lg-3 mt-2 mb-3 ">
                   <button type="button" class="btn btn-default btn-pill dropdown-toggle" data-bs-toggle="dropdown">
                       {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %}<span class="caret"></span>
                       </button>
                   <ul class="dropdown-menu" role="menu">
-                      <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Все курсы <small class="text-primary">({% if courses.count > 0 %}{{ courses.count }} курс{{ courses.count|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                      <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Сбросить</a></li>
                       {% for subject in subjects %}
                       <li><a href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }} <small class="text-primary">({% if subject.total_courses > 0 %}{{ subject.total_courses }} курс{{ subject.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
                       {% endfor %}
                   </ul>
                 </div>
-                <div class="col-1 col-md-3 mt-2 mb-3 my-2">
+                <div class="col-1 col-sm-3 col-xl-3 col-md-2 col-lg-3 mt-2 mb-3 my-2">
                   <button type="button" class="btn btn-default btn-pill dropdown-toggle" data-bs-toggle="dropdown">
-                      {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %}<span class="caret"></span>
+                      {% if complexity_name %}{{ complexity_full_name }}{% else %}Сложность{% endif %}<span class="caret"></span>
                       </button>
                   <ul class="dropdown-menu" role="menu">
-                      <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Все курсы <small class="text-primary">({% if courses.count > 0 %}{{ courses.count }} курс{{ courses.count|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
-                      {% for subject in subjects %}
-                      <li><a href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }} <small class="text-primary">({% if subject.total_courses > 0 %}{{ subject.total_courses }} курс{{ subject.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+                      <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Сбросить</a></li>
+                      {% for c in courses %}
+                      <li><a href="{% url 'courses:manage_course_list_by_complexity' c.subject.slug c.complexity  %}">{{ c.get_complexity_full_name }}</a></li>
                       {% endfor %}
-                  </ul>
-                </div>
-                <div class="col-2 col-md-3 nav nav-price dropdown">
-                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> {% if subject_id %}{{ subject_id }}{% else %}Направление{% endif %} </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="{% url 'courses:course_list' %}">Все курсы <small class="text-primary">({% if courses.count > 0 %}{{ courses.count }} курс{{ courses.count|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
-                    {% for subject in subjects %}
-                    <li><a class="dropdown-item" href="{% url 'courses:manage_course_list' subject.slug %}">{{ subject }} <small class="text-primary">({% if subject.total_courses > 0 %}{{ subject.total_courses }} курс{{ subject.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
-                    {% endfor %}
-                  </ul>
-                </div>
-                <div class="col-2 col-md-3 nav nav-price dropdown">
-                  <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> Сложность </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    {% for c in all_course %}
-                    <li><a class="dropdown-item" href="{% url 'courses:manage_course_list_by_complexity' c.subject.slug c.complexity  %}">{{ c.get_complexity_full_name }}</a></li>
-                    {% endfor %}
                   </ul>
                 </div>
               </div>
@@ -76,54 +59,6 @@
               </div>
               {% endfor %}
             </div>
-            {% comment %} <div class="pri-tabs-heading text-center">
-              <ul class="nav nav-price">
-                <li>
-                  <a data-bs-toggle="tab" href="#all">{% trans "All courses" %}</a>
-                </li>
-                <li>
-                  <a class="active show" data-bs-toggle="tab" href="#junior">{% trans "Junior" %} </a>
-                </li>
-                <li>
-                  <a class="show" data-bs-toggle="tab" href="#middle">{% trans "Middle" %}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="tab-content">
-              <div class="tab-pane" id="all">
-                <div class="row d-flex align-items-center justify-content-center">
-                  {% for course in all_courses %}
-                  <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
-                    <div class="card p-3 pricing-card">
-                      {% include 'courses/manage/course/includes/cart-courses.html' %}
-                    </div>
-                  </div>
-                  {% endfor %}
-                </div>
-              </div>
-              <div class="tab-pane pb-0 active show" id="junior">
-                <div class="row d-flex align-items-center justify-content-center">
-                  {% for course in junior_courses %}
-                    <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
-                      <div class="card p-3 pricing-card">
-                        {% include 'courses/manage/course/includes/cart-courses.html' %}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-              <div class="tab-pane" id="middle">
-                <div class="row d-flex align-items-center justify-content-center">
-                  {% for course in middle_courses %}
-                    <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6">
-                      <div class="card p-3 pricing-card">
-                        {% include 'courses/manage/course/includes/cart-courses.html' %}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div> {% endcomment %}
           </div>
         </div>
         <!-- /Cart courses -->

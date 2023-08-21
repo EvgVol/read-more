@@ -84,11 +84,22 @@
                                   class="badge bg-danger me-1 mb-1 mt-1"> {{ course.get_complexity_full_name }}</span></h4>
                               <h1 class="text-start fw-bold">{{ course.title }}</h1>
                               <p class="pb-1">{{ course.description|linebreaks }}</p>
-
-                              <a href="{% url 'courses:module_list' course.id %}"
-                                  target="_blank" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"><i
-                                      class="fe fe-play me-2"></i> Начать учиться
-                              </a>
+                              {% if request.user.is_authenticated %}
+                                <form
+                                  action="{% url 'courses:student_enroll_course' %}"
+                                  method="post"
+                                  target="_blank"
+                                  class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"
+                                  ><i class="fe fe-play me-2"></i>
+                                  {{ enroll_form }}
+                                  {% csrf_token %}
+                                  <input type="submit" value=" Начать учиться"  style="display: inline; border: none; background: none; color:white;">
+                                </form>
+                              {% else %}
+                                <a href="{% url 'signup' %}" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">
+                                  <i class="fe fe-play me-2"></i> Начать учиться
+                                </a>
+                              {% endif %}  
                               <a href="#"
                                   class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
                                       class="fe fe-eye me-2"></i>Узнать больше
@@ -916,10 +927,22 @@
                                                                 <h1 class="fw-semibold text-white">Начать учиться бесплатно</h1>
                                                             </div>
                                                             <div class="col-lg-3 text-end my-auto">
-                                                                <a href="{% url 'courses:module_list' course.id %}"
-                                                                    class="btn btn-info w-lg pt-2 pb-2"><i
-                                                                        class="fe fe-arrow-right me-2"></i>Вперед
-                                                                </a>
+                                                                {% if request.user.is_authenticated %}
+                                                                    <form
+                                                                    action="{% url 'courses:student_enroll_course' %}"
+                                                                    method="post"
+                                                                    target="_blank"
+                                                                    class="btn ripple btn-min w-lg mb-3 me-2 btn-primary"
+                                                                    ><i class="fe fe-arrow-right me-2"></i>
+                                                                    {{ enroll_form }}
+                                                                    {% csrf_token %}
+                                                                    <input type="submit" value=" Вперед"  style="display: inline; border: none; background: none; color:white;">
+                                                                    </form>
+                                                                {% else %}
+                                                                    <a href="{% url 'signup' %}" class="btn ripple btn-min w-lg mb-3 me-2 btn-primary">
+                                                                    <i class="fe fe-arrow-right me-2"></i> Вперед
+                                                                    </a>
+                                                                {% endif %}
                                                             </div>
                                                         </div>
                                                     </div>

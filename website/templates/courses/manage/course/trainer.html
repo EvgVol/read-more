@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% load i18n %}
-{% block title %}READ MORE | Сайт для разработчиков и о разработчиках, и ещё кое о чем...{% endblock %}
+{% block title %}READ MORE | {{ object.title }} {% endblock %}
 {% block base %}
 {% load static %}
 {% load thumbnail %}
@@ -24,17 +24,17 @@
             <div class="row">
               <div class="">
                   <ul class="col">
-                      <li class="col-12 mt-7"><i
-                          class="icon-home text-white fa-2x"></i>
+                      <a class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="К курсам" href="{% url 'courses:course_list' %}"><i
+                          class="icon-home text-white fa-2x" ></i>
+                      </a>
+                      <li class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Программа"><i
+                          class="icon-book-open text-white fa-2x" ></i>
                       </li>
-                      <li class="col-12 mt-7"><i
-                          class="icon-book-open text-white fa-2x"></i>
+                      <li class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Поиск"><i
+                          class="icon-magnifier text-white fa-2x" ></i>
                       </li>
-                      <li class="col-12 mt-7"><i
-                          class="icon-magnifier text-white fa-2x"></i>
-                      </li>
-                      <li class="col-12 mt-7"><i
-                          class="icon-notebook text-white fa-2x"></i>
+                      <li class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Записная книжка"><i
+                          class="icon-notebook text-white fa-2x" ></i>
                       </li>
                   </ul>
               </div>
@@ -47,23 +47,31 @@
           <!-- CONTAINER -->
           <div class="main-container container-fluid">
               <!-- PAGE-HEADER -->
-              <div class="text-center mt-8 d-flex justify-content-center flex-column">
-                <div class="row justify-content-center mt-3">
-                    <div class="col col-md-1 progress me-1 bg-dark"></div>
-                    <div class="col col-md-1 progress me-1 bg-dark"></div>
-                    <div class="col col-md-1 progress me-1 bg-dark"></div>
-                    <div class="col col-md-1 progress me-1 bg-dark"></div>
-                    <div class="col col-md-1 progress me-1 bg-dray"></div>
-                    <div class="col col-md-1 progress me-1 bg-dray"></div>
-                    <div class="col col-md-1 progress me-1 bg-dray"></div>
-                    <div class="col col-md-1 progress me-1 bg-dray"></div>
-                </div>
-              </div>
+              
               <div class="card col-md-10 mt-5">
-                <div class="">
-                  <h1 class="mt-7">Pagination Samples</h1>
+                <div class="text-center mt-8 d-flex justify-content-center flex-column">
+                  <div class="row justify-content-center mt-3">
+                      {% for m in object.modules.all %}
+                      <a class="col-6 col-md-1 progress me-1 {% if m == module %}bg-dark{% else %}bg-dray{% endif %}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ m.title }}" href="{% url 'courses:course_trainer_module' object.slug m.id %}"></a>
+                      {% endfor %}
+                      {% comment %} <div class="col col-md-1 progress me-1 bg-dark"></div>
+                      <div class="col col-md-1 progress me-1 bg-dark"></div>
+                      <div class="col col-md-1 progress me-1 bg-dark"></div>
+                      <div class="col col-md-1 progress me-1 bg-dray"></div>
+                      <div class="col col-md-1 progress me-1 bg-dray"></div>
+                      <div class="col col-md-1 progress me-1 bg-dray"></div>
+                      <div class="col col-md-1 progress me-1 bg-dray"></div> {% endcomment %}
+                  </div>
                 </div>
-                <div class="col-md-10">
+                <div class="">
+                  <h1 class="mt-7">{{ module.title }}</h1>
+                </div>
+                {% for content in module.contents.all %}
+                  {% with item=content.item %}
+                    {{ item.render }}
+                  {% endwith %}
+                {% endfor %}
+                {% comment %} <div class="col-md-10">
                   <img src="{% static 'images/3DFqGLCSyF4.jpg' %}" alt="" class="br-5 mt-5">
                 </div>
                 <div class="col-md-10">
@@ -116,7 +124,7 @@
                             <img class="img-responsive br-5" src="{% static 'images/media/files/01.jpg' %}" alt="Thumb-2">
                         </a>
                     </li>
-                </ul>
+                  </ul>
                 </div>
                 <div class="col-md-10">
                   <p class="text fs-20 br-5 mt-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique aliquet ex, a convallis massa maximus id. Maecenas mollis turpis vel metus tempus, non porta libero dignissim. Morbi at dignissim odio. Integer feugiat, urna ut dictum pellentesque, lectus elit ullamcorper lectus, id tempus sem sem ut quam. Maecenas et metus congue, fermentum metus ut, tempus nulla. Aliquam erat volutpat. Vestibulum eget cursus magna. Maecenas laoreet faucibus cursus. Mauris aliquet ipsum eu purus sagittis consequat. Proin rhoncus diam quis convallis congue. Curabitur scelerisque gravida est, id imperdiet sem consectetur vitae. Sed quis risus in velit rutrum finibus. Sed sagittis lectus a turpis commodo, vel auctor lectus hendrerit.</p>
@@ -138,7 +146,7 @@
                 </div>
                 <div class="col-md-10 text-center d-flex justify-content-center align-items-center mt-8 my-5">
                   <button class="btn btn-outline-dark btn-lg btn-pill fa-2x">К следующей теме</button>
-                </div>
+                </div> {% endcomment %}
               </div>
           </div>
           <!-- CONTAINER CLOSED -->

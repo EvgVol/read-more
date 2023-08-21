@@ -324,7 +324,7 @@
             </div>
 
             <!-- Status -->
-            <div class="col-xl-6">
+            <div class="col-xl-5">
 
               <div class="card">
                 <div class="card-body">
@@ -766,7 +766,7 @@
             </div>
 
             
-            <div class="col-xl-3">
+            <div class="col-xl-4">
 
               {% if author.followers.count != 0 %}
               <!-- Followers -->
@@ -814,88 +814,32 @@
               </div>
               {% endif %}
 
-              {% comment %} <!-- News -->
+              <!-- News -->
               <div class="card">
                 <div class="card-header">
-                  <div class="card-title">Our Latest News</div>
+                  <div class="card-title">Начатые курсы</div>
                 </div>
                 <div class="card-body">
                   <div class="">
-                    <div class="media media-xs overflow-visible">
-                      <img
-                        class="avatar bradius avatar-xl me-3"
-                        src="{% static 'images/users/12.jpg' %}"
-                        alt="avatar-img"
-                      />
+                    {% for course in courses %}
+                    <div class="media media-xs overflow-visible mt-1">
+                      {% thumbnail course.image "40x40" crop="center" upscale=True as im %}
+                      <img class="avatar bradius avatar-xl me-3" src="{{ im.url }}" alt="avatar-img"/>
+                      {% endthumbnail %}
                       <div class="media-body valign-middle">
-                        <a
-                          href="javascript:void(0)"
-                          class="fw-semibold text-dark"
-                          >John Paige</a
-                        >
-                        <p class="text-muted mb-0">
-                          There are many variations of passages of Lorem Ipsum
-                          available ...
-                        </p>
+                        <a href="javascript:void(0)" class="fw-semibold text-dark">{{ course.title }}</a>
+                        <div class="text-muted small">{{ course.subject.title }}</div>
                       </div>
+                      <a href="{% url 'courses:course_detail' course.id %}" type="button" class="btn btn-primary btn-sm d-block">К курсу</a>
                     </div>
-                    <div class="media media-xs overflow-visible mt-5">
-                      <img
-                        class="avatar bradius avatar-xl me-3"
-                        src="{% static 'images/users/2.jpg' %}"
-                        alt="avatar-img"
-                      />
-                      <div class="media-body valign-middle">
-                        <a
-                          href="javascript:void(0)"
-                          class="fw-semibold text-dark"
-                          >Peter Hill</a
-                        >
-                        <p class="text-muted mb-0">
-                          There are many variations of passages of Lorem Ipsum
-                          available ...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="media media-xs overflow-visible mt-5">
-                      <img
-                        class="avatar bradius avatar-xl me-3"
-                        src="{% static 'images/users/9.jpg' %}"
-                        alt="avatar-img"
-                      />
-                      <div class="media-body valign-middle">
-                        <a
-                          href="javascript:void(0)"
-                          class="fw-semibold text-dark"
-                          >Irene Harris</a
-                        >
-                        <p class="text-muted mb-0">
-                          There are many variations of passages of Lorem Ipsum
-                          available ...
-                        </p>
-                      </div>
-                    </div>
-                    <div class="media media-xs overflow-visible mt-5">
-                      <img
-                        class="avatar bradius avatar-xl me-3"
-                        src="{% static 'images/users/4.jpg' %}"
-                        alt="avatar-img"
-                      />
-                      <div class="media-body valign-middle">
-                        <a
-                          href="javascript:void(0)"
-                          class="fw-semibold text-dark"
-                          >Harry Fisher</a
-                        >
-                        <p class="text-muted mb-0">
-                          There are many variations of passages of Lorem Ipsum
-                          available ...
-                        </p>
-                      </div>
-                    </div>
+                    {% empty %}
+                    <p>
+                      <a href="{% url "courses:course_list" %}">Browse courses</a>
+                      </p>
+                    {% endfor %}
                   </div>
                 </div>
-              </div> {% endcomment %}
+              </div>
 
               {% comment %} <!-- Friends -->
               <div class="card">

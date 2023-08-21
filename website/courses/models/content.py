@@ -3,11 +3,13 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import get_user_model
-
-User = get_user_model()
+from django.template.loader import render_to_string
 
 from .module import Module
 from ..fields import OrderField
+
+
+User = get_user_model()
 
 
 class ItemBase(models.Model):
@@ -27,6 +29,11 @@ class ItemBase(models.Model):
 
     def __str__(self):
         return self.title
+
+    def render(self):
+        return render_to_string(
+            f'courses/content/{self._meta.model_name}.html', {'item': self}
+        )
 
 
 class Content(models.Model):

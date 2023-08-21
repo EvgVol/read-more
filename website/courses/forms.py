@@ -15,11 +15,12 @@ class CourseForm(forms.ModelForm):
         queryset=Technology.objects.all(),
         widget=FilteredSelectMultiple(verbose_name='Technologies', is_stacked=False)
     )
-    # cards = forms.ModelMultipleChoiceField(
-    #     queryset=Card.objects.all(),
-    #     widget=FilteredSelectMultiple(verbose_name='Cards', is_stacked=False)
-    # )
 
     class Meta:
         model = Course
         fields = '__all__'
+
+
+class CourseEnrollForm(forms.Form):
+    course = forms.ModelChoiceField(queryset=Course.objects.all(),
+                                    widget=forms.HiddenInput)
