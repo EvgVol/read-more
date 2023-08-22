@@ -4,6 +4,7 @@
 {% block base %}
 {% load static %}
 {% load thumbnail %}
+{% load cache %}
 <div class="page">
   <div class="page-main">
     <!-- app-Header -->
@@ -66,7 +67,7 @@
                                         class="side-menu__label">Блог</span></a>
                               </li>
                           </ul>
-                          <a class="slide" href="{% url 'courses:manage_course_list' subject_name=course.subject.slug %}">
+                          <a class="slide" href="{% url 'courses:manage_course_list' %}?subject_name={{ subject.slug }}">
                               <i class="fe fe-corner-up-left me-2"></i>
                               <span class="side-menu__label">Назад к курсам</span>
                           </a>
@@ -130,19 +131,21 @@
                                         <span class="landing-title"></span>
                                         <h2 class="fw-semibold text-center">Основные характистики</h2>
                                         <div class="row mt-7">
-                                            {% for advantage in course.advantages.all %}
-                                            <div class="col-lg-6 col-md-12">
-                                                <div class="card features main-features main-features-7 wow fadeInUp reveal revealleft"
-                                                    data-wow-delay="0.1s">
-                                                    <div class="d-flex align-items-center px-0">
-                                                        {% thumbnail advantage.image "100x100" crop="center" upscale=True as im %}
-                                                            <img class="avatar-xl profile-user brround cover-image me-3" src="{{ im.url }}" />
-                                                        {% endthumbnail %}
-                                                        <h4 class="fs-20 fw-bold">{{ advantage.name }}</h4>
+                                            {% cache 600 course_advantages advantage %}
+                                                {% for advantage in course.advantages.all %}
+                                                <div class="col-lg-6 col-md-12">
+                                                    <div class="card features main-features main-features-7 wow fadeInUp reveal revealleft"
+                                                        data-wow-delay="0.1s">
+                                                        <div class="d-flex align-items-center px-0">
+                                                            {% thumbnail advantage.image "100x100" crop="center" upscale=True as im %}
+                                                                <img class="avatar-xl profile-user brround cover-image me-3" src="{{ im.url }}" />
+                                                            {% endthumbnail %}
+                                                            <h4 class="fs-20 fw-bold">{{ advantage.name }}</h4>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            {% endfor %}
+                                                {% endfor %}
+                                            {% endcache %}
                                         </div>
                                     </div>
                                 </div>
@@ -232,20 +235,22 @@
                                                     <div class="row justify-content-center">
                                                         <div class="col-lg-12 px-0">
                                                             <div class="feature-logos mt-5">
-                                                                {% for technology in course.technologies.all %}
-                                                                <div class="slide">
-                                                                    <img
-                                                                      src="{{ technology.url }}"
-                                                                      data-bs-toggle="tooltip"
-                                                                      data-bs-trigger="click"
-                                                                      title="{{ technology.hints }}"
-                                                                    >
-                                                                    <h5 
-                                                                      class="mt-3 text-white">
-                                                                      {{ technology.name }}
-                                                                    </h5>
-                                                                </div>
-                                                                {% endfor %}
+                                                                {% cache 600 course_technologies technology %}
+                                                                    {% for technology in course.technologies.all %}
+                                                                    <div class="slide">
+                                                                        <img
+                                                                        src="{{ technology.url }}"
+                                                                        data-bs-toggle="tooltip"
+                                                                        data-bs-trigger="click"
+                                                                        title="{{ technology.hints }}"
+                                                                        >
+                                                                        <h5 
+                                                                        class="mt-3 text-white">
+                                                                        {{ technology.name }}
+                                                                        </h5>
+                                                                    </div>
+                                                                    {% endfor %}
+                                                                {% endcache %}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -282,19 +287,19 @@
                                                             class="card p-3 border-primary pricing-card advanced reveal revealrotate">
                                                             <div class="card-header d-block text-justified pt-2">
                                                                 <p class="fs-9 fw-semibold mb-1 pe-0">
-                                                                  {{ card.course }}
-                                                                  {% if card.status %}
-                                                                  <span class="tag bg-primary text-white float-end">
+                                                                {{ card.course }}
+                                                                {% if card.status %}
+                                                                <span class="tag bg-primary text-white float-end">
                                                                     {{ card.status }}
-                                                                  </span>
-                                                                  {% endif %}
+                                                                </span>
+                                                                {% endif %}
                                                                 </p>
                                                                 <p class="text-justify fw-semibold mb-1">
-                                                                  <span class="fs-30 me-1">{{ card.course.price_per_mouth }}</span>
-                                                                  <span class="fs-30 me-2">₽</span>
-                                                                  <span class="fs-25">
+                                                                <span class="fs-30 me-1">{{ card.course.price_per_mouth }}</span>
+                                                                <span class="fs-30 me-2">₽</span>
+                                                                <span class="fs-25">
                                                                     <span class="op-0-5 text-muted text-20">/мес</span>
-                                                                  </span>
+                                                                </span>
                                                                 </p>
                                                                 <p class="fs-13 mb-2">{{ card.title }}</p>
                                                                 <p class="fs-13 mb-1 text-primary">частями в течение {{ card.course.period }} месяцев</p>
@@ -302,17 +307,17 @@
                                                             <div class="card-body pt-2">
                                                                 <ul class="text-justify pricing-body ps-0">
                                                                     <li>
-                                                                      <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                      <strong> {{ card.course.period }} месяцев </strong> учебы
+                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
+                                                                    <strong> {{ card.course.period }} месяцев </strong> учебы
                                                                     </li>
                                                                     <li>
-                                                                      <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                      <strong>{{ card.course.get_load_display }} </strong> нагрузка</li>
+                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
+                                                                    <strong>{{ card.course.get_load_display }} </strong> нагрузка</li>
                                                                     <li>
-                                                                      <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                      <strong>{{ card.course.count_projects }} </strong> учебных проектов</li>
+                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
+                                                                    <strong>{{ card.course.count_projects }} </strong> учебных проектов</li>
                                                                     <li class="mt-1">
-                                                                      {{ card.additional_text }}
+                                                                    {{ card.additional_text }}
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -324,7 +329,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% endfor %}
+                                                    {% endfor %} 
                                                   </div>
                                               </div>
                                               <div class="tab-pane" id="immediately">
@@ -724,37 +729,39 @@
                                                     <h2 class="text-center fw-semibold text-white mb-7">What People Are
                                                         Saying About Our Product.</h2>
                                                     <div class="testimonial-carousel">
-                                                        {% for review in reviews %}
-                                                        <div class="slide text-center">
-                                                            <div class="row">
-                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                    <div class="testimonia">
-                                                                        <p class="text-white-80">
-                                                                            <i
-                                                                                class="fa fa-quote-left fs-20 text-white-80"></i>
-                                                                            {{ review.comment }}
-                                                                        </p>
-                                                                        <a href="{{ review.author.get_absolute_url}}">
-                                                                          {% if review.author.avatar %}
-                                                                            {% thumbnail review.author.avatar "216x226" crop="center" upscale=True as im %}
-                                                                            <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
-                                                                            {% endthumbnail %}
-                                                                          {% else %}
-                                                                            <img
-                                                                              class="avatar profile-user brround cover-image"
-                                                                              src="{% static 'images/users/default-user.jpeg' %}"
-                                                                              alt="Аватар"
-                                                                            />
-                                                                          {% endif %}
-                                                                          <h3 class="title mt-3">{{ review.author }}</h3>
-                                                                          {% comment %} <span class="post">Web Developer</span> {% endcomment %}
-                                                                          <div class="rating-stars block my-rating-7 mb-5" data-rating="{{ review.rating }}" data-read-only="true"></div>
-                                                                        </a>
+                                                        {% cache 600 course_reviews review %}
+                                                            {% for review in reviews %}
+                                                            <div class="slide text-center">
+                                                                <div class="row">
+                                                                    <div class="col-xl-8 col-md-12 d-block mx-auto">
+                                                                        <div class="testimonia">
+                                                                            <p class="text-white-80">
+                                                                                <i
+                                                                                    class="fa fa-quote-left fs-20 text-white-80"></i>
+                                                                                {{ review.comment }}
+                                                                            </p>
+                                                                            <a href="{{ review.author.get_absolute_url}}">
+                                                                            {% if review.author.avatar %}
+                                                                                {% thumbnail review.author.avatar "216x226" crop="center" upscale=True as im %}
+                                                                                <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
+                                                                                {% endthumbnail %}
+                                                                            {% else %}
+                                                                                <img
+                                                                                class="avatar profile-user brround cover-image"
+                                                                                src="{% static 'images/users/default-user.jpeg' %}"
+                                                                                alt="Аватар"
+                                                                                />
+                                                                            {% endif %}
+                                                                            <h3 class="title mt-3">{{ review.author }}</h3>
+                                                                            {% comment %} <span class="post">Web Developer</span> {% endcomment %}
+                                                                            <div class="rating-stars block my-rating-7 mb-5" data-rating="{{ review.rating }}" data-read-only="true"></div>
+                                                                            </a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        {% endfor %}
+                                                            {% endfor %}
+                                                        {% endcache %}
                                                     </div>
                                                 </div>
                                             </div>

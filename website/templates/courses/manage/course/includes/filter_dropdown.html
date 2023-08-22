@@ -1,0 +1,14 @@
+{% load ending_num %}
+<button type="button" class="btn btn-default btn-pill dropdown-toggle" data-bs-toggle="dropdown">
+    {% if display_name %}{{ display_name }}{% else %}{{ default }}{% endif %}<span class="caret"></span>
+</button>
+<ul class="dropdown-menu" role="menu">
+    <li class="dropdown-plus-title"><a class="dropdown-item" href="{% url 'courses:course_list' %}">Сбросить</a></li>
+    {% for choice in choices %}
+        {% if filter_name == 'subject_name' %}
+            <li><a href="{{ request.path }}?{% if get %}{{ get }}&{% endif %}subject_name={{ choice.slug }}">{{ choice }} <small class="text-primary">({% if choice.total_courses > 0 %}{{ choice.total_courses }} курс{{ choice.total_courses|ru_plural:",а,ов" }}{% else %}нет курсов{% endif %})</small></a></li>
+        {% else %}
+            <li><a href="{{ request.path }}?{% if get %}{{ get }}&{% endif %}complexity_name={{ choice.complexity }}">{{ choice.get_complexity_full_name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>

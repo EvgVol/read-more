@@ -19,7 +19,7 @@
                 <a href="javascript:void(0)">READ MORE</a>
               </li>
               <li class="breadcrumb-item">
-                <a href="{% url 'courses:manage_course_list' course.subject.slug %}">{{ course.subject }}</a>
+                <a href="{% url 'courses:manage_course_list' %}?subject_name={{ course.subject.slug }}">{{ course.subject }}</a>
               </li>
               <li class="breadcrumb-item">
                 <a href="{{ course.get_absolute_url }}">{{ course.title }}</a>
@@ -70,7 +70,7 @@
                         
                         <div class="card-footer">
                             <input type="submit" class="btn btn-primary" value="Save modules">
-                            <a href="{% url 'courses:manage_course_list' course.subject.slug %}" class="btn btn-default float-end">Отмена</a>
+                            <a href="{% url 'courses:manage_course_list' %}?subject_name={{ course.subject.slug }}" class="btn btn-default float-end">Отмена</a>
                         </div>
                     </div>
                     {{ formset.management_form }}

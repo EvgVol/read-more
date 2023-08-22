@@ -1,6 +1,7 @@
 {% extends 'includes/base.html' %}
 {% load i18n %}
 {% load static %}
+{% load cache %}
 {% load thumbnail %}
 {% block title %}
   ExView | {% trans "Education" %}
@@ -28,19 +29,21 @@
                     <h2 class="fw-semibold mb-2">Out Subjects</h2>
                     <h5>Cреда, где всё получится: и новая IT-профессия, и новая жизнь</h5>
                 </div>
-                {% for subject in object_list %}
-                <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6 mt-7">
-                    <div class="card pricing-card card-blog overflow-hidden">
-                        {% thumbnail subject.image "500x333" crop="center" as im %}
-                        <a href="{% url 'courses:manage_course_list' subject_name=subject.slug %}"><img class="card-img-top" src="{{ im.url }}"></a>
-                        {% endthumbnail %}
-                        <div class="card-body">
-                            <h3 class="card-title">{{ subject.title }}</h3>
-                            <p>{{ subject.description }}</p>
+                {% cache 600 object_list_subjects subject %}
+                    {% for subject in object_list %}
+                    <div class="col-sm-6 col-xl-3 col-md-6 col-lg-6 mt-7">
+                        <div class="card pricing-card card-blog overflow-hidden">
+                            {% thumbnail subject.image "500x333" crop="center" as im %}
+                            <a href="{% url 'courses:manage_course_list' %}?subject_name={{ subject.slug }}"><img class="card-img-top" src="{{ im.url }}"></a>
+                            {% endthumbnail %}
+                            <div class="card-body">
+                                <h3 class="card-title">{{ subject.title }}</h3>
+                                <p>{{ subject.description }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% endcache %}
             </div>
             <div class="row mt-7">
                 <div class="col-lg-12">

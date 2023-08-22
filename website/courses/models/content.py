@@ -32,7 +32,7 @@ class ItemBase(models.Model):
 
     def render(self):
         return render_to_string(
-            f'courses/content/{self._meta.model_name}.html', {'item': self}
+            f'courses/manage/content/{self._meta.model_name}.html', {'item': self}
         )
 
 

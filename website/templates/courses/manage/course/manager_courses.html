@@ -2,6 +2,7 @@
 {% load course %}
 {% load i18n %}
 {% load static %}
+{% load cache %}
 
 {% block title %}
     READ MORE | {% trans "Test" %}
@@ -21,7 +22,7 @@
 							<a href="{% url 'courses:subject_list' %}">Read more</a>
 						</li>
 						<li class="breadcrumb-item" aria-current="page">
-							<a href="{% url 'courses:manage_course_list' course.subject.slug %}">{{ course.subject }}</a>
+							<a href="{% url 'courses:manage_course_list' %}?subject_name={{ subject.slug }}">{{ course.subject }}</a>
 						</li>
 					</ol>
 				</div>
@@ -90,25 +91,27 @@
 							<div class="card-body">
 								<div class="">
 									<ul class="list-group" id="modules">
-										{% for m in course.modules.all %}
-										<li data-id="{{ m.id }}" >
-											<a href="{% url 'courses:content_list' m.id %}" class="list-group-item list-group-item-action flex-column align-items-start {% if m == module %}active{% endif %}">
-												<span>
-													Module <span class="order">{{ m.order|add:1 }}</span>
-												</span>
-												<div class="d-flex w-100 justify-content-between ">
-													<h5 class="mb-1">{{ m.title }}</h5>
+										{% cache 600 course_modules module %}
+											{% for m in course.modules.all %}
+											<li data-id="{{ m.id }}" >
+												<a href="{% url 'courses:content_list' m.id %}" class="list-group-item list-group-item-action flex-column align-items-start {% if m == module %}active{% endif %}">
+													<span>
+														Module <span class="order">{{ m.order|add:1 }}</span>
+													</span>
+													<div class="d-flex w-100 justify-content-between ">
+														<h5 class="mb-1">{{ m.title }}</h5>
+													</div>
+												</a>
+												
+											</li>
+											{% empty %}
+											<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+												<div class="d-flex w-100 justify-content-between">
+													<h5 class="mb-1">No modules yet.</h5>
 												</div>
 											</a>
-											
-										</li>
-										{% empty %}
-										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
-											<div class="d-flex w-100 justify-content-between">
-												<h5 class="mb-1">No modules yet.</h5>
-											</div>
-										</a>
-										{% endfor %}
+											{% endfor %}
+										{% endcache %}
 									</ul>
 								</div>
 							</div>
@@ -136,28 +139,30 @@
 									</div>
 									<ul>
 										<div class="mt-5" id="module-contents">
-										{% for content in module.contents.all %}
-										<li data-id="{{ content.id }}" class="contents" >
-											{% with item=content.item %}
-											<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-												
-												<span>
-													<i class="{% if item|model_name == "text" %}pe-7s-note2 {% elif item|model_name == "image" %}pe-7s-photo{% elif item|model_name == "video" %}pe-7s-video{% elif item|model_name == "file" %}pe-7s-file{% endif %} me-2 text-dark"></i> Content <span class="order">{{ content.order|add:1 }}</span>
-												</span>
-												
-												<div class="d-flex w-100 justify-content-between ">
-													<h5 class="mb-1">{{ item }}</h5>
+										{% cache 600 module_contents content %}
+											{% for content in module.contents.all %}
+											<li data-id="{{ content.id }}" class="contents" >
+												{% with item=content.item %}
+												<a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+													
+													<span>
+														<i class="{% if item|model_name == "text" %}pe-7s-note2 {% elif item|model_name == "image" %}pe-7s-photo{% elif item|model_name == "video" %}pe-7s-video{% elif item|model_name == "file" %}pe-7s-file{% endif %} me-2 text-dark"></i> Content <span class="order">{{ content.order|add:1 }}</span>
+													</span>
+													
+													<div class="d-flex w-100 justify-content-between ">
+														<h5 class="mb-1">{{ item }}</h5>
+													</div>
+												</a>
+												{% endwith %}
+											</li>
+											{% empty %}
+											<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
+												<div class="d-flex w-100 justify-content-between">
+													<h5 class="mb-1">No contents yet.</h5>
 												</div>
 											</a>
-											{% endwith %}
-										</li>
-										{% empty %}
-										<a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start">
-											<div class="d-flex w-100 justify-content-between">
-												<h5 class="mb-1">No contents yet.</h5>
-											</div>
-										</a>
-										{% endfor %}
+											{% endfor %}
+										{% endcache %}
 									</div>
 									</ul>
 								</div>

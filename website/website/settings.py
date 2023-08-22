@@ -51,23 +51,28 @@ INSTALLED_APPS = [
     'sorl.thumbnail', #IMAGE #https://sorl-thumbnail.readthedocs.io/en/latest/
     'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/
     'social_django', #OAUTH2 #https://python-social-auth.readthedocs.io/en/latest/index.html
-    'django_extensions', #SSL #https://django-extensions.readthedocs.io/en/latest/
+    'django_extensions', #Lite SSL #https://django-extensions.readthedocs.io/en/latest/
     'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
     'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
+    'embed_video', #EMBEDDING YouTube and Vimeo videos #https://django-embed-video.readthedocs.io/en/latest/
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
 
 ROOT_URLCONF = 'website.urls'
 
@@ -308,3 +313,13 @@ CART_SESSION_ID = 'cart'
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 60 * 15
+CACHE_MIDDLEWARE_KEY_PREFIX = 'website'

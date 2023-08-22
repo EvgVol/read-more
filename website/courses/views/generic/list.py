@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import get_object_or_404
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.db.models import Count
+from django.core.cache import cache
 
 from courses.models.subject import Subject
 from courses.models.course import Course
@@ -23,30 +24,54 @@ class CourseListView(OwnerCourseMixin, ListView):
     template_name = 'courses/manage/course/list.html'
     permission_required = 'courses.view_course'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        subject_name = self.kwargs.get('subject_name', None)
-        complexity_name = self.kwargs.get('complexity_name', None)
-        subjects = Subject.objects.annotate(total_courses=Count('courses'))
-        all_course = Course.objects.all()
-        courses = Course.objects.all()
+    def get_filters_from_request(self):
+        subject_name = self.request.GET.get('subject_name')
+        complexity_name = self.request.GET.get('complexity_name')
+        return subject_name, complexity_name
+
+    def apply_filter(self, subject_name, complexity_name):
+        queryset_filters = {}
 
         if subject_name:
             subject_id = get_object_or_404(Subject, slug=subject_name)
-            courses = courses.filter(subject=subject_id)
+            queryset_filters['subject'] = subject_id
+
+        if complexity_name:
+            queryset_filters['complexity'] = complexity_name
+
+        return queryset_filters
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        subject_name, complexity_name = self.get_filters_from_request()
+        
+        subjects = Subject.objects.annotate(total_courses=Count('courses')).prefetch_related('courses')
+        cache.set('all_subjects', subjects)
+        all_course = Course.objects.all().select_related('subject').prefetch_related('modules')
+
+        context['subjects'] = subjects
+        context['all_course'] = all_course
+
+        cache_key = f'courses_subject_{subject_name}_complexity_{complexity_name}'
+        courses = cache.get(cache_key)
+
+        queryset_filters = {}
+
+        if courses is None:
+            queryset_filters = self.apply_filter(subject_name, complexity_name)
+            courses = Course.objects.filter(**queryset_filters)
+            cache.set(cache_key, courses, 300)
+        
+        context['courses'] = courses
+
+        if subject_name and 'subject' in queryset_filters:
+            subject_id = queryset_filters['subject']
             context['subject_id'] = subject_id
 
         if complexity_name:
-            courses = Course.objects.filter(complexity=complexity_name)
             complexity = all_course.first().Complexity(complexity_name).label
             context['complexity_full_name'] = complexity
-            
-
-        context['complexity_name'] = complexity_name
-        
-        context['all_course'] = all_course
-        context['courses'] = courses
-        context['subjects'] = subjects
+            context['complexity_name'] = complexity_name
         return context
 
 

@@ -37,8 +37,8 @@
   <body class="{{ body_class }}">
     <div class="{% if request.path == '/countdown/' %}login-img{% endif %}"> 
       <div id="global-loader">
-        <img src="{% static 'images/loader.svg' %}" class="loader-img" alt="Loader">
-      </div>
+        <div class="spinner-lg loader-img"></div>
+      </div> 
       {% if messages %} {% for message in messages %}
         <div class="alert alert-{{ message.tags }}" role="alert">
           {{ message|safe }}

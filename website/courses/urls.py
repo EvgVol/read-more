@@ -1,5 +1,6 @@
 from django.urls import path, include
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.cache import cache_page
 
 from courses.views.generic.list import (CourseListView, SubjectView,
                                         ContentListView, ModuleListView,
@@ -20,11 +21,13 @@ urlpatterns = [
     path("create/", 
          CourseCreateView.as_view(), name="course_create"),
     path("course/<slug:slug>/trainer/",
-         CourseTrainerView.as_view(), name="course_trainer"),
+         cache_page(60 * 15)(CourseTrainerView.as_view()), name="course_trainer"),
     path("course/<slug:slug>/trainer/<module_id>/",
-         CourseTrainerView.as_view(), name="course_trainer_module"),
+         cache_page(60 * 15)(CourseTrainerView.as_view()), name="course_trainer_module"),
     path("courses/",
          CourseListView.as_view(), name="course_list"),
+    path("courses/",
+         CourseListView.as_view(), name="manage_course_list"),
     path("courses/<int:pk>/", include([
         path("edit/",
              CourseUpdateView.as_view(), name="course_edit"),
@@ -34,10 +37,6 @@ urlpatterns = [
             path('', ModuleUpdateView.as_view(), name="module_update"),
         ])),
     ])),
-    path("courses/<subject_name>/",
-         CourseListView.as_view(), name="manage_course_list"),
-    path("courses/<subject_name>/<complexity_name>/",
-         CourseListView.as_view(), name="manage_course_list_by_complexity"),
     path("course/<int:pk>/", include([
         path("", CourseDetailView.as_view(), name="course_detail"),
         path('modules/', ModuleListView.as_view(), name='module_list'),
