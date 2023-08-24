@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
     'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
     'embed_video', #EMBEDDING YouTube and Vimeo videos #https://django-embed-video.readthedocs.io/en/latest/
+    'redisboard', #STATS SERVER REDIS #https://pypi.org/project/django-redisboard/
 ]
 
 MIDDLEWARE = [
@@ -313,10 +314,11 @@ CART_SESSION_ID = 'cart'
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
 
+#Setting CASHES (Redis or Memcached)
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-        'LOCATION': '127.0.0.1:11211',
+        'BACKEND': config('CACHE_BACKEND'),
+        'LOCATION': config('CACHE_LOCATION'),
     }
 }
 
