@@ -35,10 +35,18 @@ EMAIL_ADMIN='your-email@yandex.ru'
 DB_ENGINE=django.db.backends.postgresql
 DB_NAME=postgres
 POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
+POSTGRES_PASSWORD=postgres 
 DB_HOST=db
 DB_PORT=5432
 MODE=prod # --> IF NEED `SQLite3` write: dev
+YANDEX_KEY='yandex-key'
+YANDEX_SECRET='yandex-secret'
+GOOGLE_KEY='google-key'
+GOOGLE_SECRET='google-secret'
+VK_KEY='vk-key'
+VK_SECRET='vk-secret'
+GITHUB_KEY='github-key'
+GITHUB_SECRET='github-secret'
 ```
 
 4. Navigate to the project directory using:
@@ -57,7 +65,13 @@ docker pull redis
 docker run -it --rm --name redis -p 6379:6379 redis
 ```
 
-7. Start the Django development server using the following command:
+7.  Start the Memcached using the following command:
+```
+docker pull memcached
+docker run -it --rm --name memcached -p 11211:11211 memcached -m 64
+```
+
+8. Start the Django development server using the following command:
 ```
 python manage.py runserver --settings=website.settings.local
 
@@ -65,14 +79,14 @@ python manage.py runserver --settings=website.settings.local
 python manage.py runserver_plus --cert-file cert.crt
 ```
 
-8. Open your web browser and navigate to http://localhost:8000 to view the application.
+9. Open your web browser and navigate to http://localhost:8000 to view the application.
 
 
-9. To add translations of your source code, use the following command:
+10. To add translations of your source code, use the following command:
 ```
 python manage.py makemessages --all
 ```
-10. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
+11. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
 ```
 python manage.py compilemessages
 ```
