@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
     'embed_video', #EMBEDDING YouTube and Vimeo videos #https://django-embed-video.readthedocs.io/en/latest/
     'redisboard', #STATS SERVER REDIS #https://pypi.org/project/django-redisboard/
+    'rest_framework', #RESTful API #https://www.django-rest-framework.org/
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,8 @@ else:
             'PASSWORD': config('POSTGRES_PASSWORD'),
         }
     }
+
+    SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 #Setting AUTHENTICATION for Users
 AUTHENTICATION_BACKENDS = [
@@ -252,7 +255,7 @@ CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = "Lax"
 
 # Social Auth 
-SOCIAL_AUTH_JSONFIELD_ENABLED = True #When using PosgreSQL:
+
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -314,7 +317,7 @@ CART_SESSION_ID = 'cart'
 # CELERY_TASK_SERIALIZER = 'json'
 # CELERY_RESULT_SERIALIZER = 'json'
 
-#Setting CASHES (Redis or Memcached)
+#Setting CASHES
 CACHES = {
     'default': {
         'BACKEND': config('CACHE_BACKEND'),
@@ -325,3 +328,9 @@ CACHES = {
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 15
 CACHE_MIDDLEWARE_KEY_PREFIX = 'website'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+}
