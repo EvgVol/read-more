@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'embed_video', #EMBEDDING YouTube and Vimeo videos #https://django-embed-video.readthedocs.io/en/latest/
     'redisboard', #STATS SERVER REDIS #https://pypi.org/project/django-redisboard/
     'rest_framework', #RESTful API #https://www.django-rest-framework.org/
+    'channels', #CHANNELS
 ]
 
 MIDDLEWARE = [
@@ -101,6 +102,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'website.wsgi.application'
+ASGI_APPLICATION = 'website.asgi.application'
 
 #Setting Database (SQLite3 or PostgreSQL)
 if MODE == 'dev':

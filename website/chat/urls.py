@@ -7,7 +7,7 @@ app_name = 'chat'
 
 
 urlpatterns = [
-    path('room/<slug:course_slug>/',
+    path('room/<int:course_id>/',
          views.course_chat_room,
          name='course_chat_room'),
 ]
