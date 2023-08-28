@@ -13,7 +13,7 @@ services:
     image: redis:7.0.4
     restart: always
     volumes:
-      – ./data/cache:/data
+      - ./data/cache:/data
 
   web:
     build:
@@ -21,8 +21,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - static_value:/code/static/
+      - media_value:/code/media/
     depends_on:
       - db
       - cache

@@ -119,13 +119,9 @@ else:
             'NAME': config('DB_NAME'),
             'USER': config('POSTGRES_USER'),
             'PASSWORD': config('POSTGRES_PASSWORD'),
+            'HOST': config('POSTGRES_HOST', default='localhost'),
+            'PORT': config('DB_PORT', default='5432'),
         },
-        'blog': {
-            'ENGINE': config('DB_ENGINE'),
-            'NAME': config('DB_NAME'),
-            'USER': config('POSTGRES_USER'),
-            'PASSWORD': config('POSTGRES_PASSWORD'),
-        }
     }
 
     SOCIAL_AUTH_JSONFIELD_ENABLED = True
@@ -306,7 +302,7 @@ INTERNAL_IPS = [
 ]
 
 # Setting Redis:
-REDIS_HOST = 'localhost'
+REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
 REDIS_DB = 0
 
@@ -346,3 +342,7 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+REDIS_URL = 'redis://cache:6379'
+CACHES['default']['LOCATION'] = REDIS_URL
+CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
