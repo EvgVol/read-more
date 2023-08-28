@@ -33,9 +33,9 @@
                       <li class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Поиск"><i
                           class="icon-magnifier text-white fa-2x" ></i>
                       </li>
-                      <li class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Записная книжка"><i
-                          class="icon-notebook text-white fa-2x" ></i>
-                      </li>
+                      <a class="col-12 mt-7" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Онлайн чат" href="{% url "chat:course_chat_room" course.id %}"><i
+                          class="icon-bubbles text-white fa-2x" ></i>
+                      </a>
                   </ul>
               </div>
           </div>
@@ -159,7 +159,6 @@
 
 {% endblock base %}
 {% block script %}
-
 
 
 <!-- BACK-TO-TOP -->

@@ -9,6 +9,8 @@ def course_chat_room(request, course_id):
         course = request.user.courses_joined.get(id=course_id)
     except:
         return HttpResponseForbidden()
+    
+    users_in_chat = course.students.all()
     return render(request,
                   'chat/room.html',
-                  {'course': course})
+                  {'course': course, 'users_in_chat': users_in_chat})

@@ -32,19 +32,34 @@
               <div class="main-content-body main-content-body-chat">
                 <div class="main-chat-header pt-3 d-block d-sm-flex">
                   <div class="avatar avatar-xxl brround cover-image">
-                    {% thumbnail request.user.avatar "80x80" crop="center" as im %}
-                    <img class="brround" alt="avatar" src="{{ im.url }}">
-                    {% endthumbnail %}
+                    {% if request.user.avatar %}
+                      {% thumbnail request.user.avatar "80x80" crop="center" as im %}
+                      <img class="brround" alt="avatar" src="{{ im.url }}">
+                      {% endthumbnail %}
+                    {% else %}
+                      <img class="brround" alt="avatar" src="{% static 'images/users/default-user.jpeg' %}">
+                    {% endif %}
                   </div>
                   <div class="main-chat-msg-name mt-2">
                     <span class="dot-label bg-success"></span><small class="me-3">online</small>
-                    <div class="avatar-list avatar-list-stacked mt-2">
-                      <span class="avatar brround cover-image" data-bs-image-src="{% static 'images/users/12.jpg' %}"></span>
-                      <span class="avatar brround cover-image" data-bs-image-src="{% static 'images/users/12.jpg' %}"></span>
-                      <span class="avatar brround cover-image" data-bs-image-src="{% static 'images/users/12.jpg' %}"></span>
-                      <span class="avatar brround cover-image" data-bs-image-src="{% static 'images/users/12.jpg' %}"></span>
-                      <span class="avatar brround cover-image" data-bs-image-src="{% static 'images/users/12.jpg' %}"></span>
-                      <span class="avatar brround cover-image bg-primary">+8</span>
+                    <div id="users-list">
+                      {% if users_in_chat|length > 1 %}
+                        <div class="avatar-list avatar-list-stacked mt-2">
+                          {% for user in users_in_chat %}
+                            <span class="avatar brround cover-image">
+                              {% if user.avatar %}
+                                {% thumbnail user.avatar "80x80" crop="center" as im %}
+                                  <img class="brround" alt="avatar" src="{{ im.url }}">
+                                {% endthumbnail %}
+                              {% else %}
+                                <img class="brround" alt="avatar" src="{% static 'images/users/default-user.jpeg' %}">
+                              {% endif %}
+                            </span>
+                          {% endfor %}
+                        </div>
+                      {% else %}
+                        <p>Вы одни в чате.</p>
+                      {% endif %}
                     </div>
                   </div>
                   <nav class="nav ms-auto">
@@ -64,132 +79,6 @@
                 <div class="main-chat-body flex-2">
                   <!--Chat-->
                   <div class="content-inner" id="chat">
-                    {% comment %} <div class="media flex-row-reverse chat-right">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/21.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                        </div>
-                        <div class="main-msg-wrapper">
-                          rhoncus ut, imperdiet a, venenatis vitae, justo...
-                        </div>
-                        <div>
-                          <span>9:48 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <label class="main-chat-time"><span>2 days ago</span></label>
-                    <div class="media chat-left ">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/1.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                        <div>
-                          <span>9:32 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media flex-row-reverse chat-right">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/21.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                        </div>
-                        <div class="main-msg-wrapper">
-                          rhoncus ut, imperdiet a, venenatis vitae, justo...
-                        </div>
-                        <div>
-                          <span>9:48 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media chat-left ">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/1.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                        <div>
-                          <span>9:32 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media flex-row-reverse chat-right">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/21.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                        </div>
-                        <div class="main-msg-wrapper">
-                          rhoncus ut, imperdiet a, venenatis vitae, justo...
-                        </div>
-                        <div>
-                          <span>9:48 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media chat-left ">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/1.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                        <div>
-                          <span>9:32 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media flex-row-reverse chat-right">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/21.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                        </div>
-                        <div class="main-msg-wrapper">
-                          rhoncus ut, imperdiet a, venenatis vitae, justo...
-                        </div>
-                        <div>
-                          <span>9:48 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media chat-left ">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/1.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                        <div>
-                          <span>9:32 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media flex-row-reverse chat-right">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/21.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Nulla consequat massa quis enim. Donec pede justo, fringilla vel...
-                        </div>
-                        <div class="main-msg-wrapper">
-                          rhoncus ut, imperdiet a, venenatis vitae, justo...
-                        </div>
-                        <div>
-                          <span>9:48 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="media chat-left ">
-                      <div class="main-img-user online"><img alt="avatar" src="{% static 'images/users/1.jpg' %}"></div>
-                      <div class="media-body">
-                        <div class="main-msg-wrapper">
-                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                        <div>
-                          <span>9:32 am</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
-                        </div>
-                      </div>
-                    </div> {% endcomment %}
                   </div>
                   <!--END Chat-->
 
@@ -214,11 +103,15 @@
 
 {% block add_script %}
   {{ course.id|json_script:"course-id" }}
+  {{ request.user.username|json_script:"request-user" }}
 {% endblock %}
 
 {% block domready %}
   const courseId = JSON.parse(
     document.getElementById('course-id').textContent
+  );
+  const requestUser = JSON.parse(
+    document.getElementById('request-user').textContent
   );
   const url = 'ws://' + window.location.host +
               '/ws/chat/room/' + courseId + '/';
@@ -227,16 +120,27 @@
   chatSocket.onmessage = function(event) {
     const data = JSON.parse(event.data);
     const chat = document.getElementById('chat');
-    chat.innerHTML += `<div class="media flex-row-reverse chat-right">
+    const avatarSrc = data.avatar ? data.avatar : "{% static 'images/users/default-user.jpeg' %}";
+
+    const dateOptions = {hour: 'numeric', minute: 'numeric', hour12: true};
+    const datetime = new Date(data.datetime).toLocaleString('en', dateOptions);
+    const isMe = data.user === requestUser;
+    const source = isMe ? 'me' : 'other';
+    const name = isMe ? 'Me' : data.user;
+    const styleMessage = isMe ? "flex-row-reverse chat-right" : "chat-left";
+
+    chat.innerHTML += `<div class="media ${styleMessage}">
       <div class="main-img-user online">
-        <img alt="avatar" src="{% static 'images/users/1.jpg' %}">
+        <img class="brround" alt="avatar" src="${avatarSrc}">
       </div>
       <div class="media-body">
-        <div class="main-msg-wrapper" style="background: skyblue;">
+        
+        <div class="main-msg-wrapper my-0" style="background: skyblue;">
+          <h6 class="fw-bolder text-capitalize my-0">@${data.user}</h6>
           ${data.message}
         </div>
         <div>
-          <span>${data.time_stamp}</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
+          <span>${datetime}</span> <a href="javascript:void(0)"><i class="icon ion-android-more-horizontal"></i></a>
         </div>
       </div>
     </div>`;

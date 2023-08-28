@@ -101,10 +101,10 @@
                                   <i class="fe fe-play me-2"></i> Начать учиться
                                 </a>
                               {% endif %}  
-                              <a href="#"
+                              {% comment %} <a href="{% url "chat:course_chat_room" course.id %}"
                                   class="btn ripple btn-min w-lg btn-outline-primary mb-3 me-2" target="_blank"><i
-                                      class="fe fe-eye me-2"></i>Узнать больше
-                              </a>
+                                      class="fe fe-message-circle me-2"></i>Онлайн чат
+                              </a> {% endcomment %}
                           </div>
                           {% thumbnail course.image "600x370" crop="center" as im %}
                           <div class="col-xl-6 col-lg-6 my-auto">
