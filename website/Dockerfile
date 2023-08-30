@@ -5,4 +5,4 @@ WORKDIR /code
 COPY requirements.txt /code
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["gunicorn", "website.wsgi:application", "--bind", "0:8000" ]
+CMD ["daphne", "website.asgi:application", "-b", "0.0.0.0", "-p", "8000"]
