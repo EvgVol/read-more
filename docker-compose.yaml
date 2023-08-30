@@ -33,12 +33,15 @@ services:
     image: nginx:1.21.3-alpine
     restart: always
     ports:
-      - "80:80"
+    - "80:80"
+    - "443:443"
     volumes: 
       - ./data/nginx/default.conf:/etc/nginx/conf.d/default.conf 
       - static_value:/var/html/static/ 
-      - media_value:/var/html/media/ 
-    depends_on: 
+      - media_value:/var/html/media/
+      - ./data/ssl/readmore.crt:/etc/nginx/ssl/readmore.crt
+      - ./data/ssl/readmore.key:/etc/nginx/ssl/readmore.key
+    depends_on:
       - web
 
 volumes:

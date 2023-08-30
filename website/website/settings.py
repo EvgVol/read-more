@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/
     'social_django', #OAUTH2 #https://python-social-auth.readthedocs.io/en/latest/index.html
     'django_extensions', #Lite SSL #https://django-extensions.readthedocs.io/en/latest/
-    'debug_toolbar', #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
     'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
     'embed_video', #EMBEDDING YouTube and Vimeo videos #https://django-embed-video.readthedocs.io/en/latest/
     'redisboard', #STATS SERVER REDIS #https://pypi.org/project/django-redisboard/
@@ -76,6 +75,8 @@ MIDDLEWARE = [
 ]
 
 if DEBUG:
+    #TOOLBAR #https://django-debug-toolbar.readthedocs.io/en/latest/
+    INSTALLED_APPS = ['debug_toolbar',] + INSTALLED_APPS 
     MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
 
 ROOT_URLCONF = 'website.urls'
@@ -252,9 +253,9 @@ PASSWORD_HASHERS = [
 CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SECURE = True
 
 # Social Auth 
-
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -343,6 +344,6 @@ CHANNEL_LAYERS = {
     },
 }
 
-# REDIS_URL = 'redis://cache:6379'
-# CACHES['default']['LOCATION'] = REDIS_URL
-# CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
+REDIS_URL = 'redis://cache:6379'
+CACHES['default']['LOCATION'] = REDIS_URL
+CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
