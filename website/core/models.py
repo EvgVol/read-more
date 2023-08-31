@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class PolicyManager(models.Manager):
@@ -43,9 +44,21 @@ class Policy(models.Model):
     def __str__(self):
         return self.body
 
-    # def get_absolute_url(self):
-    #     return reverse('core:policy',
-    #                    args=[self.publish.year,
-    #                          self.publish.month,
-    #                          self.publish.day,
-    #                          self.slug])
+
+class Question(models.Model):
+
+    first_name = models.CharField(_("first name"), max_length=50, blank=False,
+                                  help_text='Enter your first name')
+    email = models.EmailField(_("email"), max_length=150, blank=False,
+                              help_text='Enter your email adress')
+    content = models.TextField(_("content"), blank=False,
+                               help_text='Post your question')
+    time_create = models.DateTimeField(_("time created"), auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-time_create']
+        verbose_name = _("question")
+        verbose_name_plural = _("questions")
+
+    def __str__(self):
+        return f'Question №{self.pk}'

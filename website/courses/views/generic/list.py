@@ -4,7 +4,11 @@ from django.shortcuts import get_object_or_404
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.db.models import Count
 from django.core.cache import cache
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
 
+from core.forms import QuestionForm
+from core.email import send_email_message
 from courses.models.subject import Subject
 from courses.models.course import Course
 from courses.models.module import Module
@@ -16,6 +20,29 @@ from courses.views.mixins import OwnerCourseMixin
 class SubjectView(ListView):
     model = Subject
     template_name = 'courses/subject_list.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = QuestionForm()
+        context['success'] = kwargs.get('success', False)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save()
+            send_email_message(question)
+            messages.success(request,
+                             _('Your question has been sent'))
+            return self.render_to_response(
+                self.get_context_data(form=QuestionForm(), success=True)
+            )
+
+        return self.render_to_response(self.get_context_data(form=form))
 
 
 class CourseListView(OwnerCourseMixin, ListView):

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
 from .validators import validate_username
 from core import texts
@@ -12,7 +13,7 @@ class User(AbstractUser):
     """Модель пользователя."""
 
     username = models.CharField(
-        'Уникальный юзернейм',
+        _("username"),
         validators=(validate_username,),
         max_length=Limits.MAX_LEN_USERS_CHARFIELD.value,
         unique=True,
@@ -23,7 +24,7 @@ class User(AbstractUser):
     )
 
     first_name = models.CharField(
-        'Имя',
+        _("first name"),
         max_length=Limits.MAX_LEN_USERS_CHARFIELD.value,
         blank=True,
         null=True,
@@ -31,7 +32,7 @@ class User(AbstractUser):
     )
 
     last_name = models.CharField(
-        'Фамилия',
+        _("last name"),
         max_length=Limits.MAX_LEN_USERS_CHARFIELD.value,
         blank=True,
         null=True,
@@ -39,7 +40,7 @@ class User(AbstractUser):
     )
 
     email = models.EmailField(
-        'Электронная почта',
+        _("email"),
         max_length=Limits.MAX_LEN_EMAIL_FIELD.value,
         unique=True,
         blank=False,
@@ -48,12 +49,12 @@ class User(AbstractUser):
     )
 
     birthdate = models.DateField(
-        'Дата рождения',
+        _("birthday"),
         blank=True,
         null=True,
     )
 
-    avatar = models.ImageField('Изображение',
+    avatar = models.ImageField(_("avatar"),
                                help_text=texts.USER_AVATAR,
                                upload_to='accounts/images/',
                                blank=True, null=True,)

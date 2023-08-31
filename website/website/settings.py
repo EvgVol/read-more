@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.postgres',
 
-    'blog.apps.BlogConfig', 
     'core.apps.CoreConfig',
+    'blog.apps.BlogConfig', 
     'vookmarks.apps.VookmarksConfig',
     'actions.apps.ActionsConfig', 
     'shop.apps.ShopConfig',
@@ -233,6 +233,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', cast=str, default='your-pass
 
 DEFAULT_FROM_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
 SERVER_EMAIL = config('EMAIL_HOST_USER', cast=str, default='your-email@yandex.ru')
+EMAIL_ADMIN = config('EMAIL_ADMIN', cast=str, default=['your-email@yandex.ru'])
 
 # Action Users LOGIN and LOGOUT
 LOGIN_REDIRECT_URL = reverse_lazy("courses:subject_list")
@@ -304,7 +305,7 @@ INTERNAL_IPS = [
 ]
 
 # Setting Redis:
-REDIS_HOST = 'cache'
+REDIS_HOST = '127.0.0.1'
 REDIS_PORT = 6379
 REDIS_DB = 0
 
@@ -340,11 +341,14 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('cache', 6379)],
+            'hosts': [('127.0.0.1', 6379)],
         },
     },
 }
 
-REDIS_URL = 'redis://cache:6379'
+REDIS_URL = 'redis://127.0.0.1:6379'
 CACHES['default']['LOCATION'] = REDIS_URL
 CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
+
+TELEGRAM_TOKEN = config('TELEGRAM_TOKEN')
+TELEGRAM_CHAT_ID = config('TELEGRAM_CHAT_ID')

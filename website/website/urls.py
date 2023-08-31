@@ -5,12 +5,22 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from django.utils.translation import gettext_lazy as _
+from django.views.defaults import (bad_request,
+                                   permission_denied,
+                                   page_not_found,
+                                   server_error)
 
 from blog.sitemaps import PostSitemap
+
 
 sitemaps = {
     'posts': PostSitemap
 }
+
+handler400 = bad_request
+handler403 = permission_denied
+handler404 = page_not_found
+handler500 = server_error
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls, name='admin'),
@@ -34,6 +44,10 @@ urlpatterns = i18n_patterns(
 )
 
 if settings.DEBUG:
+    
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
     )
