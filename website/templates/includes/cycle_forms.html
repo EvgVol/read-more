@@ -1,22 +1,17 @@
 {% load template_tags %}
 {% for field in form %}
-  <div class="form-group row p-3 my-1" 
-    {% if field.field.required %} 
-      aria-required="true" 
-    {% else %} 
-      aria-required="false" 
-    {% endif %}>
+  <div class="form-group row p-3 my-1" {% if field.field.required %} aria-required="true" {% else %} aria-required="false" {% endif %}>
     <label for="{{ field.id_for_label }}">
       {{ field.label }}
-        {% if field.field.required %}
-          <span class="required text-danger">*</span>
-        {% endif %}
+      {% if field.field.required %}
+        <span class="required text-danger">*</span>
+      {% endif %}
     </label>
     {{ field|addclass:'input150 border-start-0 form-control ms-0' }}
     {% if field.help_text %}
-        <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+      <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
         {{ field.help_text|safe }}
-        </small>
+      </small>
     {% endif %}
   </div>
 {% endfor %}

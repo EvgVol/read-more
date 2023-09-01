@@ -1,11 +1,12 @@
 {% extends 'registration/base.html' %}
-{% block title %}Авторизация{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Authorization" %}{% endblock %}
 {% block content %}
 {% load static %}
 <div class="container-login100">
     <div class="wrap-login100 p-6">
       <div class="login100-form validate-form">
-        <span class="login100-form-title pb-5"> Авторизация </span>
+        <span class="login100-form-title pb-5"> {% trans "Authorization" %} </span>
         <div class="panel panel-primary">
 
           <div class="tab-menu-heading">
@@ -14,11 +15,11 @@
               <ul class="nav panel-tabs">
                 <li class="mx-0">
                   <a href="#tab5" class="active" data-bs-toggle="tab"
-                    >Логин</a
+                    >{% trans "Login" %}</a
                   >
                 </li>
                 <li class="mx-0">
-                  <a href="#tab6" data-bs-toggle="tab">Телефон</a>
+                  <a href="#tab6" data-bs-toggle="tab">{% trans "Phone" %}</a>
                 </li>
               </ul>
             </div>
@@ -38,7 +39,7 @@
                       type="text"
                       name="username"
                       required id="id_username"
-                      placeholder="Логин"
+                      placeholder="{% trans "Login" %}"
                     />
                     {% for error in form.username.errors %}
                       <div class="invalid-feedback">{{ error }}</div>
@@ -53,7 +54,7 @@
                       type="password"
                       name="password"
                       required id="id_password"
-                      placeholder="Пароль"
+                      placeholder="{% trans "Password" %}"
                     />
                     {% for error in form.password.errors %}
                       <div class="invalid-feedback">{{ error }}</div>
@@ -62,14 +63,14 @@
                   <div class="text-end pt-4">
                     <p class="mb-0">
                       <a href="{% url 'password_reset' %}" class="text-primary ms-1"
-                        >Забыли пароль?</a
+                        >{% trans "Forgot your password?" %}</a
                       >
                     </p>
                   </div>
                   {% csrf_token %}
                   <div class="container-login100-form-btn">
                     <button class="login100-form-btn btn-primary" type="submit">
-                      Войти
+                      {% trans "Log In" %}
                     </button>
                   </div>
                   {% if form.errors %}
@@ -85,15 +86,15 @@
                 
                 <div class="text-center pt-3">
                   <p class="text-dark mb-0">
-                    Впервые?<a
+                    {% trans "Is this your first time?" %}<a
                       href="{% url 'signup' %}"
                       class="text-primary ms-1"
-                      >Зарегистрироваться</a
+                      >{% trans "Sig Up" %}</a
                     >
                   </p>
                 </div>
                 <label class="login-social-icon"
-                  ><span>ИЛИ</span></label
+                  ><span>{% trans "OR" %}</span></label
                 >
                 <div class="d-flex justify-content-center">
                   <a href="{% url "social:begin" "github" %}" >
@@ -155,7 +156,7 @@
                   />
                 </div>
                 <span
-                  >Войдите в систему посредством телефона</span
+                  >{% trans "Log in using your phone" %}</span
                 >
                 <div class="container-login100-form-btn">
                   <a
@@ -163,7 +164,7 @@
                     class="login100-form-btn btn-primary"
                     id="generate-otp"
                   >
-                    Войти
+                    {% trans "Log In" %}
                   </a>
                 </div>
               </div>

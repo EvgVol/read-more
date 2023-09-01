@@ -1,6 +1,6 @@
 {% extends 'includes/base.html' %}
 {% load i18n %}
-{% block title %}ExView | {% trans "Online store" %} | {{ product.name }}{% endblock %}
+{% block title %}READ MORE | {% trans "Online store" %} | {{ product.name }}{% endblock %}
 {% load static %}
 {% load thumbnail %}
 {% block content %}
@@ -16,7 +16,7 @@
               <h1 class="page-title">{{ product.name }}</h1>
               <div>
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="javascript:void(0)">ExView</a></li>
+                  <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
                   <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">{% trans "Online store" %}</a></li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">{{ product.category.name }}</a></li>
                 </ol>

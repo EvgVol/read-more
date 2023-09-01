@@ -16,7 +16,7 @@
               <a href="javascript:void(0)">READ MORE</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="javascript:void(0)">Аккаунт</a>
+              <a href="{{ user.get_absolute_url }}">Аккаунт</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               Редактировать
@@ -96,7 +96,7 @@
             </form>
             {% endwith %}
           </div>
-          <div class="row">
+          {% comment %} <div class="row">
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-header">
@@ -309,7 +309,7 @@
                 >Delete Account</a
               >
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
       <!-- ROW-1 CLOSED -->

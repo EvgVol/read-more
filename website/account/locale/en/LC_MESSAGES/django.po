@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 13:55+0400\n"
+"POT-Creation-Date: 2023-09-01 12:30+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,30 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\account\models.py:16
+msgid "username"
+msgstr ""
+
+#: .\account\models.py:27
+msgid "first name"
+msgstr ""
+
+#: .\account\models.py:35
+msgid "last name"
+msgstr ""
+
+#: .\account\models.py:43
+msgid "email"
+msgstr ""
+
+#: .\account\models.py:52
+msgid "birthday"
+msgstr ""
+
+#: .\account\models.py:57
+msgid "avatar"
+msgstr ""
 
 #: .\account\urls.py:8
 msgid "account/"

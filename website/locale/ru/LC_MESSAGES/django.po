@@ -8,145 +8,538 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 13:24+0400\n"
-"PO-Revision-Date: 2023-06-29 13:32+0400\n"
-"Last-Translator: Главный разработчик <admin@example.com>\n"
+"POT-Creation-Date: 2023-09-01 12:30+0400\n"
+"PO-Revision-Date: 2023-09-01 12:42+0400\n"
+"Last-Translator: Евгений Волочек <admin@example.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Translated-Using: django-rosetta 0.9.8\n"
+"X-Translated-Using: django-rosetta 0.9.9\n"
 
-#: .\courses\apps.py:8 .\courses\models.py:56
+#: .\courses\admin.py:85 .\courses\models\course.py:52
+msgid "technologies"
+msgstr "технологии"
+
+#: .\courses\admin.py:91
+#, fuzzy
+#| msgid "course"
+msgid "icon course"
+msgstr "курс"
+
+#: .\courses\apps.py:8 .\courses\models\course.py:83
 msgid "courses"
 msgstr "курсы"
 
-#: .\courses\models.py:18 .\courses\models.py:47 .\courses\models.py:74
-#: .\courses\models.py:122
-msgid "title"
-msgstr "заголовок"
+#: .\courses\models\advantage.py:7 .\courses\models\technology.py:6
+#, fuzzy
+#| msgid "last name"
+msgid "name"
+msgstr "фамилия"
 
-#: .\courses\models.py:19
-msgid "Enter the subject title"
-msgstr "Введите название предмета"
-
-#: .\courses\models.py:20 .\courses\models.py:49
-msgid "slug"
-msgstr "slug"
-
-#: .\courses\models.py:24 .\courses\models.py:44
-msgid "subject"
-msgstr "предмет"
-
-#: .\courses\models.py:25
-msgid "subjects"
-msgstr "предметы"
-
-#: .\courses\models.py:40 .\courses\models.py:119
-msgid "owner"
-msgstr "владелец"
-
-#: .\courses\models.py:48
-msgid "Enter the course title"
-msgstr "Введите название курса"
-
-#: .\courses\models.py:50
-msgid "overview"
-msgstr "общее представление"
-
-#: .\courses\models.py:51 .\courses\models.py:124
-msgid "created"
-msgstr "создан"
-
-#: .\courses\models.py:55 .\courses\models.py:71
-msgid "course"
-msgstr "курс"
-
-#: .\courses\models.py:75
-msgid "Enter the module title"
-msgstr "Введите название модуля"
-
-#: .\courses\models.py:76
-#| msgid "Description"
-msgid "description"
-msgstr "описание"
-
-#: .\courses\models.py:78
-msgid "Enter a description of the module"
-msgstr "Введите описание модуля"
-
-#: .\courses\models.py:84 .\courses\models.py:95
-msgid "module"
-msgstr "модуль"
-
-#: .\courses\models.py:85
-msgid "modules"
-msgstr "модули"
-
-#: .\courses\models.py:99
-msgid "content type"
-msgstr "тип контента"
-
-#: .\courses\models.py:105
-msgid "object id"
-msgstr "идентификатор объекта"
-
-#: .\courses\models.py:111 .\courses\models.py:137
-msgid "content"
-msgstr "материал"
-
-#: .\courses\models.py:112
-msgid "contents"
-msgstr "материалы"
-
-#: .\courses\models.py:123
-msgid "Enter a title"
-msgstr "Введите название"
-
-#: .\courses\models.py:125
-msgid "updated"
-msgstr "изменен"
-
-#: .\courses\models.py:143
-#| msgid "Profile"
-msgid "file"
-msgstr "профиль"
-
-#: .\courses\models.py:149
+#: .\courses\models\advantage.py:8 .\courses\models\content.py:78
+#: .\courses\models\course.py:61 .\courses\models\subject.py:16
 msgid "image"
 msgstr "изображение"
 
-#: .\courses\models.py:155
+#: .\courses\models\advantage.py:12
+msgid "advantage"
+msgstr "преимущество"
+
+#: .\courses\models\advantage.py:13 .\courses\models\course.py:48
+msgid "advantages"
+msgstr "преимущества"
+
+#: .\courses\models\card.py:9 .\courses\models\content.py:22
+#: .\courses\models\course.py:55 .\courses\models\lessons.py:13
+#: .\courses\models\module.py:15 .\courses\models\subject.py:10
+msgid "title"
+msgstr "заголовок"
+
+#: .\courses\models\card.py:11 .\courses\models\course.py:82
+#: .\courses\models\module.py:12
+msgid "course"
+msgstr "курс"
+
+#: .\courses\models\card.py:14
+msgid "additional text"
+msgstr "дополнительный текст"
+
+#: .\courses\models\card.py:15
+msgid "status"
+msgstr "статус"
+
+#: .\courses\models\card.py:18
+msgid "card"
+msgstr "карточка"
+
+#: .\courses\models\card.py:19
+msgid "cards"
+msgstr "карточки"
+
+#: .\courses\models\content.py:19 .\courses\models\course.py:34
+msgid "owner"
+msgstr "владелец"
+
+#: .\courses\models\content.py:23
+msgid "Enter a title"
+msgstr "Введите название"
+
+#: .\courses\models\content.py:24 .\courses\models\course.py:60
+msgid "created"
+msgstr "создан"
+
+#: .\courses\models\content.py:25
+msgid "updated"
+msgstr "изменен"
+
+#: .\courses\models\content.py:43 .\courses\models\lessons.py:10
+#: .\courses\models\module.py:25
+msgid "module"
+msgstr "модуль"
+
+#: .\courses\models\content.py:47 .\reviews\models.py:29
+msgid "content type"
+msgstr "тип контента"
+
+#: .\courses\models\content.py:53
+msgid "object id"
+msgstr "идентификатор объекта"
+
+#: .\courses\models\content.py:59 .\courses\models\content.py:66
+msgid "content"
+msgstr "материал"
+
+#: .\courses\models\content.py:60
+msgid "contents"
+msgstr "материалы"
+
+#: .\courses\models\content.py:72
+msgid "file"
+msgstr "профиль"
+
+#: .\courses\models\content.py:84
 msgid "url"
 msgstr "URL-адрес"
+
+#: .\courses\models\course.py:22
+msgid "junior"
+msgstr "Джуниор"
+
+#: .\courses\models\course.py:23
+msgid "middle"
+msgstr "Мидл"
+
+#: .\courses\models\course.py:24
+msgid "senior"
+msgstr "Сеньор"
+
+#: .\courses\models\course.py:27
+msgid "lite"
+msgstr "легкий"
+
+#: .\courses\models\course.py:28
+msgid "intensive"
+msgstr "интенсивный"
+
+#: .\courses\models\course.py:29
+msgid "moderate"
+msgstr "умеренный"
+
+#: .\courses\models\course.py:30
+msgid "high"
+msgstr "углубленный"
+
+#: .\courses\models\course.py:31
+msgid "highest"
+msgstr "тяжелый"
+
+#: .\courses\models\course.py:38 .\courses\models\subject.py:21
+msgid "subject"
+msgstr "предмет"
+
+#: .\courses\models\course.py:41
+msgid "complexity"
+msgstr "сложность"
+
+#: .\courses\models\course.py:45 .\courses\models\module.py:17
+#: .\courses\models\subject.py:12
+msgid "description"
+msgstr "описание"
+
+#: .\courses\models\course.py:46
+#, fuzzy
+#| msgid "description"
+msgid "Enter a description"
+msgstr "описание"
+
+#: .\courses\models\course.py:56
+msgid "Enter the course title"
+msgstr "Введите название курса"
+
+#: .\courses\models\course.py:58 .\courses\models\subject.py:17
+msgid "slug"
+msgstr "slug"
+
+#: .\courses\models\course.py:59
+msgid "overview"
+msgstr "общее представление"
+
+#: .\courses\models\course.py:62
+msgid "load"
+msgstr "нагрузка"
+
+#: .\courses\models\course.py:67
+msgid "period"
+msgstr "период"
+
+#: .\courses\models\course.py:69
+msgid "count projects"
+msgstr "количество проектов"
+
+#: .\courses\models\course.py:71
+msgid "price per mouth"
+msgstr "плата в месяц"
+
+#: .\courses\models\course.py:73
+msgid "price immediately"
+msgstr "плата единоразово"
+
+#: .\courses\models\course.py:76
+#, fuzzy
+#| msgid "contents"
+msgid "students"
+msgstr "материалы"
+
+#: .\courses\models\lessons.py:14
+#, fuzzy
+#| msgid "Enter the module title"
+msgid "Enter the lesson title"
+msgstr "Введите название модуля"
+
+#: .\courses\models\lessons.py:19
+msgid "lesson"
+msgstr "урок"
+
+#: .\courses\models\lessons.py:20
+msgid "lessons"
+msgstr "уроки"
+
+#: .\courses\models\module.py:16
+msgid "Enter the module title"
+msgstr "Введите название модуля"
+
+#: .\courses\models\module.py:19
+msgid "Enter a description of the module"
+msgstr "Введите описание модуля"
+
+#: .\courses\models\module.py:26
+msgid "modules"
+msgstr "модули"
+
+#: .\courses\models\subject.py:11
+msgid "Enter the subject title"
+msgstr "Введите название предмета"
+
+#: .\courses\models\subject.py:14
+#, fuzzy
+#| msgid "Enter a description of the module"
+msgid "Enter a description of the subject"
+msgstr "Введите описание модуля"
+
+#: .\courses\models\subject.py:22
+msgid "subjects"
+msgstr "предметы"
+
+#: .\courses\models\technology.py:8
+msgid "hints"
+msgstr "подсказка"
+
+#: .\courses\models\technology.py:11
+msgid "technology"
+msgstr "технология"
+
+#: .\courses\views\generic\list.py:40
+msgid "Your question has been sent"
+msgstr "Ваш вопрос был отправлен"
+
+#: .\reviews\apps.py:8 .\reviews\models.py:41
+#, fuzzy
+#| msgid "overview"
+msgid "reviews"
+msgstr "общее представление"
+
+#: .\reviews\models.py:25
+msgid "author"
+msgstr "автор"
+
+#: .\reviews\models.py:35
+msgid "comment"
+msgstr "комментарий"
+
+#: .\reviews\models.py:40
+#, fuzzy
+#| msgid "overview"
+msgid "review"
+msgstr "общее представление"
+
+#: .\reviews\models.py:46
+msgid "Rating and comment cannot both be empty."
+msgstr "Рейтинг и комментарий не могут быть пустыми одновременно."
+
+#: .\reviews\models.py:54
+#, python-brace-format
+msgid "{self.author} left a review"
+msgstr "{self.author} оставил отзыв"
+
+#: .\templates\chat\room.html:10
+#, fuzzy
+#| msgid "Online store"
+msgid "Online chat"
+msgstr "Онлайн магазин"
+
+#: .\templates\chat\room.html:19
+msgid "Chat room for "
+msgstr "Чат-комната для"
+
+#: .\templates\chat\room.html:69 .\templates\includes\header.html:421
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\templates\chat\room.html:70
+msgid "Edit"
+msgstr "Редактировать"
+
+#: .\templates\chat\room.html:71
+msgid "New Group"
+msgstr "Новая группа"
+
+#: .\templates\chat\room.html:72 .\templates\includes\header.html:441
+msgid "Settings"
+msgstr "Настройки"
+
+#: .\templates\chat\room.html:73
+msgid "Back to lesson"
+msgstr "Вернуться к уроку"
+
+#: .\templates\chat\room.html:87
+msgid "Type your message here..."
+msgstr "Введите свое сообщение здесь..."
+
+#: .\templates\core\errors\400.html:3 .\templates\core\errors\400.html:16
+msgid "Bad Request"
+msgstr "Плохой запрос"
+
+#: .\templates\core\errors\400.html:17
+msgid "Sorry, your request cannot be processed."
+msgstr "К сожалению, ваш запрос не может быть обработан."
+
+#: .\templates\core\errors\400.html:18
+msgid "We are unable to recognize the request or it contains errors."
+msgstr "Мы не можем распознать запрос или он содержит ошибки."
+
+#: .\templates\core\errors\400.html:19
+msgid "Please try again and ensure the request is correct."
+msgstr "Пожалуйста, повторите попытку и убедитесь в правильности запроса."
+
+#: .\templates\core\errors\400.html:22 .\templates\core\errors\401.html:11
+#: .\templates\core\errors\403.html:12 .\templates\core\errors\404.html:12
+#: .\templates\core\errors\500.html:12 .\templates\core\errors\503.html:12
+msgid "Back to Home"
+msgstr "Вернуться на главную"
+
+#: .\templates\core\errors\401.html:3
+msgid "Unauthorized"
+msgstr "Пользователь не авторизован"
+
+#: .\templates\core\errors\401.html:7
+msgid "Unfortunately, you are not authorized to access this page."
+msgstr "К сожалению, вы не авторизованы для доступа к этой странице."
+
+#: .\templates\core\errors\401.html:8
+msgid "Please log in to your account or register to gain access."
+msgstr ""
+"Пожалуйста, войдите в свою учетную запись или зарегистрируйтесь, чтобы "
+"получить доступ."
+
+#: .\templates\core\errors\403.html:3
+msgid "Forbidden"
+msgstr "Доступ запрещен"
+
+#: .\templates\core\errors\403.html:7
+msgid "Sorry, access to this page is forbidden."
+msgstr "Извините, доступ к этой странице запрещен."
+
+#: .\templates\core\errors\403.html:8
+msgid "You do not have permission to access this page."
+msgstr "У вас нет разрешения на доступ к этой странице."
+
+#: .\templates\core\errors\403.html:9
+msgid "If you believe this is an error, please contact us."
+msgstr "Если вы считаете, что это ошибка, пожалуйста, свяжитесь с нами."
+
+#: .\templates\core\errors\404.html:3
+msgid "Not Found"
+msgstr "Страница не найдена"
+
+#: .\templates\core\errors\404.html:7
+msgid "Unfortunately, the page you are looking for could not be found."
+msgstr "К сожалению, страница, которую вы ищете, не найдена."
+
+#: .\templates\core\errors\404.html:8
+msgid "This may be due to the page being deleted or moved."
+msgstr "Это может быть связано с удалением или перемещением страницы."
+
+#: .\templates\core\errors\404.html:9
+msgid ""
+"Please check the link you entered to ensure it is correct, or use the search"
+" function to find the information you need."
+msgstr ""
+"Пожалуйста, проверьте введенную вами ссылку, чтобы убедиться в ее "
+"правильности, или воспользуйтесь функцией поиска, чтобы найти нужную вам "
+"информацию."
+
+#: .\templates\core\errors\500.html:3
+msgid "Internal Server Error"
+msgstr "Внутренняя ошибка сервера"
+
+#: .\templates\core\errors\500.html:7
+msgid "Sorry, our server has encountered a problem."
+msgstr "Извините, на нашем сервере возникла проблема."
+
+#: .\templates\core\errors\500.html:8
+msgid "We are working to resolve this and everything will be fixed soon."
+msgstr "Мы работаем над решением этой проблемы, и скоро все будет исправлено."
+
+#: .\templates\core\errors\500.html:9 .\templates\core\errors\503.html:9
+msgid "Please try the page again later."
+msgstr "Пожалуйста, попробуйте зайти на страницу еще раз позже."
+
+#: .\templates\core\errors\503.html:3
+msgid "Service Unavailable"
+msgstr "Сайт недоступен"
+
+#: .\templates\core\errors\503.html:7
+msgid "Sorry, our website is currently unavailable due to technical issues."
+msgstr ""
+"К сожалению, наш веб-сайт в настоящее время недоступен из-за технических "
+"неполадок."
+
+#: .\templates\core\errors\503.html:8
+msgid ""
+"We are working to fix the problem and everything will be back to normal "
+"soon."
+msgstr ""
+"Мы работаем над устранением проблемы, и скоро все вернется в нормальное "
+"русло."
+
+#: .\templates\courses\manage\content\form.html:6
+#: .\templates\courses\manage\content\form.html:20
+#: .\templates\courses\manage\content\form.html:41
+#, fuzzy
+#| msgid "content"
+msgid "Edit content"
+msgstr "Редактировать содержимое"
+
+#: .\templates\courses\manage\content\form.html:8
+#: .\templates\courses\manage\content\form.html:22
+#: .\templates\courses\manage\content\form.html:43
+msgid "Add a new content"
+msgstr "Добавить содержимое"
+
+#: .\templates\courses\manage\content\form.html:54
+#, fuzzy
+#| msgid "content"
+msgid "Save content"
+msgstr "Сохранить содержимое"
+
+#: .\templates\courses\manage\course\delete.html:3
+#, fuzzy
+#| msgid "course"
+msgid "Delete course"
+msgstr "Удалить курс"
+
+#: .\templates\courses\manage\course\form.html:5
+#: .\templates\courses\manage\course\form.html:19
+#: .\templates\courses\manage\course\form.html:43
+#: .\templates\courses\manage\module\formset.html:6
+#: .\templates\courses\manage\module\formset.html:15
+#, fuzzy
+#| msgid "course"
+msgid "Edit course"
+msgstr "Редактировать курс"
+
+#: .\templates\courses\manage\course\form.html:7
+#: .\templates\courses\manage\course\form.html:21
+#: .\templates\courses\manage\course\form.html:45
+msgid "Create a new course"
+msgstr "Создать новый курс"
+
+#: .\templates\courses\manage\course\form.html:30
+#: .\templates\courses\manage\course\list.html:5
+#, fuzzy
+#| msgid "courses"
+msgid "Courses"
+msgstr "курсы"
+
+#: .\templates\courses\manage\course\form.html:56
+#, fuzzy
+#| msgid "course"
+msgid "Save course"
+msgstr "Сохранить курс"
+
+#: .\templates\courses\manage\course\manager_courses.html:8
+msgid "Test"
+msgstr "Тест"
+
+#: .\templates\courses\manage\lessons\lesson_list.html:7
+#: .\templates\courses\manage\module\content_list.html:7
+#, fuzzy
+#| msgid "module"
+msgid "Module"
+msgstr "Модуль"
+
+#: .\templates\courses\manage\lessons\lesson_list.html:15
+#: .\templates\courses\subject_list.html:7
+#, fuzzy
+#| msgid "description"
+msgid "Education"
+msgstr "Обучение"
+
+#: .\templates\courses\manage\module\formset.html:35
+#, fuzzy
+#| msgid "modules"
+msgid "Course modules"
+msgstr "Модули курса"
+
+#: .\templates\courses\manage\module\module_list.html:8
+msgid "The course programm of"
+msgstr "Программа курса состоит из"
 
 #: .\templates\includes\country_selector_modal.html:10
 msgid "Choose language"
 msgstr "Выберите язык"
 
-#: .\templates\includes\header.html:434
-msgid "Profile"
-msgstr "Профиль"
-
-#: .\templates\includes\header.html:437
+#: .\templates\includes\header.html:424
 msgid "E-mail"
 msgstr "Почта"
 
-#: .\templates\includes\header.html:444
+#: .\templates\includes\header.html:431
 msgid "Admin zone"
 msgstr "Админ-зона"
 
-#: .\templates\includes\header.html:447
+#: .\templates\includes\header.html:434
 msgid "Translator"
 msgstr "Переводчик"
 
-#: .\templates\includes\header.html:451
-msgid "Settings"
-msgstr "Настройки"
+#: .\templates\includes\header.html:437
+msgid "Dashboard"
+msgstr "Дашборд"
 
-#: .\templates\includes\header.html:459
+#: .\templates\includes\header.html:449
+#: .\templates\includes\sidebar-left.html:53
 msgid "Log Out"
 msgstr "Выйти"
 
@@ -175,8 +568,7 @@ msgid "address"
 msgstr "адрес"
 
 #: .\templates\shop\product-detail.html:3
-#: .\templates\shop\product-detail.html:20 .\templates\shop\shop.html:3
-#: .\templates\shop\shop.html:16 .\templates\shop\shop.html:20
+#: .\templates\shop\product-detail.html:20
 msgid "Online store"
 msgstr "Онлайн магазин"
 
@@ -208,6 +600,11 @@ msgstr "В корзину"
 msgid "To Buy"
 msgstr "Купить"
 
+#: .\templates\shop\shop.html:3 .\templates\shop\shop.html:16
+#: .\templates\shop\shop.html:20
+msgid "Bookstore"
+msgstr "Книжный магазин"
+
 #: .\templates\shop\shop.html:71
 msgid "Add product"
 msgstr "Добавить товар"
@@ -220,42 +617,49 @@ msgstr "Добавить в корзину"
 msgid "Add to Favorites"
 msgstr "Добавить в избранное"
 
-#: .\website\settings.py:151
+#: .\website\settings.py:162
 msgid "English"
 msgstr "Английский"
 
-#: .\website\settings.py:152
+#: .\website\settings.py:163
 msgid "Russian"
 msgstr "Русский"
 
-#: .\website\settings.py:153
+#: .\website\settings.py:164
 msgid "Ukrainian"
 msgstr "Украинский"
 
-#: .\website\urls.py:20
+#: .\website\urls.py:28
 msgid "blog/"
 msgstr "блог/"
 
-#: .\website\urls.py:21
+#: .\website\urls.py:29
 msgid "vookmarks/"
 msgstr "закладки/"
 
-#: .\website\urls.py:23
+#: .\website\urls.py:31
 msgid "shop/"
 msgstr "магазин/"
 
-#: .\website\urls.py:24
+#: .\website\urls.py:32
 msgid "cart/"
 msgstr "корзина/"
 
-#: .\website\urls.py:25
+#: .\website\urls.py:33
 msgid "coupons/"
 msgstr "купоны/"
 
-#: .\website\urls.py:26
+#: .\website\urls.py:34
 msgid "orders/"
 msgstr "заказы/"
 
-#: .\website\urls.py:27
-msgid "courses/"
-msgstr "курсы/"
+#: .\website\urls.py:36
+msgid "chat/"
+msgstr "чат/"
+
+#: .\website\urls.py:37
+msgid "api/"
+msgstr "апи/"
+
+#~ msgid "courses/"
+#~ msgstr "курсы/"

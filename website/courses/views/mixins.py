@@ -5,13 +5,6 @@ from django.shortcuts import redirect
 from courses.models.course import Course
 
 
-class OwnerMixin:
-    """
-    A mixin that limits queryset to those created by the requesting user.
-    """
-    def get_queryset(self):
-        return super().get_queryset().filter(owner=self.request.user)
-
 
 class OwnerEditMixin:
     """

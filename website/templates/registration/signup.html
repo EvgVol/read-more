@@ -1,8 +1,11 @@
-{% extends 'registration/base.html' %} {% block title %}Регистрация{% endblock %} {% block content %}
+{% extends 'registration/base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Sig Up" %}{% endblock %}
+{% block content %}
 <div class="container-login100">
   <div class="wrap-login100 p-6">
     <div class="login100-form validate-form">
-      <span class="login100-form-title"> Регистрация </span>
+      <span class="login100-form-title"> {% trans "Sig Up" %} </span>
       <form method="post">
         <div class="wrap-input100 validate-input input-group">
           
@@ -18,7 +21,7 @@
             name="username"
             maxlength="32"
             required id="id_username"
-            placeholder="Логин"
+            placeholder="{% trans "Login" %}"
           />
           
         </div>
@@ -33,12 +36,12 @@
             <i class="zmdi zmdi-email" aria-hidden="true"></i>
           </a>
           <input
-            class="input100 border-start-0 ms-0 form-control"
+            class="input101 border-start-0 ms-0 form-control"
             type="email"
             name="email"
             maxlength="256"
             required id="id_email"
-            placeholder="Электронная почта"
+            placeholder="{% trans "Email" %}"
           />
         </div>
         <div
@@ -56,7 +59,7 @@
             type="password"
             name="password"
             required id="id_password"
-            placeholder="Пароль"
+            placeholder="{% trans "Password" %}"
           />
         </div>
         <label class="custom-control custom-checkbox mt-4">
@@ -67,26 +70,26 @@
             required id="id_privacy_policy"
           />
           <span class="custom-control-label"
-            >Согласен с <a href="#">Политикой кондифициальности</a></span
+            >{% trans "I agree with" %} <a href="#">{% trans "The policy of conditionality" %}</a></span
           >
         </label>
         {% csrf_token %}
         <div class="container-login100-form-btn">
           <button class="login100-form-btn btn-primary" type="submit">
-            Зарегистрироваться
+            {% trans "Sig Up" %}
           </button>
         </div>
       </form>
       <div class="text-center pt-3">
         <p class="text-dark mb-0">
-          Уже зарегистрированы?<a
+          {% trans "Already registered?" %}<a
             href="{% url 'login' %}"
             class="text-primary ms-1"
-            >Войти</a
+            >{% trans "Log In" %}</a
           >
         </p>
       </div>
-      <label class="login-social-icon"><span>ИЛИ</span></label>
+      <label class="login-social-icon"><span>{% trans "OR" %}</span></label>
       <div class="d-flex justify-content-center">
         <a href="javascript:void(0)">
           <div class="social-login me-4 text-center">

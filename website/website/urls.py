@@ -5,10 +5,6 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from django.utils.translation import gettext_lazy as _
-from django.views.defaults import (bad_request,
-                                   permission_denied,
-                                   page_not_found,
-                                   server_error)
 
 from blog.sitemaps import PostSitemap
 
@@ -17,10 +13,12 @@ sitemaps = {
     'posts': PostSitemap
 }
 
-handler400 = bad_request
-handler403 = permission_denied
-handler404 = page_not_found
-handler500 = server_error
+handler400 = 'core.views.bad_request'
+handler401 = 'core.views.unauthorized'
+handler403 = 'core.views.permission_denied'
+handler404 = 'core.views.page_not_found'
+handler500 = 'core.views.server_error'
+handler503 = 'core.views.server_unavailable'
 
 urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls, name='admin'),

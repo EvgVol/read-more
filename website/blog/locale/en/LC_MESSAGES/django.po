@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 13:55+0400\n"
+"POT-Creation-Date: 2023-09-01 12:30+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -193,24 +193,4 @@ msgid ""
 "Read the article `{post.title}` here: {post_url}\n"
 "\n"
 "                         Comment from {cd['name']}: {cd['comments']}"
-msgstr ""
-
-#: .\blog\views.py:151
-msgid "shared the article"
-msgstr ""
-
-#: .\blog\views.py:172
-msgid "commented"
-msgstr ""
-
-#: .\blog\views.py:223
-msgid "added a new post:"
-msgstr ""
-
-#: .\blog\views.py:224
-msgid "The post was added successfully"
-msgstr ""
-
-#: .\blog\views.py:243
-msgid "liked the post:"
 msgstr ""

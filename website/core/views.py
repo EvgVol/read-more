@@ -1,6 +1,8 @@
+from http import HTTPStatus
+
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model 
+from django.contrib.auth import get_user_model
 
 from blog.models import Post, Comment
 from actions.models import Action
@@ -83,6 +85,45 @@ class DashboardPageView(TemplateView):
 def countdown_view(request):
     return render(request, 'core/countdown.html')
 
+# ,
+#                                    permission_denied,
+#                                    page_not_found,
+#                                    server_error
+
+def bad_request(request, exception):
+    return render(request,
+                  'core/errors/400.html',
+                  status=HTTPStatus.BAD_REQUEST)
+
+
+def unauthorized(request, exception):
+    return render(request,
+                  'core/errors/401.html',
+                  status=HTTPStatus.UNAUTHORIZED)
+
+
+def permission_denied(request, exception):
+    return render(request, 'core/errors/403.html',
+                  status=HTTPStatus.FORBIDDEN)
+
+
+def page_not_found(request, exception):
+    return render(request, 'core/errors/404.html',
+                  status=HTTPStatus.NOT_FOUND)
+
+
+def server_error(request):
+    return render(request, 'core/errors/500.html',
+                  status=HTTPStatus.INTERNAL_SERVER_ERROR)
+
+
+def server_unavailable(request):
+    return render(request, 'core/errors/503.html',
+                  status=HTTPStatus.SERVICE_UNAVAILABLE)
+
+
+
+
 
 class TestPageView(TemplateView):
-    template_name = 'chat/room.html'
+    template_name = 'core/errors/503.html'

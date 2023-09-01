@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 13:55+0400\n"
+"POT-Creation-Date: 2023-09-01 12:30+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .\core\email.py:14
+msgid "Question from the website"
+msgstr ""
+
 #: .\core\export_to_csv.py:29
 msgid "Export to CSV"
 msgstr ""
 
+#: .\core\forms.py:19
+msgid "Please, enter your name"
+msgstr ""
+
+#: .\core\forms.py:22
+msgid "Please, enter your email adress"
+msgstr ""
+
+#: .\core\forms.py:25
+msgid "Please leave your question"
+msgstr ""
+
+#: .\core\models.py:50
+msgid "first name"
+msgstr ""
+
+#: .\core\models.py:52
+msgid "email"
+msgstr ""
+
+#: .\core\models.py:54
+msgid "content"
+msgstr ""
+
+#: .\core\models.py:56
+msgid "time created"
+msgstr ""
+
+#: .\core\models.py:60
+msgid "question"
+msgstr ""
+
+#: .\core\models.py:61
+msgid "questions"
+msgstr ""
+
 #: .\core\urls.py:12
-msgid "home/"
+msgid "dashboard/"
 msgstr ""
 
 #: .\core\urls.py:13
@@ -36,4 +76,8 @@ msgstr ""
 
 #: .\core\urls.py:15
 msgid "countdown/"
+msgstr ""
+
+#: .\core\urls.py:16
+msgid "test/"
 msgstr ""

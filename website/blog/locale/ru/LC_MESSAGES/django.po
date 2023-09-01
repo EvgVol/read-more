@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 13:24+0400\n"
+"POT-Creation-Date: 2023-09-01 12:30+0400\n"
 "PO-Revision-Date: 2023-06-27 14:03+0400\n"
 "Last-Translator: Главный разработчик <admin@example.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,22 +201,17 @@ msgstr ""
 "\n"
 "Прокомментировал {cd['name']}: {cd['comments']}"
 
-#: .\blog\views.py:151
-msgid "shared the article"
-msgstr "поделился статьей"
+#~ msgid "shared the article"
+#~ msgstr "поделился статьей"
 
-#: .\blog\views.py:172
-msgid "commented"
-msgstr "прокомментировал"
+#~ msgid "commented"
+#~ msgstr "прокомментировал"
 
-#: .\blog\views.py:223
-msgid "added a new post:"
-msgstr "добавил новую статью:"
+#~ msgid "added a new post:"
+#~ msgstr "добавил новую статью:"
 
-#: .\blog\views.py:224
-msgid "The post was added successfully"
-msgstr "Статья была успешно добавлена"
+#~ msgid "The post was added successfully"
+#~ msgstr "Статья была успешно добавлена"
 
-#: .\blog\views.py:243
-msgid "liked the post:"
-msgstr "лайкнул статью:"
+#~ msgid "liked the post:"
+#~ msgstr "лайкнул статью:"

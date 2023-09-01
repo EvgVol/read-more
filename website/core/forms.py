@@ -10,9 +10,9 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ('first_name', 'email', 'content',)
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control', 'aria-describedby': 'first_name-help'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'aria-describedby': 'email-help'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'aria-describedby': 'content-help'}),
         }
         error_messages = {
             'first_name': {
@@ -24,4 +24,9 @@ class QuestionForm(forms.ModelForm):
             'content': {
                 'required': _('Please leave your question'),
             }
+        }
+        help_texts = {
+            'first_name': _('Please, enter your name'),
+            'email': _('Please, enter your email adress'),
+            'content': _('Please leave your question'),
         }

@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+#: .\website\urls.py:35
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 13:24+0400\n"
+"POT-Creation-Date: 2023-09-01 12:30+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,132 +19,481 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\courses\apps.py:8 .\courses\models.py:56
+#: .\courses\admin.py:85 .\courses\models\course.py:52
+msgid "technologies"
+msgstr ""
+
+#: .\courses\admin.py:91
+msgid "icon course"
+msgstr ""
+
+#: .\courses\apps.py:8 .\courses\models\course.py:83
 msgid "courses"
 msgstr ""
 
-#: .\courses\models.py:18 .\courses\models.py:47 .\courses\models.py:74
-#: .\courses\models.py:122
-msgid "title"
+#: .\courses\models\advantage.py:7 .\courses\models\technology.py:6
+msgid "name"
 msgstr ""
 
-#: .\courses\models.py:19
-msgid "Enter the subject title"
-msgstr ""
-
-#: .\courses\models.py:20 .\courses\models.py:49
-msgid "slug"
-msgstr ""
-
-#: .\courses\models.py:24 .\courses\models.py:44
-msgid "subject"
-msgstr ""
-
-#: .\courses\models.py:25
-msgid "subjects"
-msgstr ""
-
-#: .\courses\models.py:40 .\courses\models.py:119
-msgid "owner"
-msgstr ""
-
-#: .\courses\models.py:48
-msgid "Enter the course title"
-msgstr ""
-
-#: .\courses\models.py:50
-msgid "overview"
-msgstr ""
-
-#: .\courses\models.py:51 .\courses\models.py:124
-msgid "created"
-msgstr ""
-
-#: .\courses\models.py:55 .\courses\models.py:71
-msgid "course"
-msgstr ""
-
-#: .\courses\models.py:75
-msgid "Enter the module title"
-msgstr ""
-
-#: .\courses\models.py:76
-msgid "description"
-msgstr ""
-
-#: .\courses\models.py:78
-msgid "Enter a description of the module"
-msgstr ""
-
-#: .\courses\models.py:84 .\courses\models.py:95
-msgid "module"
-msgstr ""
-
-#: .\courses\models.py:85
-msgid "modules"
-msgstr ""
-
-#: .\courses\models.py:99
-msgid "content type"
-msgstr ""
-
-#: .\courses\models.py:105
-msgid "object id"
-msgstr ""
-
-#: .\courses\models.py:111 .\courses\models.py:137
-msgid "content"
-msgstr ""
-
-#: .\courses\models.py:112
-msgid "contents"
-msgstr ""
-
-#: .\courses\models.py:123
-msgid "Enter a title"
-msgstr ""
-
-#: .\courses\models.py:125
-msgid "updated"
-msgstr ""
-
-#: .\courses\models.py:143
-msgid "file"
-msgstr ""
-
-#: .\courses\models.py:149
+#: .\courses\models\advantage.py:8 .\courses\models\content.py:78
+#: .\courses\models\course.py:61 .\courses\models\subject.py:16
 msgid "image"
 msgstr ""
 
-#: .\courses\models.py:155
+#: .\courses\models\advantage.py:12
+msgid "advantage"
+msgstr ""
+
+#: .\courses\models\advantage.py:13 .\courses\models\course.py:48
+msgid "advantages"
+msgstr ""
+
+#: .\courses\models\card.py:9 .\courses\models\content.py:22
+#: .\courses\models\course.py:55 .\courses\models\lessons.py:13
+#: .\courses\models\module.py:15 .\courses\models\subject.py:10
+msgid "title"
+msgstr ""
+
+#: .\courses\models\card.py:11 .\courses\models\course.py:82
+#: .\courses\models\module.py:12
+msgid "course"
+msgstr ""
+
+#: .\courses\models\card.py:14
+msgid "additional text"
+msgstr ""
+
+#: .\courses\models\card.py:15
+msgid "status"
+msgstr ""
+
+#: .\courses\models\card.py:18
+msgid "card"
+msgstr ""
+
+#: .\courses\models\card.py:19
+msgid "cards"
+msgstr ""
+
+#: .\courses\models\content.py:19 .\courses\models\course.py:34
+msgid "owner"
+msgstr ""
+
+#: .\courses\models\content.py:23
+msgid "Enter a title"
+msgstr ""
+
+#: .\courses\models\content.py:24 .\courses\models\course.py:60
+msgid "created"
+msgstr ""
+
+#: .\courses\models\content.py:25
+msgid "updated"
+msgstr ""
+
+#: .\courses\models\content.py:43 .\courses\models\lessons.py:10
+#: .\courses\models\module.py:25
+msgid "module"
+msgstr ""
+
+#: .\courses\models\content.py:47 .\reviews\models.py:29
+msgid "content type"
+msgstr ""
+
+#: .\courses\models\content.py:53
+msgid "object id"
+msgstr ""
+
+#: .\courses\models\content.py:59 .\courses\models\content.py:66
+msgid "content"
+msgstr ""
+
+#: .\courses\models\content.py:60
+msgid "contents"
+msgstr ""
+
+#: .\courses\models\content.py:72
+msgid "file"
+msgstr ""
+
+#: .\courses\models\content.py:84
 msgid "url"
+msgstr ""
+
+#: .\courses\models\course.py:22
+msgid "junior"
+msgstr ""
+
+#: .\courses\models\course.py:23
+msgid "middle"
+msgstr ""
+
+#: .\courses\models\course.py:24
+msgid "senior"
+msgstr ""
+
+#: .\courses\models\course.py:27
+msgid "lite"
+msgstr ""
+
+#: .\courses\models\course.py:28
+msgid "intensive"
+msgstr ""
+
+#: .\courses\models\course.py:29
+msgid "moderate"
+msgstr ""
+
+#: .\courses\models\course.py:30
+msgid "high"
+msgstr ""
+
+#: .\courses\models\course.py:31
+msgid "highest"
+msgstr ""
+
+#: .\courses\models\course.py:38 .\courses\models\subject.py:21
+msgid "subject"
+msgstr ""
+
+#: .\courses\models\course.py:41
+msgid "complexity"
+msgstr ""
+
+#: .\courses\models\course.py:45 .\courses\models\module.py:17
+#: .\courses\models\subject.py:12
+msgid "description"
+msgstr ""
+
+#: .\courses\models\course.py:46
+msgid "Enter a description"
+msgstr ""
+
+#: .\courses\models\course.py:56
+msgid "Enter the course title"
+msgstr ""
+
+#: .\courses\models\course.py:58 .\courses\models\subject.py:17
+msgid "slug"
+msgstr ""
+
+#: .\courses\models\course.py:59
+msgid "overview"
+msgstr ""
+
+#: .\courses\models\course.py:62
+msgid "load"
+msgstr ""
+
+#: .\courses\models\course.py:67
+msgid "period"
+msgstr ""
+
+#: .\courses\models\course.py:69
+msgid "count projects"
+msgstr ""
+
+#: .\courses\models\course.py:71
+msgid "price per mouth"
+msgstr ""
+
+#: .\courses\models\course.py:73
+msgid "price immediately"
+msgstr ""
+
+#: .\courses\models\course.py:76
+msgid "students"
+msgstr ""
+
+#: .\courses\models\lessons.py:14
+msgid "Enter the lesson title"
+msgstr ""
+
+#: .\courses\models\lessons.py:19
+msgid "lesson"
+msgstr ""
+
+#: .\courses\models\lessons.py:20
+msgid "lessons"
+msgstr ""
+
+#: .\courses\models\module.py:16
+msgid "Enter the module title"
+msgstr ""
+
+#: .\courses\models\module.py:19
+msgid "Enter a description of the module"
+msgstr ""
+
+#: .\courses\models\module.py:26
+msgid "modules"
+msgstr ""
+
+#: .\courses\models\subject.py:11
+msgid "Enter the subject title"
+msgstr ""
+
+#: .\courses\models\subject.py:14
+msgid "Enter a description of the subject"
+msgstr ""
+
+#: .\courses\models\subject.py:22
+msgid "subjects"
+msgstr ""
+
+#: .\courses\models\technology.py:8
+msgid "hints"
+msgstr ""
+
+#: .\courses\models\technology.py:11
+msgid "technology"
+msgstr ""
+
+#: .\courses\views\generic\list.py:40
+msgid "Your question has been sent"
+msgstr ""
+
+#: .\reviews\apps.py:8 .\reviews\models.py:41
+msgid "reviews"
+msgstr ""
+
+#: .\reviews\models.py:25
+msgid "author"
+msgstr ""
+
+#: .\reviews\models.py:35
+msgid "comment"
+msgstr ""
+
+#: .\reviews\models.py:40
+msgid "review"
+msgstr ""
+
+#: .\reviews\models.py:46
+msgid "Rating and comment cannot both be empty."
+msgstr ""
+
+#: .\reviews\models.py:54
+#, python-brace-format
+msgid "{self.author} left a review"
+msgstr ""
+
+#: .\templates\chat\room.html:10
+msgid "Online chat"
+msgstr ""
+
+#: .\templates\chat\room.html:19
+msgid "Chat room for "
+msgstr ""
+
+#: .\templates\chat\room.html:69 .\templates\includes\header.html:421
+msgid "Profile"
+msgstr ""
+
+#: .\templates\chat\room.html:70
+msgid "Edit"
+msgstr ""
+
+#: .\templates\chat\room.html:71
+msgid "New Group"
+msgstr ""
+
+#: .\templates\chat\room.html:72 .\templates\includes\header.html:441
+msgid "Settings"
+msgstr ""
+
+#: .\templates\chat\room.html:73
+msgid "Back to lesson"
+msgstr ""
+
+#: .\templates\chat\room.html:87
+msgid "Type your message here..."
+msgstr ""
+
+#: .\templates\core\errors\400.html:3 .\templates\core\errors\400.html:16
+msgid "Bad Request"
+msgstr ""
+
+#: .\templates\core\errors\400.html:17
+msgid "Sorry, your request cannot be processed."
+msgstr ""
+
+#: .\templates\core\errors\400.html:18
+msgid "We are unable to recognize the request or it contains errors."
+msgstr ""
+
+#: .\templates\core\errors\400.html:19
+msgid "Please try again and ensure the request is correct."
+msgstr ""
+
+#: .\templates\core\errors\400.html:22 .\templates\core\errors\401.html:11
+#: .\templates\core\errors\403.html:12 .\templates\core\errors\404.html:12
+#: .\templates\core\errors\500.html:12 .\templates\core\errors\503.html:12
+msgid "Back to Home"
+msgstr ""
+
+#: .\templates\core\errors\401.html:3
+msgid "Unauthorized"
+msgstr ""
+
+#: .\templates\core\errors\401.html:7
+msgid "Unfortunately, you are not authorized to access this page."
+msgstr ""
+
+#: .\templates\core\errors\401.html:8
+msgid "Please log in to your account or register to gain access."
+msgstr ""
+
+#: .\templates\core\errors\403.html:3
+msgid "Forbidden"
+msgstr ""
+
+#: .\templates\core\errors\403.html:7
+msgid "Sorry, access to this page is forbidden."
+msgstr ""
+
+#: .\templates\core\errors\403.html:8
+msgid "You do not have permission to access this page."
+msgstr ""
+
+#: .\templates\core\errors\403.html:9
+msgid "If you believe this is an error, please contact us."
+msgstr ""
+
+#: .\templates\core\errors\404.html:3
+msgid "Not Found"
+msgstr ""
+
+#: .\templates\core\errors\404.html:7
+msgid "Unfortunately, the page you are looking for could not be found."
+msgstr ""
+
+#: .\templates\core\errors\404.html:8
+msgid "This may be due to the page being deleted or moved."
+msgstr ""
+
+#: .\templates\core\errors\404.html:9
+msgid ""
+"Please check the link you entered to ensure it is correct, or use the search "
+"function to find the information you need."
+msgstr ""
+
+#: .\templates\core\errors\500.html:3
+msgid "Internal Server Error"
+msgstr ""
+
+#: .\templates\core\errors\500.html:7
+msgid "Sorry, our server has encountered a problem."
+msgstr ""
+
+#: .\templates\core\errors\500.html:8
+msgid "We are working to resolve this and everything will be fixed soon."
+msgstr ""
+
+#: .\templates\core\errors\500.html:9 .\templates\core\errors\503.html:9
+msgid "Please try the page again later."
+msgstr ""
+
+#: .\templates\core\errors\503.html:3
+msgid "Service Unavailable"
+msgstr ""
+
+#: .\templates\core\errors\503.html:7
+msgid "Sorry, our website is currently unavailable due to technical issues."
+msgstr ""
+
+#: .\templates\core\errors\503.html:8
+msgid ""
+"We are working to fix the problem and everything will be back to normal soon."
+msgstr ""
+
+#: .\templates\courses\manage\content\form.html:6
+#: .\templates\courses\manage\content\form.html:20
+#: .\templates\courses\manage\content\form.html:41
+msgid "Edit content"
+msgstr ""
+
+#: .\templates\courses\manage\content\form.html:8
+#: .\templates\courses\manage\content\form.html:22
+#: .\templates\courses\manage\content\form.html:43
+msgid "Add a new content"
+msgstr ""
+
+#: .\templates\courses\manage\content\form.html:54
+msgid "Save content"
+msgstr ""
+
+#: .\templates\courses\manage\course\delete.html:3
+msgid "Delete course"
+msgstr ""
+
+#: .\templates\courses\manage\course\form.html:5
+#: .\templates\courses\manage\course\form.html:19
+#: .\templates\courses\manage\course\form.html:43
+#: .\templates\courses\manage\module\formset.html:6
+#: .\templates\courses\manage\module\formset.html:15
+msgid "Edit course"
+msgstr ""
+
+#: .\templates\courses\manage\course\form.html:7
+#: .\templates\courses\manage\course\form.html:21
+#: .\templates\courses\manage\course\form.html:45
+msgid "Create a new course"
+msgstr ""
+
+#: .\templates\courses\manage\course\form.html:30
+#: .\templates\courses\manage\course\list.html:5
+msgid "Courses"
+msgstr ""
+
+#: .\templates\courses\manage\course\form.html:56
+msgid "Save course"
+msgstr ""
+
+#: .\templates\courses\manage\course\manager_courses.html:8
+msgid "Test"
+msgstr ""
+
+#: .\templates\courses\manage\lessons\lesson_list.html:7
+#: .\templates\courses\manage\module\content_list.html:7
+msgid "Module"
+msgstr ""
+
+#: .\templates\courses\manage\lessons\lesson_list.html:15
+#: .\templates\courses\subject_list.html:7
+msgid "Education"
+msgstr ""
+
+#: .\templates\courses\manage\module\formset.html:35
+msgid "Course modules"
+msgstr ""
+
+#: .\templates\courses\manage\module\module_list.html:8
+msgid "The course programm of"
 msgstr ""
 
 #: .\templates\includes\country_selector_modal.html:10
 msgid "Choose language"
 msgstr ""
 
-#: .\templates\includes\header.html:434
-msgid "Profile"
-msgstr ""
-
-#: .\templates\includes\header.html:437
+#: .\templates\includes\header.html:424
 msgid "E-mail"
 msgstr ""
 
-#: .\templates\includes\header.html:444
+#: .\templates\includes\header.html:431
 msgid "Admin zone"
 msgstr ""
 
-#: .\templates\includes\header.html:447
+#: .\templates\includes\header.html:434
 msgid "Translator"
 msgstr ""
 
-#: .\templates\includes\header.html:451
-msgid "Settings"
+#: .\templates\includes\header.html:437
+msgid "Dashboard"
 msgstr ""
 
-#: .\templates\includes\header.html:459
+#: .\templates\includes\header.html:449
+#: .\templates\includes\sidebar-left.html:53
 msgid "Log Out"
 msgstr ""
 
@@ -172,8 +522,7 @@ msgid "address"
 msgstr ""
 
 #: .\templates\shop\product-detail.html:3
-#: .\templates\shop\product-detail.html:20 .\templates\shop\shop.html:3
-#: .\templates\shop\shop.html:16 .\templates\shop\shop.html:20
+#: .\templates\shop\product-detail.html:20
 msgid "Online store"
 msgstr ""
 
@@ -205,6 +554,11 @@ msgstr ""
 msgid "To Buy"
 msgstr ""
 
+#: .\templates\shop\shop.html:3 .\templates\shop\shop.html:16
+#: .\templates\shop\shop.html:20
+msgid "Bookstore"
+msgstr ""
+
 #: .\templates\shop\shop.html:71
 msgid "Add product"
 msgstr ""
@@ -217,42 +571,46 @@ msgstr ""
 msgid "Add to Favorites"
 msgstr ""
 
-#: .\website\settings.py:151
+#: .\website\settings.py:162
 msgid "English"
 msgstr ""
 
-#: .\website\settings.py:152
+#: .\website\settings.py:163
 msgid "Russian"
 msgstr ""
 
-#: .\website\settings.py:153
+#: .\website\settings.py:164
 msgid "Ukrainian"
 msgstr ""
 
-#: .\website\urls.py:20
+#: .\website\urls.py:28
 msgid "blog/"
 msgstr ""
 
-#: .\website\urls.py:21
+#: .\website\urls.py:29
 msgid "vookmarks/"
 msgstr ""
 
-#: .\website\urls.py:23
+#: .\website\urls.py:31
 msgid "shop/"
 msgstr ""
 
-#: .\website\urls.py:24
+#: .\website\urls.py:32
 msgid "cart/"
 msgstr ""
 
-#: .\website\urls.py:25
+#: .\website\urls.py:33
 msgid "coupons/"
 msgstr ""
 
-#: .\website\urls.py:26
+#: .\website\urls.py:34
 msgid "orders/"
 msgstr ""
 
-#: .\website\urls.py:27
-msgid "courses/"
+#: .\website\urls.py:36
+msgid "chat/"
+msgstr ""
+
+#: .\website\urls.py:37
+msgid "api/"
 msgstr ""
