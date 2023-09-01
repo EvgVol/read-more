@@ -10,10 +10,11 @@
         <button class="btn input-group-text bg-transparent border-start-0 text-muted my-2">
             <i class="fe fe-search text-muted" aria-hidden="true"></i>
         </button>
+        {% if request.user.is_staff %}
         <ul class="nav item2-gl-menu float-end my-2">
-          <li class="border-end"><a href="#tab-11" class="show active" data-bs-toggle="tab" title="List style"><i class="fa fa-th"></i></a></li>
-          <li><a href="#tab-12" data-bs-toggle="tab" class="" title="Grid"><i class="fa fa-list"></i></a></li>
+          <li class="border-end"><a href="{% url 'blog:post_create' %}" class="show active"><i class="fa fa-plus"></i></a></li>
         </ul>
+        {% endif %}
       </div>
     </div>
   </form>

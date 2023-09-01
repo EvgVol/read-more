@@ -1,5 +1,6 @@
 {% extends 'includes/base.html' %}
-{% block title %}READ MORE | Блог{% endblock %}
+{% load i18n %}
+{% block title %}READ MORE | {% trans "Blog" %}{% endblock %}
 {% block content %}
 {% load static %}
 {% load blog_tags %}
@@ -7,11 +8,16 @@
   <div class="side-app">
     <div class="main-container container-fluid">
       <div class="page-header">
-          <h1 class="page-title">Блог</h1>
+          <h1 class="page-title">{% trans "Blog" %}</h1>
           <div>
-            <div class="breadcrumb">
-              <a href="{% url 'blog:post_create' %}" class="btn btn-info d-inline-block"><i class="fa fa-plus-square me-2"></i>Добавить пост</a>
-            </div>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="{% url 'courses:subject_list' %}">READ MORE</a>
+              </li>
+              <li class="breadcrumb-item active">
+                <a href="{% url 'blog:post_list' %}">{% trans "Blog" %}</a>
+              </li>
+            </ol>
           </div>
       </div>
 

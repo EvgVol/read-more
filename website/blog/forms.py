@@ -1,8 +1,10 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from pytils.translit import slugify
 
 from .models import Comment, Post
 
+User = get_user_model()
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -31,7 +33,7 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ['name', 'email', 'body']
+        fields = ['author', 'body']
 
 
 class SearchForm(forms.Form):

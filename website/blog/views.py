@@ -15,10 +15,12 @@ from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from taggit.models import Tag
+from django.utils.encoding import force_str
 
 from actions.utils import create_action
 from .models import Post, Category
 from .forms import EmailPostForm, CommentForm, SearchForm, PostForm
+from reviews.forms import ReviewForm
 
 
 r = redis.Redis(host=settings.REDIS_HOST,
@@ -117,7 +119,7 @@ def post_detail(request, year, month, day, post):
     # Получение списка всех тегов и количества статей, связанных с каждым тегом
     tag_list = Tag.objects.annotate(total_posts=Count('post'))
     # увеличить общее число просмотров статьи на 1
-    total_views = r.incr(_(f'Article:{post.id}:viewed'))
+    total_views = r.incr(force_str(_(f'Article:{post.id}:viewed')))
     # увеличить рейтинг статьи на 1
     r.zincrby('post_ranking', 1, post.id)
 
@@ -159,6 +161,7 @@ def post_share(request, post_id):
 
 # Оставляем комментарий к статье
 @require_POST
+@login_required
 def post_comment(request, post_id):
     """Оставляем комментарии к статье."""
     post = get_object_or_404(Post,
@@ -169,6 +172,8 @@ def post_comment(request, post_id):
         comment = form.save(commit=False)
         comment.post = post
         comment.save()
+        messages.success(request,
+                         _('Your comment has been add'))
         # create_action(request.user, _('commented'), post)
     return render(request, 'blog/post/comment.html',
                   {'post': post,

@@ -21,30 +21,10 @@ class StyleView(TemplateView):
     template_name = 'core/style.html'
 
 
-# class LangingPageView(TemplateView):
-#     """Отображает страницу лендинг."""
-
-#     template_name = 'core/landing-page.html'
-
-#     def dispatch(self, request, *args, **kwargs):
-#         """Перенаправляет авторизованного пользователя на главную страницу"""
-#         if request.user.is_authenticated:
-#             return redirect('core:dashboard')
-#         else:
-#             return super().dispatch(request, *args, **kwargs)
-
-
 class DashboardPageView(TemplateView):
     """Отображает главную страницу."""
 
     template_name = 'core/dashboard.html'
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     """Перенаправляет неавторизованного пользователя на лендинг"""
-    #     if request.user.is_anonymous:
-    #         return redirect('core:index')
-    #     else:
-    #         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -82,13 +62,10 @@ class DashboardPageView(TemplateView):
         context['like_count'] = sum(post.users_like.count() for post in Post.objects.all())
         return context
 
+
 def countdown_view(request):
     return render(request, 'core/countdown.html')
 
-# ,
-#                                    permission_denied,
-#                                    page_not_found,
-#                                    server_error
 
 def bad_request(request, exception):
     return render(request,
@@ -120,9 +97,6 @@ def server_error(request):
 def server_unavailable(request):
     return render(request, 'core/errors/503.html',
                   status=HTTPStatus.SERVICE_UNAVAILABLE)
-
-
-
 
 
 class TestPageView(TemplateView):

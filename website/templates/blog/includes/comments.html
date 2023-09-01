@@ -1,5 +1,6 @@
 {% load static %}
 {% load humanize %}
+{% load thumbnail %}
 <div class="card">
   <div class="card-header">
     <div class="card-title">Комментарии</div>
@@ -8,12 +9,14 @@
     {% for comment in comments %}
     <div class="media mb-5 overflow-visible d-block d-sm-flex">
       <div class="me-3 mb-2">
-        <a href="#">
+        <a href="{{ comment.author.get_absolute_url }}">
+          {% thumbnail comment.author.avatar "64x64" crop="center" as im %}
           <img
             class="media-object rounded-circle thumb-sm"
             alt="64x64"
-            src="{% static 'images/users/19.jpg' %}"
+            src="{{ im.url }}"
           />
+          {% endthumbnail %}
         </a>
       </div>
       <div class="media-body overflow-visible">
@@ -45,7 +48,7 @@
               </div>
             </div>
           </nav>
-          <h5 class="mt-0">{{ comment.name }} | <small class="text-muted font-weight-light">{{ comment.created|naturaltime }}</small></h5>
+          <h5 class="mt-0">{{ comment.author.username }} | <small class="text-muted font-weight-light">{{ comment.created|naturaltime }}</small></h5>
           <span><i class="fe fe-thumb-up text-danger"></i></span>
           <p class="font-13 text-muted">
             {{ comment.body|linebreaks }}

@@ -126,21 +126,14 @@ class Comment(models.Model):
     This model represents a comment left by a user on a specific blog post.
     """
 
-    post = models.ForeignKey(
-        Post,
-        on_delete=models.CASCADE,
-        related_name='comments',
-        verbose_name = _('post')
-    )
-    name = models.CharField(
-        _('username'),
-        max_length=80,
-        help_text=_('Enter your name.')
-    )
-    email = models.EmailField(
-        _('email'),
-        help_text=_('Enter your email address.')
-    )
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE,
+                             related_name='comments',
+                             verbose_name = _('post'))
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               verbose_name=_("author"),
+                               related_name='comments',
+                               on_delete=models.CASCADE)
     body = models.TextField(
         _('message'),
         help_text=_('Enter your comment.')
