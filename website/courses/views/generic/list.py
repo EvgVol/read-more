@@ -45,7 +45,7 @@ class SubjectView(ListView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class CourseListView(OwnerCourseMixin, ListView):
+class CourseListView(ListView):
     """A view for displaying a list of courses."""
 
     template_name = 'courses/manage/course/list.html'
@@ -67,6 +67,20 @@ class CourseListView(OwnerCourseMixin, ListView):
             queryset_filters['complexity'] = complexity_name
 
         return queryset_filters
+
+    def get_queryset(self):
+        subject_name, complexity_name = self.get_filters_from_request()
+
+        queryset_filters = self.apply_filter(subject_name, complexity_name)
+
+        cache_key = f'courses_subject_{subject_name}_complexity_{complexity_name}'
+        queryset = cache.get(cache_key)
+
+        if queryset is None:
+            queryset = Course.objects.filter(**queryset_filters)
+            cache.set(cache_key, queryset, 300)
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

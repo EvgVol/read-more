@@ -1,5 +1,4 @@
-from django.contrib.auth.mixins import (LoginRequiredMixin,
-                                        PermissionRequiredMixin)
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.shortcuts import redirect
 
@@ -24,9 +23,7 @@ class OwnerEditMixin:
         return super().form_valid(form)
 
 
-class OwnerCourseMixin(OwnerMixin,
-                       LoginRequiredMixin,
-                       PermissionRequiredMixin):
+class OwnerCourseMixin(PermissionRequiredMixin):
     """A mixin for views that deal with Course instances."""
 
     model = Course

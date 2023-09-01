@@ -1,12 +1,13 @@
 from django.views.generic import DetailView
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from courses.forms import CourseEnrollForm
 from courses.models.course import Course
 from reviews.models import Review
 
 
-class CourseDetailView(DetailView):
+class CourseDetailView(LoginRequiredMixin, DetailView):
     """A view a detail course."""
 
     model = Course
@@ -22,7 +23,7 @@ class CourseDetailView(DetailView):
         return context
 
 
-class CourseTrainerView(DetailView):
+class CourseTrainerView(LoginRequiredMixin, DetailView):
     model = Course
     template_name = 'courses/manage/course/trainer.html'
 
