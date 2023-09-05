@@ -33,15 +33,15 @@
                 <!-- Categories-END -->
 
                 <!-- Price Range -->
-                {% include 'shop/includes/price-range.html' %}
+                {% comment %} {% include 'shop/includes/price-range.html' %} {% endcomment %}
                 <!-- Price Range-END -->
                 
                 <!-- Filter -->
-                {% include 'shop/includes/filter.html' %}
+                {% comment %} {% include 'shop/includes/filter.html' %} {% endcomment %}
                 <!-- Filter-END -->
 
                 <!-- Top Products -->
-                {% include 'shop/includes/top-products.html' %}
+                {% comment %} {% include 'shop/includes/top-products.html' %} {% endcomment %}
                 <!-- Filter-END -->
               </div>
             </div>
@@ -53,23 +53,23 @@
                       <div class="card p-0">
                           <div class="card-body p-4">
                               <div class="row">
-                                  <div class="col-xl-5 col-lg-8 col-md-8 col-sm-8">
+                                  {% comment %} <div class="col-xl-5 col-lg-8 col-md-8 col-sm-8">
                                       <div class="input-group d-flex w-100 float-start">
                                           <input type="text" class="form-control border-end-0 my-2" placeholder="Поиск ...">
                                           <button class="btn input-group-text bg-transparent border-start-0 text-muted my-2">
                                               <i class="fe fe-search text-muted" aria-hidden="true"></i>
                                           </button>
                                       </div>
-                                  </div>
+                                  </div> {% endcomment %}
                                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
                                       <ul class="nav item2-gl-menu float-end my-2">
                                           <li class="border-end"><a href="#tab-11" class="show active" data-bs-toggle="tab" title="List style"><i class="fa fa-th"></i></a></li>
                                           <li><a href="#tab-12" data-bs-toggle="tab" class="" title="Grid"><i class="fa fa-list"></i></a></li>
                                       </ul>
                                   </div>
-                                  <div class="col-xl-3 col-lg-12">
+                                  {% comment %} <div class="col-xl-3 col-lg-12">
                                       <a href="#" class="btn btn-info btn-block float-end my-2"><i class="fa fa-plus-square me-2"></i>{% trans "Add product" %}</a>
-                                  </div>
+                                  </div> {% endcomment %}
                               </div>
                           </div>
                       </div>
@@ -83,14 +83,14 @@
                             <div class="card">
                               <div class="product-grid6">
                                 <div class="product-image6 p-5">
-                                    <ul class="icons">
+                                    {% comment %} <ul class="icons">
                                         <li>
                                             <a href="{{ product.get_absolute_url }}" class="btn btn-primary"> <i class="fe fe-eye">  </i> </a>
                                         </li>
                                         <li><a href="add-product.html" class="btn btn-success"><i  class="fe fe-edit"></i></a></li>
                                         <li><a href="javascript:void(0)" class="btn btn-danger"><i class="fe fe-x"></i></a></li>
-                                    </ul>
-                                    {% thumbnail product.image "250x200" crop="center" as im %}
+                                    </ul> {% endcomment %}
+                                    {% thumbnail product.image "250x350" crop="center" as im %}
                                       <a href="{{ product.get_absolute_url }}" >
                                           <img class="img-fluid br-7 w-100" src="{% if product.image %}{{ im.url }}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img">
                                       </a>
@@ -99,14 +99,14 @@
                                 <div class="card-body pt-0">
                                     <div class="product-content text-center">
                                         <h2 class="title fw-bold fs-20"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h2>
-                                        <div class="mb-2 text-warning">
+                                        {% comment %} <div class="mb-2 text-warning">
                                             <i class="fa fa-star text-warning"></i>
                                             <i class="fa fa-star text-warning"></i>
                                             <i class="fa fa-star text-warning"></i>
                                             <i class="fa fa-star-half-o text-warning"></i>
                                             <i class="fa fa-star-o text-warning"></i>
-                                        </div>
-                                        <div class="price">{{ product.price }} ₽<span class="ms-4">799 ₽</span>
+                                        </div> {% endcomment %}
+                                        <div class="price">{{ product.price }} ₽
                                         </div>
                                     </div>
                                 </div>
@@ -116,14 +116,13 @@
                                       <input type="hidden" name="quantity" value="1" style="display:none;">
                                       <button type="submit" class="btn btn-primary mb-1"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</button>
                                     </form>
-                                    <a href="wishlist.html" class="btn btn-outline-danger mb-1"><i class="fe fe-heart mx-2 wishlist-icon"></i>{% trans "Add to Favorites" %}</a>
                                 </div>
                               </div>
                             </div>
                           </div>
                           {% endfor %}
                           <!-- Paginator -->
-                          <div class="mb-5">
+                          {% comment %} <div class="mb-5">
                               <div class="float-end">
                                   <ul class="pagination ">
                                       <li class="page-item page-prev disabled">
@@ -139,7 +138,7 @@
                                       </li>
                                   </ul>
                               </div>
-                          </div>
+                          </div> {% endcomment %}
                           <!-- Paginator-END -->
                       </div>
                   </div>
@@ -152,13 +151,13 @@
                                       <div class="row g-0">
                                           <div class="col-xl-3 col-lg-12 col-md-12">
                                               <div class="product-list">
-                                                  <div class="product-image">
+                                                  {% comment %} <div class="product-image">
                                                       <ul class="icons">
                                                           <li><a href="{{ product.get_absolute_url }}" class="btn btn-primary"><i class="fe fe-eye text-white "></i></a></li>
                                                           <li><a href="add-product.html" class="btn btn-success"><i class="fe fe-edit text-white "></i></a></li>
                                                           <li><a href="wishlist.html" class="btn btn-danger"><i class="fe fe-x text-white"></i></a></li>
                                                       </ul>
-                                                  </div>
+                                                  </div> {% endcomment %}
                                                   <div class="br-be-0 br-te-0">
                                                     <a href="{{ product.get_absolute_url }}" class="">
                                                         <img src="{% if product.image %}{% thumbnail product.image "200x200" %}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img" class="cover-image br-7 w-100">
@@ -171,45 +170,26 @@
                                                   <div class="mb-3">
                                                       <a href="{{ product.get_absolute_url }}" class="">
                                                           <h2 class="fw-bold fs-30 mb-3">{{ product.name }}</h2>
-                                                          <div class="mb-2 text-warning">
+                                                          {% comment %} <div class="mb-2 text-warning">
                                                               <i class="fa fa-star fs-18 text-warning"></i>
                                                               <i class="fa fa-star fs-18 text-warning"></i>
                                                               <i class="fa fa-star fs-18 text-warning"></i>
                                                               <i class="fa fa-star-half-o fs-18 text-warning"></i>
                                                               <i class="fa fa-star-o fs-18 text-warning"></i>
-                                                          </div>
+                                                          </div> {% endcomment %}
                                                       </a>
                                                       <p class="fs-16">{{ product.description|markdown|truncatewords_html:25 }}</p>
-                                                      <form class="shop__filter">
-                                                          <div class="row gutters-xs">
-                                                              <div class="col-auto">
-                                                                  <label class="colorinput">
-                                                                      <input type="checkbox" name="color" value="azure" class="colorinput-input" checked>
-                                                                      <span class="colorinput-color bg-azure"></span>
-                                                                  </label>
-                                                              </div>
-                                                              <div class="col-auto">
-                                                                  <label class="colorinput">
-                                                                      <input type="checkbox" name="color" value="indigo" class="colorinput-input">
-                                                                      <span class="colorinput-color bg-indigo"></span>
-                                                                  </label>
-                                                              </div>
-                                                              <div class="col-auto">
-                                                                  <label class="colorinput">
-                                                                      <input type="checkbox" name="color" value="purple" class="colorinput-input">
-                                                                      <span class="colorinput-color bg-purple"></span>
-                                                                  </label>
-                                                              </div>
-                                                          </div>
-                                                      </form>
                                                   </div>
                                               </div>
                                           </div>
                                           <div class="col-xl-3 col-lg-12 col-md-12 my-auto">
                                               <div class="card-body p-0">
                                                   <div class="price h2 text-center mb-5 fw-bold">{{ product.price }} ₽</div>
-                                                  <a href="cart.html" class="btn btn-primary btn-block"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</a>
-                                                  <a href="wishlist.html" class="btn btn-outline-danger btn-block mt-2"><i class="fe fe-heart mx-2 wishlist-icon"></i>{% trans "Add to Favorites" %}</a>
+                                                  <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="quantity" value="1" style="display:none;">
+                                                    <button type="submit" class="btn btn-primary mb-1"><i class="fe fe-shopping-cart mx-2"></i>{% trans "Add to Cart" %}</button>
+                                                  </form>
                                               </div>
                                           </div>
                                       </div>
@@ -218,7 +198,7 @@
                           </div>
                           {% endfor %}
                           <!-- Paginator -->
-                          <div class="mb-5">
+                          {% comment %} <div class="mb-5">
                               <div class="float-end">
                                   <ul class="pagination ">
                                       <li class="page-item page-prev disabled">
@@ -234,7 +214,7 @@
                                       </li>
                                   </ul>
                               </div>
-                          </div>
+                          </div> {% endcomment %}
                           <!-- Paginator-END -->
                       </div>
                   </div>

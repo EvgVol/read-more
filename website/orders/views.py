@@ -41,7 +41,6 @@ def order_create(request):
             # очищаем корзину
             cart.clear()
 
-            create_action(request.user, _('Order has been made'))
             if cart.coupon:
                 messages.info(request,
                               (_('Your order has been placed successfully'

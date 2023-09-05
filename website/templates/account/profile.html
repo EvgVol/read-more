@@ -149,13 +149,13 @@
                       О себе <i class="fe fe-edit-3 text-primary mx-2"></i>
                     </h5>
                     <p>
-                      Перетащите следующую кнопку на панель закладок, чтобы добавить в закладки изображения с других веб-сайтов
-                      <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">Bookmark it...</a>
+                      {{ author.about_me }}
+                      {% comment %} <a href="javascript:{% include "bookmarklet_launcher.js" %}" class="button">Bookmark it...</a> {% endcomment %}
                     </p>
                   </div>
                   {% endif %}
                   <hr />
-                  {% if author.phone_number %}
+                  {% comment %} {% if author.phone_number %}
                   <div class="d-flex align-items-center mb-3 mt-3">
                     <div class="me-4 text-center text-primary">
                       <span><i class="fe fe-phone fs-20"></i></span>
@@ -164,7 +164,7 @@
                       <strong>{{ author.phone_number }} </strong>
                     </div>
                   </div>
-                  {% endif %}
+                  {% endif %} {% endcomment %}
                 </div>
               </div>
             </div>
