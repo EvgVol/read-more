@@ -1,6 +1,7 @@
-from django.forms import forms
+from django import forms
+from django.forms.models import inlineformset_factory
 
-from .views import Product
+from .models import Product, ProductImage
 
 
 class ProductForm(forms.ModelForm):
@@ -17,3 +18,19 @@ class ProductForm(forms.ModelForm):
             'image': 'Изображение',
             'available': 'В наличии',
         }
+
+
+class ProductImageForm(forms.ModelForm):
+
+    class Meta:
+        model = ProductImage
+        fields = '__all__'
+
+
+ProductImageFormSet = inlineformset_factory(Product,
+                                            ProductImage,
+                                            form=ProductImageForm,
+                                            extra=1,
+                                            max_num=10,
+                                            min_num=1,
+                                            can_delete=True)

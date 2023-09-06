@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 from actions.utils import create_action
 from .cart import Cart
@@ -7,7 +8,7 @@ from .forms import CartAddProductForm
 from shop.models import Product
 from coupons.forms import CouponApplyForm
 
-
+@login_required
 @require_POST
 def cart_add(request, product_id):
     """Добавляет товар в корзину."""
@@ -24,6 +25,7 @@ def cart_add(request, product_id):
     return redirect('cart:cart_detail')
 
 
+@login_required
 @require_POST
 def cart_remove(request, product_id):
     """Удаляет товар из корзины."""
@@ -34,6 +36,7 @@ def cart_remove(request, product_id):
     return redirect('cart:cart_detail')
 
 
+@login_required
 @require_POST
 def cart_clear(request):
     """Очищает корзину."""

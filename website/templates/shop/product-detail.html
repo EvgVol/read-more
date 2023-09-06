@@ -17,7 +17,7 @@
               <div>
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">{% trans "Online store" %}</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">{% trans "Bookstore" %}</a></li>
                   <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">{{ product.category.name }}</a></li>
                 </ol>
               </div>
@@ -87,38 +87,8 @@
                                       <p class="text-muted mb-4">( 40 Customers Reviews) </p>
                                       <h4 class="mt-4"><b> {% trans "Description" %}</b></h4>
                                       <p>{{ product.description|linebreaks }}</p>
-                                      <h3 class="mb-4"><span class="me-2 fw-bold fs-25">{{ product.price }} ₽/</span><span><del class="fs-18 text-muted">₽599</del></span></h3>
-                                      <div class=" mt-4 mb-5"><span class="fw-bold me-2">Offer :</span><span class="fw-bold text-primary">15% Cashback </span>by using icici bank credit card.<small class="text-muted">Terms and Conditions Applies!</small></div>
+                                      <h3 class="mb-4"><span class="me-2 fw-bold fs-25">{{ product.price }} ₽</span></h3>
                                       <div class=" mt-4 mb-5"><span class="fw-bold me-2">{% trans "Availability" %} :</span><span class="fw-bold text-success">{% trans "Item is in stock" %}</span></div>
-                                      <div class="colors d-flex me-3 mt-4 mb-5">
-                                          <span class="mt-2 fw-bold">{% trans "Colors" %}:</span>
-                                          <div class="row gutters-xs ms-4">
-                                              <div class="col-3">
-                                                  <label class="colorinput">
-                                                  <input name="color" type="radio" value="azure" class="colorinput-input" checked="">
-                                                  <span class="colorinput-color bg-danger rounded-10"></span>
-                                                  </label>
-                                              </div>
-                                              <div class="col-3">
-                                                  <label class="colorinput">
-                                                  <input name="color" type="radio" value="indigo" class="colorinput-input">
-                                                  <span class="colorinput-color bg-dark rounded-10"></span>
-                                                  </label>
-                                              </div>
-                                              <div class="col-3">
-                                                  <label class="colorinput">
-                                                  <input name="color" type="radio" value="purple" class="colorinput-input">
-                                                  <span class="colorinput-color bg-info rounded-10"></span>
-                                                  </label>
-                                              </div>
-                                              <div class="col-3">
-                                                  <label class="colorinput">
-                                                  <input name="color" type="radio" value="pink" class="colorinput-input">
-                                                  <span class="colorinput-color bg-success rounded-10"></span>
-                                                  </label>
-                                              </div>
-                                          </div>
-                                      </div>
                                       <div class="row row-sm">
                                           <div class="col">
                                               <div class="mb-2 me-2 sizes">

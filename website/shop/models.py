@@ -68,3 +68,21 @@ class Product(models.Model):
         return reverse('shop:product_detail',
                        args=[self.category.slug,
                              self.slug])
+
+
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product,
+                                related_name='images',
+                                on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='products/%Y/%m/%d',
+                              blank=True,
+                              null=True)
+
+    class Meta:
+        verbose_name = _('product image')
+        verbose_name_plural = _('product images')
+
+    def __str__(self):
+        return f'{self.product.name} - {self.image.url}'

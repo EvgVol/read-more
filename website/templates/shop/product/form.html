@@ -4,7 +4,7 @@
   READ MORE |{% if object %}
     {% trans 'Edit course' %}"{{ object.title }}"
   {% else %}
-    {% trans 'Create a new course' %}
+    {% trans 'Create a new product' %}
   {% endif %}
 {% endblock %}
 {% block content %}
@@ -18,7 +18,7 @@
             {% if object %}
               {% trans 'Edit course' %}"{{ object.title }}"
             {% else %}
-              {% trans 'Create a new course' %}
+                {% trans 'Create a new product' %}
             {% endif %}
           </h1>
           <div>
@@ -27,7 +27,7 @@
                 <a href="javascript:void(0)">READ MORE</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
-                {% trans 'Courses' %}
+                {% trans 'Products' %}
               </li>
             </ol>
           </div>
@@ -42,18 +42,20 @@
                   {% if object %}
                     {% trans 'Edit course' %}"{{ object.title }}"
                   {% else %}
-                    {% trans 'Create a new course' %}
+                    {% trans 'Create a new product' %}
                   {% endif %}
                 </div>
               </div>
 
               <form method="POST" enctype="multipart/form-data">
-                <div class="card-body">
-                  {% include 'includes/cycle_forms.html' %}
-                </div>
                 {% csrf_token %}
+                {{ form.as_p }}
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {{ form.as_p }}
+                {% endfor %}
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">{% trans "Save course" %}</button>
+                  <button type="submit" class="btn btn-primary">{% trans "Save product" %}</button>
                   <a href="#" class="btn btn-default float-end">Отмена</a>
                 </div>
               </form>

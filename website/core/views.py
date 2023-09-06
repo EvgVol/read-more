@@ -3,6 +3,7 @@ from http import HTTPStatus
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import user_passes_test
 
 from blog.models import Post, Comment
 from actions.models import Action
@@ -11,19 +12,16 @@ from courses.models.course import Course
 
 class SettingView(TemplateView):
     """Отображает страницу со списком настроек."""
-
     template_name = 'core/settings.html'
 
 
 class StyleView(TemplateView):
     """Отображает страницу с настройками стилей."""
-
     template_name = 'core/style.html'
 
 
 class DashboardPageView(TemplateView):
     """Отображает главную страницу."""
-
     template_name = 'core/dashboard.html'
 
     def get_context_data(self, **kwargs):
@@ -63,6 +61,10 @@ class DashboardPageView(TemplateView):
         return context
 
 
+class TestPageView(TemplateView):
+    template_name = 'core/errors/503.html'
+
+
 def countdown_view(request):
     return render(request, 'core/countdown.html')
 
@@ -97,7 +99,3 @@ def server_error(request):
 def server_unavailable(request):
     return render(request, 'core/errors/503.html',
                   status=HTTPStatus.SERVICE_UNAVAILABLE)
-
-
-class TestPageView(TemplateView):
-    template_name = 'core/errors/503.html'
