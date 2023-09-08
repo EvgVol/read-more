@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, Comment, Category
+from .models import Post, Category
 
 
 @admin.register(Category)
@@ -30,11 +30,3 @@ class PostAdmin(admin.ModelAdmin):
 
     def tag_list(self, obj):
             return u", ".join(o.name for o in obj.tags.all())
-
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ['author', 'body', 'created', 'active']
-    list_filter = ['active', 'created', 'updated']
-    search_fields = ['author', 'body']
-    

@@ -1,6 +1,8 @@
 from django import template
+from django.db import models
 from django.db.models import Count
 from django.utils.safestring import mark_safe
+from django.contrib.contenttypes.models import ContentType
 import markdown
 
 from ..models import Post, Category
@@ -16,8 +18,9 @@ def total_posts():
 
 @register.simple_tag
 def get_most_commented_posts(count=3):
+    post_content_type = ContentType.objects.get_for_model(Post)
     return Post.published.annotate(
-        total_comments=Count('comments')
+        total_comments=Count('reviews', filter=models.Q(reviews__content_type=post_content_type))
     ).filter(total_comments__gt=1).order_by('-total_comments')[:count]
 
 

@@ -25,7 +25,7 @@ def register(request):
             new_user.backend = 'django.contrib.auth.backends.ModelBacken'
             login(request, new_user)
             Profile.objects.create(user=new_user)
-            create_action(new_user, 'зарегистрировался', None)
+            create_action(new_user, 'зарегистрировался', new_user)
         return redirect('blog:post_list')
     else:
         form = RegisterForm()
@@ -40,11 +40,13 @@ def user_detail(request, username):
     post_list = author.blog_posts.all()
     followers = author.followers.order_by('-username').all()
     courses = author.courses_joined.all()
+    actions = Action.objects.select_related('user')[:6]
     context = {
         'author': author,
         'post_list': post_list,
         'followers': followers,
         'courses': courses,
+        'actions': actions,
     }
     return render(request, 'account/profile.html', context)
 
@@ -62,13 +64,13 @@ def user_edit(request):
         if 'save-details' in request.POST:
             if form.is_valid():
                 form.save()
-                create_action(user, 'изменил свои данные', None)
+                create_action(user, 'изменил свои данные', user)
                 messages.success(request, 'Данные профиля изменены')
         elif 'change-password' in request.POST:
             if form_password.is_valid():
                 form_password.save()
                 logout(request)
-                create_action(user, 'изменил свои данные', None)
+                create_action(user, 'изменил свои данные', user)
                 messages.success(request, 'Пароль успешно изменен')
                 return redirect('login')
     return render(request, 'account/profile-edit.html',

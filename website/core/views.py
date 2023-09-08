@@ -5,9 +5,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
 
-from blog.models import Post, Comment
+from blog.models import Post
 from actions.models import Action
 from courses.models.course import Course
+from reviews.models import Review
 
 
 class SettingView(TemplateView):
@@ -55,7 +56,7 @@ class DashboardPageView(TemplateView):
         context['percent_senior'] = percent_senior
         context['user_count'] = get_user_model().objects.count()
         context['post_count'] = Post.objects.count()
-        context['comment_count'] = Comment.objects.count()
+        context['comment_count'] = Review.objects.count()
         context['actions'] = Action.objects.select_related('user')[:6]
         context['like_count'] = sum(post.users_like.count() for post in Post.objects.all())
         return context

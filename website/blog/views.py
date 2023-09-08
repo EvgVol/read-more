@@ -22,7 +22,7 @@ from django.urls import reverse
 from actions.utils import create_action
 from reviews.models import Review
 from .models import Post, Category
-from .forms import EmailPostForm, CommentForm, SearchForm, PostForm
+from .forms import EmailPostForm, SearchForm, PostForm
 from reviews.forms import ReviewForm
 
 
@@ -163,30 +163,6 @@ def post_share(request, post_id):
     return render(request, 'blog/post/share.html', {'post': post,
                                                     'form': form,
                                                     'sent': sent})
-
-
-# Оставляем комментарий к статье
-@require_POST
-@login_required
-def post_comment(request, post_id):
-    """Оставляем комментарии к статье."""
-    post = get_object_or_404(Post,
-                             id= post_id,
-                             status= Post.Status.PUBLISHED
-                             )
-    form = ReviewForm(data=request.POST)
-
-    if form.is_valid():
-        comment = form.save(commit=False)
-        comment.author = request.user
-        comment.content_type = ContentType.objects.get_for_model(Post)
-        comment.object_id = post.id
-        comment.save()
-        create_action(request.user, _('commented:'), post)
-        messages.success(request, _('Your comment has been add'))
-    else:
-        form = ReviewForm()    
-    return redirect(post.get_absolute_url())
 
 
 def post_search(request):

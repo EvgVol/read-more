@@ -15,7 +15,6 @@ urlpatterns = [
          name='post_detail'),
     path('<int:post_id>/', include([
         path(_('share/'), views.post_share, name='post_share'),
-        path(_('comment/'), views.post_comment, name='post_comment'),
     ])),
     path(_('tag/<slug:tag_slug>/'), views.post_list, name='post_list_by_tag'),
     path(_('category/<slug:category_slug>/'), views.post_list, name='post_list_by_category'),

@@ -3,9 +3,10 @@ from django.db.models.query import QuerySet
 from django.utils import timezone
 from django.urls import reverse
 from django.conf import settings
-from django.utils.encoding import force_str
+from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.translation import gettext_lazy as _
 
+from reviews.models import Review
 from taggit.managers import TaggableManager
 from pytils.translit import slugify
 
@@ -94,6 +95,7 @@ class Post(models.Model):
                                         verbose_name = _('liked'),
                                         related_name='posts_liked',
                                         blank=True)
+    reviews = GenericRelation(Review, related_query_name='post')
 
     class Meta:
         ordering = ['-publish']
@@ -118,47 +120,3 @@ class Post(models.Model):
                              self.publish.month,
                              self.publish.day,
                              self.slug])
-
-
-class Comment(models.Model):
-    """
-    Model for comments.
-    This model represents a comment left by a user on a specific blog post.
-    """
-
-    post = models.ForeignKey(Post,
-                             on_delete=models.CASCADE,
-                             related_name='comments',
-                             verbose_name = _('post'))
-    author = models.ForeignKey(settings.AUTH_USER_MODEL,
-                               verbose_name=_("author"),
-                               related_name='comments',
-                               on_delete=models.CASCADE)
-    body = models.TextField(
-        _('message'),
-        help_text=_('Enter your comment.')
-    )
-    created = models.DateTimeField(
-        _('created'),
-        auto_now_add=True)
-    updated = models.DateTimeField(
-        _('updated'),
-        auto_now=True)
-    active = models.BooleanField(
-        default=True,
-        verbose_name = _('active'),
-        help_text=_(
-            'A boolean field indicating whether the comment is active.'
-        )
-    )
-
-    class Meta:
-        ordering = ['created']
-        verbose_name = _('comment')
-        verbose_name_plural = _('comments')
-        indexes = [
-            models.Index(fields=['created']),
-        ]
-    
-    def __str__(self):
-        return force_str(_(f'Comment from {self.name} on post "{self.post}"'))

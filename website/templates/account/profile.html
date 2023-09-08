@@ -2,6 +2,7 @@
 {% block title %}Профиль пользователя {% endblock %}
 {% block content %}
 {% load thumbnail %}
+{% load humanize %}
 {% load static %}
 {% load blog_tags %}
 <div class="main-content app-content mt-0">
@@ -241,6 +242,32 @@
                   </div>
                 </div>
               </div>
+
+              {% with author=action.author %}
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title fw-semibold">Моя активность</h4>
+                </div>
+                <div class="card-body pb-0">
+                  <ul class="task-list">
+                    {% for action in actions %}
+                    <li class="d-sm-flex mb-1">
+                      <div>
+                        <i class="task-icon bg-secondary"></i>
+                        <span class="fs-11 fw-normal text-primary">{{ action.created|naturaltime }}</span>
+                        {% with target=action.target %}
+                        <p class="text-muted fs-12">
+                          {{ action.verb }}<a href="{{ target.get_absolute_url }}" class="fw-semibold"> {% if not target %}{% else %}{{ target|truncatechars:30 }}{% endif %}</a>
+                        </p>
+                        {% endwith %}
+                      </div>
+                    </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+                <a href="{% url 'actions:notification' %}" class="dropdown-item text-center p-3 text-muted">Посмотреть всю активность</a>
+              </div>
+              {% endwith %}
             </div>
           </div>
         </div>

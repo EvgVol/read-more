@@ -35,7 +35,7 @@
 				<small class="d-block text-muted">{{ post.publish|naturaltime }}</small>
 			</div>
 			<div class="ms-auto">
-				{% with total_likes=post.users_like.count total_comments=post.comments.count total_views=post.total_views %}
+				{% with total_likes=post.users_like.count total_comments=post.reviews.count total_views=post.total_views %}
 				<a href="#" class="icon d-none d-md-inline-block text-muted position-relative">
 					{% if total_likes != 0 %}
 					<i class="fa fa-heart border brround text-danger">

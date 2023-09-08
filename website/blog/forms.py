@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from pytils.translit import slugify
 
-from .models import Comment, Post
+from .models import Post
 
 User = get_user_model()
 
@@ -26,14 +26,6 @@ class EmailPostForm(forms.Form):
     email = forms.EmailField()
     to = forms.EmailField()
     comments = forms.CharField(required=False, widget=forms.Textarea)
-
-
-class CommentForm(forms.ModelForm):
-    """Форма по добавлению комментариев к посту."""
-
-    class Meta:
-        model = Comment
-        fields = ['author', 'body']
 
 
 class SearchForm(forms.Form):

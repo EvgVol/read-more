@@ -10,15 +10,7 @@
         {% for action in actions %}
         <li class="d-sm-flex mb-1">
           <div>
-            {% if action.verb == 'лайкнул' %}
-              <i class="task-icon bg-success"></i>
-            {% elif action.verb == 'изменил свои данные' %}
-              <i class="task-icon bg-info"></i>
-            {% elif action.verb == 'подписался на' %}
-              <i class="task-icon bg-warning"></i>
-            {% else %}
-              <i class="task-icon bg-secondary"></i>
-            {% endif %}
+            <i class="task-icon bg-secondary"></i>
             <h6 class="fw-semibold">{{ user.username|capfirst }}<span class="text-muted fs-11 mx-2 fw-normal">{{ action.created|naturaltime }}</span></h6>
             {% with target=action.target %}
             <p class="text-muted fs-12">
