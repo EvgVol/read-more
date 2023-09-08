@@ -26,6 +26,9 @@
           <div id="obj-list">
             {% include 'blog/post/cart.html' %}
           </div>
+          <div class="text-center mb-4">
+            <button id="more-btn" class="btn ripple btn-primary w-md">Показать еще</button>
+          </div>
       </div>
         <div class="col-xl-4">
           {% include 'blog/includes/search.html' %}
@@ -56,9 +59,10 @@
   var page = 1;
   var emptyPage = false;
   var blockRequest = false;
-  window.addEventListener('scroll', function(e) {
-    var margin = document.body.clientHeight - window.innerHeight - 200; 
-    if (window.pageYOffset > margin && !emptyPage && !blockRequest) { 
+  var moreBtn = $('#more-btn');
+
+  moreBtn.on('click', function() {
+    if (!emptyPage && !blockRequest) { 
       blockRequest = true; 
       page += 1; 
       fetch('?posts_only=1&page=' + page) 
@@ -68,17 +72,13 @@
           if (html === '') { 
             emptyPage = true;
             objList.insertAdjacentHTML('beforeEnd', '');
+            moreBtn.hide();
           } 
           else { 
             objList.insertAdjacentHTML('beforeEnd', html); 
           }
           blockRequest = false;
         }) 
-    } 
+    }
   });
-
-  // Запустить события прокрутки 
-  const scrollEvent = new Event('scroll'); 
-  window.dispatchEvent(scrollEvent);
 {% endblock %}
-

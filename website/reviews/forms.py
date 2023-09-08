@@ -7,7 +7,8 @@ from .models import Review
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ('comment',)
+        fields = ('rating', 'comment',)
         widgets = {
             'comment': forms.Textarea(attrs={'placeholder': 'Ваш отзыв'}),
+            'rating': forms.NumberInput(attrs={'placeholder': 'Ваша оценка'}),
         }

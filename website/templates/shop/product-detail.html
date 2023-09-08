@@ -16,9 +16,9 @@
               <h1 class="page-title">{{ product.name }}</h1>
               <div>
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
-                  <li class="breadcrumb-item" aria-current="page"><a href="javascript:void(0)">{% trans "Bookstore" %}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page"><a href="javascript:void(0)">{{ product.category.name }}</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'courses:subject_list' %}">READ MORE</a></li>
+                  <li class="breadcrumb-item" aria-current="page"><a href="{% url 'shop:product_list' %}">{% trans "Bookstore" %}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="#">{{ product.category.name }}</a></li>
                 </ol>
               </div>
           </div>
@@ -33,7 +33,7 @@
                               <div class="col-xl-5 col-lg-12 col-md-12">
                                   <div class="row">
                                       <div class="col-xl-12">
-                                          {% thumbnail product.image  "550x350" crop="center" as im %}
+                                          {% thumbnail product.image  "400x332" as im %}
                                           <div class="product-carousel">
                                               <div class="carousel slide border">
                                                   <div class="carousel-inner">
@@ -51,7 +51,11 @@
                               <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0">
                                   <div class="mt-2 mb-4">
                                       <h3 class="mb-3 fw-semibold">{{ product.name }}</h3>
+                                      {% if product.price == 0 %}
+                                      <span class="fw-bold fs-23 text-success">БЕСПЛАТНО</span>
+                                      {% else %}
                                       <h3 class="mb-4"><span class="me-2 fw-bold fs-25">{{ product.price }} ₽</span></h3>
+                                      {% endif %}
                                       <div class=" mt-4 mb-5"><span class="fw-bold me-2">{% trans "Availability" %} :</span><span class="fw-bold text-success">{% trans "Item is in stock" %}</span></div>
                                       <div class="row row-sm">
                                           <div class="col">
@@ -77,9 +81,9 @@
                                       <hr>
                                       <div class="btn-list mt-4">
                                           {% csrf_token %}
-                                          <button type="submit" class="btn ripple btn-primary me-2"><i class="fe fe-shopping-cart"> </i> {% trans "To Cart" %}</button>
+                                          <button type="submit" class="btn ripple btn-primary me-2"><i class="fe fe-shopping-cart"> </i> {% trans "To Buy" %}</button>
                                           </form>
-                                          <a href="checkout.html" class="btn ripple btn-secondary"><i class="fe fe-credit-card"> </i> {% trans "To Buy" %}</a>
+                                          {% comment %} <a href="checkout.html" class="btn ripple btn-secondary"><i class="fe fe-credit-card"> </i> {% trans "To Buy" %}</a> {% endcomment %}
                                       </div>
                                   </div>
                               </div>
@@ -96,11 +100,11 @@
               <!-- Customer Services CLOSED -->
               
               <!-- Reviews -->
-              {% comment %} {% include 'shop/includes/reviews.html' %} {% endcomment %}
+              {% include 'shop/includes/reviews.html' %}
               <!-- Reviews CLOSED -->
 
               <!-- Add Review -->
-              {% comment %} {% include 'shop/includes/add-review.html' %} {% endcomment %}
+              {% include 'shop/includes/add-review.html' %}
               <!-- Add Review CLOSED -->
 
               <!-- Related Products -->

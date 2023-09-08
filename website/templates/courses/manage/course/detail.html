@@ -283,6 +283,7 @@
                                         <section class="sptb demo-screen-demo" id="faqs">
                                             <div class="row align-items-center">
                                                 <div class="col-md-12 col-lg-6">
+                                                    {% for module in course.modules.all %}
                                                     <div class="col-md-12 grid-item  px-0">
                                                         <div
                                                             class="card card-collapsed bg-primary-transparent p-0 reveal">
@@ -290,120 +291,16 @@
                                                                 data-bs-toggle="card-collapse">
                                                                 <a href="#"
                                                                     class="card-options-collapse h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-primary">01.</span>Can
-                                                                    i get a free trial before purchase ?</a>
+                                                                        class="me-3 fs-18 fw-bold text-primary">{{ module.order }}.</span>{{ module.title }}</a>
                                                             </div>
                                                             <div class="card-body pt-0">
                                                                 <p>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit. Iure quos debitis aliquam .
+                                                                    {{ module.description }}
                                                                 </p>
-                                                                <p class="mt-2 mb-3">
-                                                                    <span class="fw-bold">Note: </span>Please Refer
-                                                                    support section for more information.
-                                                                </p>
-                                                                <a href="javascript:void(0)"
-                                                                    class="btn btn-outline-primary tx-13">Click here</a>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 grid-item  px-0">
-                                                        <div
-                                                            class="card card-collapsed bg-success-transparent p-0 reveal">
-                                                            <div class="card-header grid-link"
-                                                                data-bs-toggle="card-collapse">
-                                                                <a href="#"
-                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-success">02.</span>What
-                                                                    type of files i will get after purchase ?</a>
-                                                            </div>
-                                                            <div class="card-body pt-0">
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit. Iure quos debitis aliquam.
-                                                                </p>
-                                                                <p class="mt-2 mb-3">
-                                                                    <span class="fw-bold">Note: </span>Please Refer
-                                                                    support section for more information.
-                                                                </p>
-                                                                <a href="javascript:void(0)"
-                                                                    class="btn btn-outline-success tx-13">Click here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 grid-item  px-0">
-                                                        <div
-                                                            class="card card-collapsed bg-secondary-transparent p-0 reveal">
-                                                            <div class="card-header grid-link"
-                                                                data-bs-toggle="card-collapse">
-                                                                <a href="#"
-                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-secondary">03.</span>What
-                                                                    is a single Application</a>
-                                                            </div>
-                                                            <div class="card-body pt-0">
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit. Iure quos debitis aliquam.
-                                                                </p>
-                                                                <p class="mt-2 mb-3">
-                                                                    <span class="fw-bold">Note: </span>Please Refer
-                                                                    support section for more information.
-                                                                </p>
-                                                                <a href="javascript:void(0)"
-                                                                    class="btn btn-outline-secondary tx-13">Click
-                                                                    here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 grid-item  px-0">
-                                                        <div
-                                                            class="card card-collapsed bg-warning-transparent p-0 reveal">
-                                                            <div class="card-header grid-link"
-                                                                data-bs-toggle="card-collapse">
-                                                                <a href="#"
-                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-warning">04.</span>How
-                                                                    to get future updates ?</a>
-                                                            </div>
-                                                            <div class="card-body pt-0">
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit. Iure quos debitis aliquam.
-                                                                </p>
-                                                                <p class="mt-2 mb-3">
-                                                                    <span class="fw-bold">Note: </span>Please Refer
-                                                                    support section for more information.
-                                                                </p>
-                                                                <a href="javascript:void(0)"
-                                                                    class="btn btn-outline-warning tx-13">Click here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-12 grid-item  px-0">
-                                                        <div
-                                                            class="card card-collapsed bg-danger-transparent p-0 reveal">
-                                                            <div class="card-header grid-link"
-                                                                data-bs-toggle="card-collapse">
-                                                                <a href="#"
-                                                                    class="card-options-collapse  h5 fw-bold card-title mb-0"><span
-                                                                        class="me-3 fs-18 fw-bold text-danger">05.</span>Do
-                                                                    you provide support ?</a>
-                                                            </div>
-                                                            <div class="card-body pt-0">
-                                                                <p>
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing
-                                                                    elit. Iure quos debitis aliquam.
-                                                                </p>
-                                                                <p class="mt-2 mb-3">
-                                                                    <span class="fw-bold">Note: </span>Please Refer
-                                                                    support section for more information.
-                                                                </p>
-                                                                <a href="javascript:void(0)"
-                                                                    class="btn btn-outline-danger tx-13">Click here</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {% endfor %}
                                                 </div>
                                                 <div class="col-md-12 col-lg-6 reveal revealright">
                                                     <img src="{% static 'images/landing/frequently-asked-questions.png' %}"

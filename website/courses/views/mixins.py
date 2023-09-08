@@ -22,8 +22,7 @@ class OwnerCourseMixin(PermissionRequiredMixin):
     model = Course
     fields = ('subject', 'title', 'overview', 'description',
               'complexity', 'advantages', 'technologies', 'load',
-              'period', 'count_projects', 'price_per_mouth',
-              'price_immediately')
+              'period', 'count_projects')
 
     def get_success_url(self):
         subject_name = self.object.subject.slug

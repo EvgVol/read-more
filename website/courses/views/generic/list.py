@@ -86,7 +86,9 @@ class CourseListView(ListView):
         context = super().get_context_data(**kwargs)
         subject_name, complexity_name = self.get_filters_from_request()
         
-        subjects = Subject.objects.annotate(total_courses=Count('courses')).prefetch_related('courses')
+        subjects = Subject.objects.annotate(
+            total_courses=Count('courses')
+        ).prefetch_related('courses')
         cache.set('all_subjects', subjects)
         all_course = Course.objects.all().select_related('subject').prefetch_related('modules')
 

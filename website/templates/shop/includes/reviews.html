@@ -1,60 +1,64 @@
-<div class="col-xl-6">
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">Reviews</div>
+{% load static %}
+{% load humanize %}
+{% load thumbnail %}
+
+{% if comments %}
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Комментарии</div>
+  </div>
+  <div class="card-body pb-0">
+    {% for comment in comments %}
+    <div class="media mb-5 overflow-visible d-block d-sm-flex">
+      <div class="me-3 mb-2">
+        <a href="{{ comment.author.get_absolute_url }}">
+          {% thumbnail comment.author.avatar "64x64" crop="center" as im %}
+          <img
+            class="media-object rounded-circle thumb-sm"
+            alt="64x64"
+            src="{{ im.url }}"
+          />
+          {% endthumbnail %}
+        </a>
+      </div>
+      <div class="media-body overflow-visible">
+        <div class="border">
+          {% comment %} <nav class="nav float-end">
+            <div class="dropdown">
+              <a
+                class="nav-link text-muted fs-16 p-0 ps-4"
+                href="javascript:;"
+                data-bs-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                ><i class="fe fe-more-vertical"></i
+              ></a>
+              <div class="dropdown-menu dropdown-menu-end" style="">
+                <a class="dropdown-item" href="javascript:void(0)"
+                  ><i class="fe fe-edit mx-1"></i> Редактировать</a
+                >
+                <a class="dropdown-item" href="javascript:void(0)"
+                  ><i class="fe fe-corner-up-left mx-1"></i> Ответить</a
+                >
+                <a class="dropdown-item" href="javascript:void(0)"
+                  ><i class="fe fe-flag mx-1"></i> Отметить как нежелательный</a
+                >
+                <a class="dropdown-item" href="javascript:void(0)"
+                  ><i class="fe fe-trash-2 mx-1"></i> Удалить</a
+                >
+              </div>
+            </div>
+          </nav> {% endcomment %}
+          <h5 class="mt-0"><a href="{{ comment.author.get_absolute_url }}" >@{{ comment.author.username }}</a> | <small class="text-muted font-weight-light">{{ comment.created|naturaltime }}</small></h5>
+          <span><i class="fe fe-thumb-up text-danger"></i></span>
+          <p class="font-13 font-weight-light text-muted">
+            {{ comment.comment|linebreaks }}
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-      <div class="media mb-5">
-        <div class="me-3">
-          <a href="javascript:void(0)"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="../assets/images/users/5.jpg" /></a>
-        </div>
-        <div class="media-body">
-          <h5 class="mt-0 mb-0">Gavin Murray</h5>
-          <div class="text-warning mb-0">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p class="font-13 text-muted">Good Looking.........</p>
-          <a class="like" href="javascript:;"><span class="badge btn-danger-light rounded-pill py-2 px-3"><i class="fe fe-heart me-1"></i>56</span></a>
-          <span class="reply" id="6"><a href="javascript:;"><span class="badge btn-primary-light rounded-pill py-2 px-3"><i class="fe fe-corner-up-left me-1"></i>Reply</span></a></span>
-        </div>
-      </div>
-      <div class="media mb-5">
-        <div class="me-3">
-          <a href="javascript:void(0)"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="../assets/images/users/15.jpg" /></a>
-        </div>
-        <div class="media-body">
-          <h5 class="mt-0 mb-0">Paul Smith</h5>
-          <div class="text-warning mb-0">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p class="font-13 text-muted">Very nice ! On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the</p>
-          <a class="like" href="javascript:;"><span class="badge btn-danger-light rounded-pill py-2 px-3"><i class="fe fe-heart me-1"></i>56</span></a>
-          <span class="reply" id="6"><a href="javascript:;"><span class="badge btn-primary-light rounded-pill py-2 px-3"><i class="fe fe-corner-up-left me-1"></i>Reply</span></a></span>
-        </div>
-      </div>
-      <div class="media mb-0">
-        <div class="me-3">
-          <a href="javascript:void(0)"><img class="media-object rounded-circle thumb-sm" alt="64x64" src="../assets/images/users/5.jpg" /></a>
-        </div>
-        <div class="media-body">
-          <h5 class="mt-0 mb-0">Mozelle Belt</h5>
-          <div class="text-warning mb-0">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
+{% endif %}

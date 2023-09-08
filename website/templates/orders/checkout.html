@@ -1,6 +1,7 @@
 {% extends 'includes/base.html' %}
+{% load i18n %}
 {% block title %}
-  READ MORE | Интернет магазин | Оформление заказа
+  READ MORE | {% trans "Bookstore" %} | Оформление заказа
 {% endblock %}
 {% load static %}
 {% block content %}
@@ -14,12 +15,11 @@
           <div>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="javascript:void(0)">ExView</a>
+                <a href="{% url 'courses:subject_list' %}">READ MORE</a>
               </li>
               <li class="breadcrumb-item" aria-current="page">
-                <a href="javascript:void(0)">Интернет магазин</a>
+                <a href="{% url 'shop:product_list' %}">{% trans "Bookstore" %}</a>
               </li>
-              <li class="breadcrumb-item active" aria-current="page"></li>
             </ol>
           </div>
         </div>
@@ -100,13 +100,13 @@
                         <img class="avatar-xxl br-7" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "images/nophoto.png" %}{% endif %}" alt="img" />
                         <div class="ms-3">
                           <h4 class="mb-1 fw-semibold fs-14"><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h4>
-                          <div class="text-warning fs-14">
+                          {% comment %} <div class="text-warning fs-14">
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star"></i>
                             <i class="fa fa-star-half-o"></i>
                             <i class="fa fa-star-o"></i>
-                          </div>
+                          </div> {% endcomment %}
                           <p>Количество: {{ item.quantity }}</p>
                         </div>
                         <div class="ms-auto">
@@ -134,9 +134,6 @@
                     <span class="h4 fw-bold mb-0 float-end">{{ cart.get_total_price_after_discount|floatformat:0 }} ₽</span>
                   </li>
                 </ul>
-              </div>
-              <div class="card-footer text-end">
-                <input type="button" class="btn btn-primary" value="Оформить" id="click-payment" />
               </div>
             </div>
           </div>

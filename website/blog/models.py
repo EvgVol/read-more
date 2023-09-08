@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericRelation
 from django.utils.translation import gettext_lazy as _
 
+from courses.models import module
 from reviews.models import Review
 from taggit.managers import TaggableManager
 from pytils.translit import slugify
@@ -95,7 +96,8 @@ class Post(models.Model):
                                         verbose_name = _('liked'),
                                         related_name='posts_liked',
                                         blank=True)
-    reviews = GenericRelation(Review, related_query_name='post')
+    reviews = GenericRelation(Review, related_query_name='posts')
+    modules = GenericRelation(module.Module, related_query_name='posts')
 
     class Meta:
         ordering = ['-publish']

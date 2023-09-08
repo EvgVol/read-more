@@ -1,29 +1,35 @@
-<div class="col-xl-6">
-  <div class="card">
-    <div class="card-header">
-      <div class="card-title">Add Review</div>
-    </div>
-    <div class="card-body">
-      <form class="form-horizontal m-t-20" action="index.html">
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control" type="text" required="" placeholder="Username*" />
-          </div>
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Добавить комментарий</div>
+  </div>
+  <div class="card-body">
+    <form
+      class="form-horizontal m-t-20"
+      action="{% url 'reviews:create_review' product_content_type.id product.id %}"
+      method="post"
+    >
+      <div class="form-group">
+        <div class="col-xs-12">
+          <textarea
+            class="form-control"
+            rows="5"
+            required=""
+            placeholder="Ваш комментарий*"
+            name="comment"
+            id="id_comment"
+          ></textarea>
         </div>
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control" type="email" required="" placeholder="Email*" />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-xs-12">
-            <textarea class="form-control" rows="5">Your Review*</textarea>
-          </div>
-        </div>
-        <div class="">
-          <a href="javascript:void(0)" class="btn btn-primary btn-rounded waves-effect waves-light">Submit</a>
-        </div>
-      </form>
-    </div>
+      </div>
+      {% csrf_token %}
+      <div class="">
+        <p>
+          <input
+            type="submit"
+            class="btn btn-primary btn-rounded waves-effect waves-light"
+            value="Отправить"
+          />
+        </p>
+      </div>
+    </form>
   </div>
 </div>

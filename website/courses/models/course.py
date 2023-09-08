@@ -68,10 +68,6 @@ class Course(models.Model):
     )
     count_projects = models.PositiveSmallIntegerField(_("count projects"),
                                                       blank=True)
-    price_per_mouth = models.PositiveIntegerField(_("price per mouth"),
-                                                  blank=True)
-    price_immediately = models.PositiveIntegerField(_("price immediately"),
-                                                    blank=True)
     students = models.ManyToManyField(User,
                                       verbose_name=_("students"), 
                                       related_name='courses_joined',
@@ -98,9 +94,3 @@ class Course(models.Model):
 
     def get_load_full_name(self):
         return self.get_load_display()
-
-    def benefit(self):
-        total_cost = self.period * self.price_per_mouth
-        benefit = total_cost - self.price_immediately
-        benefit_percentage = (benefit / total_cost) * 100
-        return benefit_percentage

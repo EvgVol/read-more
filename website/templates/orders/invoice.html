@@ -1,6 +1,7 @@
 {% extends 'includes/base.html' %}
+{% load i18n %}
 {% block title %}
-  READ MORE | Интернет магазин | Мой заказ
+  READ MORE | {% trans "Bookstore" %} | Мой заказ
 {% endblock %}
 {% load static %}
 {% block content %}
@@ -16,8 +17,8 @@
                 <h1 class="page-title">Товарная накладная</h1>
                 <div>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">ExView</a></li>
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Интернет магазин</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'courses:subject_list' %}">READ MORE</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}">{% trans "Bookstore" %}</a></li>
                     </ol>
                 </div>
             </div>
@@ -27,7 +28,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card ribbone-card">
-                        {% if order.paid %}
+                        {% if order.paid or order.get_total_cost == 0 %}
                         <div class="arrow-ribbone-right bg-teal display-5 mt-9">ОПЛАЧЕНО</div>
                         {% else %}
                         <div class="arrow-ribbone-right bg-danger display-5 mt-9">НЕ ОПЛАЧЕНО</div>
@@ -42,8 +43,7 @@
                                     </a>
                                     <div>
                                         <address class="pt-3">
-                                            Street Address, State, City, Region, Postal Code<br>
-                                            yourdomain@example.com
+                                            <iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=ePyBeQLSHoM.230908&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
                                         </address>
                                     </div>
                                 </div>
@@ -109,9 +109,11 @@
                                         <!-- products END -->
                                     </tbody>
                                 </table>
+                                
                             </div>
                         </div>
                         <div class="card-footer text-end">
+                            
                             <button type="button" class="btn btn-primary mb-1" onclick="javascript:window.print();"><i class="si si-wallet"></i> Оплатить</button>
                             {% comment %} <button type="button" class="btn btn-secondary mb-1" onclick=""><i class="fe fe-save"></i> Сохранить</button> {% endcomment %}
                             <button type="button" class="btn btn-danger mb-1" onclick="javascript:window.print();"><i class="si si-printer"></i> Распечатать</button>

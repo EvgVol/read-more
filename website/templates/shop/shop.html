@@ -16,7 +16,7 @@
           <h1 class="page-title">{% trans "Bookstore" %}</h1>
           <div>
               <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="javascript:void(0)">READ MORE</a></li>
+                  <li class="breadcrumb-item"><a href="{% url 'courses:subject_list' %}">READ MORE</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{% trans "Bookstore" %}</li>
               </ol>
           </div>
@@ -92,7 +92,7 @@
                                         <li><a href="add-product.html" class="btn btn-success"><i  class="fe fe-edit"></i></a></li>
                                         <li><a href="javascript:void(0)" class="btn btn-danger"><i class="fe fe-x"></i></a></li>
                                     </ul> {% endcomment %}
-                                    {% thumbnail product.image "250x350" crop="center" as im %}
+                                    {% thumbnail product.image "250x350" as im %}
                                       <a href="{{ product.get_absolute_url }}" >
                                           <img class="img-fluid br-7 w-100" src="{% if product.image %}{{ im.url }}{% else %}{% static 'images/nophoto.png' %}{% endif %}" alt="img">
                                       </a>
