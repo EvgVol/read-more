@@ -4,6 +4,7 @@
 {% block base %}
 {% load static %}
 {% load thumbnail %}
+{% load blog_tags %}
 {% load cache %}
 <div class="page">
   <div class="page-main">
@@ -262,204 +263,6 @@
                             </div>
                             <!-- TECHNOLOGIES CLOSED -->
 
-                            <!-- CARDS OPEN -->
-                            <div class="bg-landing section bg-image-style" id="Price">
-                              <div class="container">
-                                  <div class="row">
-                                      <h4 class="text-center fw-semibold">Choose a plan </h4>
-                                      <span class="landing-title"></span>
-                                      <h2 class="text-center fw-semibold">Explore the <span class="text-primary">Perfect
-                                              Plan</span> for your Learning Journey.</h2>
-                                      <div class="pricing-tabs">
-                                          <div class="pri-tabs-heading text-center">
-                                              <ul class="nav nav-price">
-                                                  <li><a class="active show" data-bs-toggle="tab" href="#month">Monthly</a></li>
-                                                  <li><a data-bs-toggle="tab"
-                                                          href="#immediately">Immediately</a></li>
-                                              </ul>
-                                          </div>
-                                          <div class="tab-content">
-                                              <div class="tab-pane pb-0 active show" id="month">
-                                                  <div class="row d-flex align-items-center justify-content-center">
-                                                    {% for card in course.cards.all %}
-                                                    <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                        <div
-                                                            class="card p-3 border-primary pricing-card advanced reveal revealrotate">
-                                                            <div class="card-header d-block text-justified pt-2">
-                                                                <p class="fs-9 fw-semibold mb-1 pe-0">
-                                                                {{ card.course }}
-                                                                {% if card.status %}
-                                                                <span class="tag bg-primary text-white float-end">
-                                                                    {{ card.status }}
-                                                                </span>
-                                                                {% endif %}
-                                                                </p>
-                                                                <p class="text-justify fw-semibold mb-1">
-                                                                <span class="fs-30 me-1">{{ card.course.price_per_mouth }}</span>
-                                                                <span class="fs-30 me-2">₽</span>
-                                                                <span class="fs-25">
-                                                                    <span class="op-0-5 text-muted text-20">/мес</span>
-                                                                </span>
-                                                                </p>
-                                                                <p class="fs-13 mb-2">{{ card.title }}</p>
-                                                                <p class="fs-13 mb-1 text-primary">частями в течение {{ card.course.period }} месяцев</p>
-                                                            </div>
-                                                            <div class="card-body pt-2">
-                                                                <ul class="text-justify pricing-body ps-0">
-                                                                    <li>
-                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                    <strong> {{ card.course.period }} месяцев </strong> учебы
-                                                                    </li>
-                                                                    <li>
-                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                    <strong>{{ card.course.get_load_display }} </strong> нагрузка</li>
-                                                                    <li>
-                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                    <strong>{{ card.course.count_projects }} </strong> учебных проектов</li>
-                                                                    <li class="mt-1">
-                                                                    {{ card.additional_text }}
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                            <div class="card-footer text-center border-top-0 pt-1">
-                                                                <button
-                                                                    class="btn btn-lg btn-outline-dark btn-block">
-                                                                    <span class="ms-4 me-4">Select</span>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {% endfor %} 
-                                                  </div>
-                                              </div>
-                                              <div class="tab-pane" id="immediately">
-                                                <div class="row d-flex align-items-center justify-content-center">
-                                                  {% for card in course.cards.all %}
-                                                  <div class="col-lg-4 col-xl-4 col-md-8 col-sm-12">
-                                                      <div
-                                                          class="card p-3 border-primary pricing-card advanced reveal revealrotate">
-                                                          <div class="card-header d-block text-justified pt-2">
-                                                              <p class="fs-9 fw-semibold mb-1 pe-0">
-                                                                {{ card.course }}
-                                                                {% if card.status %}
-                                                                <span class="tag bg-primary text-white float-end">
-                                                                  {{ card.status }}
-                                                                </span>
-                                                                {% endif %}
-                                                              </p>
-                                                              <p class="text-justify fw-semibold mb-1">
-                                                                <span class="fs-30 me-1">{{ card.course.price_immediately }}</span>
-                                                                <span class="fs-30 me-2">₽</span>
-                                                              </p>
-                                                              <p class="fs-13 mb-2">{{ card.title }}</p>
-                                                              {% if card.course.benefit != 0 %}
-                                                                <p class="fs-13 mb-1 text-success">дешевле на {{ card.course.benefit|floatformat:0}}%</p>
-                                                              {% endif %}
-                                                          </div>
-                                                          <div class="card-body pt-2">
-                                                              <ul class="text-justify pricing-body ps-0">
-                                                                  <li>
-                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                    <strong> {{ card.course.period }} месяцев </strong> учебы
-                                                                  </li>
-                                                                  <li>
-                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                    <strong>{{ card.course.get_load_display }} </strong> нагрузка</li>
-                                                                  <li>
-                                                                    <i class="mdi mdi-checkbox-marked-circle-outline text-primary p-2 fs-16"></i>
-                                                                    <strong>{{ card.course.count_projects }} </strong> учебных проектов</li>
-                                                                  <li class="mt-1">
-                                                                    {{ card.additional_text }}
-                                                                  </li>
-                                                              </ul>
-                                                          </div>
-                                                          <div class="card-footer text-center border-top-0 pt-1">
-                                                              <button
-                                                                  class="btn btn-lg btn-outline-dark btn-block">
-                                                                  <span class="ms-4 me-4">Select</span>
-                                                              </button>
-                                                          </div>
-                                                      </div>
-                                                  </div>
-                                                  {% endfor %}
-                                                </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="mt-3">
-                                        <div class="text-dark">
-                                            <div class="services-statistics reveal my-5">
-                                                <div class="row text-center">
-                                                    <div class="col-xl-3 col-md-6 col-lg-6">
-                                                        <div class="card-body p-0">
-                                                            <div class="counter-status">
-                                                                <div
-                                                                    class="counter-icon bg-primary-transparent box-shadow-primary">
-                                                                    <i
-                                                                        class="fe fe-map-pin text-primary fs-23"></i>
-                                                                </div>
-                                                                <h4
-                                                                    class="mb-2 fw-semibold">
-                                                                    Вернем деньги</h4>
-                                                                <p>за оставшееся время обучения, если что-то не понравится</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-3 col-md-6 col-lg-6">
-                                                      <div class="card-body p-0">
-                                                          <div class="counter-status">
-                                                              <div
-                                                                  class="counter-icon bg-secondary-transparent box-shadow-secondary">
-                                                                  <i
-                                                                      class="fe fe-headphones text-secondary fs-23"></i>
-                                                              </div>
-                                                              <h4
-                                                                  class="mb-2 fw-semibold">
-                                                                  Поможем</h4>
-                                                              <p class="mb-0">69% выпускников находят работу по новой специальности</p>
-                                                          </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-xl-3 col-md-6 col-lg-6">
-                                                      <div class="card-body p-0">
-                                                          <div class="counter-statuss">
-                                                              <div
-                                                                  class="counter-icon bg-success-transparent box-shadow-success">
-                                                                  <i
-                                                                      class="fe fe-mail text-success fs-23"></i>
-                                                              </div>
-                                                              <h4
-                                                                  class="mb-2 fw-semibold">
-                                                                  Познакомим</h4>
-                                                              <p class="mb-0">
-                                                                студентов и выпускников, которые всегда готовы помочь</p>
-                                                          </div>
-                                                      </div>
-                                                    </div>
-                                                    <div class="col-xl-3 col-md-6 col-lg-6">
-                                                      <div class="card-body p-0">
-                                                          <div class="counter-status">
-                                                              <div
-                                                                  class="counter-icon bg-danger-transparent box-shadow-danger">
-                                                                  <i
-                                                                      class="fe fe-airplay text-danger fs-23"></i>
-                                                              </div>
-                                                              <h4
-                                                                  class="mb-2 fw-semibold">
-                                                                  Будем рядом</h4>
-                                                              <p class="mb-0">вместе с наставниками, кураторами и опытными IT-экспертами</p>
-                                                              </p>
-                                                          </div>
-                                                      </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-                              </div>
-                            </div>
-                            <!-- CARDS CLOSED -->
 
                             <!-- PROGRAMMS OPEN -->
                             <div class="section" id="Programms">
@@ -620,92 +423,29 @@
                                         <h4 class="text-center fw-semibold">Статьи</h4>
                                         <span class="landing-title"></span>
                                         <h2 class="text-center fw-semibold mb-7">Последнее из блога</h2>
+                                        {% for post in posts %}
                                         <div class="col-lg-6">
                                             <div class="card bg-transparent reveal">
                                                 <div class="card-body px-1">
                                                     <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
+                                                        {% thumbnail post.image "162x131" crop="center" as im %}
+                                                        <a href="{{ post.get_absolute_url }}"
                                                             class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="{% static 'images/media/12.jpg' %}.jpg"
-                                                            style="background: url(&quot;{% static 'images/media/12.jpg' %}&quot;) center center;"></a>
+                                                            data-bs-image-src="{{ im.url }}"
+                                                            style="background: url(&quot;{{ im.url }}&quot;) center center;"></a>
+                                                        {% endthumbnail %}    
                                                         <div class="ps-3 flex-column">
                                                             <span
-                                                                class="badge bg-primary me-1 mb-1 mt-1">Business</span>
-                                                            <h3><a href="blog-details.html">Voluptatem quia
-                                                                    voluptas...</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
+                                                                class="badge bg-primary me-1 mb-1 mt-1">{{ post.category }}</span>
+                                                            <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                                                            <div class="">{{ post.body|markdown|truncatewords_html:15 }}</div>
                                                         </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="{% static 'images/media/22.jpg' %}"
-                                                            style="background: url(&quot;{% static 'images/media/22.jpg' %}&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span
-                                                                class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                                                            <h3><a href="blog-details.html">Generator on the
-                                                                    Internet..</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- COL-END -->
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="{% static 'images/media/about.jpg' %}"
-                                                            style="background: url(&quot;{% static 'images/media/about.jpg' %}&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span
-                                                                class="badge bg-secondary me-1 mb-1 mt-1">Travel</span>
-                                                            <h3><a href="blog-details.html">Generator on the
-                                                                    Internet..</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- COL-END -->
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="card bg-transparent reveal">
-                                                <div class="card-body px-1">
-                                                    <div class="d-flex overflow-visible">
-                                                        <a href="blog-details.html"
-                                                            class="card-aside-column br-5 cover-image"
-                                                            data-bs-image-src="{% static 'images/media/25.jpg' %}"
-                                                            style="background: url(&quot;{% static 'images/media/25.jpg' %}&quot;) center center;"></a>
-                                                        <div class="ps-3 flex-column">
-                                                            <span class="badge bg-success me-1 mb-1 mt-1">Meeting</span>
-                                                            <h3><a href="blog-details.html">Voluptatem quia
-                                                                    voluptas...</a></h3>
-                                                            <div class="">Excepteur sint occaecat cupidatat non
-                                                                proident, accusantium sunt in culpa qui officia deserunt
-                                                                mollit anim id est laborum....</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- COL-END -->
-                                        </div>
+                                        {% endfor %}
                                         <div class="text-center">
                                             <a href="{% url 'blog:post_list' %}" target="_blank"
                                                 class="btn btn-outline-primary pt-2 pb-2"><i
@@ -729,39 +469,37 @@
                                                     <h2 class="text-center fw-semibold text-white mb-7">What People Are
                                                         Saying About Our Product.</h2>
                                                     <div class="testimonial-carousel">
-                                                        {% cache 600 course_reviews review %}
-                                                            {% for review in reviews %}
-                                                            <div class="slide text-center">
-                                                                <div class="row">
-                                                                    <div class="col-xl-8 col-md-12 d-block mx-auto">
-                                                                        <div class="testimonia">
-                                                                            <p class="text-white-80">
-                                                                                <i
-                                                                                    class="fa fa-quote-left fs-20 text-white-80"></i>
-                                                                                {{ review.comment }}
-                                                                            </p>
-                                                                            <a href="{{ review.author.get_absolute_url}}">
-                                                                            {% if review.author.avatar %}
-                                                                                {% thumbnail review.author.avatar "216x226" crop="center" upscale=True as im %}
-                                                                                <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
-                                                                                {% endthumbnail %}
-                                                                            {% else %}
-                                                                                <img
-                                                                                class="avatar profile-user brround cover-image"
-                                                                                src="{% static 'images/users/default-user.jpeg' %}"
-                                                                                alt="Аватар"
-                                                                                />
-                                                                            {% endif %}
-                                                                            <h3 class="title mt-3">{{ review.author }}</h3>
-                                                                            {% comment %} <span class="post">Web Developer</span> {% endcomment %}
-                                                                            <div class="rating-stars block my-rating-7 mb-5" data-rating="{{ review.rating }}" data-read-only="true"></div>
-                                                                            </a>
-                                                                        </div>
+                                                        {% for review in reviews %}
+                                                        <div class="slide text-center">
+                                                            <div class="row">
+                                                                <div class="col-xl-8 col-md-12 d-block mx-auto">
+                                                                    <div class="testimonia">
+                                                                        <p class="text-white-80">
+                                                                            <i
+                                                                                class="fa fa-quote-left fs-20 text-white-80"></i>
+                                                                            {{ review.comment }}
+                                                                        </p>
+                                                                        <a href="{{ review.author.get_absolute_url}}">
+                                                                        {% if review.author.avatar %}
+                                                                            {% thumbnail review.author.avatar "216x226" crop="center" upscale=True as im %}
+                                                                            <img class="avatar profile-user brround cover-image" src="{{ im.url }}" />
+                                                                            {% endthumbnail %}
+                                                                        {% else %}
+                                                                            <img
+                                                                            class="avatar profile-user brround cover-image"
+                                                                            src="{% static 'images/users/default-user.jpeg' %}"
+                                                                            alt="Аватар"
+                                                                            />
+                                                                        {% endif %}
+                                                                        <h3 class="title mt-3">{{ review.author }}</h3>
+                                                                        {% comment %} <span class="post">Web Developer</span> {% endcomment %}
+                                                                        <div class="rating-stars block my-rating-7 mb-5" data-rating="{{ review.rating }}" data-read-only="true"></div>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            {% endfor %}
-                                                        {% endcache %}
+                                                        </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>

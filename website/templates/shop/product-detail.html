@@ -33,40 +33,14 @@
                               <div class="col-xl-5 col-lg-12 col-md-12">
                                   <div class="row">
                                       <div class="col-xl-12">
-                                          {% thumbnail product.image  "300x250" crop="center" as im %}
+                                          {% thumbnail product.image  "550x350" crop="center" as im %}
                                           <div class="product-carousel">
-                                              <div id="Slider" class="carousel slide border" data-bs-ride="false">
+                                              <div class="carousel slide border">
                                                   <div class="carousel-inner">
-                                                        
                                                       <div class="carousel-item active"><img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
                                                           <div class="text-center mt-5 mb-5 btn-list">
                                                           </div>
                                                       </div>
-                                                      <div class="carousel-item"> <img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
-                                                          <div class="text-center mb-5 mt-5 btn-list">
-                                                          </div>
-                                                      </div>
-                                                      <div class="carousel-item"> <img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
-                                                          <div class="text-center  mb-5 mt-5 btn-list">
-                                                          </div>
-                                                      </div>
-                                                      <div class="carousel-item"> <img src="{{ im.url }}" alt="img" class="img-fluid mx-auto d-block">
-                                                          <div class="text-center  mb-5 mt-5 btn-list">
-                                                          </div>
-                                                      </div>
-                                                      
-                                                  </div>
-                                              </div>
-                                          </div>
-                                          <div class="clearfix carousel-slider">
-                                              <div id="thumbcarousel" class="carousel slide" data-bs-interval="t">
-                                                  <div class="carousel-inner">
-                                                      <ul class="carousel-item active">
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="0" class="thumb active m-2"><img src="{{ im.url }}" alt="img"></li>
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="1" class="thumb m-2"><img src="{{ im.url }}" alt="img"></li>
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="2" class="thumb m-2"><img src="{{ im.url }}" alt="img"></li>
-                                                          <li data-bs-target="#Slider" data-bs-slide-to="3" class="thumb m-2"><img src="{{ im.url }}" alt="img"></li>
-                                                      </ul>
                                                   </div>
                                               </div>
                                           </div>
@@ -77,16 +51,6 @@
                               <div class="details col-xl-7 col-lg-12 col-md-12 mt-4 mt-xl-0">
                                   <div class="mt-2 mb-4">
                                       <h3 class="mb-3 fw-semibold">{{ product.name }}</h3>
-                                      <p class="text-muted float-start me-3">
-                                          <span class="fa fa-star text-warning"></span>
-                                          <span class="fa fa-star text-warning"></span>
-                                          <span class="fa fa-star text-warning"></span>
-                                          <span class="fa fa-star-half-o text-warning"></span>
-                                          <span class="fa fa-star-o text-warning"></span>
-                                      </p>
-                                      <p class="text-muted mb-4">( 40 Customers Reviews) </p>
-                                      <h4 class="mt-4"><b> {% trans "Description" %}</b></h4>
-                                      <p>{{ product.description|linebreaks }}</p>
                                       <h3 class="mb-4"><span class="me-2 fw-bold fs-25">{{ product.price }} ₽</span></h3>
                                       <div class=" mt-4 mb-5"><span class="fw-bold me-2">{% trans "Availability" %} :</span><span class="fw-bold text-success">{% trans "Item is in stock" %}</span></div>
                                       <div class="row row-sm">
@@ -128,19 +92,19 @@
               <!-- Specifications CLOSED -->
 
               <!-- Customer Services -->
-              {% include 'shop/includes/customer-services.html' %}
+              {% comment %} {% include 'shop/includes/customer-services.html' %} {% endcomment %}
               <!-- Customer Services CLOSED -->
               
               <!-- Reviews -->
-              {% include 'shop/includes/reviews.html' %}
+              {% comment %} {% include 'shop/includes/reviews.html' %} {% endcomment %}
               <!-- Reviews CLOSED -->
 
               <!-- Add Review -->
-              {% include 'shop/includes/add-review.html' %}
+              {% comment %} {% include 'shop/includes/add-review.html' %} {% endcomment %}
               <!-- Add Review CLOSED -->
 
               <!-- Related Products -->
-              {% include 'shop/includes/related-products.html' %}
+              {% comment %} {% include 'shop/includes/related-products.html' %} {% endcomment %}
               <!-- Related Products CLOSED -->
           </div>
           <!-- Product CLOSED -->
@@ -149,8 +113,3 @@
   </div>
 </div>
 {% endblock %}
-{% block add_script %}
-<!-- Star Rating-1 Js-->
-<script src="{% static 'plugins/ratings-2/jquery.star-rating.js' %}"></script>
-<script src="{% static 'plugins/ratings-2/star-rating.js' %}"></script>
-{% endblock add_script %}

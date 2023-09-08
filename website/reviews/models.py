@@ -8,19 +8,8 @@ from django.utils.encoding import force_str
 
 
 class Review(models.Model):
-    """
-    Model representing a review for a specific object.
-    
-    Attributes:
-        author (ForeignKey): The author of the review.
-        content_type (ForeignKey): The content type of the related object.
-        object_id (PositiveIntegerField): The ID of the related object.
-        content_object (GenericForeignKey): The related object.
-        rating (PositiveIntegerField): The rating given in the review.
-        comment (TextField): The comment left in the review.
-        created (DateTimeField): The date and time when the review was created.
-        updated (DateTimeField): The date and time when the review was last updated.
-    """
+    """Model representing a review for a specific object."""
+
     author = models.ForeignKey(settings.AUTH_USER_MODEL,
                                verbose_name=_('author'),
                                on_delete=models.CASCADE,
@@ -31,7 +20,7 @@ class Review(models.Model):
                                      db_index=True)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
-    rating = models.PositiveIntegerField(blank=True)
+    rating = models.PositiveIntegerField(blank=True, null=True)
     comment = models.TextField(_('comment'), blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

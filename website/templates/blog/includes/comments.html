@@ -20,8 +20,8 @@
         </a>
       </div>
       <div class="media-body overflow-visible">
-        <div class="border mb-5 p-4 br-5">
-          <nav class="nav float-end">
+        <div class="border">
+          {% comment %} <nav class="nav float-end">
             <div class="dropdown">
               <a
                 class="nav-link text-muted fs-16 p-0 ps-4"
@@ -47,11 +47,11 @@
                 >
               </div>
             </div>
-          </nav>
-          <h5 class="mt-0">{{ comment.author.username }} | <small class="text-muted font-weight-light">{{ comment.created|naturaltime }}</small></h5>
+          </nav> {% endcomment %}
+          <h5 class="mt-0"><a href="{{ comment.author.get_absolute_url }}" >@{{ comment.author.username }}</a> | <small class="text-muted font-weight-light">{{ comment.created|naturaltime }}</small></h5>
           <span><i class="fe fe-thumb-up text-danger"></i></span>
-          <p class="font-13 text-muted">
-            {{ comment.body|linebreaks }}
+          <p class="font-13 font-weight-light text-muted">
+            {{ comment.comment|linebreaks }}
           </p>
         </div>
       </div>

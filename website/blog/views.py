@@ -10,14 +10,17 @@ from django.db.models import Count, Q
 from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
 from taggit.models import Tag
 from django.utils.encoding import force_str
+from django.urls import reverse
 
 from actions.utils import create_action
+from reviews.models import Review
 from .models import Post, Category
 from .forms import EmailPostForm, CommentForm, SearchForm, PostForm
 from reviews.forms import ReviewForm
@@ -105,9 +108,11 @@ def post_detail(request, year, month, day, post):
                               publish__month=month,
                               publish__day=day)
     # Получение списка активных комментариев для этой статьи
-    comments = post.comments.filter(active=True)
-     # Если пользователь оставил комментарий
-    form = CommentForm()
+    post_content_type = ContentType.objects.get_for_model(Post)
+    comments = Review.objects.filter(content_type=post_content_type,
+                                     object_id=post.pk)
+    # Если пользователь оставил комментарий
+    form = ReviewForm()
     # Получение списка похожих статей
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = Post.published.filter(
@@ -126,6 +131,7 @@ def post_detail(request, year, month, day, post):
     return render(request, 'blog/blog-detail.html',
                   {'post': post,
                    'comments': comments,
+                   'post_content_type': post_content_type,
                    'form': form,
                    'similar_posts': similar_posts,
                    'tag_list': tag_list,
@@ -166,19 +172,21 @@ def post_comment(request, post_id):
     """Оставляем комментарии к статье."""
     post = get_object_or_404(Post,
                              id= post_id,
-                             status= Post.Status.PUBLISHED)
-    form = CommentForm(data=request.POST)
+                             status= Post.Status.PUBLISHED
+                             )
+    form = ReviewForm(data=request.POST)
+
     if form.is_valid():
         comment = form.save(commit=False)
-        comment.post = post
+        comment.author = request.user
+        comment.content_type = ContentType.objects.get_for_model(Post)
+        comment.object_id = post.id
         comment.save()
-        messages.success(request,
-                         _('Your comment has been add'))
-        # create_action(request.user, _('commented'), post)
-    return render(request, 'blog/post/comment.html',
-                  {'post': post,
-                   'form': form,
-                   'comment': comment})
+        create_action(request.user, _('commented:'), post)
+        messages.success(request, _('Your comment has been add'))
+    else:
+        form = ReviewForm()    
+    return redirect(post.get_absolute_url())
 
 
 def post_search(request):
@@ -225,8 +233,8 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-            # create_action(request.user, _('added a new post:', post))
-            # messages.success(request, _('The post was added successfully'))
+            create_action(request.user, _('added a new post:'), post)
+            messages.success(request, _('The post was added successfully'))
             return redirect(post.get_absolute_url())
     else:
         form = PostForm()
@@ -245,7 +253,7 @@ def post_like(request):
             post = Post.objects.get(id=post_id)
             if action == 'like':
                 post.users_like.add(request.user)
-                # create_action(request.user, _('liked the post:'), post)
+                create_action(request.user, _('liked the post:'), post)
             else:
                 post.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})

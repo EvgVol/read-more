@@ -28,6 +28,7 @@ urlpatterns = i18n_patterns(
     path(_('blog/'), include('blog.urls', namespace='blog')),
     path(_('vookmarks/'), include('vookmarks.urls', namespace='vookmarks')),
     path('', include('actions.urls', namespace='actions')),
+    path('', include('reviews.urls', namespace='reviews')),
     path(_('shop/'), include('shop.urls', namespace='shop')),
     path(_('cart/'), include('cart.urls', namespace='cart')),
     path(_('coupons/'), include('coupons.urls', namespace='coupons')),

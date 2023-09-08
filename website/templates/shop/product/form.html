@@ -1,11 +1,8 @@
 {% extends 'includes/base.html' %}
 {% load i18n %}
+{% load template_tags %}
 {% block title %}
-  READ MORE |{% if object %}
-    {% trans 'Edit course' %}"{{ object.title }}"
-  {% else %}
-    {% trans 'Create a new product' %}
-  {% endif %}
+  READ MORE | {% trans 'Create a new product' %}
 {% endblock %}
 {% block content %}
   <div class="main-content app-content mt-0">
@@ -15,11 +12,7 @@
         <!-- PAGE-HEADER -->
         <div class="page-header">
           <h1 class="page-title">
-            {% if object %}
-              {% trans 'Edit course' %}"{{ object.title }}"
-            {% else %}
-                {% trans 'Create a new product' %}
-            {% endif %}
+            {% trans 'Create a new product' %}
           </h1>
           <div>
             <ol class="breadcrumb">
@@ -39,21 +32,38 @@
             <div class="card">
               <div class="card-header">
                 <div class="card-title">
-                  {% if object %}
-                    {% trans 'Edit course' %}"{{ object.title }}"
-                  {% else %}
-                    {% trans 'Create a new product' %}
-                  {% endif %}
+                  {% trans 'Create a new product' %}
                 </div>
               </div>
-
               <form method="POST" enctype="multipart/form-data">
+                <div class="card-body">
+                  {% for field in form %}
+                    {% if field.name == "DELETE" %}
+                        <div class="form-check">
+                        {{ field|addclass:'form-checkbox' }}
+                        <label class="form-check-label" for="{{ field.id_for_label }}">
+                          {{ field.label }}
+                        </label>
+                      </div>
+                    {% else %}
+                        <div class="form-group row p-3 my-1" {% if field.field.required %} aria-required="true" {% else %} aria-required="false" {% endif %}>
+                        <label for="{{ field.id_for_label }}">
+                            {{ field.label }}
+                            {% if field.field.required %}
+                            <span class="required text-danger">*</span>
+                            {% endif %}
+                        </label>
+                        {{ field|addclass:'input150 border-start-0 form-control ms-0' }}
+                        {% if field.help_text %}
+                            <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                            {{ field.help_text|safe }}
+                            </small>
+                        {% endif %}
+                        </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
                 {% csrf_token %}
-                {{ form.as_p }}
-                {{ formset.management_form }}
-                {% for form in formset %}
-                    {{ form.as_p }}
-                {% endfor %}
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">{% trans "Save product" %}</button>
                   <a href="#" class="btn btn-default float-end">Отмена</a>
