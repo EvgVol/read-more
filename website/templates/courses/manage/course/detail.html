@@ -272,13 +272,13 @@
                                         <span class="landing-title"></span>
                                         <h2 class="text-center fw-semibold">Курс <span class="text-primary">{{ course.title }}</span></h2>
                                         <div class="row justify-content-center">
-                                            <p class="col-xl-9 wow fadeInUp text-default sub-text mb-7"
+                                            {% comment %} <p class="col-xl-9 wow fadeInUp text-default sub-text mb-7"
                                                 data-wow-delay="0s">
                                                 The Sash admin template is one of the modern dashboard templates.
                                                 It is also a premium admin dashboard with high-end features, where users
                                                 can easily customize
                                                 or change their projects according to their choice.
-                                            </p>
+                                            </p> {% endcomment %}
                                         </div>
                                         <section class="sptb demo-screen-demo" id="faqs">
                                             <div class="row align-items-center">
@@ -361,10 +361,9 @@
                                         <div class="col-md-12">
                                             <div class="card bg-transparent">
                                                 <div class="card-body pt-5">
-                                                    <h4 class="text-center fw-semibold text-white-80">Testimonials </h4>
+                                                    <h4 class="text-center fw-semibold text-white-80">Отзывы </h4>
                                                     <span class="landing-title"></span>
-                                                    <h2 class="text-center fw-semibold text-white mb-7">What People Are
-                                                        Saying About Our Product.</h2>
+                                                    <h2 class="text-center fw-semibold text-white mb-7">Что говорят люди о нашем курсе</h2>
                                                     <div class="testimonial-carousel">
                                                         {% for review in reviews %}
                                                         <div class="slide text-center">

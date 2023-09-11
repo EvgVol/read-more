@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail', #IMAGE #https://sorl-thumbnail.readthedocs.io/en/latest/
     'taggit', #TAGS #https://django-taggit.readthedocs.io/en/latest/
     'social_django', #OAUTH2 #https://python-social-auth.readthedocs.io/en/latest/index.html
-    'django_extensions', #Lite SSL #https://django-extensions.readthedocs.io/en/latest/
+    # 'django_extensions', #Lite SSL #https://django-extensions.readthedocs.io/en/latest/
     'rosetta', #INTERFACE #https://django-rosetta.readthedocs.io/
     'embed_video', #EMBEDDING YouTube and Vimeo videos #https://django-embed-video.readthedocs.io/en/latest/
     'redisboard', #STATS SERVER REDIS #https://pypi.org/project/django-redisboard/
@@ -295,8 +295,8 @@ INTERNAL_IPS = [
 ]
 
 # Setting Redis:
-REDIS_HOST = '127.0.0.1'
-REDIS_PORT = 6379
+REDIS_HOST = config('REDIS_HOST')
+REDIS_PORT = config('REDIS_PORT')
 REDIS_DB = 0
 
 # Setting Cart:
@@ -331,12 +331,12 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)],
+            'hosts': [(REDIS_HOST, REDIS_PORT)],
         },
     },
 }
 
-REDIS_URL = 'redis://127.0.0.1:6379'
+REDIS_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 CACHES['default']['LOCATION'] = REDIS_URL
 CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
 

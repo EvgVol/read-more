@@ -28,7 +28,7 @@ git clone https://github.com/evgvol/read_more.git
 ```
 SECRET_KEY='django-insecure-51ydgsn!flww^)=p+m5rkp=bpan@q*em8#u^40s^4ug94l6_j('
 DEBUG=False
-ALLOWED_HOSTS=127.0.0.1, localhost
+ALLOWED_HOSTS=127.0.0.1, localhost, web
 EMAIL_HOST_USER='your-email@yandex.ru'
 EMAIL_HOST_PASSWORD='your-password'
 EMAIL_ADMIN='your-email@yandex.ru'
@@ -38,7 +38,8 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres 
 DB_HOST=db
 DB_PORT=5432
-MODE=prod # --> IF NEED `SQLite3` write: dev
+REDIS_HOST='127.0.0.1'
+REDIS_PORT=6379
 YANDEX_KEY='yandex-key'
 YANDEX_SECRET='yandex-secret'
 GOOGLE_KEY='google-key'
@@ -65,13 +66,7 @@ docker pull redis
 docker run -it --rm --name redis -p 6379:6379 redis
 ```
 
-7.  Start the Memcached using the following command:
-```
-docker pull memcached
-docker run -it --rm --name memcached -p 11211:11211 memcached -m 64
-```
-
-8. Start the Django development server using the following command:
+7. Start the Django development server using the following command:
 ```
 python manage.py runserver --settings=website.settings.local
 
@@ -79,14 +74,14 @@ python manage.py runserver --settings=website.settings.local
 python manage.py runserver_plus --cert-file cert.crt
 ```
 
-9. Open your web browser and navigate to http://localhost:8000 to view the application.
+8. Open your web browser and navigate to http://localhost:8000 to view the application.
 
 
-10. To add translations of your source code, use the following command:
+9. To add translations of your source code, use the following command:
 ```
 python manage.py makemessages --all
 ```
-11. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
+10. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
 ```
 python manage.py compilemessages
 ```

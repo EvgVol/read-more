@@ -16,9 +16,7 @@ services:
       - ./data/cache:/data
 
   web:
-    build:
-      context: ./website
-      dockerfile: Dockerfile
+    image: evol93/readmore_hub
     restart: always
     volumes:
       - static_value:/code/static/
