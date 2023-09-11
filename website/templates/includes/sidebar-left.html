@@ -34,9 +34,17 @@
               </span>
             </a>
         </div>
-            
+         
 
       </div>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'courses:subject_list' %}">Главная</a>
+          <a class="navbar-brand" href="{% url 'blog:post_list' %}">Блог</a>
+          <a class="navbar-brand" href="{% url 'shop:product_list' %}">Книжный магазин</a>
+          
+        </div>
+      </nav>
       {% if request.user.is_authenticated %}
         <div class="header-nav-right d-none d-lg-flex align-items-center">
             <a href="{{ user.get_absolute_url }}"
