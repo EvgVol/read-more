@@ -39,10 +39,19 @@ services:
       - ./data/nginx/default.conf:/etc/nginx/conf.d/default.conf 
       - static_value:/var/html/static/ 
       - media_value:/var/html/media/
-      - ./data/ssl/readmore.crt:/etc/nginx/ssl/readmore.crt
-      - ./data/ssl/readmore.key:/etc/nginx/ssl/readmore.key
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     depends_on:
       - web
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
 volumes:
   postgres_data:

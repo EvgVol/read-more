@@ -22,8 +22,6 @@ ALLOWED_HOSTS = config(
 
 SITE_ID = 1
 
-MODE = config('MODE', cast=str, default='dev')
-
 INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'django.contrib.admin',
@@ -106,26 +104,18 @@ WSGI_APPLICATION = 'website.wsgi.application'
 ASGI_APPLICATION = 'website.asgi.application'
 
 #Setting Database (SQLite3 or PostgreSQL)
-if MODE == 'dev':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': config('DB_ENGINE'),
-            'NAME': config('DB_NAME'),
-            'USER': config('POSTGRES_USER'),
-            'PASSWORD': config('POSTGRES_PASSWORD'),
-            'HOST': config('POSTGRES_HOST', default='localhost'),
-            'PORT': config('DB_PORT', default='5432'),
-        },
-    }
+DATABASES = {
+    'default': {
+        'ENGINE': config('DB_ENGINE'),
+        'NAME': config('DB_NAME'),
+        'USER': config('POSTGRES_USER'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('POSTGRES_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+    },
+}
 
-    SOCIAL_AUTH_JSONFIELD_ENABLED = True
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 #Setting AUTHENTICATION for Users
 AUTHENTICATION_BACKENDS = [
