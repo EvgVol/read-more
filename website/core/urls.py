@@ -14,4 +14,5 @@ urlpatterns = [
     path(_('style/'), views.StyleView.as_view(), name='style'),
     path(_('countdown/'), views.countdown_view, name='countdown_view'),
     path(_('test/'), views.TestPageView.as_view(), name='test_page'),
+    path(_('policy/'), views.PolicyView.as_view(), name='policy'),
 ]

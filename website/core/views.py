@@ -1,10 +1,11 @@
 from http import HTTPStatus
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import user_passes_test
 
+from core.models import Policy
 from blog.models import Post
 from actions.models import Action
 from courses.models.course import Course
@@ -64,6 +65,12 @@ class DashboardPageView(TemplateView):
 
 class TestPageView(TemplateView):
     template_name = 'core/errors/503.html'
+
+
+class PolicyView(ListView):
+    model = Policy
+    template_name = 'core/policy.html'
+
 
 
 def countdown_view(request):

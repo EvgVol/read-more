@@ -44,6 +44,9 @@ class Policy(models.Model):
     def __str__(self):
         return self.body
 
+    def get_full_status(self):
+        return self.get_status_display()
+
 
 class Question(models.Model):
 

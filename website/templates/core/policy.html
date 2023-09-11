@@ -1,0 +1,39 @@
+{% extends 'includes/base.html' %}
+{% block title %}Политика конфиденциальности {% endblock %}
+{% block content %}
+{% load humanize %}
+{% load static %}
+<div class="main-content app-content mt-0">
+  <div class="side-app">
+    <!-- CONTAINER -->
+    <div class="main-container container-fluid">
+      <!-- PAGE-HEADER -->
+      <div class="page-header">
+        <h1 class="page-title">Политика конфиденциальности</h1>
+        <div>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="javascript:void(0)">READ MORE</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="main-container container-fluid">
+      <div class="row ">
+        {% for policy in object_list %}
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4><b>Дата создания {{ policy.created|naturaltime }}</b></h4>
+                    <p>{{ policy.body|linebreaks }}</p>
+                    <p>Статус: <span class="text-primary">{{ policy.get_full_status }}</span></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

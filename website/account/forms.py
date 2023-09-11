@@ -14,7 +14,8 @@ class LoginForm(forms.Form):
     """Форма входа в систему."""
 
     username = forms.CharField(label='Имя пользователя')
-    password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
+    password = forms.CharField(label='Пароль',
+                               widget=forms.PasswordInput)
 
 
 class RegisterForm(forms.ModelForm):
@@ -103,7 +104,7 @@ class PasswordChangingForm(PasswordChangeForm):
             raise ValidationError(
                 'Новый пароль не может совпадать со старым'
             )
-        
+
         # проверяем, что новый пароль подтвержден верно
         if (new_password1 and new_password2 
             and new_password1 != new_password2):

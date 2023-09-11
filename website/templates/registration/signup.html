@@ -70,7 +70,7 @@
             required id="id_privacy_policy"
           />
           <span class="custom-control-label"
-            >{% trans "I agree with" %} <a href="#">{% trans "The policy of conditionality" %}</a></span
+            >{% trans "I agree with" %} <a href="{% url 'core:policy' %}">{% trans "The policy of conditionality" %}</a></span
           >
         </label>
         {% csrf_token %}
