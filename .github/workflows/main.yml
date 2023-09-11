@@ -68,8 +68,8 @@ jobs:
             sudo echo GOOGLE_SECRET=${{ secrets.GOOGLE_SECRET }} >> .env
             sudo echo VK_KEY=${{ secrets.VK_KEY }} >> .env
             sudo echo VK_SECRET=${{ secrets.VK_SECRET }} >> .env
-            sudo echo GITHUB_KEY=${{ secrets.GITHUB_KEY }} >> .env
-            sudo echo GITHUB_SECRET=${{ secrets.GITHUB_SECRET }} >> .env
+            sudo echo SOCIAL_AUTH_GITHUB_KEY=${{ secrets.SOCIAL_AUTH_GITHUB_KEY }} >> .env
+            sudo echo SOCIAL_AUTH_GITHUB_SECRET=${{ secrets.SOCIAL_AUTH_GITHUB_SECRET }} >> .env
             sudo echo CACHE_BACKEND=${{ secrets.CACHE_BACKEND }} >> .env
             sudo echo CACHE_LOCATION=${{ secrets.CACHE_LOCATION }} >> .env
             sudo echo TELEGRAM_TOKEN=${{ secrets.TELEGRAM_TOKEN }} >> .env
