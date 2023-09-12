@@ -86,8 +86,15 @@ python manage.py makemessages --all
 python manage.py compilemessages
 ```
 
+## SERVER SETUP
+
+
+
+
 ## Credits
 This project was created by [Evgeniy Volochek](https://github.com/EvgVol). The Bootstrap framework was used to assist with the layout and styling of the website.
 
 ## License
 This project is licensed under the MIT License. See the LICENSE.md file for details.
+
+
