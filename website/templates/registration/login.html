@@ -18,9 +18,9 @@
                     >{% trans "Login" %}</a
                   >
                 </li>
-                <li class="mx-0">
+                {% comment %} <li class="mx-0">
                   <a href="#tab6" data-bs-toggle="tab">{% trans "Phone" %}</a>
-                </li>
+                </li> {% endcomment %}
               </ul>
             </div>
           </div>
@@ -120,7 +120,7 @@
                 </div>
               </div>
 
-              <div class="tab-pane" id="tab6">
+              {% comment %} <div class="tab-pane" id="tab6">
                 <div
                   id="mobile-num"
                   class="wrap-input100 validate-input input-group mb-4"
@@ -167,7 +167,7 @@
                     {% trans "Log In" %}
                   </a>
                 </div>
-              </div>
+              </div> {% endcomment %}
             </div>
           </div>
         </div>

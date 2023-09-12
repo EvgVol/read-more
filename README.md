@@ -27,17 +27,17 @@ The "READ MORE" project is a web platform developed for the purpose of educating
 ## Features
 
 ### Courses and Learning
-   - Diverse Course Offerings: We offer a wide range of courses covering various knowledge domains, ranging from programming to arts and sciences.
-   - Interactive Learning Materials: Our courses include interactive educational materials, tasks, and projects to make learning engaging and effective.
-   - Community: Students can join discussions, ask questions, and share their experiences in our chat and forum.
+   - Diverse Course Offerings
+   - Interactive Learning Materials
+   - Community
 
-### Blog - Articles and Discussions: Our blog features articles authored by experts in various fields and allows users to share their knowledge and opinions.
+### Blog - Articles and Discussions
    - Feedback: Readers can comment on articles and participate in discussions, creating an active community.
 
-### Bookstore - Extensive Selection: We provide a catalog of books on various topics to deepen knowledge.
+### Bookstore - Extensive Selection
    - Online Purchase: Users can easily purchase books through our interface.
 
-### Student Chat - Online Communication: We provide a platform for students to communicate, ask questions, and support each other during the learning process.
+### Student Chat - Online Communication
 
 
 

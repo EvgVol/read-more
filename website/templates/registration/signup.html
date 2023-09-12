@@ -91,19 +91,24 @@
       </div>
       <label class="login-social-icon"><span>{% trans "OR" %}</span></label>
       <div class="d-flex justify-content-center">
-        <a href="javascript:void(0)">
+        <a href="{% url "social:begin" "github" %}" >
           <div class="social-login me-4 text-center">
-            <i class="fa fa-google"></i>
+            <i class="fa fa-github"></i>
           </div>
         </a>
-        <a href="javascript:void(0)">
+        <a href="{% url 'social:begin' 'yandex-oauth2' %}">
           <div class="social-login me-4 text-center">
-            <i class="fa fa-facebook"></i>
+            <i class="fa fa-yahoo"></i>
           </div>
         </a>
-        <a href="javascript:void(0)">
-          <div class="social-login text-center">
-            <i class="fa fa-twitter"></i>
+        <a href="{% url 'social:begin' 'google-oauth2' %}">
+          <div class="social-login me-4 text-center">
+            <i class="fa fa-google" ></i>
+          </div>
+        </a>
+        <a href="{% url 'social:begin' 'vk-oauth2' %}">
+          <div class="social-login me-4 text-center">
+            <i class="fa fa-vk"></i>
           </div>
         </a>
       </div>
