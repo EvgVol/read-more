@@ -36,7 +36,7 @@
             <div class="card-body">
               <div class="text-center chat-image mb-5">
                 <div class="avatar avatar-xxl chat-profile mb-3 brround">
-                  <a class="" href="profile.html">
+                  <a class="" href="{{ user.get_absolute_url }}">
                     {% if user.avatar %}
                     {% thumbnail user.avatar "216x226" crop="center" upscale=True as im %}
                         <img class="brround" src="{{ im.url }}" />

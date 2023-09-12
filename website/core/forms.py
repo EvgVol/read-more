@@ -26,7 +26,7 @@ class QuestionForm(forms.ModelForm):
             }
         }
         help_texts = {
-            'first_name': _('Please, enter your name'),
-            'email': _('Please, enter your email adress'),
-            'content': _('Please leave your question'),
+            'first_name': _('Пожалуйста укажите своё имя'),
+            'email': _('Пожалуйста укажите свою электронную почту'),
+            'content': _('Укажите ваш вопрос'),
         }
