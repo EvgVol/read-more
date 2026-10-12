@@ -3,6 +3,7 @@ from django.db import transaction
 
 from courses.models.course import Course
 from courses.models.lesson_material import LessonMaterial
+from courses.management.commands.ml_theory import build_theory
 
 
 def entry(title, objectives, theory, practice, self_check, resources):
@@ -185,6 +186,14 @@ MATERIALS = (
           'Соберите репозиторий с README, src, tests, train.py, моделью, FastAPI, Dockerfile и error analysis. Защитите baseline, leakage, метрики по сегментам, latency, безопасность, rollback и следующий эксперимент.',
           'Как сформулирован target и горизонт? Какой baseline? Какие ошибки опаснее? Как другой инженер воспроизведёт результат?',
           '[Model persistence](https://scikit-learn.org/stable/model_persistence.html)\n[FastAPI deployment](https://fastapi.tiangolo.com/deployment/)\n[Docker get started](https://docs.docker.com/get-started/)'),
+)
+
+# Keep the catalogue entry concise while storing a full, structured study text
+# for every lesson. The lesson-specific blueprint supplies the technical
+# vocabulary and production concerns used by the long-form generator.
+MATERIALS = tuple(
+    {**item, 'theory': build_theory(item['title'])}
+    for item in MATERIALS
 )
 
 

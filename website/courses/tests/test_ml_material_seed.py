@@ -33,3 +33,32 @@ class MlMaterialSeedTests(TestCase):
             LessonMaterial.objects.filter(lesson__module__course=course).count(),
             28,
         )
+
+    def test_each_theory_is_long_form_and_structured(self):
+        call_command('seed_ml_materials', verbosity=0)
+
+        course = Course.objects.get(slug='ml-inzhener')
+        materials = LessonMaterial.objects.filter(lesson__module__course=course)
+
+        for material in materials:
+            words = material.theory.split()
+            self.assertGreaterEqual(
+                len(words),
+                6000,
+                msg=f'{material.lesson.title}: expected at least 6000 theory words',
+            )
+            self.assertLessEqual(
+                len(words),
+                10000,
+                msg=f'{material.lesson.title}: expected no more than 10000 theory words',
+            )
+            for heading in (
+                '## Интуиция',
+                '## Базовые понятия',
+                '## Пошаговый разбор',
+                '## Практические примеры',
+                '## Типичные ошибки',
+                '## Связь с ML-инженерией',
+                '## Итоги',
+            ):
+                self.assertIn(heading, material.theory)
