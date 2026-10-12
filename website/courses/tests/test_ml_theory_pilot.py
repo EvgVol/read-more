@@ -20,6 +20,12 @@ class MlTheoryPilotTests(SimpleTestCase):
         ):
             with self.subTest(heading=heading):
                 self.assertIn(heading, theory)
+        appendix = theory[theory.index('## Интуиция'):]
+        self.assertGreater(
+            appendix.count('\n\n'),
+            40,
+            'additional sections must keep paragraphs separated for Markdown',
+        )
         self.assertIn(
             '/static/images/courses/ml-inzhener/python/01-data-flow.svg',
             theory,

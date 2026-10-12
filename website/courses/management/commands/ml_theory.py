@@ -539,7 +539,9 @@ def build_theory(title):
         ]
         appendix = []
         for heading, content in appendix_sections:
-            appendix.extend([f'## {heading}', '', *content, ''])
+            appendix.extend([f'## {heading}', ''])
+            for paragraph in content:
+                appendix.extend([paragraph, ''])
         return PILOT_THEORY + '\n\n' + PILOT_EXTRA_SECTIONS + '\n\n' + '\n'.join(appendix).strip()
     blueprint = BLUEPRINTS[title]
     paragraphs = _paragraphs(blueprint)
@@ -569,8 +571,8 @@ def build_theory(title):
     for heading, content in sections:
         result.append(f'## {heading}')
         result.append('')
-        result.extend(content)
-        result.append('')
+        for paragraph in content:
+            result.extend([paragraph, ''])
     result.extend([
         '## Итоги',
         '',
