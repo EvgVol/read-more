@@ -2,6 +2,7 @@ from django.core.management import call_command
 from django.test import TestCase
 
 from courses.models.course import Course
+from courses.models.lesson_block import LessonBlock
 from courses.models.lesson_material import LessonMaterial
 
 
@@ -62,3 +63,22 @@ class MlMaterialSeedTests(TestCase):
                 '## Итоги',
             ):
                 self.assertIn(heading, material.theory)
+
+    def test_pilot_block_seed_is_published_and_idempotent(self):
+        call_command('seed_ml_materials', verbosity=0)
+        call_command('seed_ml_lesson_blocks', verbosity=0)
+        call_command('seed_ml_lesson_blocks', verbosity=0)
+
+        course = Course.objects.get(slug='ml-inzhener')
+        lesson = course.modules.get(title='Python для ML').lessons.get(
+            title='Python для анализа данных'
+        )
+        blocks = LessonBlock.objects.filter(lesson=lesson).order_by('position')
+
+        self.assertEqual(blocks.count(), 5)
+        self.assertEqual(
+            list(blocks.values_list('type', flat=True)),
+            ['theory', 'image', 'code_example', 'image', 'summary'],
+        )
+        self.assertTrue(all(block.published for block in blocks))
+        self.assertEqual(blocks.filter(position=10).first().content['markdown'], lesson.material.theory)
