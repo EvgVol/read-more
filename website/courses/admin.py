@@ -10,6 +10,7 @@ from courses.models.module import Module
 from courses.models.course import Course
 from courses.models.card import Card
 from courses.models.lessons import Lesson
+from courses.models.lesson_material import LessonMaterial
 
 
 
@@ -51,6 +52,13 @@ class SubjectAdmin(admin.ModelAdmin):
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):
     list_display = ('title',)
+
+
+@admin.register(LessonMaterial)
+class LessonMaterialAdmin(admin.ModelAdmin):
+    list_display = ('lesson', 'updated')
+    search_fields = ('lesson__title', 'lesson__module__title')
+    list_select_related = ('lesson', 'lesson__module')
 
 
 class LessonInline(admin.StackedInline):  
