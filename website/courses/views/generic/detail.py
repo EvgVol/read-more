@@ -12,6 +12,7 @@ from courses.models.lesson_block import LessonBlock
 from courses.models.lessons import Lesson
 from courses.models.module import Module
 from courses.services.lesson_blocks import get_lesson_stage_content
+from courses.services.lesson_blocks import get_published_lesson_blocks
 from courses.services.lesson_progress import course_progress, get_or_start_progress
 from reviews.models import Review
 from blog.models import Post
@@ -145,6 +146,10 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             context['active_step_label'] = self.lesson_steps[context['active_step'] - 1]['label']
             if context['material']:
                 active_descriptor = self.lesson_steps[context['active_step'] - 1]
+                context['active_blocks'] = (
+                    get_published_lesson_blocks(context['active_lesson'])
+                    if active_descriptor['key'] == 'theory' else []
+                )
                 context['active_content'] = get_lesson_stage_content(
                     context['active_lesson'],
                     active_descriptor['key'],

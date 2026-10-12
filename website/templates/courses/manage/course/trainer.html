@@ -77,7 +77,11 @@
             <div class="course-learning__step-caption">Шаг {{ active_step }} из {{ lesson_steps|length }}</div>
             <h3 id="active-step-title">{{ active_step_label }}</h3>
             {% if active_step == 2 %}
-              {% render_lesson_document active_content as lesson_document %}
+              {% if active_blocks %}
+                {% render_lesson_blocks_document active_blocks as lesson_document %}
+              {% else %}
+                {% render_lesson_document active_content as lesson_document %}
+              {% endif %}
               {% if lesson_document.toc %}
                 <nav class="course-learning__toc" aria-label="Навигация по разделам урока">
                   <strong>Оглавление урока</strong>

@@ -197,6 +197,23 @@
 .lesson-callout--practice { border-left-color: #16a34a; background: #f3fbf5; }
 .lesson-callout--self-check { border-left-color: #7c3aed; background: #faf7ff; }
 
+.lesson-block {
+  margin: 0;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--learning-border);
+  border-radius: .75rem;
+  background: #fff;
+  scroll-margin-top: 1.5rem;
+}
+.lesson-block + .lesson-block { margin-top: 1rem; }
+.lesson-block:focus-within { box-shadow: 0 0 0 3px rgba(37, 99, 235, .12); }
+.lesson-block--theory { border-top: 3px solid #2563eb; }
+.lesson-block--summary { border-top: 3px solid #7c3aed; background: #fcfaff; }
+.lesson-block--image { border-top: 3px solid #0891b2; }
+.lesson-block--code-example { border-top: 3px solid #475569; background: #f8fafc; }
+.lesson-block > :first-child { margin-top: 0; }
+.lesson-block > :last-child { margin-bottom: 0; }
+
 .lesson-material figure {
   margin: 1.75rem 0;
   text-align: center;
@@ -246,6 +263,7 @@
   .course-learning__reading { font-size: .98rem; }
   .course-learning__toc { padding: .85rem 1rem; }
   .lesson-material figure { margin-right: -.25rem; margin-left: -.25rem; }
+  .lesson-block { padding: .9rem 1rem; }
   .course-learning__history li { align-items: flex-start; flex-direction: column; gap: .15rem; }
   .course-learning__adjacent { flex-direction: column; }
 }

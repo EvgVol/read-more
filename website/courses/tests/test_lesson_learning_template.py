@@ -113,7 +113,9 @@ class LessonLearningTemplateTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Блок вместо legacy')
         self.assertContains(response, 'Новый текст урока.')
-        self.assertContains(response, 'href="#blok-vmesto-legacy"')
+        self.assertContains(response, 'href="#block-10-blok-vmesto-legacy"')
+        self.assertContains(response, 'class="lesson-block lesson-block--theory"')
+        self.assertContains(response, 'data-block-type="theory"')
 
     def test_missing_material_shows_empty_state_without_completion_form(self):
         response = self.client.get(self.url_for(self.empty_lesson))

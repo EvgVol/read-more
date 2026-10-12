@@ -35,3 +35,8 @@ class LessonDocumentTests(SimpleTestCase):
 
         self.assertIn('id="zagolovok"', document.html)
         self.assertIn('Обычный текст.', document.html)
+
+    def test_heading_prefix_keeps_block_anchors_unique(self):
+        document = render_lesson_document('## Основы', heading_prefix='block-20-')
+
+        self.assertEqual(document.toc[0]['anchor'], 'block-20-osnovy')

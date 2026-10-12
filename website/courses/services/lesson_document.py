@@ -77,7 +77,10 @@ def _extract_callouts(source: str) -> tuple[str, list[str]]:
     return _CALLOUT_RE.sub(replace, source), callout_html
 
 
-def _extract_headings(source: str) -> tuple[str, list[dict[str, str | int]], list[str]]:
+def _extract_headings(
+    source: str,
+    heading_prefix: str = '',
+) -> tuple[str, list[dict[str, str | int]], list[str]]:
     headings: list[dict[str, str | int]] = []
     placeholders: list[str] = []
     seen: dict[str, int] = {}
@@ -99,6 +102,7 @@ def _extract_headings(source: str) -> tuple[str, list[dict[str, str | int]], lis
         base_anchor = _slugify_heading(title)
         seen[base_anchor] = seen.get(base_anchor, 0) + 1
         anchor = base_anchor if seen[base_anchor] == 1 else f'{base_anchor}-{seen[base_anchor]}'
+        anchor = f'{heading_prefix}{anchor}'
         index = len(placeholders)
         placeholders.append(
             f'<h{level} id="{anchor}">{escape(title)}</h{level}>'
@@ -143,13 +147,13 @@ def _sanitize_html(rendered: str) -> str:
     )
 
 
-def render_lesson_document(value: str | None) -> LessonDocument:
+def render_lesson_document(value: str | None, heading_prefix: str = '') -> LessonDocument:
     """Render safe lesson Markdown and expose its heading navigation."""
     if not value:
         return LessonDocument(html='', toc=[])
 
     source, callouts = _extract_callouts(str(value))
-    source, toc, headings = _extract_headings(source)
+    source, toc, headings = _extract_headings(source, heading_prefix=heading_prefix)
     rendered = _render_markdown_fragment(source)
     for index, replacement in enumerate(callouts):
         rendered = rendered.replace(f'@@LESSON_CALLOUT_{index}@@', replacement)

@@ -10,6 +10,7 @@ from courses.models.module import Module
 from courses.models.subject import Subject
 from courses.services.lesson_blocks import (
     get_lesson_stage_content,
+    render_lesson_blocks_document,
     render_lesson_blocks,
 )
 
@@ -158,3 +159,43 @@ class LessonBlockTests(TestCase):
             get_lesson_stage_content(self.lesson, 'theory', self.material),
             'Legacy theory',
         )
+
+    def test_block_document_has_semantic_wrappers_and_visual_types(self):
+        theory = LessonBlock.objects.create(
+            lesson=self.lesson,
+            type=LessonBlock.Type.THEORY,
+            position=10,
+            published=True,
+            content={'markdown': '## Теория\n\nОбъяснение.'},
+        )
+        code = LessonBlock.objects.create(
+            lesson=self.lesson,
+            type=LessonBlock.Type.CODE_EXAMPLE,
+            position=20,
+            published=True,
+            content={'language': 'python', 'code': 'print("ok")'},
+        )
+
+        document = render_lesson_blocks_document([theory, code])
+
+        self.assertIn('class="lesson-block lesson-block--theory"', document.html)
+        self.assertIn('data-block-type="theory"', document.html)
+        self.assertIn('aria-label="Теоретический блок"', document.html)
+        self.assertIn('lesson-block--code-example', document.html)
+        self.assertIn('language-python', document.html)
+        self.assertEqual(document.toc[0]['anchor'], 'block-10-teoriya')
+
+    def test_unknown_block_is_rendered_as_safe_fallback_wrapper(self):
+        block = LessonBlock.objects.create(
+            lesson=self.lesson,
+            type='quiz_v2',
+            position=30,
+            published=True,
+            content={'answer': '<script>alert(1)</script>'},
+        )
+
+        document = render_lesson_blocks_document([block])
+
+        self.assertIn('lesson-block lesson-block--quiz-v2', document.html)
+        self.assertIn('Дополнительный материал', document.html)
+        self.assertNotIn('<script>', document.html)

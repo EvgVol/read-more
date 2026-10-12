@@ -6,6 +6,9 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
 from courses.services.lesson_document import render_lesson_document as _render_lesson_document
+from courses.services.lesson_blocks import (
+    render_lesson_blocks_document as _render_lesson_blocks_document,
+)
 
 
 register = template.Library()
@@ -35,6 +38,12 @@ def render_markdown(value):
 def render_lesson_document(value):
     """Prepare lesson HTML and table of contents for the trainer template."""
     return _render_lesson_document(value)
+
+
+@register.simple_tag
+def render_lesson_blocks_document(value):
+    """Render published lesson blocks with one semantic wrapper per block."""
+    return _render_lesson_blocks_document(value)
 
 
 @register.filter
