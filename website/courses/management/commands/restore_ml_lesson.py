@@ -6,6 +6,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.db import transaction
 
 from courses.models.course import Course
+from courses.models.lessons import Lesson
 from courses.models.lesson_block import LessonBlock
 from courses.models.lesson_material import LessonMaterial
 from courses.models.quiz import QuizQuestion
@@ -30,8 +31,10 @@ class Command(BaseCommand):
             raise CommandError('Snapshot checksum does not match.')
 
         course = Course.objects.filter(slug='ml-inzhener').first()
-        lesson = course.modules.filter(id=payload['lesson']['module_id']).first().lessons.filter(
-            id=payload['lesson']['id'], title=payload['lesson']['title']
+        lesson = Lesson.objects.filter(
+            pk=payload['lesson']['id'],
+            module__course=course,
+            title=payload['lesson']['title'],
         ).first() if course else None
         if lesson is None:
             raise CommandError('Snapshot lesson is not present in the current course.')

@@ -7,6 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 from courses.models.course import Course
 from courses.models.lesson_block import LessonBlock
 from courses.models.lesson_material import LessonMaterial
+from courses.models.lessons import Lesson
 from courses.models.quiz import QuizQuestion
 
 
@@ -30,16 +31,22 @@ def lesson_payload(lesson):
 
 
 class Command(BaseCommand):
-    help = 'Write a JSON snapshot of lesson 2717 content for restore.'
+    help = 'Write a JSON snapshot of a course lesson for restore.'
 
     def add_arguments(self, parser):
         parser.add_argument('path', type=Path)
+        parser.add_argument('--lesson-id', type=int)
 
     def handle(self, *args, **options):
         course = Course.objects.filter(slug='ml-inzhener').first()
-        lesson = course.modules.filter(title='Python для ML').first().lessons.filter(
-            title='Python для анализа данных'
-        ).first() if course else None
+        if course and options['lesson_id']:
+            lesson = Lesson.objects.filter(
+                pk=options['lesson_id'], module__course=course,
+            ).first()
+        else:
+            lesson = Lesson.objects.filter(
+                module__course=course, title='Python для анализа данных',
+            ).first() if course else None
         if lesson is None:
             raise CommandError('Reference lesson was not found.')
         payload = lesson_payload(lesson)
