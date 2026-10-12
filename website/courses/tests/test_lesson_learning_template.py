@@ -46,7 +46,12 @@ class LessonLearningTemplateTests(TestCase):
         LessonMaterial.objects.create(
             lesson=self.lesson,
             objectives='Цель урока',
-            theory='## Теория\n\nПодробное объяснение.',
+            theory=(
+                '## Как читать этот урок\n\n'
+                'Подробное объяснение.\n\n'
+                ':::important\nВажно читать последовательно.\n:::\n\n'
+                '![Схема урока](/static/images/courses/ml-inzhener/python/01-data-flow.svg)'
+            ),
             practice='Практическое задание',
             self_check='Вопрос для самопроверки',
             resources='[Источник](https://docs.python.org/3/)',
@@ -86,6 +91,11 @@ class LessonLearningTemplateTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Шаг 2 из 5')
         self.assertContains(response, 'Подробное объяснение.')
+        self.assertContains(response, 'Оглавление урока')
+        self.assertContains(response, 'href="#kak-chitat-etot-urok"')
+        self.assertContains(response, 'lesson-callout')
+        self.assertContains(response, '<figure', html=False)
+        self.assertContains(response, 'aria-label="Навигация по разделам урока"')
         self.assertNotContains(response, 'Цель урока')
 
     def test_missing_material_shows_empty_state_without_completion_form(self):

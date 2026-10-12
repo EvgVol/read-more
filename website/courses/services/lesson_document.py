@@ -126,7 +126,12 @@ def _sanitize_image(match: re.Match) -> str:
     alt = attributes.get('alt', '').strip()
     if not alt or not source.startswith(('/static/', '/media/')):
         return ''
-    return f'<img src="{escape(source)}" alt="{escape(alt)}">'
+    return (
+        '<figure class="lesson-material__figure">'
+        f'<img src="{escape(source)}" alt="{escape(alt)}">'
+        f'<figcaption>{escape(alt)}</figcaption>'
+        '</figure>'
+    )
 
 
 def _sanitize_html(rendered: str) -> str:

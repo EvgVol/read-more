@@ -20,3 +20,30 @@ class CourseLearningAssetTests(SimpleTestCase):
         self.assertIn('@media (max-width: 991.98px)', css)
         self.assertIn('overflow-x: auto', css)
         self.assertIn('outline:', css)
+
+    def test_global_loader_is_hidden_after_page_load(self):
+        template_path = (
+            Path(__file__).resolve().parents[2] / 'templates/main.html'
+        )
+        template = template_path.read_text()
+
+        self.assertIn("window.addEventListener('load'", template)
+        self.assertIn("loader.style.display = 'none'", template)
+
+    def test_reading_styles_and_pilot_diagrams_exist(self):
+        css_path = Path(__file__).resolve().parents[2] / 'static/css/course-learning.css'
+        static_root = Path(__file__).resolve().parents[2] / 'static'
+        css = css_path.read_text()
+
+        self.assertIn('.course-learning__toc', css)
+        self.assertIn('.lesson-callout', css)
+        self.assertIn('.lesson-material figure', css)
+        self.assertIn('@media (max-width: 575.98px)', css)
+        for diagram in (
+            '01-data-flow.svg',
+            '02-boundaries.svg',
+            '03-validation-loop.svg',
+        ):
+            self.assertTrue(
+                (static_root / 'images/courses/ml-inzhener/python' / diagram).exists()
+            )
