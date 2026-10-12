@@ -1,5 +1,6 @@
 import json
 import re
+from collections import Counter
 
 from django.core.management.base import BaseCommand, CommandError
 
@@ -17,6 +18,29 @@ REQUIRED_HEADINGS = (
     '## Итоги',
 )
 RESOURCE_LINK_PATTERN = re.compile(r'\[[^]]+\]\(https?://[^)]+\)')
+ISSUE_CATEGORY_LABELS = {
+    'material': 'Материалы',
+    'theory': 'Теория',
+    'practice': 'Практика',
+    'self_check': 'Self-check',
+    'quiz': 'Quiz',
+    'structure': 'Структура курса',
+}
+
+
+def issue_category(issue):
+    lowered = issue.casefold()
+    if 'quiz' in lowered:
+        return 'quiz'
+    if 'theory' in lowered or 'раздел' in lowered:
+        return 'theory'
+    if 'practice' in lowered:
+        return 'practice'
+    if 'self_check' in lowered:
+        return 'self_check'
+    if 'модул' in lowered or 'уроков' in lowered:
+        return 'structure'
+    return 'material'
 
 
 def _question_issue(prefix, question):
@@ -139,6 +163,7 @@ def collect_audit_report(course):
             lesson_issues.extend(_question_issue(f'{prefix} / позиция {question["position"]}', question))
 
         issues.extend(lesson_issues)
+        category_keys = sorted({issue_category(issue) for issue in lesson_issues})
         lesson_reports.append({
             'module': lesson.module.title,
             'module_id': lesson.module_id,
@@ -146,9 +171,14 @@ def collect_audit_report(course):
             'lesson_id': lesson.id,
             'material': material_report,
             'quiz': quiz_report,
+            'issue_categories': [ISSUE_CATEGORY_LABELS[key] for key in category_keys],
             'issues': lesson_issues,
         })
 
+    category_counts = Counter(
+        issue_category(issue)
+        for issue in issues
+    )
     return {
         'course': course.title,
         'summary': {
@@ -157,6 +187,10 @@ def collect_audit_report(course):
             'published_questions': sum(item['quiz']['count'] for item in lesson_reports),
             'lessons_with_issues': sum(bool(item['issues']) for item in lesson_reports),
             'issues': len(issues),
+            'issue_categories': {
+                ISSUE_CATEGORY_LABELS[key]: category_counts.get(key, 0)
+                for key in ISSUE_CATEGORY_LABELS
+            },
         },
         'lessons': lesson_reports,
         'issues': issues,

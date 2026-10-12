@@ -40,10 +40,17 @@
 .course-audit__metric strong { color: #111827; font-size: 1.8rem; line-height: 1; }
 .course-audit__metric span,
 .course-audit__hint { color: var(--audit-muted); font-size: .875rem; }
+.course-audit__categories { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-bottom: 1.5rem; padding: 1.25rem 1.5rem; background: #fff; border: 1px solid var(--audit-border); border-radius: .75rem; }
+.course-audit__categories h2 { margin: .35rem 0 0; font-size: 1.15rem; }
+.course-audit__category-list { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; }
+.course-audit__category { padding: .45rem .65rem; background: #f8fafc; border: 1px solid var(--audit-border); border-radius: .4rem; color: var(--audit-muted); font-size: .8rem; }
+.course-audit__category strong { color: #111827; }
 
 .course-audit__card { overflow: hidden; }
 .course-audit__card-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--audit-border); }
 .course-audit__toolbar { display: grid; gap: .75rem; justify-items: end; }
+.course-audit__export { color: #174ea6; font-size: .8rem; text-decoration: none; }
+.course-audit__export:hover { text-decoration: underline; }
 .course-audit__filters { display: flex; gap: .35rem; }
 .course-audit__filters a { padding: .4rem .65rem; border-radius: .4rem; color: var(--audit-muted); font-size: .8rem; text-decoration: none; }
 .course-audit__filters a:hover,
@@ -67,6 +74,7 @@
 .course-audit__ok { color: #147a3d; font-weight: 600; }
 .course-audit__issues summary { color: #b42318; cursor: pointer; font-weight: 600; }
 .course-audit__issues ul { margin: .5rem 0 0; padding-left: 1rem; color: #b42318; font-size: .8rem; }
+.course-audit__category-hint { display: block; margin-top: .35rem; color: #b42318; }
 
 @media (max-width: 767.98px) {
   .course-audit__header { display: grid; }
@@ -74,4 +82,6 @@
   .course-audit__summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .course-audit__card-header { display: grid; }
   .course-audit__toolbar { justify-items: start; }
+  .course-audit__categories { display: grid; }
+  .course-audit__category-list { justify-content: flex-start; }
 }

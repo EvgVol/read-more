@@ -79,3 +79,28 @@ class CourseAuditViewTests(TestCase):
 
         self.assertEqual(filtered.status_code, 200)
         self.assertContains(filtered, 'Все уроки прошли аудит')
+
+    def test_owner_can_download_current_audit_as_csv(self):
+        client = Client()
+        client.force_login(self.course.owner)
+
+        response = client.get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug}),
+            {'format': 'csv', 'filter': 'issues'},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response['Content-Type'], 'text/csv; charset=utf-8')
+        self.assertIn('attachment;', response['Content-Disposition'])
+        self.assertIn('Модуль,Урок', response.content.decode('utf-8-sig'))
+
+    def test_audit_summary_exposes_issue_categories(self):
+        client = Client()
+        client.force_login(self.course.owner)
+
+        response = client.get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug})
+        )
+
+        self.assertContains(response, 'Типы замечаний')
+        self.assertContains(response, 'Quiz')

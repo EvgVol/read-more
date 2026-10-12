@@ -1,5 +1,8 @@
+import csv
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import HttpResponse
 from django.views.generic import DetailView
 
 from courses.management.commands.audit_ml_learning_content import collect_audit_report
@@ -28,3 +31,21 @@ class CourseAuditView(LoginRequiredMixin, DetailView):
         context['audit_report'] = report
         context['audit_filter'] = filter_mode
         return context
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.request.GET.get('format') == 'csv':
+            response = HttpResponse('\ufeff', content_type='text/csv; charset=utf-8')
+            response['Content-Disposition'] = (
+                f'attachment; filename="{self.object.slug}-audit.csv"'
+            )
+            writer = csv.writer(response)
+            writer.writerow(('Модуль', 'Урок', 'Категории', 'Замечания'))
+            for lesson in context['audit_report']['lessons']:
+                writer.writerow((
+                    lesson['module'],
+                    lesson['lesson'],
+                    ', '.join(lesson['issue_categories']),
+                    ' | '.join(lesson['issues']),
+                ))
+            return response
+        return super().render_to_response(context, **response_kwargs)

@@ -30,6 +30,18 @@
       <article class="course-audit__metric"><strong>{{ audit_report.summary.lessons_with_issues }}</strong><span>уроков с замечаниями</span></article>
     </section>
 
+    <section class="course-audit__categories" aria-labelledby="audit-categories-title">
+      <div>
+        <span class="course-audit__eyebrow">Диагностика</span>
+        <h2 id="audit-categories-title">Типы замечаний</h2>
+      </div>
+      <div class="course-audit__category-list">
+        {% for category, count in audit_report.summary.issue_categories.items %}
+          <span class="course-audit__category"><strong>{{ count }}</strong> {{ category }}</span>
+        {% endfor %}
+      </div>
+    </section>
+
     <section class="course-audit__card" aria-labelledby="audit-lessons-title">
       <div class="course-audit__card-header">
         <div>
@@ -38,6 +50,7 @@
         </div>
         <div class="course-audit__toolbar">
           <span class="course-audit__hint">Теория · практика · self-check · quiz</span>
+          <a class="course-audit__export" href="?format=csv&amp;filter={{ audit_filter }}">Скачать CSV</a>
           <nav class="course-audit__filters" aria-label="Фильтр уроков">
             <a class="{% if audit_filter == 'all' %}is-active{% endif %}" href="?filter=all">Все уроки</a>
             <a class="{% if audit_filter == 'issues' %}is-active{% endif %}" href="?filter=issues">Только с замечаниями</a>
@@ -79,6 +92,7 @@
                   {% else %}
                     <span class="course-audit__ok">Готово</span>
                   {% endif %}
+                  {% if lesson.issue_categories %}<small class="course-audit__category-hint">{{ lesson.issue_categories|join:', ' }}</small>{% endif %}
                 </td>
               </tr>
             {% empty %}
