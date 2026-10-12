@@ -5,6 +5,8 @@ from django import template
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
+from courses.services.lesson_document import render_lesson_document as _render_lesson_document
+
 
 register = template.Library()
 
@@ -27,6 +29,12 @@ def render_markdown(value):
         rendered,
     )
     return mark_safe(rendered)
+
+
+@register.simple_tag
+def render_lesson_document(value):
+    """Prepare lesson HTML and table of contents for the trainer template."""
+    return _render_lesson_document(value)
 
 
 @register.filter
