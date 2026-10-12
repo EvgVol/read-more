@@ -37,3 +37,18 @@ class MlTheoryPilotTests(SimpleTestCase):
         for title in BLUEPRINTS:
             with self.subTest(title=title):
                 self.assertTrue(build_theory(title).strip())
+
+    def test_visualization_lesson_has_visual_learning_route(self):
+        theory = build_theory('Визуализация данных')
+
+        for marker in (
+            '## Как читать график',
+            '## Сценарий визуальной проверки',
+            ':::remember',
+            ':::important',
+            ':::practice',
+            '/static/images/courses/ml-inzhener/visualization/01-chart-anatomy.svg',
+            '/static/images/courses/ml-inzhener/visualization/02-chart-choice.svg',
+        ):
+            with self.subTest(marker=marker):
+                self.assertIn(marker, theory)
