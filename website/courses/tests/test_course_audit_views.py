@@ -1,3 +1,5 @@
+from io import StringIO
+
 from django.contrib.auth import get_user_model
 from django.core.management import call_command
 from django.test import Client, TestCase
@@ -223,3 +225,28 @@ class CourseAuditViewTests(TestCase):
         )
         self.assertContains(resolved, 'Устранённые замечания')
         self.assertContains(resolved, 'audit-change--resolved')
+
+    def test_audit_history_cleanup_is_dry_run_until_apply(self):
+        CourseAuditRun.objects.bulk_create([
+            CourseAuditRun(course=self.course, passed=True)
+            for _ in range(3)
+        ])
+        output = StringIO()
+
+        call_command(
+            'cleanup_ml_audit_history',
+            '--keep=1',
+            stdout=output,
+        )
+
+        self.assertEqual(CourseAuditRun.objects.count(), 3)
+        self.assertIn('предпросмотр', output.getvalue().casefold())
+
+        call_command(
+            'cleanup_ml_audit_history',
+            '--keep=1',
+            '--apply',
+            stdout=StringIO(),
+        )
+
+        self.assertEqual(CourseAuditRun.objects.count(), 1)
