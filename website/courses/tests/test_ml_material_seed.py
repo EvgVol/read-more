@@ -143,7 +143,14 @@ class MlMaterialSeedTests(TestCase):
         ).lessons.get(title='Python для анализа данных')
         questions = QuizQuestion.objects.filter(lesson=lesson).order_by('position')
 
-        self.assertEqual(QuizQuestion.objects.filter(lesson__module__course=course).count(), 36)
+        all_questions = QuizQuestion.objects.filter(lesson__module__course=course)
+        self.assertEqual(all_questions.count(), 84)
+        self.assertEqual(
+            all_questions.values('lesson_id').distinct().count(),
+            28,
+        )
+        for course_lesson in course.modules.all().values_list('lessons__id', flat=True):
+            self.assertEqual(all_questions.filter(lesson_id=course_lesson).count(), 3)
         self.assertEqual(questions.count(), 3)
         self.assertEqual(list(questions.values_list('type', flat=True)), ['single', 'multiple', 'short'])
         self.assertEqual(questions.get(position=10).correct_answers, ['b'])
