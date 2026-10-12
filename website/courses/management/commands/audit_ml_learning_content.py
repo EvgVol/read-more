@@ -141,7 +141,9 @@ def collect_audit_report(course):
         issues.extend(lesson_issues)
         lesson_reports.append({
             'module': lesson.module.title,
+            'module_id': lesson.module_id,
             'lesson': lesson.title,
+            'lesson_id': lesson.id,
             'material': material_report,
             'quiz': quiz_report,
             'issues': lesson_issues,

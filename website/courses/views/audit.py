@@ -19,5 +19,12 @@ class CourseAuditView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['audit_report'] = collect_audit_report(self.object)
+        report = collect_audit_report(self.object)
+        filter_mode = self.request.GET.get('filter', 'all')
+        if filter_mode not in {'all', 'issues'}:
+            filter_mode = 'all'
+        if filter_mode == 'issues':
+            report['lessons'] = [lesson for lesson in report['lessons'] if lesson['issues']]
+        context['audit_report'] = report
+        context['audit_filter'] = filter_mode
         return context

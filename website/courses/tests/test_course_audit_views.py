@@ -50,3 +50,32 @@ class CourseAuditViewTests(TestCase):
         self.assertContains(response, 'quiz-вопроса')
         self.assertContains(response, 'Python для анализа данных')
         self.assertContains(response, 'Аудит пройден')
+
+    def test_audit_rows_link_to_lessons_and_support_issue_filter(self):
+        client = Client()
+        client.force_login(self.course.owner)
+
+        response = client.get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug})
+        )
+
+        self.assertContains(
+            response,
+            reverse(
+                'courses:course_trainer_lesson',
+                kwargs={
+                    'slug': self.course.slug,
+                    'module_id': self.course.modules.first().id,
+                    'lesson_id': self.course.modules.first().lessons.first().id,
+                },
+            ),
+        )
+        self.assertContains(response, 'Только с замечаниями')
+
+        filtered = client.get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug}),
+            {'filter': 'issues'},
+        )
+
+        self.assertEqual(filtered.status_code, 200)
+        self.assertContains(filtered, 'Все уроки прошли аудит')

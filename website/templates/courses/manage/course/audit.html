@@ -36,7 +36,13 @@
           <span class="course-audit__eyebrow">Детализация</span>
           <h2 id="audit-lessons-title">Проверка уроков</h2>
         </div>
-        <span class="course-audit__hint">Теория · практика · self-check · quiz</span>
+        <div class="course-audit__toolbar">
+          <span class="course-audit__hint">Теория · практика · self-check · quiz</span>
+          <nav class="course-audit__filters" aria-label="Фильтр уроков">
+            <a class="{% if audit_filter == 'all' %}is-active{% endif %}" href="?filter=all">Все уроки</a>
+            <a class="{% if audit_filter == 'issues' %}is-active{% endif %}" href="?filter=issues">Только с замечаниями</a>
+          </nav>
+        </div>
       </div>
       <div class="course-audit__table-wrap">
         <table class="course-audit__table">
@@ -56,7 +62,7 @@
               <tr class="{% if lesson.issues %}has-issues{% endif %}">
                 <th scope="row">
                   <span>{{ lesson.module }}</span>
-                  <strong>{{ lesson.lesson }}</strong>
+                  <strong><a href="{% url 'courses:course_trainer_lesson' course.slug lesson.module_id lesson.lesson_id %}">{{ lesson.lesson }}</a></strong>
                 </th>
                 <td>{{ lesson.material.theory_words }} слов</td>
                 <td>{{ lesson.material.practice_words }} слов</td>
@@ -74,6 +80,10 @@
                     <span class="course-audit__ok">Готово</span>
                   {% endif %}
                 </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td class="course-audit__empty" colspan="6">Все уроки прошли аудит — замечаний нет.</td>
               </tr>
             {% endfor %}
           </tbody>

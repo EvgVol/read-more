@@ -43,6 +43,14 @@
 
 .course-audit__card { overflow: hidden; }
 .course-audit__card-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--audit-border); }
+.course-audit__toolbar { display: grid; gap: .75rem; justify-items: end; }
+.course-audit__filters { display: flex; gap: .35rem; }
+.course-audit__filters a { padding: .4rem .65rem; border-radius: .4rem; color: var(--audit-muted); font-size: .8rem; text-decoration: none; }
+.course-audit__filters a:hover,
+.course-audit__filters a.is-active { background: #eef4ff; color: #174ea6; }
+.course-audit__table tbody th a { color: #174ea6; text-decoration: none; }
+.course-audit__table tbody th a:hover { text-decoration: underline; }
+.course-audit__empty { padding: 2rem 1rem !important; color: #147a3d !important; text-align: center !important; }
 .course-audit__table-wrap { overflow-x: auto; }
 .course-audit__table { width: 100%; min-width: 850px; border-collapse: collapse; }
 .course-audit__table th,
@@ -64,4 +72,6 @@
   .course-audit__header { display: grid; }
   .course-audit__status { min-width: 0; }
   .course-audit__summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .course-audit__card-header { display: grid; }
+  .course-audit__toolbar { justify-items: start; }
 }
