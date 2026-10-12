@@ -15,7 +15,7 @@ from courses.models.quiz import QuizAttempt, QuizQuestion
 from courses.services.lesson_blocks import get_lesson_stage_content
 from courses.services.lesson_blocks import get_published_lesson_blocks
 from courses.services.lesson_progress import course_progress, get_or_start_progress
-from courses.services.quiz import course_quiz_progress
+from courses.services.quiz import course_quiz_progress, module_quiz_progress
 from reviews.models import Review
 from blog.models import Post
 
@@ -128,6 +128,10 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             progress_records=progress_records,
         )
         context['quiz_progress'] = course_quiz_progress(
+            user=self.request.user,
+            course=course,
+        )
+        context['quiz_progress_by_module'] = module_quiz_progress(
             user=self.request.user,
             course=course,
         )

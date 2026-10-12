@@ -34,6 +34,9 @@
             <a class="course-learning__module-link" href="{% url 'courses:course_trainer_module' object.slug module_item.id %}">
               <span>Модуль {{ forloop.counter }}</span>
               <strong>{{ module_item.title }}</strong>
+              {% with module_quiz=quiz_progress_by_module|lookup:module_item.id %}
+                {% if module_quiz %}<small class="course-learning__module-quiz">Тесты: {{ module_quiz.passed_quizzes }}/{{ module_quiz.total_quizzes }} · {{ module_quiz.average_percent }}%</small>{% endif %}
+              {% endwith %}
             </a>
             <ol class="course-learning__lesson-list">
               {% for lesson_item in module_item.lessons.all %}

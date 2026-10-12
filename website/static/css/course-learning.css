@@ -153,6 +153,7 @@
 .course-learning__lesson-card h3 { margin: .5rem 0 2rem; font-size: 1.5rem; }
 .course-learning__quiz-summary { display: grid; gap: .2rem; margin-top: .9rem; padding-top: .75rem; border-top: 1px solid var(--learning-border); font-size: .88rem; }
 .course-learning__quiz-summary span { color: var(--learning-muted); }
+.course-learning__module-quiz { display: block; margin-top: .35rem; color: var(--learning-muted); font-size: .78rem; font-weight: 500; }
 .course-learning__reading { max-width: 78ch; color: #202938; font-size: 1.02rem; line-height: 1.72; }
 .course-learning__reading p { margin: 0 0 1.2rem; }
 .course-learning__reading h1,

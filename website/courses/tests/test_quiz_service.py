@@ -7,7 +7,7 @@ from courses.models.lessons import Lesson
 from courses.models.module import Module
 from courses.models.quiz import QuizAnswer, QuizAttempt, QuizQuestion
 from courses.models.subject import Subject
-from courses.services.quiz import course_quiz_progress, normalize_short_answer, submit_quiz
+from courses.services.quiz import course_quiz_progress, module_quiz_progress, normalize_short_answer, submit_quiz
 
 
 class QuizServiceTests(TestCase):
@@ -95,3 +95,17 @@ class QuizServiceTests(TestCase):
         self.assertEqual(progress['attempted_quizzes'], 1)
         self.assertEqual(progress['passed_quizzes'], 0)
         self.assertEqual(progress['average_percent'], 0)
+
+    def test_module_progress_groups_latest_attempts(self):
+        submit_quiz(
+            user=self.user,
+            lesson=self.lesson,
+            answers={str(self.single.id): 'b', str(self.multiple.id): ['a', 'b'], str(self.short.id): 'shape'},
+        )
+
+        progress = module_quiz_progress(user=self.user, course=self.lesson.module.course)
+        summary = progress[self.lesson.module_id]
+
+        self.assertEqual(summary['total_quizzes'], 1)
+        self.assertEqual(summary['passed_quizzes'], 1)
+        self.assertEqual(summary['average_percent'], 100)

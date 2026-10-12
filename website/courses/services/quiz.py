@@ -107,3 +107,41 @@ def course_quiz_progress(*, user, course):
         'passed_quizzes': passed,
         'average_percent': average,
     }
+
+
+def module_quiz_progress(*, user, course):
+    """Return the same latest-attempt summary grouped by course module."""
+    question_rows = list(
+        QuizQuestion.objects.filter(
+            lesson__module__course=course,
+            published=True,
+        ).values_list('lesson_id', 'lesson__module_id')
+    )
+    lesson_module = {lesson_id: module_id for lesson_id, module_id in question_rows}
+    attempts = QuizAttempt.objects.filter(
+        user=user,
+        lesson_id__in=lesson_module,
+    ).order_by('lesson_id', '-submitted_at', '-id')
+    latest_by_lesson = {}
+    for attempt in attempts:
+        latest_by_lesson.setdefault(attempt.lesson_id, attempt)
+
+    result = {}
+    for lesson_id, module_id in lesson_module.items():
+        summary = result.setdefault(module_id, {
+            'total_quizzes': 0,
+            'attempted_quizzes': 0,
+            'passed_quizzes': 0,
+            'average_percent': 0,
+            '_percents': [],
+        })
+        summary['total_quizzes'] += 1
+        attempt = latest_by_lesson.get(lesson_id)
+        if attempt:
+            summary['attempted_quizzes'] += 1
+            summary['passed_quizzes'] += int(attempt.passed)
+            summary['_percents'].append(attempt.percent)
+    for summary in result.values():
+        percents = summary.pop('_percents')
+        summary['average_percent'] = round(sum(percents) / len(percents)) if percents else 0
+    return result

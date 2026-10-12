@@ -91,6 +91,7 @@ class MlCourseEndToEndTests(TestCase):
         self.assertContains(result, 'История попыток (1)')
         self.assertContains(result, 'Тесты: 1/28')
         self.assertContains(result, 'Средний результат: 100%')
+        self.assertContains(result, 'Тесты: 1/4 · 100%')
 
         second = client.post(
             f'/ru/course/{course.slug}/trainer/{module.id}/lesson/{lesson.id}/quiz/submit/',
