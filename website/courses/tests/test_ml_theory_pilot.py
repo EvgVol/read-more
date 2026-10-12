@@ -12,6 +12,14 @@ class MlTheoryPilotTests(SimpleTestCase):
         self.assertIn(':::practice', theory)
         self.assertIn('```python', theory)
         self.assertIn('| Этап | Что проверяем |', theory)
+        for heading in (
+            '## Переменные, типы и изменяемость',
+            '## Коллекции и схема данных',
+            '## Модули, окружение и воспроизводимость',
+            '## Итоговая практика: загрузчик заказов',
+        ):
+            with self.subTest(heading=heading):
+                self.assertIn(heading, theory)
         self.assertIn(
             '/static/images/courses/ml-inzhener/python/01-data-flow.svg',
             theory,
