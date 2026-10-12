@@ -86,3 +86,5 @@ class MlCourseEndToEndTests(TestCase):
         self.assertEqual(response.status_code, 302)
         result = client.get(response['Location'])
         self.assertContains(result, 'Тест пройден')
+        self.assertContains(result, 'Последняя попытка:')
+        self.assertContains(result, 'Освоено')

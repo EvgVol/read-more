@@ -224,6 +224,9 @@
 }
 .lesson-quiz__heading h4 { margin: .25rem 0 .35rem; color: #111827; font-size: 1.25rem; }
 .lesson-quiz__heading p { margin-bottom: 1.25rem; color: var(--learning-muted); }
+.lesson-quiz__last-attempt { display: flex; flex-wrap: wrap; gap: .35rem .75rem; margin: .75rem 0 1rem; padding: .65rem .75rem; border-radius: .45rem; background: #fff; color: #344054; font-size: .9rem; }
+.lesson-quiz__last-attempt span { color: var(--learning-muted); }
+.lesson-quiz__last-attempt em { color: #166534; font-style: normal; font-weight: 600; }
 .lesson-quiz__question { margin: 0; padding: 1rem 0; border: 0; border-top: 1px solid var(--learning-border); }
 .lesson-quiz__question legend { float: left; width: 100%; margin-bottom: .75rem; color: #111827; font-weight: 600; }
 .lesson-quiz__question legend + * { clear: both; }

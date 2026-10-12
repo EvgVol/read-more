@@ -166,6 +166,10 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             context['quiz_questions'] = list(
                 getattr(context['active_lesson'], 'published_quiz_questions', [])
             )
+            context['quiz_last_attempt'] = QuizAttempt.objects.filter(
+                user=self.request.user,
+                lesson=context['active_lesson'],
+            ).order_by('-submitted_at', '-id').first()
             attempt_id = self.request.GET.get('quiz_attempt')
             context['quiz_attempt'] = None
             if attempt_id and attempt_id.isdigit():

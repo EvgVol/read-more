@@ -103,6 +103,13 @@
                     <span class="course-learning__eyebrow">Проверка понимания</span>
                     <h4 id="lesson-quiz-title">Мини-тест по уроку</h4>
                     <p>Ответы проверяются на сервере. Можно пройти тест повторно.</p>
+                    {% if quiz_last_attempt %}
+                      <div class="lesson-quiz__last-attempt">
+                        <strong>Последняя попытка:</strong>
+                        <span>{{ quiz_last_attempt.percent }}% · {{ quiz_last_attempt.earned_points }} из {{ quiz_last_attempt.total_points }} баллов</span>
+                        <em>{% if quiz_last_attempt.passed %}Освоено{% else %}Нужно повторить{% endif %}</em>
+                      </div>
+                    {% endif %}
                   </div>
                   {% if quiz_attempt %}
                     <div class="lesson-quiz__result {% if quiz_attempt.passed %}is-passed{% else %}is-failed{% endif %}" role="status">
