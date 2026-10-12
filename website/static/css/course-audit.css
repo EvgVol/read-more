@@ -51,6 +51,10 @@
 .course-audit__toolbar { display: grid; gap: .75rem; justify-items: end; }
 .course-audit__export { color: #174ea6; font-size: .8rem; text-decoration: none; }
 .course-audit__export:hover { text-decoration: underline; }
+.course-audit__run-button { padding: .65rem 1rem; border: 0; border-radius: .45rem; background: #2563eb; color: #fff; font-weight: 600; }
+.course-audit__run-button:hover { background: #174ea6; }
+.course-audit__error { color: #b42318; font-weight: 600; }
+.course-audit__history-table { min-width: 650px; }
 .course-audit__filters { display: flex; gap: .35rem; }
 .course-audit__filters a { padding: .4rem .65rem; border-radius: .4rem; color: var(--audit-muted); font-size: .8rem; text-decoration: none; }
 .course-audit__filters a:hover,

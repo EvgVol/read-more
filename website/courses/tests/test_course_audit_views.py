@@ -4,6 +4,7 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from courses.models.course import Course
+from courses.models.audit import CourseAuditRun
 
 
 class CourseAuditViewTests(TestCase):
@@ -123,3 +124,46 @@ class CourseAuditViewTests(TestCase):
         csv_body = csv_response.content.decode('utf-8-sig')
         self.assertIn('Практика', csv_body)
         self.assertIn(material.lesson.title, csv_body)
+
+    def test_owner_can_save_audit_run_and_open_history(self):
+        client = Client()
+        client.force_login(self.course.owner)
+        run_url = reverse(
+            'courses:course_audit_run',
+            kwargs={'slug': self.course.slug},
+        )
+
+        response = client.post(run_url)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(CourseAuditRun.objects.count(), 1)
+        run = CourseAuditRun.objects.get()
+        self.assertTrue(run.passed)
+        self.assertEqual(run.lessons_count, 28)
+        self.assertEqual(run.published_questions_count, 84)
+
+        history = client.get(
+            reverse(
+                'courses:course_audit_history',
+                kwargs={'slug': self.course.slug},
+            )
+        )
+        self.assertEqual(history.status_code, 200)
+        self.assertContains(history, 'История аудитов')
+        self.assertContains(history, 'Аудит пройден')
+
+    def test_student_cannot_start_audit_run(self):
+        student = get_user_model().objects.create_user(username='audit-student')
+        self.course.students.add(student)
+        client = Client()
+        client.force_login(student)
+
+        response = client.post(
+            reverse(
+                'courses:course_audit_run',
+                kwargs={'slug': self.course.slug},
+            )
+        )
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(CourseAuditRun.objects.count(), 0)

@@ -4,8 +4,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponse
 from django.views.generic import DetailView
+from django.shortcuts import redirect
+from django.urls import reverse
 
 from courses.management.commands.audit_ml_learning_content import collect_audit_report
+from courses.models.audit import CourseAuditRun
 from courses.models.course import Course
 
 
@@ -49,3 +52,32 @@ class CourseAuditView(LoginRequiredMixin, DetailView):
                 ))
             return response
         return super().render_to_response(context, **response_kwargs)
+
+
+class CourseAuditRunView(CourseAuditView):
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        report = collect_audit_report(self.object)
+        CourseAuditRun.objects.create(
+            course=self.object,
+            passed=not report['issues'],
+            modules_count=report['summary']['modules'],
+            lessons_count=report['summary']['lessons'],
+            published_questions_count=report['summary']['published_questions'],
+            issues_count=report['summary']['issues'],
+            report=report,
+        )
+        return redirect(
+            reverse('courses:course_audit_history', kwargs={'slug': self.object.slug})
+        )
+
+
+class CourseAuditHistoryView(CourseAuditView):
+    template_name = 'courses/manage/course/audit_history.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['audit_runs'] = CourseAuditRun.objects.filter(
+            course=self.object,
+        )[:30]
+        return context

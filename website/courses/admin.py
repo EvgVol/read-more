@@ -11,6 +11,7 @@ from courses.models.course import Course
 from courses.models.card import Card
 from courses.models.lessons import Lesson
 from courses.models.lesson_material import LessonMaterial
+from courses.models.audit import CourseAuditRun
 
 
 
@@ -107,3 +108,10 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(Card)
 class CardAdmin(admin.ModelAdmin):
     list_display = ['title', 'course']
+
+
+@admin.register(CourseAuditRun)
+class CourseAuditRunAdmin(admin.ModelAdmin):
+    list_display = ('course', 'passed', 'issues_count', 'created')
+    list_filter = ('passed', 'created')
+    list_select_related = ('course',)

@@ -51,6 +51,7 @@
         <div class="course-audit__toolbar">
           <span class="course-audit__hint">Теория · практика · self-check · quiz</span>
           <a class="course-audit__export" href="?format=csv&amp;filter={{ audit_filter }}">Скачать CSV</a>
+          <a class="course-audit__export" href="{% url 'courses:course_audit_history' course.slug %}">История аудитов →</a>
           <nav class="course-audit__filters" aria-label="Фильтр уроков">
             <a class="{% if audit_filter == 'all' %}is-active{% endif %}" href="?filter=all">Все уроки</a>
             <a class="{% if audit_filter == 'issues' %}is-active{% endif %}" href="?filter=issues">Только с замечаниями</a>

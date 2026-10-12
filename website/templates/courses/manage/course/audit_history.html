@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}READ MORE | История аудитов {{ course.title }}{% endblock %}
+
+{% block css %}
+  <link href="{% static 'css/course-audit.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block base %}
+<main class="course-audit page" id="main-content">
+  <div class="course-audit__shell container-fluid">
+    <a class="course-audit__back-link" href="{% url 'courses:course_audit' course.slug %}">← К текущему аудиту</a>
+    <header class="course-audit__header">
+      <div>
+        <span class="course-audit__eyebrow">Контроль изменений</span>
+        <h1>История аудитов</h1>
+        <p>{{ course.title }} · последние 30 сохранённых запусков.</p>
+      </div>
+      <form method="post" action="{% url 'courses:course_audit_run' course.slug %}">
+        {% csrf_token %}
+        <button class="course-audit__run-button" type="submit">Запустить аудит</button>
+      </form>
+    </header>
+
+    <section class="course-audit__card" aria-labelledby="audit-history-title">
+      <div class="course-audit__card-header">
+        <div>
+          <span class="course-audit__eyebrow">Снимки состояния</span>
+          <h2 id="audit-history-title">Запуски аудита</h2>
+        </div>
+      </div>
+      <div class="course-audit__table-wrap">
+        <table class="course-audit__table course-audit__history-table">
+          <caption class="visually-hidden">История запусков аудита курса</caption>
+          <thead>
+            <tr>
+              <th scope="col">Дата</th>
+              <th scope="col">Статус</th>
+              <th scope="col">Уроки</th>
+              <th scope="col">Quiz</th>
+              <th scope="col">Замечания</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for run in audit_runs %}
+              <tr>
+                <th scope="row">{{ run.created|date:'d.m.Y H:i' }}</th>
+                <td>{% if run.passed %}<span class="course-audit__ok">Аудит пройден</span>{% else %}<span class="course-audit__error">Нужны исправления</span>{% endif %}</td>
+                <td>{{ run.modules_count }} модулей · {{ run.lessons_count }} уроков</td>
+                <td>{{ run.published_questions_count }}</td>
+                <td>{{ run.issues_count }}</td>
+              </tr>
+            {% empty %}
+              <tr><td class="course-audit__empty" colspan="5">Сохранённых запусков пока нет.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

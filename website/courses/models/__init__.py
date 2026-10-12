@@ -1,4 +1,5 @@
 from .lesson_progress import LessonProgress, LessonProgressEvent
+from .audit import CourseAuditRun
 from .quiz import QuizAnswer, QuizAttempt, QuizQuestion
 
 __all__ = [
@@ -7,4 +8,5 @@ __all__ = [
     'QuizAnswer',
     'QuizAttempt',
     'QuizQuestion',
+    'CourseAuditRun',
 ]
