@@ -75,6 +75,13 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             user=self.request.user,
             course=course,
         )
+        context['lesson_progress_by_id'] = {
+            item.lesson_id: item
+            for item in LessonProgress.objects.filter(
+                user=self.request.user,
+                lesson__module__course=course,
+            )
+        }
         if 'lesson_id' in self.kwargs:
             context['active_lesson'] = get_object_or_404(
                 Lesson,
@@ -91,6 +98,13 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             if requested_step and requested_step.isdigit():
                 active_step = int(requested_step)
             context['active_step'] = min(max(active_step, 1), 5)
+            context['active_step_label'] = self.lesson_steps[context['active_step'] - 1]['label']
+            if context['material']:
+                active_descriptor = self.lesson_steps[context['active_step'] - 1]
+                context['active_content'] = getattr(
+                    context['material'],
+                    active_descriptor['key'],
+                )
             all_lessons = list(
                 Lesson.objects.filter(module__course=course)
                 .select_related('module')

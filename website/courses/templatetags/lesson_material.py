@@ -27,3 +27,11 @@ def render_markdown(value):
         rendered,
     )
     return mark_safe(rendered)
+
+
+@register.filter
+def lookup(value, key):
+    """Read a dictionary key from a template without exposing Python internals."""
+    if not value:
+        return None
+    return value.get(key)
