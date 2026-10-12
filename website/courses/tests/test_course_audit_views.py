@@ -104,3 +104,22 @@ class CourseAuditViewTests(TestCase):
 
         self.assertContains(response, 'Типы замечаний')
         self.assertContains(response, 'Quiz')
+
+    def test_broken_practice_is_visible_with_category_and_csv_detail(self):
+        material = self.course.modules.first().lessons.first().material
+        material.practice = 'Слишком короткая практика.'
+        material.save(update_fields=['practice', 'updated'])
+        client = Client()
+        client.force_login(self.course.owner)
+        url = reverse('courses:course_audit', kwargs={'slug': self.course.slug})
+
+        page = client.get(url)
+        self.assertContains(page, 'Нужны исправления')
+        self.assertContains(page, 'Практика')
+        self.assertContains(page, 'Есть замечания')
+        self.assertContains(page, material.lesson.title)
+
+        csv_response = client.get(url, {'format': 'csv', 'filter': 'issues'})
+        csv_body = csv_response.content.decode('utf-8-sig')
+        self.assertIn('Практика', csv_body)
+        self.assertIn(material.lesson.title, csv_body)
