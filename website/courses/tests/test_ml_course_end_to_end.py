@@ -88,3 +88,16 @@ class MlCourseEndToEndTests(TestCase):
         self.assertContains(result, 'Тест пройден')
         self.assertContains(result, 'Последняя попытка:')
         self.assertContains(result, 'Освоено')
+        self.assertContains(result, 'История попыток (1)')
+
+        second = client.post(
+            f'/ru/course/{course.slug}/trainer/{module.id}/lesson/{lesson.id}/quiz/submit/',
+            {
+                f'question_{questions[0].id}': 'a',
+                f'question_{questions[1].id}': ['a'],
+                f'question_{questions[2].id}': 'wrong',
+            },
+        )
+        history = client.get(second['Location'])
+        self.assertContains(history, 'История попыток (2)')
+        self.assertContains(history, 'Повторить')

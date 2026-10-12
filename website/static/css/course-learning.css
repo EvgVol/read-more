@@ -227,6 +227,12 @@
 .lesson-quiz__last-attempt { display: flex; flex-wrap: wrap; gap: .35rem .75rem; margin: .75rem 0 1rem; padding: .65rem .75rem; border-radius: .45rem; background: #fff; color: #344054; font-size: .9rem; }
 .lesson-quiz__last-attempt span { color: var(--learning-muted); }
 .lesson-quiz__last-attempt em { color: #166534; font-style: normal; font-weight: 600; }
+.lesson-quiz__history { margin: .75rem 0 1rem; padding-top: .75rem; border-top: 1px solid var(--learning-border); }
+.lesson-quiz__history summary { color: #174ea6; cursor: pointer; font-weight: 600; }
+.lesson-quiz__history ol { display: grid; gap: .4rem; margin: .65rem 0 0; padding: 0; list-style: none; }
+.lesson-quiz__history li { display: grid; grid-template-columns: minmax(8rem, auto) 1fr auto; gap: .65rem; align-items: center; color: #344054; font-size: .9rem; }
+.lesson-quiz__history time { color: var(--learning-muted); }
+.lesson-quiz__history strong { color: #166534; font-size: .82rem; }
 .lesson-quiz__question { margin: 0; padding: 1rem 0; border: 0; border-top: 1px solid var(--learning-border); }
 .lesson-quiz__question legend { float: left; width: 100%; margin-bottom: .75rem; color: #111827; font-weight: 600; }
 .lesson-quiz__question legend + * { clear: both; }

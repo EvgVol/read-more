@@ -110,6 +110,20 @@
                         <em>{% if quiz_last_attempt.passed %}Освоено{% else %}Нужно повторить{% endif %}</em>
                       </div>
                     {% endif %}
+                    {% if quiz_attempt_history %}
+                      <details class="lesson-quiz__history">
+                        <summary>История попыток ({{ quiz_attempt_history|length }})</summary>
+                        <ol>
+                          {% for attempt in quiz_attempt_history %}
+                            <li>
+                              <time datetime="{{ attempt.submitted_at|date:'c' }}">{{ attempt.submitted_at|date:'d.m.Y H:i' }}</time>
+                              <span>{{ attempt.percent }}% · {{ attempt.earned_points }}/{{ attempt.total_points }}</span>
+                              <strong>{% if attempt.passed %}Пройдено{% else %}Повторить{% endif %}</strong>
+                            </li>
+                          {% endfor %}
+                        </ol>
+                      </details>
+                    {% endif %}
                   </div>
                   {% if quiz_attempt %}
                     <div class="lesson-quiz__result {% if quiz_attempt.passed %}is-passed{% else %}is-failed{% endif %}" role="status">
