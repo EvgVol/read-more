@@ -50,10 +50,20 @@ class MlCourseEndToEndTests(TestCase):
         material_seed = dockerfile.index('seed_ml_materials')
         block_seed = dockerfile.index('seed_ml_lesson_blocks')
         quiz_seed = dockerfile.index('seed_ml_quiz')
+        audit = dockerfile.index('audit_ml_learning_content')
 
         self.assertLess(course_seed, material_seed)
         self.assertLess(material_seed, block_seed)
         self.assertLess(block_seed, quiz_seed)
+        self.assertLess(quiz_seed, audit)
+
+    def test_learning_content_audit_passes_after_all_seeds(self):
+        from django.core.management import call_command
+
+        call_command('seed_ml_lesson_blocks', verbosity=0)
+        call_command('seed_ml_python_lesson_blocks', verbosity=0)
+        call_command('seed_ml_quiz', verbosity=0)
+        call_command('audit_ml_learning_content', verbosity=0)
 
     def test_first_lesson_quiz_is_server_graded_and_answers_are_not_exposed(self):
         from django.core.management import call_command
