@@ -1,0 +1,29 @@
+{% load lesson_material %}
+<section class="card-body lesson-material mt-4">
+  {% if material %}
+    <div class="mb-5">
+      <h2 class="h4">Цели обучения</h2>
+      {{ material.objectives|render_markdown }}
+    </div>
+    <div class="mb-5">
+      <h2 class="h4">Теория</h2>
+      {{ material.theory|render_markdown }}
+    </div>
+    <div class="mb-5">
+      <h2 class="h4">Практическое задание</h2>
+      {{ material.practice|render_markdown }}
+    </div>
+    <div class="mb-5">
+      <h2 class="h4">Самопроверка</h2>
+      {{ material.self_check|render_markdown }}
+    </div>
+    <div class="mb-3">
+      <h2 class="h4">Источники</h2>
+      {{ material.resources|render_markdown }}
+    </div>
+  {% else %}
+    <div class="alert alert-secondary">
+      Материал для этого урока ещё готовится.
+    </div>
+  {% endif %}
+</section>

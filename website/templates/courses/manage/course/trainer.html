@@ -4,6 +4,7 @@
 {% block base %}
 {% load static %}
 {% load thumbnail %}
+{% load lesson_material %}
 <div class="page">
   <div class="page-main">
     <div class="hor-header header">
@@ -65,7 +66,28 @@
                 </div>
                 <div class="">
                   <h1 class="mt-7">{{ module.title }}</h1>
+                  <p class="text fs-18">{{ module.description }}</p>
                 </div>
+                <div class="card-body px-0">
+                  <h3>Уроки модуля</h3>
+                  <ol class="list-group list-group-numbered mb-5">
+                    {% for lesson in module.lessons.all %}
+                      <li class="list-group-item {% if lesson == active_lesson %}active{% endif %}">
+                        <a class="{% if lesson == active_lesson %}text-white{% endif %}"
+                          href="{% url 'courses:course_trainer_lesson' object.slug module.id lesson.id %}">
+                          {{ lesson.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ol>
+                </div>
+                {% if active_lesson %}
+                  <div class="alert alert-primary">
+                    <h2 class="h4 mb-2">{{ active_lesson.title }}</h2>
+                    <p class="mb-0">Изучите материал урока и выполните практическое задание.</p>
+                  </div>
+                  {% include 'courses/manage/course/lesson_material.html' %}
+                {% endif %}
                 {% for content in module.contents.all %}
                   {% with item=content.item %}
                     {{ item.render }}

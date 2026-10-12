@@ -1,6 +1,5 @@
 from django.urls import path, include
 from django.utils.translation import gettext_lazy as _
-from django.views.decorators.cache import cache_page
 
 from courses.views.generic.list import (CourseListView, SubjectView,
                                         ContentListView, ModuleListView,
@@ -22,10 +21,13 @@ urlpatterns = [
     path("create/", 
          CourseCreateView.as_view(), name="course_create"),
     path("course/<slug:slug>/trainer/",
-         cache_page(60 * 15)(CourseTrainerView.as_view()),
+         CourseTrainerView.as_view(),
          name="course_trainer"),
-    path("course/<slug:slug>/trainer/<module_id>/",
-         cache_page(60 * 15)(CourseTrainerView.as_view()),
+    path("course/<slug:slug>/trainer/<int:module_id>/lesson/<int:lesson_id>/",
+         CourseTrainerView.as_view(),
+         name="course_trainer_lesson"),
+    path("course/<slug:slug>/trainer/<int:module_id>/",
+         CourseTrainerView.as_view(),
          name="course_trainer_module"),
     path("courses/",
          CourseListView.as_view(), name="course_list"),
