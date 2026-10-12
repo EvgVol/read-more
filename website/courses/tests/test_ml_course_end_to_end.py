@@ -6,6 +6,7 @@ from django.test import Client, TestCase
 
 from courses.models.course import Course
 from courses.models.lesson_material import LessonMaterial
+from courses.models.quiz import QuizQuestion
 
 
 class MlCourseEndToEndTests(TestCase):
@@ -49,3 +50,35 @@ class MlCourseEndToEndTests(TestCase):
         material_seed = dockerfile.index('seed_ml_materials')
 
         self.assertLess(course_seed, material_seed)
+
+    def test_first_lesson_quiz_is_server_graded_and_answers_are_not_exposed(self):
+        from django.core.management import call_command
+
+        call_command('seed_ml_quiz', verbosity=0)
+        course = Course.objects.get(slug='ml-inzhener')
+        module = course.modules.get(title='Python для ML')
+        lesson = module.lessons.get(title='Python для анализа данных')
+        questions = list(QuizQuestion.objects.filter(lesson=lesson).order_by('position'))
+        client = Client(HTTP_HOST='127.0.0.1')
+        client.force_login(course.owner)
+
+        page = client.get(
+            f'/ru/course/{course.slug}/trainer/{module.id}/lesson/{lesson.id}/?step=2'
+        )
+        body = page.content.decode()
+        self.assertEqual(page.status_code, 200)
+        self.assertIn('Мини-тест по уроку', body)
+        self.assertIn(questions[0].prompt, body)
+        self.assertNotIn('correct_answers', body)
+
+        response = client.post(
+            f'/ru/course/{course.slug}/trainer/{module.id}/lesson/{lesson.id}/quiz/submit/',
+            {
+                f'question_{questions[0].id}': 'b',
+                f'question_{questions[1].id}': ['a', 'b', 'd'],
+                f'question_{questions[2].id}': 'shape',
+            },
+        )
+        self.assertEqual(response.status_code, 302)
+        result = client.get(response['Location'])
+        self.assertContains(result, 'Тест пройден')

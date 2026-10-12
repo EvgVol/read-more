@@ -214,6 +214,27 @@
 .lesson-block > :first-child { margin-top: 0; }
 .lesson-block > :last-child { margin-bottom: 0; }
 
+.lesson-quiz {
+  max-width: 78ch;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--learning-border);
+  border-radius: .75rem;
+  background: #f8fafc;
+}
+.lesson-quiz__heading h4 { margin: .25rem 0 .35rem; color: #111827; font-size: 1.25rem; }
+.lesson-quiz__heading p { margin-bottom: 1.25rem; color: var(--learning-muted); }
+.lesson-quiz__question { margin: 0; padding: 1rem 0; border: 0; border-top: 1px solid var(--learning-border); }
+.lesson-quiz__question legend { float: left; width: 100%; margin-bottom: .75rem; color: #111827; font-weight: 600; }
+.lesson-quiz__question legend + * { clear: both; }
+.lesson-quiz__option { display: flex; gap: .65rem; align-items: flex-start; margin: .6rem 0; cursor: pointer; }
+.lesson-quiz__option input { margin-top: .3rem; }
+.lesson-quiz__result { margin-bottom: 1rem; padding: .85rem 1rem; border-left: 4px solid #2563eb; background: #eff6ff; }
+.lesson-quiz__result.is-passed { border-left-color: #16a34a; background: #f0fdf4; }
+.lesson-quiz__result.is-failed { border-left-color: #d97706; background: #fffaf0; }
+.lesson-quiz__result > span { display: block; margin-top: .25rem; color: var(--learning-muted); }
+.lesson-quiz__result ul { margin: .75rem 0 0; padding-left: 1.25rem; }
+
 .lesson-material figure {
   margin: 1.75rem 0;
   text-align: center;

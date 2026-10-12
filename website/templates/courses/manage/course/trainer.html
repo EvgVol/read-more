@@ -97,6 +97,46 @@
               <div id="lesson-theory" class="course-learning__reading lesson-material">
                 {{ lesson_document.html|safe }}
               </div>
+              {% if quiz_questions %}
+                <section id="lesson-quiz" class="lesson-quiz" aria-labelledby="lesson-quiz-title">
+                  <div class="lesson-quiz__heading">
+                    <span class="course-learning__eyebrow">Проверка понимания</span>
+                    <h4 id="lesson-quiz-title">Мини-тест по уроку</h4>
+                    <p>Ответы проверяются на сервере. Можно пройти тест повторно.</p>
+                  </div>
+                  {% if quiz_attempt %}
+                    <div class="lesson-quiz__result {% if quiz_attempt.passed %}is-passed{% else %}is-failed{% endif %}" role="status">
+                      <strong>{% if quiz_attempt.passed %}Тест пройден{% else %}Попробуйте ещё раз{% endif %}</strong>
+                      <span>{{ quiz_attempt.percent }}% · {{ quiz_attempt.earned_points }} из {{ quiz_attempt.total_points }} баллов</span>
+                      <ul>
+                        {% for answer in quiz_attempt.answers.all %}
+                          <li><strong>{% if answer.is_correct %}Верно{% else %}Проверьте ответ{% endif %}</strong> — {{ answer.feedback }}</li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
+                  <form class="lesson-quiz__form" method="post" action="{% url 'courses:course_trainer_quiz_submit' object.slug module.id active_lesson.id %}">
+                    {% csrf_token %}
+                    {% for question in quiz_questions %}
+                      <fieldset class="lesson-quiz__question">
+                        <legend><span>{{ forloop.counter }}.</span> {{ question.prompt }}</legend>
+                        {% if question.type == 'short' %}
+                          <input class="form-control" type="text" name="question_{{ question.id }}" autocomplete="off">
+                        {% else %}
+                          {% for option in question.options %}
+                            <label class="lesson-quiz__option">
+                              <input type="{% if question.type == 'single' %}radio{% else %}checkbox{% endif %}"
+                                     name="question_{{ question.id }}" value="{{ option.id }}">
+                              <span>{{ option.text }}</span>
+                            </label>
+                          {% endfor %}
+                        {% endif %}
+                      </fieldset>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit">Проверить ответы</button>
+                  </form>
+                </section>
+              {% endif %}
             {% else %}
               <div class="course-learning__reading lesson-material">
                 {{ active_content|render_markdown }}

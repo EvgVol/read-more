@@ -11,6 +11,7 @@ from courses.models.lesson_progress import LessonProgress
 from courses.models.lesson_block import LessonBlock
 from courses.models.lessons import Lesson
 from courses.models.module import Module
+from courses.models.quiz import QuizAttempt, QuizQuestion
 from courses.services.lesson_blocks import get_lesson_stage_content
 from courses.services.lesson_blocks import get_published_lesson_blocks
 from courses.services.lesson_progress import course_progress, get_or_start_progress
@@ -77,7 +78,14 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
                                     published=True,
                                 ).order_by('position', 'id'),
                                 to_attr='published_lesson_blocks',
-                            )
+                            ),
+                            Prefetch(
+                                'quiz_questions',
+                                queryset=QuizQuestion.objects.filter(
+                                    published=True,
+                                ).order_by('position', 'id'),
+                                to_attr='published_quiz_questions',
+                            ),
                         ),
                     )
                 ),
@@ -155,6 +163,17 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
                     active_descriptor['key'],
                     context['material'],
                 )
+            context['quiz_questions'] = list(
+                getattr(context['active_lesson'], 'published_quiz_questions', [])
+            )
+            attempt_id = self.request.GET.get('quiz_attempt')
+            context['quiz_attempt'] = None
+            if attempt_id and attempt_id.isdigit():
+                context['quiz_attempt'] = QuizAttempt.objects.filter(
+                    id=int(attempt_id),
+                    user=self.request.user,
+                    lesson=context['active_lesson'],
+                ).prefetch_related('answers__question').first()
             lesson_index = all_lessons.index(context['active_lesson'])
             context['previous_lesson'] = (
                 all_lessons[lesson_index - 1] if lesson_index > 0 else None

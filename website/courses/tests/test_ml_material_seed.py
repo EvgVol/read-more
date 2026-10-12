@@ -5,6 +5,7 @@ from courses.models.course import Course
 from courses.models.lesson_block import LessonBlock
 from courses.models.lesson_material import LessonMaterial
 from courses.models.lesson_progress import LessonProgress
+from courses.models.quiz import QuizQuestion
 
 
 class MlMaterialSeedTests(TestCase):
@@ -130,3 +131,17 @@ class MlMaterialSeedTests(TestCase):
             LessonProgress.objects.get(user=course.owner, lesson=lesson).current_step,
             3,
         )
+
+    def test_quiz_seed_is_idempotent_and_keeps_correct_answers_in_model_only(self):
+        call_command('seed_ml_materials', verbosity=0)
+        call_command('seed_ml_quiz', verbosity=0)
+        call_command('seed_ml_quiz', verbosity=0)
+
+        lesson = Course.objects.get(slug='ml-inzhener').modules.get(
+            title='Python для ML'
+        ).lessons.get(title='Python для анализа данных')
+        questions = QuizQuestion.objects.filter(lesson=lesson).order_by('position')
+
+        self.assertEqual(questions.count(), 3)
+        self.assertEqual(list(questions.values_list('type', flat=True)), ['single', 'multiple', 'short'])
+        self.assertEqual(questions.get(position=10).correct_answers, ['b'])
