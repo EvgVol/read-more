@@ -43,6 +43,7 @@ class CourseLearningAssetTests(SimpleTestCase):
         self.assertIn('.lesson-block--code-example', css)
         self.assertIn('.lesson-quiz', css)
         self.assertIn('.lesson-quiz__result', css)
+        self.assertIn('.course-learning__quiz-summary', css)
         self.assertIn('@media (max-width: 575.98px)', css)
         for diagram in (
             '01-data-flow.svg',

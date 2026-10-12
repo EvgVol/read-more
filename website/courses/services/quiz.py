@@ -81,3 +81,29 @@ def submit_quiz(*, user, lesson, answers):
     attempt.passed = earned >= Decimal(attempt.total_points) * PASS_THRESHOLD
     attempt.save(update_fields=['earned_points', 'passed'])
     return attempt
+
+
+def course_quiz_progress(*, user, course):
+    """Summarize the latest attempt for each quiz lesson in a course."""
+    lesson_ids = set(
+        QuizQuestion.objects.filter(
+            lesson__module__course=course,
+            published=True,
+        ).values_list('lesson_id', flat=True).distinct()
+    )
+    attempts = QuizAttempt.objects.filter(
+        user=user,
+        lesson_id__in=lesson_ids,
+    ).order_by('lesson_id', '-submitted_at', '-id')
+    latest_by_lesson = {}
+    for attempt in attempts:
+        latest_by_lesson.setdefault(attempt.lesson_id, attempt)
+    latest = list(latest_by_lesson.values())
+    passed = sum(attempt.passed for attempt in latest)
+    average = round(sum(attempt.percent for attempt in latest) / len(latest)) if latest else 0
+    return {
+        'total_quizzes': len(lesson_ids),
+        'attempted_quizzes': len(latest),
+        'passed_quizzes': passed,
+        'average_percent': average,
+    }

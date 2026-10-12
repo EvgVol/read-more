@@ -20,6 +20,12 @@
           <span style="width: {{ course_progress.percent }}%"></span>
         </div>
         <p>{{ course_progress.completed_lessons }} из {{ course_progress.total_lessons }} уроков · {{ course_progress.percent }}%</p>
+        {% if quiz_progress.total_quizzes %}
+          <div class="course-learning__quiz-summary" aria-label="Прогресс тестов">
+            <strong>Тесты: {{ quiz_progress.passed_quizzes }}/{{ quiz_progress.total_quizzes }}</strong>
+            <span>Средний результат: {{ quiz_progress.average_percent }}%</span>
+          </div>
+        {% endif %}
       </div>
 
       <nav class="course-learning__modules">
