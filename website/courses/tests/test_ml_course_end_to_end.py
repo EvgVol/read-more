@@ -48,8 +48,12 @@ class MlCourseEndToEndTests(TestCase):
         dockerfile = Path('/code/Dockerfile').read_text()
         course_seed = dockerfile.index('seed_ml_course')
         material_seed = dockerfile.index('seed_ml_materials')
+        block_seed = dockerfile.index('seed_ml_lesson_blocks')
+        quiz_seed = dockerfile.index('seed_ml_quiz')
 
         self.assertLess(course_seed, material_seed)
+        self.assertLess(material_seed, block_seed)
+        self.assertLess(block_seed, quiz_seed)
 
     def test_first_lesson_quiz_is_server_graded_and_answers_are_not_exposed(self):
         from django.core.management import call_command
