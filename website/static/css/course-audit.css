@@ -61,6 +61,11 @@
 .course-audit__history-actions { padding: 1rem 1.5rem; border-top: 1px solid var(--audit-border); }
 .course-audit__empty-state { padding: 2rem; color: var(--audit-muted); text-align: center; }
 .course-audit__table ul { margin: 0; padding-left: 1rem; color: #b42318; font-size: .82rem; }
+.course-audit__table tbody tr.audit-change--added { background: #fffafa; }
+.course-audit__table tbody tr.audit-change--resolved { background: #f4fbf6; }
+.course-audit__table tbody tr.audit-change--added.audit-change--resolved { background: #fffaf0; }
+.course-audit__table tbody th a { color: #174ea6; text-decoration: none; }
+.course-audit__table tbody th a:hover { text-decoration: underline; }
 .course-audit__filters { display: flex; gap: .35rem; }
 .course-audit__filters a { padding: .4rem .65rem; border-radius: .4rem; color: var(--audit-muted); font-size: .8rem; text-decoration: none; }
 .course-audit__filters a:hover,

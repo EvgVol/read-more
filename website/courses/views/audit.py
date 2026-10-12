@@ -22,7 +22,9 @@ def compare_audit_reports(left_report, right_report):
         if left is None or right is None:
             changes.append({
                 'module': (right or left)['module'],
+                'module_id': (right or left)['module_id'],
                 'lesson': (right or left)['lesson'],
+                'lesson_id': (right or left)['lesson_id'],
                 'change': 'Добавлен или удалён урок',
                 'added_issues': (right or {}).get('issues', []),
                 'resolved_issues': [],
@@ -46,7 +48,9 @@ def compare_audit_reports(left_report, right_report):
         if metrics_changed or added_issues or resolved_issues:
             changes.append({
                 'module': right['module'],
+                'module_id': right['module_id'],
                 'lesson': right['lesson'],
+                'lesson_id': right['lesson_id'],
                 'change': 'Изменены метрики или содержимое',
                 'added_issues': added_issues,
                 'resolved_issues': resolved_issues,

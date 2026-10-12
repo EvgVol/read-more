@@ -197,3 +197,29 @@ class CourseAuditViewTests(TestCase):
         self.assertContains(response, 'Изменения')
         self.assertContains(response, material.lesson.title)
         self.assertContains(response, 'Практика')
+        self.assertContains(
+            response,
+            reverse(
+                'courses:course_trainer_lesson',
+                kwargs={
+                    'slug': self.course.slug,
+                    'module_id': material.lesson.module_id,
+                    'lesson_id': material.lesson.id,
+                },
+            ),
+        )
+        self.assertContains(response, 'Новые замечания')
+        self.assertContains(response, 'audit-change--added')
+
+        call_command('seed_ml_materials', verbosity=0)
+        client.post(run_url)
+        third_run = CourseAuditRun.objects.order_by('-created', '-id').first()
+        resolved = client.get(
+            reverse(
+                'courses:course_audit_compare',
+                kwargs={'slug': self.course.slug},
+            ),
+            {'left': second_run.id, 'right': third_run.id},
+        )
+        self.assertContains(resolved, 'Устранённые замечания')
+        self.assertContains(resolved, 'audit-change--resolved')

@@ -46,8 +46,8 @@
             <thead><tr><th scope="col">Урок</th><th scope="col">Новые замечания</th><th scope="col">Устранённые замечания</th></tr></thead>
             <tbody>
               {% for change in audit_comparison.changes %}
-                <tr>
-                  <th scope="row"><span>{{ change.module }}</span><strong>{{ change.lesson }}</strong></th>
+                <tr class="{% if change.added_issues %}audit-change--added{% endif %}{% if change.resolved_issues %} audit-change--resolved{% endif %}">
+                  <th scope="row"><span>{{ change.module }}</span><strong><a href="{% url 'courses:course_trainer_lesson' course.slug change.module_id change.lesson_id %}">{{ change.lesson }}</a></strong></th>
                   <td>{% if change.added_categories %}<strong>{{ change.added_categories|join:', ' }}</strong>{% endif %}{% if change.added_issues %}<ul>{% for issue in change.added_issues %}<li>{{ issue }}</li>{% endfor %}</ul>{% else %}—{% endif %}</td>
                   <td>{% if change.resolved_categories %}<strong>{{ change.resolved_categories|join:', ' }}</strong>{% endif %}{% if change.resolved_issues %}<ul>{% for issue in change.resolved_issues %}<li>{{ issue }}</li>{% endfor %}</ul>{% else %}—{% endif %}</td>
                 </tr>
