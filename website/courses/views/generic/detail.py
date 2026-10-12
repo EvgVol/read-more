@@ -62,7 +62,7 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        return qs.filter(
+        return qs.select_related('owner').filter(
             Q(students=self.request.user) | Q(owner=self.request.user)
         ).distinct().prefetch_related(
             Prefetch(

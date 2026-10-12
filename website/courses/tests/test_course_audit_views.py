@@ -1,0 +1,52 @@
+from django.contrib.auth import get_user_model
+from django.core.management import call_command
+from django.test import Client, TestCase
+from django.urls import reverse
+
+from courses.models.course import Course
+
+
+class CourseAuditViewTests(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        call_command('seed_ml_course', verbosity=0)
+        call_command('seed_ml_materials', verbosity=0)
+        call_command('seed_ml_quiz', verbosity=0)
+        cls.course = Course.objects.get(slug='ml-inzhener')
+
+    def test_anonymous_user_is_redirected_to_login(self):
+        response = Client().get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug})
+        )
+
+        self.assertEqual(response.status_code, 302)
+        self.assertIn('/account/login/', response['Location'])
+
+    def test_student_cannot_open_editor_audit(self):
+        student = get_user_model().objects.create_user(username='course-student')
+        self.course.students.add(student)
+        client = Client()
+        client.force_login(student)
+
+        response = client.get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug})
+        )
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_course_owner_sees_editor_audit(self):
+        client = Client()
+        client.force_login(self.course.owner)
+
+        response = client.get(
+            reverse('courses:course_audit', kwargs={'slug': self.course.slug})
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Отчёт качества курса')
+        self.assertContains(response, '>28<')
+        self.assertContains(response, '>84<')
+        self.assertContains(response, 'уроков')
+        self.assertContains(response, 'quiz-вопроса')
+        self.assertContains(response, 'Python для анализа данных')
+        self.assertContains(response, 'Аудит пройден')

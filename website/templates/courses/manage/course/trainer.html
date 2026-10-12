@@ -16,6 +16,9 @@
       <div class="course-learning__course-summary">
         <span class="course-learning__eyebrow">Курс</span>
         <h1>{{ object.title }}</h1>
+        {% if request.user == object.owner or request.user.is_staff %}
+          <a class="course-learning__back-link" href="{% url 'courses:course_audit' object.slug %}">Отчёт качества курса →</a>
+        {% endif %}
         <div class="course-learning__progress-track" aria-label="Прогресс курса">
           <span style="width: {{ course_progress.percent }}%"></span>
         </div>

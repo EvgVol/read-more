@@ -1,0 +1,85 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}READ MORE | Аудит курса {{ course.title }}{% endblock %}
+
+{% block css %}
+  <link href="{% static 'css/course-audit.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block base %}
+<main class="course-audit page" id="main-content">
+  <div class="course-audit__shell container-fluid">
+    <a class="course-audit__back-link" href="{% url 'courses:course_trainer' course.slug %}">← Вернуться к курсу</a>
+    <header class="course-audit__header">
+      <div>
+        <span class="course-audit__eyebrow">Редакторский отчёт</span>
+        <h1>Отчёт качества курса</h1>
+        <p>{{ course.title }} · контроль полноты материалов, практики и quiz.</p>
+      </div>
+      <div class="course-audit__status {% if audit_report.summary.issues %}is-error{% else %}is-ok{% endif %}" role="status">
+        <strong>{% if audit_report.summary.issues %}Нужны исправления{% else %}Аудит пройден{% endif %}</strong>
+        <span>{{ audit_report.summary.issues }} замечаний</span>
+      </div>
+    </header>
+
+    <section class="course-audit__summary" aria-label="Сводка курса">
+      <article class="course-audit__metric"><strong>{{ audit_report.summary.modules }}</strong><span>модулей</span></article>
+      <article class="course-audit__metric"><strong>{{ audit_report.summary.lessons }}</strong><span>уроков</span></article>
+      <article class="course-audit__metric"><strong>{{ audit_report.summary.published_questions }}</strong><span>quiz-вопроса</span></article>
+      <article class="course-audit__metric"><strong>{{ audit_report.summary.lessons_with_issues }}</strong><span>уроков с замечаниями</span></article>
+    </section>
+
+    <section class="course-audit__card" aria-labelledby="audit-lessons-title">
+      <div class="course-audit__card-header">
+        <div>
+          <span class="course-audit__eyebrow">Детализация</span>
+          <h2 id="audit-lessons-title">Проверка уроков</h2>
+        </div>
+        <span class="course-audit__hint">Теория · практика · self-check · quiz</span>
+      </div>
+      <div class="course-audit__table-wrap">
+        <table class="course-audit__table">
+          <caption class="visually-hidden">Метрики качества каждого урока</caption>
+          <thead>
+            <tr>
+              <th scope="col">Урок</th>
+              <th scope="col">Теория</th>
+              <th scope="col">Практика</th>
+              <th scope="col">Self-check</th>
+              <th scope="col">Quiz</th>
+              <th scope="col">Статус</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for lesson in audit_report.lessons %}
+              <tr class="{% if lesson.issues %}has-issues{% endif %}">
+                <th scope="row">
+                  <span>{{ lesson.module }}</span>
+                  <strong>{{ lesson.lesson }}</strong>
+                </th>
+                <td>{{ lesson.material.theory_words }} слов</td>
+                <td>{{ lesson.material.practice_words }} слов</td>
+                <td>{{ lesson.material.self_check_questions }} вопроса</td>
+                <td>{{ lesson.quiz.count }} · {{ lesson.quiz.types|join:', ' }}</td>
+                <td>
+                  {% if lesson.issues %}
+                    <details class="course-audit__issues">
+                      <summary>Есть замечания</summary>
+                      <ul>
+                        {% for issue in lesson.issues %}<li>{{ issue }}</li>{% endfor %}
+                      </ul>
+                    </details>
+                  {% else %}
+                    <span class="course-audit__ok">Готово</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}
