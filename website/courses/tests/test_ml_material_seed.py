@@ -137,11 +137,13 @@ class MlMaterialSeedTests(TestCase):
         call_command('seed_ml_quiz', verbosity=0)
         call_command('seed_ml_quiz', verbosity=0)
 
-        lesson = Course.objects.get(slug='ml-inzhener').modules.get(
+        course = Course.objects.get(slug='ml-inzhener')
+        lesson = course.modules.get(
             title='Python для ML'
         ).lessons.get(title='Python для анализа данных')
         questions = QuizQuestion.objects.filter(lesson=lesson).order_by('position')
 
+        self.assertEqual(QuizQuestion.objects.filter(lesson__module__course=course).count(), 12)
         self.assertEqual(questions.count(), 3)
         self.assertEqual(list(questions.values_list('type', flat=True)), ['single', 'multiple', 'short'])
         self.assertEqual(questions.get(position=10).correct_answers, ['b'])
