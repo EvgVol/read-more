@@ -100,7 +100,11 @@ def render_lesson_blocks_document(blocks) -> LessonDocument:
             f'data-block-type="{escape(block_type)}" aria-label="{escape(label)}">'
             f'{document.html}</article>'
         )
-        toc.extend(document.toc)
+        # The structured lesson already has its own meaningful block boundary.
+        # Keep only the first heading per block so the TOC remains a study path
+        # instead of repeating labels such as "Теория" and "Самопроверка".
+        if document.toc:
+            toc.append(document.toc[0])
     return LessonDocument(html=mark_safe('\n'.join(fragments)), toc=toc)
 
 

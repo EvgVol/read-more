@@ -22,6 +22,7 @@ class QuizQuestion(models.Model):
     options = models.JSONField(default=list, blank=True)
     correct_answers = models.JSONField(default=list, blank=True)
     explanation = models.TextField(blank=True)
+    metadata = models.JSONField(default=dict, blank=True)
     points = models.PositiveIntegerField(default=1)
     published = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)

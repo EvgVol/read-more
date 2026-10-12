@@ -20,7 +20,7 @@ _CALLOUT_RE = re.compile(
     r'(.*?)^:::\s*$',
     re.MULTILINE | re.DOTALL,
 )
-_HEADING_RE = re.compile(r'^(#{2,6})\s+(.+?)\s*#*\s*$')
+_HEADING_RE = re.compile(r'^(#{1,6})\s+(.+?)\s*#*\s*$')
 _IMAGE_RE = re.compile(r'<img\b[^>]*>', re.IGNORECASE)
 _ATTRIBUTE_RE = re.compile(
     r'(?P<name>alt|src)\s*=\s*["\'](?P<value>[^"\']*)["\']',
