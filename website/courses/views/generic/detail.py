@@ -2,13 +2,16 @@ from django.views.generic import DetailView
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
+from django.db.models import Prefetch, Q
+from django.http import Http404
 
 from courses.forms import CourseEnrollForm
 from courses.models.course import Course
 from courses.models.lesson_progress import LessonProgress
+from courses.models.lesson_block import LessonBlock
 from courses.models.lessons import Lesson
+from courses.models.module import Module
+from courses.services.lesson_blocks import get_lesson_stage_content
 from courses.services.lesson_progress import course_progress, get_or_start_progress
 from reviews.models import Review
 from blog.models import Post
@@ -58,36 +61,77 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
         qs = super().get_queryset()
         return qs.filter(
             Q(students=self.request.user) | Q(owner=self.request.user)
-        ).distinct()
+        ).distinct().prefetch_related(
+            Prefetch(
+                'modules',
+                queryset=Module.objects.prefetch_related(
+                    Prefetch(
+                        'lessons',
+                        queryset=Lesson.objects.select_related('material').order_by(
+                            'order', 'id'
+                        ).prefetch_related(
+                            Prefetch(
+                                'blocks',
+                                queryset=LessonBlock.objects.filter(
+                                    published=True,
+                                ).order_by('position', 'id'),
+                                to_attr='published_lesson_blocks',
+                            )
+                        ),
+                    )
+                ),
+            )
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        course = self.get_object()
-        
-        
-        if 'module_id' in self.kwargs:
-            context['module'] = course.modules.get(id=self.kwargs['module_id'])
+        course = context['object']
+        modules = list(course.modules.all())
+        all_lessons = [
+            lesson
+            for module_item in modules
+            for lesson in module_item.lessons.all()
+        ]
+        all_lessons.sort(key=lambda lesson: (lesson.module.order, lesson.order, lesson.id))
+        progress_records = list(
+            LessonProgress.objects.filter(
+                user=self.request.user,
+                lesson__module__course=course,
+            ).select_related('lesson', 'lesson__module')
+        )
+        module_id = self.kwargs.get('module_id')
+        if module_id:
+            context['module'] = next(
+                (module for module in modules if module.id == int(module_id)),
+                None,
+            )
+            if context['module'] is None:
+                raise Http404('Module not found')
         else:
             # Open the first module when no module was selected yet.
-            context['module'] = course.modules.all()[0]
+            context['module'] = modules[0]
         context['lesson_steps'] = self.lesson_steps
         context['course_progress'] = course_progress(
             user=self.request.user,
             course=course,
+            lessons=all_lessons,
+            progress_records=progress_records,
         )
         context['lesson_progress_by_id'] = {
             item.lesson_id: item
-            for item in LessonProgress.objects.filter(
-                user=self.request.user,
-                lesson__module__course=course,
-            )
+            for item in progress_records
         }
         if 'lesson_id' in self.kwargs:
-            context['active_lesson'] = get_object_or_404(
-                Lesson,
-                module=context['module'],
-                id=self.kwargs['lesson_id'],
+            context['active_lesson'] = next(
+                (
+                    lesson
+                    for lesson in context['module'].lessons.all()
+                    if lesson.id == int(self.kwargs['lesson_id'])
+                ),
+                None,
             )
+            if context['active_lesson'] is None:
+                raise Http404('Lesson not found')
             context['material'] = getattr(context['active_lesson'], 'material', None)
             context['progress'] = get_or_start_progress(
                 user=self.request.user,
@@ -101,15 +145,11 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             context['active_step_label'] = self.lesson_steps[context['active_step'] - 1]['label']
             if context['material']:
                 active_descriptor = self.lesson_steps[context['active_step'] - 1]
-                context['active_content'] = getattr(
-                    context['material'],
+                context['active_content'] = get_lesson_stage_content(
+                    context['active_lesson'],
                     active_descriptor['key'],
+                    context['material'],
                 )
-            all_lessons = list(
-                Lesson.objects.filter(module__course=course)
-                .select_related('module')
-                .order_by('module__order', 'order', 'id')
-            )
             lesson_index = all_lessons.index(context['active_lesson'])
             context['previous_lesson'] = (
                 all_lessons[lesson_index - 1] if lesson_index > 0 else None

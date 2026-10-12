@@ -4,6 +4,7 @@ from django.urls import reverse
 
 from courses.models.course import Course
 from courses.models.lesson_material import LessonMaterial
+from courses.models.lesson_block import LessonBlock
 from courses.models.lessons import Lesson
 from courses.models.module import Module
 from courses.models.subject import Subject
@@ -97,6 +98,22 @@ class LessonLearningTemplateTests(TestCase):
         self.assertContains(response, '<figure', html=False)
         self.assertContains(response, 'aria-label="Навигация по разделам урока"')
         self.assertNotContains(response, 'Цель урока')
+
+    def test_published_lesson_blocks_replace_legacy_theory_in_trainer(self):
+        LessonBlock.objects.create(
+            lesson=self.lesson,
+            type=LessonBlock.Type.THEORY,
+            position=10,
+            published=True,
+            content={'markdown': '## Блок вместо legacy\n\nНовый текст урока.'},
+        )
+
+        response = self.client.get(f'{self.url_for(self.lesson)}?step=2')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Блок вместо legacy')
+        self.assertContains(response, 'Новый текст урока.')
+        self.assertContains(response, 'href="#blok-vmesto-legacy"')
 
     def test_missing_material_shows_empty_state_without_completion_form(self):
         response = self.client.get(self.url_for(self.empty_lesson))
