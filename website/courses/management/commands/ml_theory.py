@@ -480,7 +480,24 @@ def _paragraphs(blueprint):
 def build_theory(title):
     """Return a long-form theory text of roughly 6,000–10,000 words."""
     if title == 'Python для анализа данных':
-        return PILOT_THEORY
+        blueprint = BLUEPRINTS[title]
+        paragraphs = _paragraphs(blueprint)
+        appendix_sections = [
+            ('Интуиция', paragraphs[:6]),
+            ('Базовые понятия', paragraphs[1:7]),
+            ('Пошаговый разбор', paragraphs[2:8]),
+            ('Практические примеры', paragraphs[3:9]),
+            ('Типичные ошибки', paragraphs[5:11]),
+            ('Связь с ML-инженерией', paragraphs[0:6]),
+            ('Упражнения с постепенным усложнением', paragraphs[4:10]),
+            ('Мини-проект: проверяемый загрузчик заказов', paragraphs[1:7]),
+            ('Контроль качества и воспроизводимость', paragraphs[6:12]),
+            ('Итоги', paragraphs[8:12]),
+        ]
+        appendix = []
+        for heading, content in appendix_sections:
+            appendix.extend([f'## {heading}', '', *content, ''])
+        return PILOT_THEORY + '\n\n' + '\n'.join(appendix).strip()
     blueprint = BLUEPRINTS[title]
     paragraphs = _paragraphs(blueprint)
     sections = [
