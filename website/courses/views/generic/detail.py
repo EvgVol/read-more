@@ -7,7 +7,9 @@ from django.shortcuts import get_object_or_404
 
 from courses.forms import CourseEnrollForm
 from courses.models.course import Course
+from courses.models.lesson_progress import LessonProgress
 from courses.models.lessons import Lesson
+from courses.services.lesson_progress import course_progress, get_or_start_progress
 from reviews.models import Review
 from blog.models import Post
 
@@ -34,10 +36,23 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
     model = Course
     template_name = 'courses/manage/course/trainer.html'
 
+    lesson_steps = (
+        {'number': 1, 'key': 'objectives', 'label': 'Цели обучения'},
+        {'number': 2, 'key': 'theory', 'label': 'Теория'},
+        {'number': 3, 'key': 'practice', 'label': 'Практика'},
+        {'number': 4, 'key': 'self_check', 'label': 'Самопроверка'},
+        {'number': 5, 'key': 'resources', 'label': 'Источники'},
+    )
+
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return redirect_to_login(request.get_full_path(), self.get_login_url())
         return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        from courses.views.progress import LessonProgressUpdateView
+
+        return LessonProgressUpdateView().post(request, *args, **kwargs)
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -55,6 +70,11 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
         else:
             # Open the first module when no module was selected yet.
             context['module'] = course.modules.all()[0]
+        context['lesson_steps'] = self.lesson_steps
+        context['course_progress'] = course_progress(
+            user=self.request.user,
+            course=course,
+        )
         if 'lesson_id' in self.kwargs:
             context['active_lesson'] = get_object_or_404(
                 Lesson,
@@ -62,4 +82,27 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
                 id=self.kwargs['lesson_id'],
             )
             context['material'] = getattr(context['active_lesson'], 'material', None)
+            context['progress'] = get_or_start_progress(
+                user=self.request.user,
+                lesson=context['active_lesson'],
+            )
+            active_step = context['progress'].current_step
+            requested_step = self.request.GET.get('step')
+            if requested_step and requested_step.isdigit():
+                active_step = int(requested_step)
+            context['active_step'] = min(max(active_step, 1), 5)
+            all_lessons = list(
+                Lesson.objects.filter(module__course=course)
+                .select_related('module')
+                .order_by('module__order', 'order', 'id')
+            )
+            lesson_index = all_lessons.index(context['active_lesson'])
+            context['previous_lesson'] = (
+                all_lessons[lesson_index - 1] if lesson_index > 0 else None
+            )
+            context['next_lesson'] = (
+                all_lessons[lesson_index + 1]
+                if lesson_index < len(all_lessons) - 1 else None
+            )
+            context['recent_events'] = context['progress'].events.all()[:8]
         return context

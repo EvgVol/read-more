@@ -5,6 +5,7 @@ from courses.views.generic.list import (CourseListView, SubjectView,
                                         ContentListView, ModuleListView,
                                         ModuleOrderView, ContentOrderView)
 from courses.views.generic.detail import CourseDetailView, CourseTrainerView
+from courses.views.progress import LessonProgressUpdateView
 from courses.views.generic.create import (CourseCreateView,
                                           ContentCreateUpdateView,)
 from courses.views.generic.update import CourseUpdateView, ModuleUpdateView
@@ -26,6 +27,9 @@ urlpatterns = [
     path("course/<slug:slug>/trainer/<int:module_id>/lesson/<int:lesson_id>/",
          CourseTrainerView.as_view(),
          name="course_trainer_lesson"),
+    path("course/<slug:slug>/trainer/<int:module_id>/lesson/<int:lesson_id>/progress/",
+         LessonProgressUpdateView.as_view(),
+         name="course_trainer_lesson_progress"),
     path("course/<slug:slug>/trainer/<int:module_id>/",
          CourseTrainerView.as_view(),
          name="course_trainer_module"),

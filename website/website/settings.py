@@ -145,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Setting language code
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'ru'
 USE_I18N = True
 USE_L10N = True
 LANGUAGES = [
