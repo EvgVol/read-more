@@ -167,3 +167,33 @@ class CourseAuditViewTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(CourseAuditRun.objects.count(), 0)
+
+    def test_owner_can_compare_two_saved_audits(self):
+        client = Client()
+        client.force_login(self.course.owner)
+        run_url = reverse(
+            'courses:course_audit_run',
+            kwargs={'slug': self.course.slug},
+        )
+        client.post(run_url)
+        first_run = CourseAuditRun.objects.get()
+
+        material = self.course.modules.first().lessons.first().material
+        material.practice = 'Слишком короткая практика.'
+        material.save(update_fields=['practice', 'updated'])
+        client.post(run_url)
+        second_run = CourseAuditRun.objects.order_by('-created', '-id').first()
+
+        response = client.get(
+            reverse(
+                'courses:course_audit_compare',
+                kwargs={'slug': self.course.slug},
+            ),
+            {'left': first_run.id, 'right': second_run.id},
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Сравнение аудитов')
+        self.assertContains(response, 'Изменения')
+        self.assertContains(response, material.lesson.title)
+        self.assertContains(response, 'Практика')

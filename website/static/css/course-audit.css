@@ -55,6 +55,12 @@
 .course-audit__run-button:hover { background: #174ea6; }
 .course-audit__error { color: #b42318; font-weight: 600; }
 .course-audit__history-table { min-width: 650px; }
+.course-audit__compare-form { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; margin-bottom: 1.5rem; padding: 1.25rem; background: #fff; border: 1px solid var(--audit-border); border-radius: .75rem; }
+.course-audit__compare-form label { display: grid; gap: .35rem; color: var(--audit-muted); font-size: .8rem; font-weight: 600; }
+.course-audit__compare-form select { min-width: 15rem; padding: .55rem .65rem; border: 1px solid var(--audit-border); border-radius: .4rem; background: #fff; color: #111827; }
+.course-audit__history-actions { padding: 1rem 1.5rem; border-top: 1px solid var(--audit-border); }
+.course-audit__empty-state { padding: 2rem; color: var(--audit-muted); text-align: center; }
+.course-audit__table ul { margin: 0; padding-left: 1rem; color: #b42318; font-size: .82rem; }
 .course-audit__filters { display: flex; gap: .35rem; }
 .course-audit__filters a { padding: .4rem .65rem; border-radius: .4rem; color: var(--audit-muted); font-size: .8rem; text-decoration: none; }
 .course-audit__filters a:hover,

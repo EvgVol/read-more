@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}READ MORE | Сравнение аудитов {{ course.title }}{% endblock %}
+
+{% block css %}
+  <link href="{% static 'css/course-audit.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block base %}
+<main class="course-audit page" id="main-content">
+  <div class="course-audit__shell container-fluid">
+    <a class="course-audit__back-link" href="{% url 'courses:course_audit_history' course.slug %}">← К истории аудитов</a>
+    <header class="course-audit__header">
+      <div>
+        <span class="course-audit__eyebrow">Контроль изменений</span>
+        <h1>Сравнение аудитов</h1>
+        <p>{{ course.title }} · изменения между двумя сохранёнными запусками.</p>
+      </div>
+    </header>
+
+    <form class="course-audit__compare-form" method="get">
+      <label>Предыдущий запуск
+        <select name="left">
+          {% for run in audit_runs %}<option value="{{ run.id }}" {% if run == left_run %}selected{% endif %}>{{ run.created|date:'d.m.Y H:i' }} · {{ run.issues_count }} замечаний</option>{% endfor %}
+        </select>
+      </label>
+      <label>Новый запуск
+        <select name="right">
+          {% for run in audit_runs %}<option value="{{ run.id }}" {% if run == right_run %}selected{% endif %}>{{ run.created|date:'d.m.Y H:i' }} · {{ run.issues_count }} замечаний</option>{% endfor %}
+        </select>
+      </label>
+      <button class="course-audit__run-button" type="submit">Сравнить</button>
+    </form>
+
+    {% if audit_comparison %}
+      <section class="course-audit__summary" aria-label="Итог сравнения">
+        <article class="course-audit__metric"><strong>{{ audit_comparison.changed_lessons }}</strong><span>изменившихся уроков</span></article>
+        <article class="course-audit__metric"><strong>{{ audit_comparison.added_issues }}</strong><span>новых замечаний</span></article>
+        <article class="course-audit__metric"><strong>{{ audit_comparison.resolved_issues }}</strong><span>устранённых замечаний</span></article>
+      </section>
+      <section class="course-audit__card" aria-labelledby="audit-changes-title">
+        <div class="course-audit__card-header"><h2 id="audit-changes-title">Изменения</h2></div>
+        <div class="course-audit__table-wrap">
+          <table class="course-audit__table">
+            <thead><tr><th scope="col">Урок</th><th scope="col">Новые замечания</th><th scope="col">Устранённые замечания</th></tr></thead>
+            <tbody>
+              {% for change in audit_comparison.changes %}
+                <tr>
+                  <th scope="row"><span>{{ change.module }}</span><strong>{{ change.lesson }}</strong></th>
+                  <td>{% if change.added_categories %}<strong>{{ change.added_categories|join:', ' }}</strong>{% endif %}{% if change.added_issues %}<ul>{% for issue in change.added_issues %}<li>{{ issue }}</li>{% endfor %}</ul>{% else %}—{% endif %}</td>
+                  <td>{% if change.resolved_categories %}<strong>{{ change.resolved_categories|join:', ' }}</strong>{% endif %}{% if change.resolved_issues %}<ul>{% for issue in change.resolved_issues %}<li>{{ issue }}</li>{% endfor %}</ul>{% else %}—{% endif %}</td>
+                </tr>
+              {% empty %}
+                <tr><td class="course-audit__empty" colspan="3">Изменений между запусками нет.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    {% else %}
+      <section class="course-audit__card course-audit__empty-state">Нужно сохранить минимум два запуска аудита.</section>
+    {% endif %}
+  </div>
+</main>
+{% endblock %}
