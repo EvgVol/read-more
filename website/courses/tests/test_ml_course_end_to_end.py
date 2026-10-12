@@ -89,7 +89,7 @@ class MlCourseEndToEndTests(TestCase):
         self.assertContains(result, 'Последняя попытка:')
         self.assertContains(result, 'Освоено')
         self.assertContains(result, 'История попыток (1)')
-        self.assertContains(result, 'Тесты: 1/4')
+        self.assertContains(result, 'Тесты: 1/28')
         self.assertContains(result, 'Средний результат: 100%')
 
         second = client.post(
