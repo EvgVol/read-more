@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Путь данных от файла до результата</title>
+  <desc id="desc">Пять этапов: источник, проверка, преобразование, результат и контрольная сводка.</desc>
+  <rect width="1200" height="360" fill="#f8fafc"/>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <g fill="#0f172a" font-size="24" font-weight="700">
+      <text x="120" y="78">Источник</text>
+      <text x="360" y="78">Проверка</text>
+      <text x="600" y="78">Преобразование</text>
+      <text x="840" y="78">Результат</text>
+      <text x="1080" y="78">Сводка</text>
+    </g>
+    <g fill="#e0f2fe" stroke="#0284c7" stroke-width="3">
+      <rect x="35" y="110" width="170" height="130" rx="18"/>
+      <rect x="275" y="110" width="170" height="130" rx="18"/>
+      <rect x="515" y="110" width="170" height="130" rx="18"/>
+      <rect x="755" y="110" width="170" height="130" rx="18"/>
+      <rect x="995" y="110" width="170" height="130" rx="18"/>
+    </g>
+    <g fill="#334155" font-size="18">
+      <text x="120" y="150"><tspan x="120" dy="0">CSV / API</tspan><tspan x="120" dy="28">raw rows</tspan></text>
+      <text x="360" y="150"><tspan x="360" dy="0">schema</tspan><tspan x="360" dy="28">types</tspan></text>
+      <text x="600" y="150"><tspan x="600" dy="0">clean</tspan><tspan x="600" dy="28">features</tspan></text>
+      <text x="840" y="150"><tspan x="840" dy="0">table</tspan><tspan x="840" dy="28">or model input</tspan></text>
+      <text x="1080" y="150"><tspan x="1080" dy="0">rows</tspan><tspan x="1080" dy="28">quality metrics</tspan></text>
+    </g>
+    <g stroke="#64748b" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M210 175h55M450 175h55M690 175h55M930 175h55"/>
+    </g>
+    <g fill="#64748b">
+      <path d="m257 166 18 9-18 9zM497 166l18 9-18 9zM737 166l18 9-18 9zM977 166l18 9-18 9z"/>
+    </g>
+    <text x="600" y="310" fill="#475569" font-size="20">Каждая граница имеет вход, проверку и наблюдаемый выход</text>
+  </g>
+</svg>

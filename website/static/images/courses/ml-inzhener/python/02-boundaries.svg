@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">Границы preprocessing</title>
+  <desc id="desc">Сырые данные проходят через проверяемые правила preprocessing и превращаются в признаки, доступные модели.</desc>
+  <rect width="1200" height="420" fill="#f8fafc"/>
+  <g font-family="Arial, sans-serif">
+    <rect x="60" y="95" width="290" height="220" rx="20" fill="#fef3c7" stroke="#d97706" stroke-width="4"/>
+    <rect x="455" y="65" width="290" height="280" rx="20" fill="#e0f2fe" stroke="#0284c7" stroke-width="4"/>
+    <rect x="850" y="95" width="290" height="220" rx="20" fill="#dcfce7" stroke="#16a34a" stroke-width="4"/>
+    <g fill="#0f172a" text-anchor="middle" font-size="26" font-weight="700">
+      <text x="205" y="140">Сырые данные</text>
+      <text x="600" y="110">Preprocessing</text>
+      <text x="995" y="140">Признаки</text>
+    </g>
+    <g fill="#334155" text-anchor="middle" font-size="19">
+      <text x="205" y="190"><tspan x="205">строки файла</tspan><tspan x="205" dy="28">строковые типы</tspan><tspan x="205" dy="28">пропуски</tspan></text>
+      <text x="600" y="165"><tspan x="600">проверить схему</tspan><tspan x="600" dy="28">привести типы</tspan><tspan x="600" dy="28">обучить правила</tspan><tspan x="600" dy="28">проверить инварианты</tspan></text>
+      <text x="995" y="190"><tspan x="995">числовые значения</tspan><tspan x="995" dy="28">одинаковая форма</tspan><tspan x="995" dy="28">готово для модели</tspan></text>
+    </g>
+    <g stroke="#64748b" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M355 205h85M750 205h85"/>
+    </g>
+    <g fill="#64748b">
+      <path d="m425 193 22 12-22 12zM820 193l22 12-22 12z"/>
+    </g>
+    <text x="600" y="390" fill="#475569" font-size="20" text-anchor="middle">Параметры, вычисленные на train, применяются к validation и test без переобучения</text>
+  </g>
+</svg>
