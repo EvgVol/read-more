@@ -1,3 +1,5 @@
+import json
+from io import StringIO
 from pathlib import Path
 
 from django.contrib.auth import get_user_model
@@ -64,6 +66,27 @@ class MlCourseEndToEndTests(TestCase):
         call_command('seed_ml_python_lesson_blocks', verbosity=0)
         call_command('seed_ml_quiz', verbosity=0)
         call_command('audit_ml_learning_content', verbosity=0)
+
+    def test_learning_content_audit_has_editor_reports(self):
+        from django.core.management import call_command
+
+        call_command('seed_ml_quiz', verbosity=0)
+        text_output = StringIO()
+        call_command('audit_ml_learning_content', '--report', verbosity=0, stdout=text_output)
+        self.assertIn('Python для ML / Python для анализа данных', text_output.getvalue())
+        self.assertIn('Аудит пройден.', text_output.getvalue())
+
+        json_output = StringIO()
+        call_command(
+            'audit_ml_learning_content',
+            '--format=json',
+            verbosity=0,
+            stdout=json_output,
+        )
+        report = json.loads(json_output.getvalue())
+        self.assertEqual(report['summary']['lessons'], 28)
+        self.assertEqual(report['summary']['published_questions'], 84)
+        self.assertEqual(report['summary']['issues'], 0)
 
     def test_first_lesson_quiz_is_server_graded_and_answers_are_not_exposed(self):
         from django.core.management import call_command
