@@ -73,9 +73,11 @@ class LessonMaterialViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Цели обучения')
         self.assertContains(response, 'Теория')
-        self.assertContains(response, 'Практическое задание')
+        self.assertContains(response, 'Практика')
         self.assertContains(response, 'Самопроверка')
         self.assertContains(response, 'Источники')
+        self.assertContains(response, 'Шаг 1 из 5')
+        self.assertNotContains(response, 'Решить практическое задание')
         self.assertContains(response, self.lesson.title)
 
     def test_lesson_from_another_module_cannot_be_opened_through_selected_module(self):

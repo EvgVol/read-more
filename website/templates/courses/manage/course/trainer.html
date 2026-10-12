@@ -4,6 +4,10 @@
 
 {% block title %}READ MORE | {{ object.title }}{% endblock %}
 
+{% block css %}
+  <link href="{% static 'css/course-learning.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block base %}
 <div class="course-learning page">
   <div class="course-learning__shell container-fluid">
