@@ -140,16 +140,20 @@ class Command(BaseCommand):
                 old_content.delete()
                 if isinstance(item, Text) and item.title.startswith('Материал модуля:'):
                     item.delete()
-        course.modules.all().delete()
         for module_order, (title, description, lessons) in enumerate(self.modules, start=1):
-            module = Module.objects.create(
+            module, _ = Module.objects.update_or_create(
                 course=course,
                 title=title,
-                description=description,
-                order=module_order,
+                defaults={
+                    'description': description,
+                    'order': module_order,
+                },
             )
             for lesson_order, lesson_title in enumerate(lessons, start=1):
-                module.lessons.create(title=lesson_title, order=lesson_order)
+                module.lessons.update_or_create(
+                    title=lesson_title,
+                    defaults={'order': lesson_order},
+                )
             text = Text.objects.create(
                 owner=owner,
                 title=f'Материал модуля: {title}',

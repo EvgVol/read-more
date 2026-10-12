@@ -4,6 +4,7 @@ from django.test import TestCase
 from courses.models.course import Course
 from courses.models.lesson_block import LessonBlock
 from courses.models.lesson_material import LessonMaterial
+from courses.models.lesson_progress import LessonProgress
 
 
 class MlMaterialSeedTests(TestCase):
@@ -82,3 +83,50 @@ class MlMaterialSeedTests(TestCase):
         )
         self.assertTrue(all(block.published for block in blocks))
         self.assertEqual(blocks.filter(position=10).first().content['markdown'], lesson.material.theory)
+
+    def test_remaining_python_module_block_seed_is_idempotent(self):
+        call_command('seed_ml_materials', verbosity=0)
+        call_command('seed_ml_lesson_blocks', verbosity=0)
+        call_command('seed_ml_python_lesson_blocks', verbosity=0)
+        call_command('seed_ml_python_lesson_blocks', verbosity=0)
+
+        course = Course.objects.get(slug='ml-inzhener')
+        module = course.modules.get(title='Python для ML')
+        lessons = module.lessons.exclude(title='Python для анализа данных')
+        self.assertEqual(lessons.count(), 3)
+        self.assertEqual(
+            LessonBlock.objects.filter(lesson__in=lessons).count(),
+            9,
+        )
+        for lesson in lessons:
+            self.assertEqual(
+                list(lesson.blocks.order_by('position').values_list('type', flat=True)),
+                ['theory', 'code_example', 'summary'],
+            )
+
+    def test_course_seed_preserves_lessons_blocks_materials_and_progress(self):
+        call_command('seed_ml_materials', verbosity=0)
+        call_command('seed_ml_lesson_blocks', verbosity=0)
+        course = Course.objects.get(slug='ml-inzhener')
+        lesson = course.modules.get(title='Python для ML').lessons.get(
+            title='Python для анализа данных'
+        )
+        lesson_id = lesson.id
+        LessonProgress.objects.create(
+            user=course.owner,
+            lesson=lesson,
+            status=LessonProgress.Status.IN_PROGRESS,
+            current_step=3,
+        )
+
+        call_command('seed_ml_course', verbosity=0)
+
+        course.refresh_from_db()
+        lesson.refresh_from_db()
+        self.assertEqual(lesson.id, lesson_id)
+        self.assertTrue(LessonMaterial.objects.filter(lesson=lesson).exists())
+        self.assertEqual(LessonBlock.objects.filter(lesson=lesson).count(), 5)
+        self.assertEqual(
+            LessonProgress.objects.get(user=course.owner, lesson=lesson).current_step,
+            3,
+        )
