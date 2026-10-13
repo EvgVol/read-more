@@ -4,7 +4,6 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 
 from actions.utils import create_action
 from .forms import RegisterForm, UserEditForm, PasswordChangingForm
@@ -88,9 +87,8 @@ def user_list(request):
                    'users': users})
 
 
-@csrf_exempt
-@require_POST
 @login_required
+@require_POST
 def user_follow(request):
     user_id = request.POST.get('id')
     action = request.POST.get('action')

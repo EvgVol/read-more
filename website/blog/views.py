@@ -11,7 +11,6 @@ from django.contrib.postgres.search import (SearchVector, SearchQuery,
                                             SearchRank, TrigramSimilarity)
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
-from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.utils.translation import gettext_lazy as _
@@ -219,7 +218,6 @@ def create_post(request):
     return render(request, 'blog/post/create.html', {'form': form})
 
 
-@csrf_exempt
 @login_required
 @require_POST
 def post_like(request):

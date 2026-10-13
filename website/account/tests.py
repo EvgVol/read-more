@@ -220,3 +220,37 @@ class TestUserFollow(TestCase):
         response = self.client.post(self.url, data={
             'id': self.followed.id, 'action': 'follow'})
         self.assertEqual(response.status_code, 302)
+
+
+class TestUserFollowCsrf(TestCase):
+    """user_follow must enforce CSRF now that @csrf_exempt is gone."""
+
+    def setUp(self):
+        self.follower = User.objects.create_user(
+            username='fcs', email='fcs@example.com', password='pass123')
+        self.followed = User.objects.create_user(
+            username='fcs2', email='fcs2@example.com', password='pass123')
+        self.url = reverse('user_follow')
+
+    def _client(self):
+        return Client(enforce_csrf_checks=True)
+
+    def test_post_with_valid_token_ok(self):
+        c = self._client()
+        c.login(username='fcs', password='pass123')
+        # profile-edit form renders {% csrf_token %} for this session
+        c.get(reverse('account_edit'))
+        token = c.cookies['csrftoken'].value
+        response = c.post(
+            self.url, data={'id': self.followed.id, 'action': 'follow'},
+            HTTP_X_CSRFTOKEN=token)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'ok')
+
+    def test_post_without_token_rejected_403(self):
+        c = self._client()
+        c.login(username='fcs', password='pass123')
+        c.get(reverse('account_edit'))
+        response = c.post(
+            self.url, data={'id': self.followed.id, 'action': 'follow'})
+        self.assertEqual(response.status_code, 403)

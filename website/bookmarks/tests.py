@@ -110,3 +110,37 @@ class TestImageSlug(TestCase):
             username='slugg', email='slugg@example.com', password='pass123')
         image = _make_image(title='Beautiful View', user=user)
         self.assertEqual(image.slug, 'beautiful-view')
+
+
+class TestImageLikeCsrf(TestCase):
+    """image_like must enforce CSRF now that @csrf_exempt is gone."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='likecs', email='lcs@example.com', password='pass123')
+        self.image = _make_image(user=self.user)
+        self.url = reverse('bookmarks:like')
+
+    def _client(self):
+        return Client(enforce_csrf_checks=True)
+
+    def test_post_with_valid_token_ok(self):
+        c = self._client()
+        c.login(username='likecs', password='pass123')
+        # profile-edit form renders {% csrf_token %} for this session
+        c.get(reverse('account_edit'))
+        token = c.cookies['csrftoken'].value
+        response = c.post(
+            self.url, data={'id': self.image.id, 'action': 'like'},
+            HTTP_X_CSRFTOKEN=token)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'ok')
+        self.assertIn(self.user, self.image.users_like.all())
+
+    def test_post_without_token_rejected_403(self):
+        c = self._client()
+        c.login(username='likecs', password='pass123')
+        c.get(reverse('account_edit'))
+        response = c.post(
+            self.url, data={'id': self.image.id, 'action': 'like'})
+        self.assertEqual(response.status_code, 403)

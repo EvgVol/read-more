@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import redis
 
@@ -51,7 +50,6 @@ def image_detail(request, id, slug):
                    'total_views': total_views})
 
 
-@csrf_exempt
 @login_required
 @require_POST
 def image_like(request):
