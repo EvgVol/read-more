@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Разделение выборок и leakage</title>
+  <desc id="d">Делим данные на train/val/test так, чтобы будущее и target не утекали в признаки.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Разделение выборок и leakage</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<rect x="70" y="120" width="340" height="70" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+<rect x="410" y="120" width="260" height="70" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="3"/>
+<rect x="670" y="120" width="260" height="70" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<text x="240" y="164" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#334155" text-anchor="middle" font-weight="700">train 70%</text>
+<text x="540" y="164" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#334155" text-anchor="middle" font-weight="700">val 15%</text>
+<text x="800" y="164" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#334155" text-anchor="middle" font-weight="700">test 15%</text>
+<text x="500" y="100" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">Одна и та же строка не должна попасть в две выборки</text>
+<path d="M800 190 C 800 285 240 285 240 190" fill="none" stroke="#dc2626" stroke-width="4" stroke-dasharray="9 6"/>
+<line x1="250" y1="250" x2="240" y2="196" stroke="#dc2626" stroke-width="4" stroke-linecap="round"/><path d="M240 196 L247.9 207.5 L236.7 209.6 Z" fill="#dc2626"/>
+<text x="500" y="300" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#dc2626" text-anchor="middle" font-weight="700">leakage: признак «знает» ответ — метрика завышена</text>
+<rect x="880" y="210" width="90" height="70" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+<text x="925" y="240" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#dc2626" text-anchor="middle" font-weight="700">запрет</text>
+<text x="925" y="262" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#dc2626" text-anchor="middle">целостности</text>
+  </g>
+</svg>

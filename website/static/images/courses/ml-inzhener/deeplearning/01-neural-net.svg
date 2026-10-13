@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Нейронные сети</title>
+  <desc id="d">Слои нейронов с весами; обучение — цикл forward, loss, backprop, обновление весов.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Нейронные сети</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<circle cx="140" cy="110.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="140" cy="166.66666666666666" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="140" cy="223.33333333333331" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="140" cy="280.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="330" cy="110.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="330" cy="144.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="330" cy="178.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="330" cy="212.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="330" cy="246.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="330" cy="280.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="520" cy="110.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="520" cy="144.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="520" cy="178.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="520" cy="212.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="520" cy="246.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="520" cy="280.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="710" cy="110.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="710" cy="195.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<circle cx="710" cy="280.0" r="17" fill="none" stroke="#0284c7" stroke-width="3"/>
+<line x1="157" y1="110.0" x2="313" y2="110.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="110.0" x2="313" y2="144.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="110.0" x2="313" y2="178.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="110.0" x2="313" y2="212.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="110.0" x2="313" y2="246.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="110.0" x2="313" y2="280.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="166.66666666666666" x2="313" y2="110.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="166.66666666666666" x2="313" y2="144.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="166.66666666666666" x2="313" y2="178.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="166.66666666666666" x2="313" y2="212.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="166.66666666666666" x2="313" y2="246.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="166.66666666666666" x2="313" y2="280.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="223.33333333333331" x2="313" y2="110.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="223.33333333333331" x2="313" y2="144.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="223.33333333333331" x2="313" y2="178.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="223.33333333333331" x2="313" y2="212.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="223.33333333333331" x2="313" y2="246.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="223.33333333333331" x2="313" y2="280.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="280.0" x2="313" y2="110.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="280.0" x2="313" y2="144.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="280.0" x2="313" y2="178.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="280.0" x2="313" y2="212.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="280.0" x2="313" y2="246.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<line x1="157" y1="280.0" x2="313" y2="280.0" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="140" y="90" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">вход</text>
+<text x="330" y="90" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">скрытый</text>
+<text x="520" y="90" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">скрытый</text>
+<text x="710" y="90" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">выход</text>
+<rect x="820" y="120" width="150" height="150" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="3"/>
+<text x="895" y="158" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">forward</text>
+<text x="895" y="188" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">loss</text>
+<text x="895" y="218" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">backprop</text>
+<text x="895" y="248" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">optimizer</text>
+  </g>
+</svg>

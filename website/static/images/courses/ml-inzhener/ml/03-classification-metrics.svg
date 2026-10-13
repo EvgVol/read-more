@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Классификация и метрики</title>
+  <desc id="d">Точность вводит в заблуждение при дисбалансе; метрику выбираем по цене ошибки.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Классификация и метрики</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<rect x="90" y="105" width="130" height="85" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<rect x="220" y="105" width="130" height="85" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<rect x="90" y="190" width="130" height="85" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<rect x="220" y="190" width="130" height="85" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"/>
+<text x="155.0" y="177.5" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#202938" text-anchor="middle" font-weight="700">TP</text>
+<text x="285.0" y="177.5" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#202938" text-anchor="middle" font-weight="700">FN</text>
+<text x="155.0" y="262.5" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#202938" text-anchor="middle" font-weight="700">FP</text>
+<text x="285.0" y="262.5" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#202938" text-anchor="middle" font-weight="700">TN</text>
+<text x="195" y="320" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">матрица ошибок</text>
+<text x="95" y="95" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#475569" text-anchor="start">пред. полож.</text>
+<text x="265" y="95" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#475569" text-anchor="start">пред. отриц.</text>
+<rect x="340" y="100" width="300" height="190" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="3"/>
+<text x="490" y="135" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">precision = TP/(TP+FP)</text>
+<text x="490" y="175" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">recall = TP/(TP+FN)</text>
+<text x="490" y="215" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">F1 — баланс двух</text>
+<text x="490" y="255" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">AUC — вся ROC-кривая</text>
+<rect x="680" y="100" width="260" height="190" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="810" y="135" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle" font-weight="700">Цена ошибки?</text>
+<text x="810" y="175" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">фрод: лучше FP</text>
+<text x="810" y="205" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">спам: лучше FN</text>
+<text x="810" y="235" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">метрика = бизнес-цена</text>
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Векторы и матрицы</title>
+  <desc id="d">Вектор задаёт точку или направление, матрица хранит признаки объектов.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Векторы и матрицы</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<circle cx="180" cy="200" r="110" fill="none" stroke="#0284c7" stroke-width="2.5"/>
+<line x1="180" y1="200" x2="180" y2="90" stroke="#64748b" stroke-width="2"/>
+<line x1="70" y1="200" x2="290" y2="200" stroke="#64748b" stroke-width="2"/>
+<line x1="180" y1="200" x2="245" y2="130" stroke="#0284c7" stroke-width="4" stroke-linecap="round"/><path d="M245 130 L240.5 143.3 L232.1 135.5 Z" fill="#0284c7"/>
+<line x1="180" y1="200" x2="120" y2="150" stroke="#7c3aed" stroke-width="4" stroke-linecap="round"/><path d="M120 150 L133.5 153.8 L126.2 162.6 Z" fill="#7c3aed"/>
+<text x="258" y="122" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#0284c7" text-anchor="middle" font-weight="700">v</text>
+<text x="112" y="142" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#7c3aed" text-anchor="middle" font-weight="700">u</text>
+<text x="180" y="300" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#475569" text-anchor="middle">Вектор — стрелка с координатами</text>
+<rect x="470" y="110" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="558" y="110" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="646" y="110" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="470" y="170" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="558" y="170" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="646" y="170" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="470" y="230" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="558" y="230" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<rect x="646" y="230" width="88" height="60" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
+<text x="700" y="92" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#475569" text-anchor="middle">Матрица признаков (3×3)</text>
+<text x="558" y="300" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#475569" text-anchor="middle">каждая ячейка — значение</text>
+<text x="558" y="322" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#475569" text-anchor="middle">признака для одного объекта</text>
+<text x="395" y="205" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#202938" text-anchor="middle" font-weight="700">+</text>
+  </g>
+</svg>

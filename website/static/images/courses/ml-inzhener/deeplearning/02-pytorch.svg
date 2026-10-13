@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">PyTorch и тензоры</title>
+  <desc id="d">Тензор — массив с градиентом; nn.Module хранит параметры, цикл обучения обновляет их через autograd.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">PyTorch и тензоры</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<rect x="70" y="110" width="200" height="100" rx="12" fill="#fee2e2" stroke="#dc2626" stroke-width="3"/>
+<text x="170" y="150" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">Tensor</text>
+<text x="170" y="178" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">data + grad</text>
+<rect x="340" y="110" width="200" height="100" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+<text x="440" y="150" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">Model</text>
+<text x="440" y="178" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">nn.Module</text>
+<rect x="610" y="110" width="200" height="100" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<text x="710" y="150" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">loss + optimizer</text>
+<text x="710" y="178" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle">step()</text>
+<line x1="270" y1="160" x2="340" y2="160" stroke="#64748b" stroke-width="4" stroke-linecap="round"/><path d="M340 160 L327.2 165.7 L327.2 154.3 Z" fill="#64748b"/>
+<line x1="540" y1="160" x2="610" y2="160" stroke="#64748b" stroke-width="4" stroke-linecap="round"/><path d="M610 160 L597.2 165.7 L597.2 154.3 Z" fill="#64748b"/>
+<path d="M710 210 C 710 300 440 300 440 210" fill="none" stroke="#7c3aed" stroke-width="4" stroke-dasharray="9 6"/>
+<line x1="450" y1="250" x2="440" y2="214" stroke="#7c3aed" stroke-width="4" stroke-linecap="round"/><path d="M440 214 L448.9 224.8 L437.9 227.8 Z" fill="#7c3aed"/>
+<text x="575" y="285" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#7c3aed" text-anchor="middle">train loop: zero_grad → forward → backward → step</text>
+<text x="500" y="325" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#475569" text-anchor="middle">устройства: .to(device) — CPU/GPU, autograd следит за графом</text>
+  </g>
+</svg>

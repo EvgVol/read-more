@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Градиентный спуск</title>
+  <desc id="d">Оптимизатор движется против градиента функции потерь, уменьшая её шаг за шагом.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Градиентный спуск</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<path d="M120 120 C 260 120 280 260 400 260 C 520 260 540 120 680 120" fill="none" stroke="#2563eb" stroke-width="5"/>
+<text x="690" y="150" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#2563eb" text-anchor="start">loss(J)</text>
+<polyline points="220,150 280,200 330,235 380,255 400,260" fill="none" stroke="#dc2626" stroke-width="3" stroke-dasharray="8 5"/>
+<circle cx="400" cy="260" r="8" fill="#dc2626"/>
+<line x1="300" y1="165" x2="360" y2="240" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/><path d="M360 240 L347.6 233.6 L356.5 226.5 Z" fill="#dc2626"/>
+<text x="400" y="285" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#dc2626" text-anchor="middle" font-weight="700">минимум</text>
+<text x="180" y="135" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#475569" text-anchor="middle">старт</text>
+<rect x="720" y="120" width="230" height="140" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+<text x="835" y="158" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">шаг = lr × градиент</text>
+<text x="835" y="190" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">lr велик → скачет</text>
+<text x="835" y="222" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">lr мал → медленно</text>
+  </g>
+</svg>

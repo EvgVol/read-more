@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Подбор гиперпараметров</title>
+  <desc id="d">Гиперпараметры подбираем на validation; test используем один раз, чтобы не подогнать под него.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Подбор гиперпараметров</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<circle cx="140" cy="95" r="13" fill="#fca5a5"/>
+<circle cx="140" cy="147" r="13" fill="#fca5a5"/>
+<circle cx="140" cy="199" r="13" fill="#fca5a5"/>
+<circle cx="140" cy="251" r="13" fill="#fca5a5"/>
+<circle cx="140" cy="303" r="13" fill="#fca5a5"/>
+<circle cx="210" cy="95" r="13" fill="#fca5a5"/>
+<circle cx="210" cy="147" r="13" fill="#fca5a5"/>
+<circle cx="210" cy="199" r="13" fill="#fca5a5"/>
+<circle cx="210" cy="251" r="13" fill="#fca5a5"/>
+<circle cx="210" cy="303" r="13" fill="#facc15"/>
+<circle cx="280" cy="95" r="13" fill="#fca5a5"/>
+<circle cx="280" cy="147" r="13" fill="#fca5a5"/>
+<circle cx="280" cy="199" r="13" fill="#fca5a5"/>
+<circle cx="280" cy="251" r="13" fill="#facc15"/>
+<circle cx="280" cy="303" r="13" fill="#16a34a"/>
+<circle cx="350" cy="95" r="13" fill="#fca5a5"/>
+<circle cx="350" cy="147" r="13" fill="#fca5a5"/>
+<circle cx="350" cy="199" r="13" fill="#facc15"/>
+<circle cx="350" cy="251" r="13" fill="#16a34a"/>
+<circle cx="350" cy="303" r="13" fill="#16a34a"/>
+<circle cx="420" cy="95" r="13" fill="#fca5a5"/>
+<circle cx="420" cy="147" r="13" fill="#fca5a5"/>
+<circle cx="420" cy="199" r="13" fill="#fca5a5"/>
+<circle cx="420" cy="251" r="13" fill="#facc15"/>
+<circle cx="420" cy="303" r="13" fill="#16a34a"/>
+<text x="310" y="312" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">сетка гиперпараметров: зелёный — лучший score на valid</text>
+<rect x="640" y="100" width="300" height="180" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+<text x="790" y="135" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle" font-weight="700">честный отбор</text>
+<text x="790" y="170" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">1) train → подобрать</text>
+<text x="790" y="200" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">2) validation → выбрать</text>
+<text x="790" y="230" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#334155" text-anchor="middle">3) test → один раз, финал</text>
+  </g>
+</svg>

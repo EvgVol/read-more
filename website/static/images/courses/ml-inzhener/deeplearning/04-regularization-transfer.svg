@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">Регуляризация и перенос обучения</title>
+  <desc id="d">Dropout, веса-штрафы и ранняя остановка борются с переобучением; transfer learning переиспользует знания.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">Регуляризация и перенос обучения</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<path d="M90 240 C 160 120 240 120 310 240" fill="none" stroke="#2563eb" stroke-width="4"/>
+<path d="M90 205 C 160 165 240 165 310 205" fill="none" stroke="#dc2626" stroke-width="4" stroke-dasharray="7 5"/>
+<text x="200" y="95" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#2563eb" text-anchor="middle">обучающая кривая</text>
+<text x="200" y="270" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#dc2626" text-anchor="middle">валидационная (расходится)</text>
+<text x="200" y="300" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle" font-weight="700">переобучение</text>
+<rect x="400" y="110" width="220" height="80" rx="12" fill="#f1f5f9" stroke="#64748b" stroke-width="3"/>
+<text x="510" y="145" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle" font-weight="700">предобученная сеть</text>
+<text x="510" y="172" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#475569" text-anchor="middle">(ImageNet / текст)</text>
+<line x1="510" y1="190" x2="510" y2="225" stroke="#64748b" stroke-width="4" stroke-linecap="round"/><path d="M510 225 L504.3 212.2 L515.7 212.2 Z" fill="#64748b"/>
+<rect x="400" y="225" width="220" height="80" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="510" y="260" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle" font-weight="700">заморозить слои</text>
+<text x="510" y="286" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#334155" text-anchor="middle">перетренить head</text>
+<text x="510" y="330" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#475569" text-anchor="middle">мало своих данных → опора на чужой опыт</text>
+  </g>
+</svg>

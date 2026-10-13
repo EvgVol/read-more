@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" role="img" aria-labelledby="t d">
+  <title id="t">FastAPI и сервис модели</title>
+  <desc id="d">Модель оборачивают в HTTP-сервис с валидацией, версионированием и наблюдаемостью.</desc>
+  <rect width="1000" height="340" rx="20" fill="#f7f8fc"/>
+  <text x="40" y="46" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#202938">FastAPI и сервис модели</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+<rect x="70" y="120" width="160" height="100" rx="12" fill="#e0f2fe" stroke="#0284c7" stroke-width="3"/>
+<text x="150" y="160" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">HTTP</text>
+<text x="150" y="188" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">запрос</text>
+<text x="150" y="216" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">JSON</text>
+<line x1="230" y1="170" x2="310" y2="170" stroke="#64748b" stroke-width="4" stroke-linecap="round"/><path d="M310 170 L297.2 175.7 L297.2 164.3 Z" fill="#64748b"/>
+<rect x="310" y="100" width="300" height="140" rx="12" fill="#e0e7ff" stroke="#4f46e5" stroke-width="3"/>
+<text x="460" y="135" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#334155" text-anchor="middle" font-weight="700">FastAPI-сервис</text>
+<text x="460" y="170" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#334155" text-anchor="middle">валидация входных данных</text>
+<text x="460" y="198" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#334155" text-anchor="middle">загрузка модели из диска</text>
+<text x="460" y="226" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#334155" text-anchor="middle">инференс + ответ</text>
+<line x1="610" y1="170" x2="690" y2="170" stroke="#64748b" stroke-width="4" stroke-linecap="round"/><path d="M690 170 L677.2 175.7 L677.2 164.3 Z" fill="#64748b"/>
+<rect x="690" y="120" width="160" height="100" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="3"/>
+<text x="770" y="160" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">предсказание</text>
+<text x="770" y="188" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">статус 200</text>
+<text x="770" y="216" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#334155" text-anchor="middle">JSON</text>
+<rect x="880" y="150" width="90" height="60" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="3"/>
+<text x="925" y="188" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#334155" text-anchor="middle" font-weight="700">лог</text>
+<line x1="850" y1="170" x2="880" y2="170" stroke="#64748b" stroke-width="3" stroke-linecap="round"/><path d="M880 170 L867.2 175.7 L867.2 164.3 Z" fill="#64748b"/>
+<text x="500" y="300" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#475569" text-anchor="middle">модель изолирована: контракт, версия, лимиты</text>
+  </g>
+</svg>

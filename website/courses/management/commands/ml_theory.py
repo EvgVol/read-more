@@ -10,6 +10,105 @@ the mathematical, implementation, debugging, and production perspectives.
 from textwrap import dedent
 
 
+# Per-lesson SVG diagram shown at the top of the theory step. Only lessons
+# whose theory is rendered from this generator (no published lesson blocks)
+# are listed here; block-based lessons attach their own illustrations.
+LESSON_DIAGRAMS = {
+    'Векторы и матрицы': (
+        '/static/images/courses/ml-inzhener/math/01-vectors-matrices.svg',
+        'Вектор как стрелка и матрица признаков',
+    ),
+    'Вероятности и распределения': (
+        '/static/images/courses/ml-inzhener/math/02-distribution.svg',
+        'Гауссово распределение: среднее и стандартное отклонение',
+    ),
+    'Статистические оценки': (
+        '/static/images/courses/ml-inzhener/math/03-estimation.svg',
+        'Оценка параметра по выборке с доверительным интервалом',
+    ),
+    'Градиентный спуск': (
+        '/static/images/courses/ml-inzhener/math/04-gradient-descent.svg',
+        'Движение против градиента к минимуму функции потерь',
+    ),
+    'EDA: исследовательский анализ': (
+        '/static/images/courses/ml-inzhener/analysis/01-eda.svg',
+        'Этапы исследовательского анализа до моделирования',
+    ),
+    'Пропуски и выбросы': (
+        '/static/images/courses/ml-inzhener/analysis/02-missing-outliers.svg',
+        'Пропуски в таблице и выбросы по квартилям',
+    ),
+    'Разделение выборок и leakage': (
+        '/static/images/courses/ml-inzhener/analysis/03-split-leakage.svg',
+        'Разделение train/validation/test и запрет утечки данных',
+    ),
+    'Линейные модели': (
+        '/static/images/courses/ml-inzhener/ml/01-linear-model.svg',
+        'Аппроксимация линейной моделью и регуляризация',
+    ),
+    'Деревья и ансамбли': (
+        '/static/images/courses/ml-inzhener/ml/02-trees-ensembles.svg',
+        'Одно дерево и ансамбль деревьев с усреднением',
+    ),
+    'Классификация и метрики': (
+        '/static/images/courses/ml-inzhener/ml/03-classification-metrics.svg',
+        'Матрица ошибок, precision, recall и выбор метрики',
+    ),
+    'Подбор гиперпараметров': (
+        '/static/images/courses/ml-inzhener/ml/04-hyperparameters.svg',
+        'Поиск по сетке гиперпараметров на валидации',
+    ),
+    'Нейронные сети': (
+        '/static/images/courses/ml-inzhener/deeplearning/01-neural-net.svg',
+        'Слои нейронов и цикл обучения сети',
+    ),
+    'PyTorch и тензоры': (
+        '/static/images/courses/ml-inzhener/deeplearning/02-pytorch.svg',
+        'Тензор, модель и цикл обучения в PyTorch',
+    ),
+    'Компьютерное зрение': (
+        '/static/images/courses/ml-inzhener/deeplearning/03-computer-vision.svg',
+        'Свёрточный путь от изображения к классам',
+    ),
+    'Регуляризация и перенос обучения': (
+        '/static/images/courses/ml-inzhener/deeplearning/04-regularization-transfer.svg',
+        'Переобучение и переиспользование предобученной сети',
+    ),
+    'Предобработка текста': (
+        '/static/images/courses/ml-inzhener/nlp/01-text-preprocessing.svg',
+        'Этапы превращения текста в числовой ввод модели',
+    ),
+    'Эмбеддинги и трансформеры': (
+        '/static/images/courses/ml-inzhener/nlp/02-embeddings-transformers.svg',
+        'Смысловые вектора и механизм внимания',
+    ),
+    'Классификация текстов': (
+        '/static/images/courses/ml-inzhener/nlp/03-text-classification.svg',
+        'Классификатор текстов и вероятности классов',
+    ),
+    'Рекомендательные системы': (
+        '/static/images/courses/ml-inzhener/nlp/04-recommenders.svg',
+        'Вектора пользователя и товаров для подбора top-K',
+    ),
+    'FastAPI и сервис модели': (
+        '/static/images/courses/ml-inzhener/mlops/01-fastapi-service.svg',
+        'HTTP-сервис вокруг модели с валидацией и логом',
+    ),
+    'Docker и CI/CD': (
+        '/static/images/courses/ml-inzhener/mlops/02-docker-cicd.svg',
+        'Конвейер сборки, тестов и развёртывания образа',
+    ),
+    'Мониторинг и обновление моделей': (
+        '/static/images/courses/ml-inzhener/mlops/03-monitoring.svg',
+        'Цикл мониторинга дрейфа и обновления модели',
+    ),
+    'Итоговый ML-проект': (
+        '/static/images/courses/ml-inzhener/mlops/04-final-project.svg',
+        'Полный путь ML-проекта от вопроса до портфолио',
+    ),
+}
+
+
 BLUEPRINTS = {
     'Python для анализа данных': {
         'focus': 'писать понятный, проверяемый Python-код для работы с данными',
@@ -603,6 +702,10 @@ def build_theory(title):
         ('Итоги', paragraphs[9:13]),
     ]
     result = [f'# {title}: подробная теория', '']
+    diagram = LESSON_DIAGRAMS.get(title)
+    if diagram:
+        src, alt = diagram
+        result.extend([f'![{alt}]({src})', ''])
     for heading, content in sections:
         result.append(f'## {heading}')
         result.append('')
