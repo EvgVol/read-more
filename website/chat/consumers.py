@@ -5,11 +5,31 @@ from channels.db import database_sync_to_async
 from django.utils import timezone
 
 
+@database_sync_to_async
+def is_student(user, course_id):
+    """True if user is enrolled in the course (mirrors the room view)."""
+    try:
+        user.courses_joined.get(id=course_id)
+        return True
+    except Exception:
+        return False
+
+
 class ChatConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
         self.user = self.scope['user']
         self.id = self.scope['url_route']['kwargs']['course_id']
+        # Auth gate: reject anonymous clients (view gates the page, but
+        # the websocket is reachable directly by URL). close() before
+        # accept() makes the ASGI server reject the handshake.
+        if not self.user.is_authenticated:
+            await self.close(code=4401)
+            return
+        # Student gate: only enrolled students may join the room.
+        if not await is_student(self.user, self.id):
+            await self.close(code=4403)
+            return
         self.room_group_name = f'chat_{self.id}'
         # присоединиться к группе чат-комнаты
         await self.channel_layer.group_add(
@@ -18,9 +38,10 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
 
     async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(
-            self.room_group_name, self.channel_name
-        )
+        if getattr(self, 'room_group_name', None):
+            await self.channel_layer.group_discard(
+                self.room_group_name, self.channel_name
+            )
 
     async def receive(self, text_data):
         now = timezone.now()
@@ -38,5 +59,3 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def chat_message(self, event):
         await self.send(text_data=json.dumps(event))
-
-    

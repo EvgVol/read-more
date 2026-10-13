@@ -133,3 +133,34 @@ class TestChatConsumer(TransactionTestCase):
             await communicator_b.disconnect()
 
         async_to_sync(scenario)()
+
+    def test_anonymous_connect_rejected(self):
+        """No session cookie -> consumer must refuse the handshake."""
+
+        async def scenario():
+            # no cookie headers at all
+            communicator = WebsocketCommunicator(
+                application, f'/ws/chat/room/{self.course.id}/',
+                headers=[
+                    (b'origin', b'http://testserver'),
+                ])
+            connected, _ = await communicator.connect()
+            self.assertFalse(connected)
+
+        async_to_sync(scenario)()
+
+    def test_non_student_connect_rejected(self):
+        """Authenticated but not enrolled -> consumer must refuse."""
+        outsider = User.objects.create_user(
+            username='wsoutsider', email='wso@example.com',
+            password='pass123')
+        client = Client()
+        client.login(username='wsoutsider', password='pass123')
+        cookie = f'sessionid={client.session.session_key}'
+
+        async def scenario():
+            communicator = self._communicator(cookie)
+            connected, _ = await communicator.connect()
+            self.assertFalse(connected)
+
+        async_to_sync(scenario)()

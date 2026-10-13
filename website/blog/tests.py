@@ -187,3 +187,68 @@ class TestPostFeed(TestCase):
         self.assertIn('Feed A', content)
         self.assertIn('Feed B', content)
         self.assertNotIn('Draft C', content)
+
+
+class TestMarkdownFilter(TestCase):
+    """The markdown filter must neutralize raw HTML (stored XSS)."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='mdfilter', email='md@example.com', password='pass123')
+
+    def test_raw_html_is_escaped(self):
+        from .templatetags.blog_tags import markdown_format
+        out = markdown_format(
+            '<p>hi</p><img src=x onerror="alert(document.cookie)">')
+        # the payload must become inert text, never a live tag
+        self.assertNotIn('<img', out)          # no live <img tag
+        self.assertIn('\u0026lt;img', out)  # payload kept only as escaped text
+
+    def test_markdown_syntax_still_works(self):
+        from .templatetags.blog_tags import markdown_format
+        out = markdown_format('**bold** and *italic*')
+        self.assertIn('<strong>bold</strong>', out)
+        self.assertIn('<em>italic</em>', out)
+
+    def test_post_body_script_neutralized(self):
+        from .templatetags.blog_tags import markdown_format
+        post = _make_post('XSS', self.user)
+        post.body = 'safe **md** <script>steal()</script>'
+        post.save()
+        # what the template pipeline would output for the body
+        rendered = markdown_format(post.body)
+        self.assertNotIn('<script>', rendered)
+        self.assertIn('<strong>md</strong>', rendered)
+
+
+class TestPostLikeCsrf(TestCase):
+    """post_like must enforce CSRF now that @csrf_exempt is gone."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='csrfl', email='cs@example.com', password='pass123')
+        self.post = _make_post('Csrf', self.user)
+        self.url = reverse('blog:post_like')
+
+    def _client(self):
+        return Client(enforce_csrf_checks=True)
+
+    def test_post_with_valid_token_ok(self):
+        c = self._client()
+        c.login(username='csrfl', password='pass123')
+        # profile-edit form renders {% csrf_token %} for this session
+        c.get(reverse('account_edit'))
+        token = c.cookies['csrftoken'].value
+        response = c.post(
+            self.url, data={'id': self.post.id, 'action': 'like'},
+            HTTP_X_CSRFTOKEN=token)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()['status'], 'ok')
+
+    def test_post_without_token_rejected_403(self):
+        c = self._client()
+        c.login(username='csrfl', password='pass123')
+        c.get(reverse('account_edit'))
+        response = c.post(
+            self.url, data={'id': self.post.id, 'action': 'like'})
+        self.assertEqual(response.status_code, 403)

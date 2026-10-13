@@ -4,6 +4,7 @@ from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django.contrib.contenttypes.models import ContentType
 import markdown
+import html
 
 from ..models import Post, Category
 
@@ -26,7 +27,13 @@ def get_most_commented_posts(count=3):
 
 @register.filter(name='markdown')
 def markdown_format(text):
-    return mark_safe(markdown.markdown(text))
+    """Render user-authored Markdown safely.
+
+    Raw HTML is escaped BEFORE markdown so embedded tags are rendered
+    as text, not injected (stored XSS). Markdown syntax itself
+    (**bold**, links, code) still works.
+    """
+    return mark_safe(markdown.markdown(html.escape(text)))
 
 
 @register.inclusion_tag('blog/includes/categories.html')
