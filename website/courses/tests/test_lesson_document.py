@@ -1,3 +1,5 @@
+from html import unescape
+
 from django.test import SimpleTestCase
 
 from courses.services.lesson_document import render_lesson_document
@@ -40,3 +42,25 @@ class LessonDocumentTests(SimpleTestCase):
         document = render_lesson_document('## Основы', heading_prefix='block-20-')
 
         self.assertEqual(document.toc[0]['anchor'], 'block-20-osnovy')
+
+    def test_fenced_code_is_not_double_escaped(self):
+        # The parser escapes code once; the pre-escape pass must not add a
+        # second level, otherwise the browser shows an entity, not ">"
+        source = "amount = '120.50'\nassert amount > 0\n"
+        document = render_lesson_document('```python\n' + source + '```\n')
+        html = document.html
+
+        self.assertIn('<pre><code class="language-python">', html)
+        code_start = html.index('<code')
+        inner = html[html.index('>', code_start) + 1: html.rindex('</code>')]
+        # After exactly one HTML decode the code must match the source
+        # verbatim; a double escape would leave a literal entity behind.
+        self.assertEqual(unescape(inner).strip(), source.strip())
+
+    def test_inline_code_is_not_double_escaped(self):
+        document = render_lesson_document('Порог `value > 0` обязателен.')
+        html = document.html
+
+        self.assertIn('<code>value', html)
+        inner = html[html.index('<code>') + 6: html.rindex('</code>')]
+        self.assertEqual(unescape(inner), 'value > 0')

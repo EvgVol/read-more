@@ -34,6 +34,11 @@ _EXTERNAL_LINK_RE = re.compile(
     r'<a href="(https?://[^"]+)">',
     re.IGNORECASE,
 )
+# Fenced code blocks first (they nest), then inline <code> spans.
+_CODE_BLOCK_RE = re.compile(
+    r'<pre><code\b[^>]*>.*?</code></pre>|<code\b[^>]*>.*?</code>',
+    re.DOTALL,
+)
 
 _CALLOUT_LABELS = {
     'important': 'Важно',
@@ -113,12 +118,34 @@ def _extract_headings(
     return '\n'.join(output), headings, placeholders
 
 
+def _unescape_code_regions(rendered: str) -> str:
+    """Undo the extra escaping pass inside markdown code regions.
+
+    The source is pre-escaped before parsing (so raw HTML in prose cannot
+    survive), and the fenced_code/code_span extensions escape ``& < >`` a
+    second time inside code blocks.  Reversing exactly one level leaves the
+    code single-escaped, which is what the browser needs to display it.
+    """
+
+    def _fix(match: re.Match) -> str:
+        block = match.group(0)
+        if block.startswith('<pre>'):
+            open_end = block.index('>', block.index('<code')) + 1
+        else:
+            open_end = block.index('>') + 1
+        close_start = block.rindex('</code>')
+        inner = html.unescape(block[open_end:close_start])
+        return block[:open_end] + inner + block[close_start:]
+
+    return _CODE_BLOCK_RE.sub(_fix, rendered)
+
+
 def _render_markdown_fragment(value: str) -> str:
     rendered = markdown.markdown(
         escape(value),
         extensions=['fenced_code', 'tables'],
     )
-    return _sanitize_html(rendered)
+    return _sanitize_html(_unescape_code_regions(rendered))
 
 
 def _sanitize_image(match: re.Match) -> str:
