@@ -26,7 +26,7 @@ def register(request):
             login(request, new_user)
             Profile.objects.create(user=new_user)
             create_action(new_user, 'зарегистрировался', new_user)
-        return redirect('blog:post_list')
+            return redirect('blog:post_list')
     else:
         form = RegisterForm()
     return render(request,
