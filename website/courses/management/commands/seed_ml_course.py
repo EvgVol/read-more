@@ -225,6 +225,17 @@ class Command(BaseCommand):
             instance.image.save(target_name, File(image_file), save=False)
         instance.save()
 
+        # sorl-thumbnail keys its cache (kvstore rows + files) by the source
+        # file name, not by content or mtime, so a thumbnail of the old
+        # placeholder would keep being served after the force-replace (or
+        # 404 if its file was deleted). Drop every cached derivative of the
+        # replaced image; the next render regenerates it from the new file.
+        from sorl.thumbnail import delete as sorl_delete
+        try:
+            sorl_delete(instance.image, delete_file=False)
+        except Exception:  # noqa: BLE001 - cache purging must never break seeding
+            pass
+
     @staticmethod
     def _purge_orphaned_images(field, instance, target_dir, target_name):
         """Delete suffixed copies of ``target_name`` not referenced in the DB.
