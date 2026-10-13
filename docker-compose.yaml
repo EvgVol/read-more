@@ -27,6 +27,16 @@ services:
     env_file:
       - ./.env
 
+  celery_worker:
+    image: evol93/readmore_hub
+    restart: always
+    depends_on:
+      - db
+      - cache
+    env_file:
+      - ./.env
+    command: celery -A website worker --loglevel=info
+
   nginx:
     image: nginx:1.21.3-alpine
     restart: always

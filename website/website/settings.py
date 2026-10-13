@@ -302,13 +302,6 @@ REDIS_DB = 0
 # Setting Cart:
 CART_SESSION_ID = 'cart'
 
-# Setting Celery:
-# CELERY_BROKER_URL = 'redis://localhost:6379' # URL брокера сообщений
-# CELERY_RESULT_BACKEND = 'redis://localhost:6379' # URL бэкенда
-# CELERY_ACCEPT_CONTENT = ['application/json']
-# CELERY_TASK_SERIALIZER = 'json'
-# CELERY_RESULT_SERIALIZER = 'json'
-
 #Setting CASHES
 CACHES = {
     'default': {
@@ -339,6 +332,18 @@ CHANNEL_LAYERS = {
 REDIS_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
 CACHES['default']['LOCATION'] = REDIS_URL
 CHANNEL_LAYERS['default']['CONFIG']['hosts'] = [REDIS_URL]
+
+# Setting Celery:
+# брокер и результат — Redis, отдельные БД (0 — cache, 1 — broker, 2 — results)
+CELERY_BROKER_URL = config(
+    'CELERY_BROKER_URL', default=f'{REDIS_URL}/1')
+CELERY_RESULT_BACKEND = config(
+    'CELERY_RESULT_BACKEND', default=f'{REDIS_URL}/2')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 TELEGRAM_TOKEN = config('TELEGRAM_TOKEN')   
 TELEGRAM_CHAT_ID = config('TELEGRAM_CHAT_ID')

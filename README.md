@@ -9,7 +9,6 @@
 [![Docker Compose](https://img.shields.io/badge/-Docker_Compose-384d54?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Redis](https://img.shields.io/badge/Redis-red)](https://redis.io/documentation)
 [![Memcached](https://img.shields.io/badge/Memcached-red)](https://memcached.org/documentation)
-[![RabbitMQ](https://img.shields.io/badge/RabbitMQ-red)](https://www.rabbitmq.com/documentation.html)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13.0-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Daphne](https://img.shields.io/badge/Daphne-blue)](https://github.com/django/daphne)
 [![Celery](https://img.shields.io/badge/Celery-green)](https://docs.celeryproject.org/en/stable/index.html)
@@ -53,9 +52,8 @@ The "READ MORE" project is a web platform developed for the purpose of educating
 * Docker
 * Docker Compose
 * Redis
-* RabbitMQ
 * Memcached
-* Celery
+* Celery (broker: Redis)
 * OAuth2
 * Bootstrap 5
 * HTML5
@@ -93,6 +91,8 @@ DB_HOST=db
 DB_PORT=5432
 REDIS_HOST='127.0.0.1'
 REDIS_PORT=6379
+CELERY_BROKER_URL=redis://127.0.0.1:6379/1
+CELERY_RESULT_BACKEND=redis://127.0.0.1:6379/2
 YANDEX_KEY='yandex-key'
 YANDEX_SECRET='yandex-secret'
 GOOGLE_KEY='google-key'
@@ -113,11 +113,13 @@ cd backend
 pip install -r requirements.txt
 ```
 
-6.  Start the Redis using the following command:
+6.  Start all services (PostgreSQL, Redis, web, celery worker, nginx) using:
 ```
-docker pull redis
-docker run -it --rm --name redis -p 6379:6379 redis
+docker compose up -d --build
 ```
+Redis is started together with the other services via Docker Compose.
+The Celery worker uses Redis as the message broker
+(`CELERY_BROKER_URL=redis://cache:6379/1`).
 
 7. Start the Django development server using the following command:
 ```
