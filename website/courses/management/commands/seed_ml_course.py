@@ -106,7 +106,10 @@ class Command(BaseCommand):
                 'description': 'Разработка и инженерные технологии',
             },
         )
-        self.replace_image(subject, subject_image_path, 'programming.png')
+        self.replace_image(
+            subject, subject_image_path, 'programming.png',
+            thumbnails=(('500x333', {'crop': 'center'}),),
+        )
 
         technology_objects = []
         for name, url, hints in self.technologies:
@@ -125,7 +128,10 @@ class Command(BaseCommand):
             )
             if not advantage_image_path.exists():
                 raise FileNotFoundError(f'Advantage image not found: {advantage_image_path}')
-            self.replace_image(advantage, advantage_image_path, f'ml-advantage-{index}.png')
+            self.replace_image(
+                advantage, advantage_image_path, f'ml-advantage-{index}.png',
+                thumbnails=(('100x100', {'crop': 'center', 'upscale': True}),),
+            )
             advantage_objects.append(advantage)
 
         course, _ = Course.objects.update_or_create(
@@ -145,7 +151,10 @@ class Command(BaseCommand):
                 'count_projects': 4,
             },
         )
-        self.replace_image(course, image_path, 'ml-engineer.png')
+        self.replace_image(
+            course, image_path, 'ml-engineer.png',
+            thumbnails=(('600x370', {'crop': 'center'}),),
+        )
         course.technologies.set(technology_objects)
         course.advantages.set(advantage_objects)
         course.students.add(owner)
@@ -195,13 +204,16 @@ class Command(BaseCommand):
         ))
 
     @staticmethod
-    def replace_image(instance, source_path, target_name):
+    def replace_image(instance, source_path, target_name, thumbnails=()):
         """Replace the instance image with a deterministic file name.
 
         The previous file, any file already occupying the target name, and any
         orphaned auto-suffixed copies (e.g. ``ml-engineer_1a2b3c4d.png`` left
         behind by older Django saves) are removed first so the media volume
-        never accumulates duplicate gray placeholders.
+        never accumulates duplicate gray placeholders. ``thumbnails`` is a tuple
+        of ``(geometry, options)`` for the sizes the templates request; each is
+        pre-generated so the file exists at deploy time instead of 404-ing on
+        the first render.
         """
         field = instance.image.field
         old = instance.image
@@ -235,6 +247,17 @@ class Command(BaseCommand):
             sorl_delete(instance.image, delete_file=False)
         except Exception:  # noqa: BLE001 - cache purging must never break seeding
             pass
+
+        # Pre-generate the exact sizes the templates request. sorl paths are
+        # deterministic (md5 of source name + geometry + options), so the files
+        # land where the templates reference them and the landing page has no
+        # 404 window after a redeploy.
+        from sorl.thumbnail import get_thumbnail
+        for geometry, options in thumbnails:
+            try:
+                get_thumbnail(instance.image, geometry, **options)
+            except Exception:  # noqa: BLE001 - pre-generation is best-effort
+                pass
 
     @staticmethod
     def _purge_orphaned_images(field, instance, target_dir, target_name):
