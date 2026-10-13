@@ -161,7 +161,7 @@ ACTIONS_LOCALE_PATH = BASE_DIR / "actions/locale"
 SHOP_LOCALE_PATH = BASE_DIR / "shop/locale"
 CART_LOCALE_PATH = BASE_DIR / "cart/locale"
 ORDERS_LOCALE_PATH = BASE_DIR / "orders/locale"
-COUPONS_LOCALE_PATH = BASE_DIR / "orders/locale"
+COUPONS_LOCALE_PATH = BASE_DIR / "coupons/locale"
 
 LOCALE_PATHS = [
     ACCOUNT_LOCALE_PATH,
@@ -172,6 +172,7 @@ LOCALE_PATHS = [
     SHOP_LOCALE_PATH,
     CART_LOCALE_PATH,
     ORDERS_LOCALE_PATH,
+    COUPONS_LOCALE_PATH,
     BASE_DIR / 'locale'
 ]
 

@@ -59,7 +59,9 @@ class DashboardPageView(TemplateView):
         context['post_count'] = Post.objects.count()
         context['comment_count'] = Review.objects.count()
         context['actions'] = Action.objects.select_related('user')[:6]
-        context['like_count'] = sum(post.users_like.count() for post in Post.objects.all())
+        # total likes across all posts in ONE query (count of the m2m
+        # through table), instead of N+1 per-post .count() calls
+        context['like_count'] = Post.users_like.through.objects.count()
         return context
 
 

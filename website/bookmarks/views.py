@@ -40,8 +40,6 @@ def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
     # увеличить общее число просмотров изображения на 1
     total_views = r.incr(f'Изображение:{image.id}:просмотрено')
-    # увеличить рейтинг изображения на 1
-    r.zincrby('image_ranking', 1, image.id)
 
     return render(request,
                   'bookmarks/image/detail.html',
@@ -97,18 +95,3 @@ def image_list(request):
     return render(request,
                   'bookmarks/image/list.html',
                   {'images': images})
-
-
-@login_required
-def image_ranking(request):
-    """Выводит закладки отсортированные по количеству просмотров"""
-    # получить словарь рейтинга изображений
-    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
-    image_ranking_ids = [int(id) for id in image_ranking]
-
-    # получить наиболее просматриваемые изображения
-    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
-    most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
-    return render(request,
-                  'images/image/ranking.html',
-                  {'section': 'images', 'most_viewed': most_viewed})
