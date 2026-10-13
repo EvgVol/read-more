@@ -161,3 +161,4 @@ cython_debug/
 static
 media
 cache
+.DS_Store
