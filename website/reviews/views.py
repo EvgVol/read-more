@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, get_object_or_404
+from django.http import Http404
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -13,7 +14,10 @@ from .forms import ReviewForm
 @login_required
 def create_review(request, content_type_id, object_id):
     content_type = get_object_or_404(ContentType, id=content_type_id)
-    content_object = content_type.get_object_for_this_type(pk=object_id)
+    try:
+        content_object = content_type.get_object_for_this_type(pk=object_id)
+    except content_type.model_class().DoesNotExist:
+        raise Http404()
     author = request.user
     
     form = ReviewForm(request.POST)

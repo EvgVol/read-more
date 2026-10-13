@@ -209,6 +209,8 @@ def create_post(request):
             post = form.save(commit=False)
             post.author = request.user
             post.save()
+            # теги (m2m) при commit=False сохраняются только через save_m2m
+            form.save_m2m()
             create_action(request.user, _('added a new post:'), post)
             messages.success(request, _('The post was added successfully'))
             return redirect(post.get_absolute_url())
