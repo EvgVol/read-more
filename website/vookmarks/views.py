@@ -65,7 +65,7 @@ def image_like(request):
                 create_action(request.user, 'лайкнул', image)
             else:
                 image.users_like.remove(request.user)
-                return JsonResponse({'status': 'ok'})
+            return JsonResponse({'status': 'ok'})
         except Image.DoesNotExist:
             pass
     return JsonResponse({'status': 'error'})
