@@ -8,7 +8,6 @@
 [![Docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
 [![Docker Compose](https://img.shields.io/badge/-Docker_Compose-384d54?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Redis](https://img.shields.io/badge/Redis-red)](https://redis.io/documentation)
-[![Memcached](https://img.shields.io/badge/Memcached-red)](https://memcached.org/documentation)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13.0-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Daphne](https://img.shields.io/badge/Daphne-blue)](https://github.com/django/daphne)
 [![Celery](https://img.shields.io/badge/Celery-green)](https://docs.celeryproject.org/en/stable/index.html)
@@ -48,11 +47,9 @@ The "READ MORE" project is a web platform developed for the purpose of educating
 * Django Channels
 * Djang Debug Toolbar 
 * PostgreSQL 13+
-* SQLite3
 * Docker
 * Docker Compose
 * Redis
-* Memcached
 * Celery (broker: Redis)
 * OAuth2
 * Bootstrap 5
@@ -71,13 +68,13 @@ To install and run the project locally, follow these steps:
 
 1. Clone the repository using:
 ```
-git clone https://github.com/evgvol/read_more.git
+git clone https://github.com/EvgVol/read-more.git
 ```
 2. Create a .env file in the root directory of the project.
 
 3. Add the following environment variables to the .env file:
 ```
-SECRET_KEY='django-insecure-51ydgsn!flww^)=p+m5rkp=bpan@q*em8#u^40s^4ug94l6_j('
+SECRET_KEY='your-generated-django-secret-key'
 DEBUG=False
 ALLOWED_HOSTS=127.0.0.1, localhost, web
 EMAIL_HOST_USER='your-email@yandex.ru'
@@ -103,17 +100,12 @@ SOCIAL_AUTH_GITHUB_KEY='github-key'
 SOCIAL_AUTH_GITHUB_SECRET='github-secret'
 ```
 
-4. Navigate to the project directory using:
+4. Install the dependencies using the following command: 
 ```
-cd backend
-```
-
-5. Install the dependencies using the following command: 
-```
-pip install -r requirements.txt
+pip install -r website/requirements.txt
 ```
 
-6.  Start all services (PostgreSQL, Redis, web, celery worker, nginx) using:
+5.  Start all services (PostgreSQL, Redis, web, celery worker, nginx) using:
 ```
 docker compose up -d --build
 ```
@@ -121,132 +113,50 @@ Redis is started together with the other services via Docker Compose.
 The Celery worker uses Redis as the message broker
 (`CELERY_BROKER_URL=redis://cache:6379/1`).
 
-7. Start the Django development server using the following command:
+6. Start the Django development server (from the `website/` directory):
 ```
-python manage.py runserver --settings=website.settings.local
-
-#If you need a SSL using the command below:
-python manage.py runserver_plus --cert-file cert.crt
+python manage.py runserver
 ```
 
-8. Open your web browser and navigate to http://localhost:8000 to view the application.
+7. Open your web browser and navigate to http://localhost:8000 to view the application.
 
 
-9. To add translations of your source code, use the following command:
+8. To add translations of your source code, use the following command:
 ```
 python manage.py makemessages --all
 ```
-10. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
+9. Edit `django.po` files in the locale folder of each application using a text editor. After that, run the following command to compile translations:
 ```
 python manage.py compilemessages
 ```
 
-## SERVER SETUP
+## DEPLOYMENT
 
-1. Connect to your server via SSH, if you haven't already done so, and update the APT package index:
+The recommended deployment target is a server running Docker + Docker Compose:
 
-```bash
-sudo apt update
-```
+1. Clone the repository on the server.
+2. Create a `.env` file with the variables from step 3 above
+   (use real credentials; in Docker set `DB_HOST=db`, `REDIS_HOST=cache`).
+3. Start the stack:
+   ```
+   docker compose up -d --build
+   ```
+4. Run migrations (already done in the image entrypoint, rerun if you
+   change models manually):
+   ```
+   docker compose exec web python manage.py migrate --noinput
+   ```
 
-2. Now update the packages installed in the system and install security updates:
+For a manual (non-Docker) deployment:
 
-```bash
-sudo apt upgrade -y
-```
-
-3. Install the Russian localization using the built-in dpkg-reconfigure utility
-
-```bash
-sudo dpkg-reconfigure locales 
-```
-
-4. Restart the server:
-
-```bash
-sudo reboot
-```
-
-5. Next, install the necessary PostgreSQL packages:
-
-```bash
-sudo apt install postgresql postgresql-contrib -y
-```
-
-6. You can manage the database server using standard systemd commands:
-
-```bash
-sudo systemctl stop postgresql # Stop 
-sudo systemctl start postgresql # Start
-sudo systemctl restart postgresql # Restart
-sudo systemctl status postgresql # Find out status, current status
-```
-
-7. On the command line, on behalf of the postgres user, call the psql utility, this is a client program for connecting and managing a DBMS:
-
-```bash
-sudo -u postgres psql
-```
-
-8. Now, through psql, create a db_name database:
-
-```bash
-CREATE DATABASE db_name;
-# Upon successful creation, CREATE DATABASE will return
-```
-
-9. Create a user registration record on the database server, then inform Django about this user's data (his username and password). As a result, Django will get access to the database under this name:
-
-```bash
-# Сreate a db_user user and come up with your password, more complicated than in the example
-CREATE USER db_user WITH ENCRYPTED PASSWORD 'xxxyyyzzz'; 
-# give the db_user user all rights when working with the db_name database
-GRANT ALL PRIVILEGES ON DATABASE db_name TO db_user;  
-```
-
-10. Configure access to PostgreSQL:
-
-Make sure that PostgreSQL allows remote connection if necessary. Edit the pg_hba.conf file, which is located in /etc/postgresql/14/main/pg_hba.conf to allow remote connections if they are required.
-
-11. Configure PostgreSQL settings:
-
-Change the PostgreSQL settings in the postgresql.conf file, which is located in /etc/postgresql/version/main/postgresql.conf. Some parameters that you may need to configure include listen_addresses, max_connections, and others depending on your needs.
-
-12. After making changes, restart PostgreSQL:
-
-```bash
-sudo systemctl restart postgresql
-```
-
-13. Install Redis:
-
-You can install Redis on Ubuntu using the apt package manager:
-
-```bash
-sudo apt install redis-server
-```
-
-14. After the installation is complete, start the Redis service and enable it to start on boot:
-
-```bash
-udo systemctl start redis-server
-sudo systemctl enable redis-server
-```
-
-15. Configure Redis (Optional):
-
-By default, Redis is configured to bind to localhost. If you want to allow external connections or make other configuration changes, you can edit the Redis configuration file at /etc/redis/redis.conf.
-
-```bash
-bind 0.0.0.0
-```
-
-16. Make sure that Redis is really running on the server. You can use the following command to check:
-
-```bash
-redis-cli -h 001.222.333.444 -p 6379 ping
-#  If the connection is successful, PONG will return
-```
+- Install PostgreSQL 13+ and create the database/user referenced by
+  `DB_NAME`, `POSTGRES_USER`, `DB_HOST`, `DB_PORT` in `.env`.
+- Install Redis and make sure `REDIS_HOST`/`REDIS_PORT` point to it
+  (it serves the cache, the Channels layer and the Celery broker).
+- Install gettext if you need to compile translations.
+- Run `pip install -r website/requirements.txt` and
+  `python manage.py migrate && python manage.py runserver`
+  (or daphne/gunicorn behind nginx for production).
 
 
 ## Credits
