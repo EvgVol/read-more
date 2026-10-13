@@ -5,6 +5,7 @@
 {% load static %}
 {% load thumbnail %}
 {% load blog_tags %}
+{% load course %}
 {% load cache %}
 <div class="page">
   <div class="page-main">
@@ -224,6 +225,14 @@
                             <!-- ABOUT COURSE CLOSED -->
 
                             <!-- TECHNOLOGIES OPEN -->
+                            <style>
+                                .course-tech-logos .slide img {
+                                    width: 96px;
+                                    height: 96px;
+                                    object-fit: contain;
+                                    border-radius: 18px;
+                                }
+                            </style>
                             <div class="section testimonial-owl-landing" id="Technologies">
                                 <div class="container">
                                     <div class="row">
@@ -235,12 +244,13 @@
                                                     <h2 class="text-center fw-semibold text-white">Какие инструменты и технологии будете использовать</h2>
                                                     <div class="row justify-content-center">
                                                         <div class="col-lg-12 px-0">
-                                                            <div class="feature-logos mt-5">
+                                                            <div class="feature-logos mt-5 course-tech-logos">
                                                                 {% cache 600 course_technologies technology %}
                                                                     {% for technology in course.technologies.all %}
                                                                     <div class="slide">
                                                                         <img
-                                                                        src="{{ technology.url }}"
+                                                                        src="{{ technology.name|technology_logo }}"
+                                                                        alt="{{ technology.name }}"
                                                                         data-bs-toggle="tooltip"
                                                                         data-bs-trigger="click"
                                                                         title="{{ technology.hints }}"

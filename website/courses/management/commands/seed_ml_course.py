@@ -1,5 +1,8 @@
+import os
+import re
 from pathlib import Path
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.core.files import File
@@ -17,7 +20,9 @@ from courses.models.technology import Technology
 class Command(BaseCommand):
     help = 'Create or update the ML engineer course and its catalog data.'
 
-    image_name = 'images/landing/business-team-working-on-business-plan.png'
+    image_name = 'images/courses/ml-inzhener/hero.png'
+    subject_image_name = 'images/subjects/programming.png'
+    advantage_image_name = 'images/courses/ml-inzhener/advantages/{index}.png'
 
     modules = (
         (
@@ -88,6 +93,11 @@ class Command(BaseCommand):
         image_path = Path(__file__).resolve().parents[3] / 'static' / self.image_name
         if not image_path.exists():
             raise FileNotFoundError(f'Course image not found: {image_path}')
+        subject_image_path = (
+            Path(__file__).resolve().parents[3] / 'static' / self.subject_image_name
+        )
+        if not subject_image_path.exists():
+            raise FileNotFoundError(f'Subject image not found: {subject_image_path}')
 
         subject, _ = Subject.objects.update_or_create(
             slug='programmirovanie',
@@ -96,7 +106,7 @@ class Command(BaseCommand):
                 'description': 'Разработка и инженерные технологии',
             },
         )
-        self.ensure_image(subject, image_path, 'programming.png')
+        self.replace_image(subject, subject_image_path, 'programming.png')
 
         technology_objects = []
         for name, url, hints in self.technologies:
@@ -109,7 +119,13 @@ class Command(BaseCommand):
         advantage_objects = []
         for index, name in enumerate(self.advantages, start=1):
             advantage, _ = Advantage.objects.update_or_create(name=name, defaults={})
-            self.ensure_image(advantage, image_path, f'ml-advantage-{index}.png')
+            advantage_image_path = (
+                Path(__file__).resolve().parents[3]
+                / 'static' / self.advantage_image_name.format(index=index)
+            )
+            if not advantage_image_path.exists():
+                raise FileNotFoundError(f'Advantage image not found: {advantage_image_path}')
+            self.replace_image(advantage, advantage_image_path, f'ml-advantage-{index}.png')
             advantage_objects.append(advantage)
 
         course, _ = Course.objects.update_or_create(
@@ -129,7 +145,7 @@ class Command(BaseCommand):
                 'count_projects': 4,
             },
         )
-        self.ensure_image(course, image_path, 'ml-engineer.png')
+        self.replace_image(course, image_path, 'ml-engineer.png')
         course.technologies.set(technology_objects)
         course.advantages.set(advantage_objects)
         course.students.add(owner)
@@ -179,7 +195,61 @@ class Command(BaseCommand):
         ))
 
     @staticmethod
-    def ensure_image(instance, source_path, target_name):
-        if not instance.image:
-            with source_path.open('rb') as image_file:
-                instance.image.save(target_name, File(image_file), save=True)
+    def replace_image(instance, source_path, target_name):
+        """Replace the instance image with a deterministic file name.
+
+        The previous file, any file already occupying the target name, and any
+        orphaned auto-suffixed copies (e.g. ``ml-engineer_1a2b3c4d.png`` left
+        behind by older Django saves) are removed first so the media volume
+        never accumulates duplicate gray placeholders.
+        """
+        field = instance.image.field
+        old = instance.image
+        if old and old.name:
+            old_file = getattr(old, 'path', None)
+            if old_file and os.path.exists(old_file):
+                os.remove(old_file)
+            old.delete(save=False)
+
+        upload_to = field.upload_to
+        if callable(upload_to):
+            upload_to = upload_to(instance, target_name)
+        target_dir = os.path.join(settings.MEDIA_ROOT, *upload_to.split('/'))
+        os.makedirs(target_dir, exist_ok=True)
+        target_file = os.path.join(target_dir, target_name)
+        if os.path.exists(target_file):
+            os.remove(target_file)
+        Command._purge_orphaned_images(field, instance, target_dir, target_name)
+
+        with source_path.open('rb') as image_file:
+            instance.image.save(target_name, File(image_file), save=False)
+        instance.save()
+
+    @staticmethod
+    def _purge_orphaned_images(field, instance, target_dir, target_name):
+        """Delete suffixed copies of ``target_name`` not referenced in the DB.
+
+        Django's FileField appends ``_<random>`` before the extension when a
+        same-named file already exists, so an orphan of ``ml-engineer.png`` is
+        ``ml-engineer_ABCD1234.png``. Match on stem plus an optional suffix.
+        """
+        stem, ext = os.path.splitext(target_name)
+        pattern = re.compile(
+            rf'^{re.escape(stem)}(_[A-Za-z0-9]+)?{re.escape(ext)}$'
+        )
+        model = instance.__class__
+        referenced = set(
+            model.objects.exclude(pk=instance.pk).values_list(
+                f'{field.name}', flat=True
+            )
+        )
+        referenced = {name for name in referenced if name}
+        for entry in os.scandir(target_dir):
+            if not entry.is_file() or not pattern.fullmatch(entry.name):
+                continue
+            if entry.name == target_name:
+                continue
+            stored = os.path.relpath(entry.path, settings.MEDIA_ROOT)
+            if stored in referenced:
+                continue
+            os.remove(entry.path)
