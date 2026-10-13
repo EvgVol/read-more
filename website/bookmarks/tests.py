@@ -6,7 +6,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from PIL import Image as PILImage
 
-from vookmarks.models import Image
+from bookmarks.models import Image
 
 User = get_user_model()
 
@@ -33,12 +33,12 @@ class TestImageList(TestCase):
         self.image = _make_image(user=self.user)
 
     def test_list_requires_login(self):
-        response = self.client.get(reverse('vookmarks:list'))
+        response = self.client.get(reverse('bookmarks:list'))
         self.assertEqual(response.status_code, 302)
 
     def test_list_shows_images(self):
         self.client.login(username='bm', password='pass123')
-        response = self.client.get(reverse('vookmarks:list'))
+        response = self.client.get(reverse('bookmarks:list'))
         self.assertEqual(response.status_code, 200)
 
 
@@ -51,19 +51,19 @@ class TestImageDetail(TestCase):
 
     def test_detail_renders(self):
         response = self.client.get(
-            reverse('vookmarks:detail',
+            reverse('bookmarks:detail',
                     args=[self.image.id, self.image.slug]))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['image'], self.image)
 
     def test_detail_wrong_id_404(self):
         response = self.client.get(
-            reverse('vookmarks:detail', args=[99999, self.image.slug]))
+            reverse('bookmarks:detail', args=[99999, self.image.slug]))
         self.assertEqual(response.status_code, 404)
 
     def test_detail_wrong_slug_404(self):
         response = self.client.get(
-            reverse('vookmarks:detail', args=[self.image.id, 'wrong-slug']))
+            reverse('bookmarks:detail', args=[self.image.id, 'wrong-slug']))
         self.assertEqual(response.status_code, 404)
 
 
@@ -74,7 +74,7 @@ class TestImageLike(TestCase):
             username='bmlike', email='bmlike@example.com', password='pass123')
         self.client.login(username='bmlike', password='pass123')
         self.image = _make_image(user=self.user)
-        self.url = reverse('vookmarks:like')
+        self.url = reverse('bookmarks:like')
 
     def test_like_returns_ok(self):
         response = self.client.post(

@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('title', models.CharField(max_length=200, verbose_name='Заголовок')),
                 ('slug', models.SlugField(blank=True, max_length=200, verbose_name='Slug')),
                 ('url', models.URLField(max_length=2000, verbose_name='URL')),
-                ('image', models.ImageField(upload_to='vookmarks/images/%Y/%m/%d/', verbose_name='Изображение')),
+                ('image', models.ImageField(upload_to='bookmarks/images/%Y/%m/%d/', verbose_name='Изображение')),
                 ('description', models.TextField(blank=True, verbose_name='Описание')),
                 ('created', models.DateField(auto_now_add=True, verbose_name='Дата создание')),
                 ('total_likes', models.PositiveIntegerField(default=0)),
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 'verbose_name': 'Изображение',
                 'verbose_name_plural': 'Изображения',
                 'ordering': ['-created'],
-                'indexes': [models.Index(fields=['-created'], name='vookmarks_i_created_791589_idx'), models.Index(fields=['-total_likes'], name='vookmarks_i_total_l_fe28f5_idx')],
+                'indexes': [models.Index(fields=['-created'], name='bookmarks_i_created_951c02_idx'), models.Index(fields=['-total_likes'], name='bookmarks_i_total_l_e7d8f7_idx')],
             },
         ),
     ]

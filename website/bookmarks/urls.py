@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from . import views
 
 
-app_name = 'vookmarks'
+app_name = 'bookmarks'
 
 
 urlpatterns = [

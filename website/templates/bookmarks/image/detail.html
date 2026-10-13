@@ -18,7 +18,7 @@
         <h1 class="page-title">{{ image.title }}</h1>
         <div>
           <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="{% url 'vookmarks:list' %}">Закладки</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'bookmarks:list' %}">Закладки</a></li>
           </ol>
         </div>
       </div>
@@ -90,7 +90,7 @@
 {% endblock %}
 
 {% block domready %}
-  const url = '{% url "vookmarks:like" %}';
+  const url = '{% url "bookmarks:like" %}';
   let options = {
     method: 'POST',
     headers: {'X-CSRFToken': csrftoken},

@@ -37,7 +37,7 @@ INSTALLED_APPS = [
 
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig', 
-    'vookmarks.apps.VookmarksConfig',
+    'bookmarks.apps.BookmarksConfig',
     'actions.apps.ActionsConfig', 
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
@@ -157,7 +157,7 @@ LANGUAGES = [
 ACCOUNT_LOCALE_PATH = BASE_DIR / "account/locale"
 BLOG_LOCALE_PATH = BASE_DIR / "blog/locale"
 CORE_LOCALE_PATH = BASE_DIR / "core/locale"
-VOOKMARKS_LOCALE_PATH = BASE_DIR / "vookmarks/locale"
+BOOKMARKS_LOCALE_PATH = BASE_DIR / "bookmarks/locale"
 ACTIONS_LOCALE_PATH = BASE_DIR / "actions/locale"
 SHOP_LOCALE_PATH = BASE_DIR / "shop/locale"
 CART_LOCALE_PATH = BASE_DIR / "cart/locale"
@@ -168,7 +168,7 @@ LOCALE_PATHS = [
     ACCOUNT_LOCALE_PATH,
     BLOG_LOCALE_PATH,
     CORE_LOCALE_PATH,
-    VOOKMARKS_LOCALE_PATH,
+    BOOKMARKS_LOCALE_PATH,
     ACTIONS_LOCALE_PATH,
     SHOP_LOCALE_PATH,
     CART_LOCALE_PATH,

@@ -588,7 +588,7 @@ msgid "blog/"
 msgstr ""
 
 #: .\website\urls.py:29
-msgid "vookmarks/"
+msgid "bookmarks/"
 msgstr ""
 
 #: .\website\urls.py:31

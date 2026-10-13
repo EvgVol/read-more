@@ -13,7 +13,7 @@ class Image(models.Model):
     slug = models.SlugField('Slug', max_length=200, blank=True)
     url = models.URLField('URL', max_length=2000)
     image = models.ImageField('Изображение', 
-                              upload_to='vookmarks/images/%Y/%m/%d/')
+                              upload_to='bookmarks/images/%Y/%m/%d/')
     description = models.TextField('Описание', blank=True)
     created = models.DateField('Дата создание', auto_now_add=True)
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL,
@@ -40,4 +40,4 @@ class Image(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('vookmarks:detail', args=[self.id, self.slug])
+        return reverse('bookmarks:detail', args=[self.id, self.slug])

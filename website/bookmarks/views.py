@@ -33,7 +33,7 @@ def image_create(request):
     else:
         form = ImageCreateForm(data=request.GET)
 
-    return render(request,'vookmarks/image/create.html',
+    return render(request,'bookmarks/image/create.html',
                   {'section': 'images', 'form': form})
 
 
@@ -45,7 +45,7 @@ def image_detail(request, id, slug):
     r.zincrby('image_ranking', 1, image.id)
 
     return render(request,
-                  'vookmarks/image/detail.html',
+                  'bookmarks/image/detail.html',
                   {'section': 'images',
                    'image': image,
                    'total_views': total_views})
@@ -93,11 +93,11 @@ def image_list(request):
 
     if images_only:
         return render(request,
-                      'vookmarks/image/list_images.html',
+                      'bookmarks/image/list_images.html',
                       {'images': images})
 
     return render(request,
-                  'vookmarks/image/list.html',
+                  'bookmarks/image/list.html',
                   {'images': images})
 
 
