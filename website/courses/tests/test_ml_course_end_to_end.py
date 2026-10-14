@@ -33,7 +33,7 @@ class MlCourseEndToEndTests(TestCase):
         client = Client(HTTP_HOST='127.0.0.1')
         client.force_login(owner)
 
-        urls = [f'/ru/course/{course.slug}/trainer/']
+        urls = []
         for module in course.modules.all():
             urls.append(f'/ru/course/{course.slug}/trainer/{module.id}/')
             for lesson in module.lessons.all():
@@ -43,8 +43,19 @@ class MlCourseEndToEndTests(TestCase):
 
         responses = [client.get(url) for url in urls]
 
-        self.assertEqual(len(responses), 36)
+        self.assertEqual(len(responses), 35)
         self.assertTrue(all(response.status_code == 200 for response in responses))
+
+        # The bare entry point now drops the learner straight into the lesson
+        # they should continue with (resume), instead of the empty picker page.
+        entry = client.get(f'/ru/course/{course.slug}/trainer/')
+        self.assertEqual(entry.status_code, 302)
+        self.assertIn(f'/course/{course.slug}/trainer/', entry.url)
+        self.assertTrue(entry.url.rstrip('/').endswith(tuple(
+            f'/lesson/{lesson.id}'
+            for module in course.modules.all()
+            for lesson in module.lessons.all()
+        )) or '/lesson/' in entry.url)
 
     def test_docker_startup_seeds_materials_after_course(self):
         dockerfile = Path('/code/Dockerfile').read_text()
