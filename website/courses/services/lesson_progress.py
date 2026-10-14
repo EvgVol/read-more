@@ -91,18 +91,25 @@ def complete_step(*, user, lesson: Lesson, step: int) -> LessonProgress:
         return progress
 
 
-def course_progress(*, user, course: Course) -> dict:
+def course_progress(*, user, course: Course, lessons=None, progress_records=None) -> dict:
     """Return aggregate progress for a user in one course."""
-    total_lessons = Lesson.objects.filter(module__course=course).count()
-    completed_lessons = LessonProgress.objects.filter(
-        user=user,
-        lesson__module__course=course,
-        status=LessonProgress.Status.COMPLETED,
-    ).count()
-    last_progress = LessonProgress.objects.filter(
-        user=user,
-        lesson__module__course=course,
-    ).select_related('lesson', 'lesson__module').first()
+    if lessons is None:
+        total_lessons = Lesson.objects.filter(module__course=course).count()
+    else:
+        total_lessons = len(lessons)
+
+    if progress_records is None:
+        progress_records = list(
+            LessonProgress.objects.filter(
+                user=user,
+                lesson__module__course=course,
+            ).select_related('lesson', 'lesson__module')
+        )
+    completed_lessons = sum(
+        item.status == LessonProgress.Status.COMPLETED
+        for item in progress_records
+    )
+    last_progress = progress_records[0] if progress_records else None
     percent = round(completed_lessons * 100 / total_lessons) if total_lessons else 0
     return {
         'total_lessons': total_lessons,
