@@ -91,6 +91,54 @@ def complete_step(*, user, lesson: Lesson, step: int) -> LessonProgress:
         return progress
 
 
+def resume_lesson(*, user, course: Course, lessons=None, progress_records=None):
+    """Return the (lesson, step) a learner should resume at, or None.
+
+    Resolution order:
+    1. The most recently opened in-progress lesson, at its current step.
+    2. The first lesson that has never been started, at step 1.
+    3. The most recently opened lesson when every lesson is finished
+       (re-learning entry point).
+    """
+    if progress_records is None:
+        progress_records = list(
+            LessonProgress.objects.filter(
+                user=user,
+                lesson__module__course=course,
+            ).select_related('lesson', 'lesson__module')
+        )
+    if lessons is None:
+        lessons = list(
+            Lesson.objects.filter(module__course=course)
+            .order_by('module__order', 'order', 'id')
+        )
+
+    in_progress = [
+        record
+        for record in progress_records
+        if record.status == LessonProgress.Status.IN_PROGRESS
+    ]
+    if in_progress:
+        latest = max(
+            in_progress,
+            key=lambda record: record.last_opened_at or record.updated,
+        )
+        return latest.lesson, latest.current_step
+
+    started_ids = {record.lesson_id for record in progress_records}
+    for lesson in lessons:
+        if lesson.id not in started_ids:
+            return lesson, 1
+
+    if progress_records:
+        latest = max(
+            progress_records,
+            key=lambda record: record.last_opened_at or record.updated,
+        )
+        return latest.lesson, latest.current_step
+    return None
+
+
 def course_progress(*, user, course: Course, lessons=None, progress_records=None) -> dict:
     """Return aggregate progress for a user in one course."""
     if lessons is None:

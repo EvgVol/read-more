@@ -1,9 +1,11 @@
 from django.views.generic import DetailView
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import Prefetch, Q
 from django.http import Http404
+from django.shortcuts import redirect
 
 from courses.forms import CourseEnrollForm
 from courses.models.course import Course
@@ -14,7 +16,11 @@ from courses.models.module import Module
 from courses.models.quiz import QuizAttempt, QuizQuestion
 from courses.services.lesson_blocks import get_lesson_stage_content
 from courses.services.lesson_blocks import get_published_lesson_blocks
-from courses.services.lesson_progress import course_progress, get_or_start_progress
+from courses.services.lesson_progress import (
+    course_progress,
+    get_or_start_progress,
+    resume_lesson,
+)
 from courses.services.quiz import course_quiz_progress, module_quiz_progress
 from reviews.models import Review
 from blog.models import Post
@@ -59,6 +65,24 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
         from courses.views.progress import LessonProgressUpdateView
 
         return LessonProgressUpdateView().post(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        # Entry point without an explicit module/lesson: drop the learner
+        # straight into the lesson they should continue with instead of
+        # the empty "pick a lesson" page.
+        if not kwargs.get('module_id'):
+            resume = resume_lesson(
+                user=request.user,
+                course=self.get_object(),
+            )
+            if resume is not None:
+                lesson, step = resume
+                target = reverse(
+                    'courses:course_trainer_lesson',
+                    args=[kwargs['slug'], lesson.module_id, lesson.id],
+                )
+                return redirect(f'{target}?step={step}')
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         qs = super().get_queryset()
