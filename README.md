@@ -3,12 +3,12 @@
 [![READ MORE workflow](https://github.com/EvgVol/read-more/actions/workflows/main.yml/badge.svg)](https://github.com/EvgVol/read-more/actions/workflows/main.yml)
 [![Python](https://img.shields.io/badge/python-3.11-blue)](https://www.python.org/downloads/release/python-3110/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-yellow)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Django](https://img.shields.io/badge/django-4.2-green)](https://docs.djangoproject.com/en/4.2/)
+[![Django](https://img.shields.io/badge/django-5.2-green)](https://docs.djangoproject.com/en/5.2/)
 [![Django Rest Framework](https://img.shields.io/badge/Django%20Rest%20Framework-v3.12-green)](https://www.django-rest-framework.org/)
 [![Docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
 [![Docker Compose](https://img.shields.io/badge/-Docker_Compose-384d54?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Redis](https://img.shields.io/badge/Redis-red)](https://redis.io/documentation)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13.0-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Daphne](https://img.shields.io/badge/Daphne-blue)](https://github.com/django/daphne)
 [![Celery](https://img.shields.io/badge/Celery-green)](https://docs.celeryproject.org/en/stable/index.html)
 [![Gunicorn](https://img.shields.io/badge/Gunicorn-green)](https://docs.gunicorn.org/en/stable/)
@@ -42,11 +42,11 @@ The "READ MORE" project is a web platform developed for the purpose of educating
 ## Technologies Used
 * Python 3.11
 * JavaScript
-* Django 4.2
+* Django 5.2
 * Django REST Framework
 * Django Channels
 * Djang Debug Toolbar 
-* PostgreSQL 13+
+* PostgreSQL 15
 * Docker
 * Docker Compose
 * Redis
@@ -149,8 +149,25 @@ The recommended deployment target is a server running Docker + Docker Compose:
 
 For a manual (non-Docker) deployment:
 
-- Install PostgreSQL 13+ and create the database/user referenced by
-  `DB_NAME`, `POSTGRES_USER`, `DB_HOST`, `DB_PORT` in `.env`.
+- Install PostgreSQL 14+ (Django 5.2 requires it) and create the
+  database/user referenced by `DB_NAME`, `POSTGRES_USER`, `DB_HOST`,
+  `DB_PORT` in `.env`.
+
+> **Upgrading from an older PostgreSQL (13 or below)?** PostgreSQL does
+> not auto-upgrade across major versions. If the `postgres_data` volume
+> already holds a PG13 database, you must migrate it once before the
+> web app will start on `postgres:15`:
+> ```
+> # on the server, before switching the image
+> docker compose stop web celery_worker
+> docker compose exec db pg_dumpall -U postgres > /tmp/pg13.dump
+> docker compose down db          # removes the PG13 container (volume kept)
+> # edit compose: image postgres:15-alpine
+> docker compose up -d db
+> docker compose exec -T db psql -U postgres -d postgres < /tmp/pg13.dump
+> docker compose up -d web celery_worker
+> ```
+> A fresh install (empty `postgres_data` volume) needs none of this.
 - Install Redis and make sure `REDIS_HOST`/`REDIS_PORT` point to it
   (it serves the cache, the Channels layer and the Celery broker).
 - Install gettext if you need to compile translations.

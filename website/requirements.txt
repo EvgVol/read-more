@@ -20,7 +20,7 @@ constantly==15.1.0
 cryptography==50.0.2
 daphne==4.2.3
 defusedxml==0.7.1
-Django==4.2.30
+Django==5.2.18
 django-braces==1.15.0
 django-debug-toolbar==4.2.0
 django-embed-video==1.4.9
@@ -58,8 +58,8 @@ requests==2.34.2
 requests-oauthlib==2.0.0
 service-identity==23.1.0
 six==1.16.0
-social-auth-app-django==5.4.2
-social-auth-core==5.0.2
+social-auth-app-django==7.1.0
+social-auth-core==6.1.1
 sorl-thumbnail==13.1.0
 sqlparse==0.6.0
 Twisted==26.4.0
