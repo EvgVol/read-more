@@ -1,0 +1,106 @@
+{% load lesson_material %}
+{% if material %}
+  <section class="course-learning__lesson-card" aria-labelledby="active-step-title">
+    <div class="course-learning__step-caption">Шаг {{ active_step }} из {{ lesson_steps|length }}</div>
+    <h3 id="active-step-title">{{ active_step_label }}</h3>
+    {% if active_step == 2 %}
+      {% if active_blocks %}
+        {% render_lesson_blocks_document active_blocks as lesson_document %}
+      {% else %}
+        {% render_lesson_document active_content as lesson_document %}
+      {% endif %}
+      {% if lesson_document.toc %}
+        <nav class="course-learning__toc" aria-label="Навигация по разделам урока">
+          <strong>Оглавление урока</strong>
+          <ol>
+            {% for item in lesson_document.toc %}
+              <li class="course-learning__toc-level-{{ item.level }}">
+                <a href="#{{ item.anchor }}">{{ item.title }}</a>
+              </li>
+            {% endfor %}
+          </ol>
+        </nav>
+      {% endif %}
+      <div id="lesson-theory" class="course-learning__reading lesson-material">
+        {{ lesson_document.html|safe }}
+      </div>
+      {% if quiz_questions %}
+        <section id="lesson-quiz" class="lesson-quiz" aria-labelledby="lesson-quiz-title">
+          <div class="lesson-quiz__heading">
+            <span class="course-learning__eyebrow">Проверка понимания</span>
+            <h4 id="lesson-quiz-title">Мини-тест по уроку</h4>
+            <p>Ответы проверяются на сервере. Можно пройти тест повторно.</p>
+            {% if quiz_last_attempt %}
+              <div class="lesson-quiz__last-attempt">
+                <strong>Последняя попытка:</strong>
+                <span>{{ quiz_last_attempt.percent }}% · {{ quiz_last_attempt.earned_points }} из {{ quiz_last_attempt.total_points }} баллов</span>
+                <em>{% if quiz_last_attempt.passed %}Освоено{% else %}Нужно повторить{% endif %}</em>
+              </div>
+            {% endif %}
+            {% if quiz_attempt_history %}
+              <details class="lesson-quiz__history">
+                <summary>История попыток ({{ quiz_attempt_history|length }})</summary>
+                <ol>
+                  {% for attempt in quiz_attempt_history %}
+                    <li>
+                      <time datetime="{{ attempt.submitted_at|date:'c' }}">{{ attempt.submitted_at|date:'d.m.Y H:i' }}</time>
+                      <span>{{ attempt.percent }}% · {{ attempt.earned_points }}/{{ attempt.total_points }}</span>
+                      <strong>{% if attempt.passed %}Пройдено{% else %}Повторить{% endif %}</strong>
+                    </li>
+                  {% endfor %}
+                </ol>
+              </details>
+            {% endif %}
+          </div>
+          {% if quiz_attempt %}
+            <div class="lesson-quiz__result {% if quiz_attempt.passed %}is-passed{% else %}is-failed{% endif %}" role="status">
+              <strong>{% if quiz_attempt.passed %}Тест пройден{% else %}Попробуйте ещё раз{% endif %}</strong>
+              <span>{{ quiz_attempt.percent }}% · {{ quiz_attempt.earned_points }} из {{ quiz_attempt.total_points }} баллов</span>
+              <ul>
+                {% for answer in quiz_attempt.answers.all %}
+                  <li><strong>{% if answer.is_correct %}Верно{% else %}Проверьте ответ{% endif %}</strong> — {{ answer.feedback }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+          <form class="lesson-quiz__form" method="post" action="{% url 'courses:course_trainer_quiz_submit' object.slug module.id active_lesson.id %}">
+            {% csrf_token %}
+            {% for question in quiz_questions %}
+              <fieldset class="lesson-quiz__question">
+                <legend><span>{{ forloop.counter }}.</span> {{ question.prompt }}</legend>
+                {% if question.type == 'short' %}
+                  <input class="form-control" type="text" name="question_{{ question.id }}" autocomplete="off">
+                {% else %}
+                  {% for option in question.options %}
+                    <label class="lesson-quiz__option">
+                      <input type="{% if question.type == 'single' %}radio{% else %}checkbox{% endif %}"
+                             name="question_{{ question.id }}" value="{{ option.id }}">
+                      <span>{{ option.text }}</span>
+                    </label>
+                  {% endfor %}
+                {% endif %}
+              </fieldset>
+            {% endfor %}
+            <button class="btn btn-primary" type="submit">Проверить ответы</button>
+          </form>
+        </section>
+      {% endif %}
+    {% else %}
+      <div class="course-learning__reading lesson-material">
+        {{ active_content|render_markdown }}
+      </div>
+    {% endif %}
+    <form class="course-learning__controls" method="post" action="{% url 'courses:course_trainer_lesson_progress' object.slug module.id active_lesson.id %}">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="complete_step">
+      <input type="hidden" name="step" value="{{ active_step }}">
+      {% if active_step > 1 %}<a class="btn btn-outline-secondary" href="?step={{ active_step|add:'-1' }}" data-step="{{ active_step|add:'-1' }}">← Назад</a>{% endif %}
+      <button class="btn btn-primary" type="submit">{% if active_step == 5 %}Завершить урок{% else %}Отметить этап{% endif %} →</button>
+      {% if active_step < 5 %}<a class="btn btn-link" href="?step={{ active_step|add:'1' }}" data-step="{{ active_step|add:'1' }}">Пропустить к следующему</a>{% endif %}
+    </form>
+  </section>
+{% else %}
+  <section class="course-learning__lesson-card">
+    <div class="alert alert-secondary">Материал для этого урока ещё готовится.</div>
+  </section>
+{% endif %}

@@ -1,0 +1,18 @@
+<nav class="course-learning__stepper" aria-label="Этапы урока">
+  <a class="course-learning__stepper-arrow" href="?step={{ active_step|add:'-1' }}" data-step="{{ active_step|add:'-1' }}" {% if active_step == 1 %}aria-disabled="true" tabindex="-1"{% endif %} aria-label="Предыдущий этап" title="Предыдущий этап">←</a>
+  <ol class="course-learning__stepper-list">
+    {% for step in lesson_steps %}
+      <li>
+        <a class="course-learning__stepper-link {% if step.number == active_step %}is-active{% elif step.number < active_step %}is-complete{% endif %}"
+           href="?step={{ step.number }}"
+           data-step="{{ step.number }}"
+           title="{{ step.label }}"
+           {% if step.number == active_step %}aria-current="step"{% endif %}>
+          <span class="course-learning__stepper-num" aria-hidden="true">{% if step.number < active_step %}✓{% else %}{{ step.number }}{% endif %}</span>
+          <span class="course-learning__stepper-label">{{ step.label }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+  <a class="course-learning__stepper-arrow course-learning__stepper-arrow--next" href="?step={{ active_step|add:'1' }}" data-step="{{ active_step|add:'1' }}" {% if active_step == 5 %}aria-disabled="true" tabindex="-1"{% endif %} aria-label="Следующий этап" title="Следующий этап">→</a>
+</nav>
