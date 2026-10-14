@@ -1,11 +1,13 @@
+from django.views import View
 from django.views.generic import DetailView
+from django.template.response import TemplateResponse
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import Prefetch, Q
 from django.http import Http404
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 
 from courses.forms import CourseEnrollForm
 from courses.models.course import Course
@@ -117,6 +119,53 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             )
         )
 
+    def _stage_context(self, request, module, lesson, requested_step):
+        """Build the context for one lesson step.
+
+        Shared by the full trainer page and the step fragment endpoint so
+        the two can never drift apart.
+        """
+        context = {
+            'module': module,
+            'active_lesson': lesson,
+            'progress': get_or_start_progress(user=request.user, lesson=lesson),
+        }
+        active_step = context['progress'].current_step
+        if requested_step and str(requested_step).isdigit():
+            active_step = int(requested_step)
+        context['active_step'] = min(max(active_step, 1), 5)
+        context['active_step_label'] = self.lesson_steps[context['active_step'] - 1]['label']
+        context['material'] = getattr(lesson, 'material', None)
+        if context['material']:
+            active_descriptor = self.lesson_steps[context['active_step'] - 1]
+            context['active_blocks'] = (
+                get_published_lesson_blocks(lesson)
+                if active_descriptor['key'] == 'theory' else []
+            )
+            context['active_content'] = get_lesson_stage_content(
+                lesson,
+                active_descriptor['key'],
+                context['material'],
+            )
+        context['quiz_questions'] = list(
+            getattr(lesson, 'published_quiz_questions', [])
+        )
+        context['quiz_attempt_history'] = list(QuizAttempt.objects.filter(
+            user=request.user,
+            lesson=lesson,
+        ).order_by('-submitted_at', '-id')[:10])
+        context['quiz_last_attempt'] = context['quiz_attempt_history'][0] if context['quiz_attempt_history'] else None
+        attempt_id = request.GET.get('quiz_attempt')
+        context['quiz_attempt'] = None
+        if attempt_id and attempt_id.isdigit():
+            context['quiz_attempt'] = QuizAttempt.objects.filter(
+                id=int(attempt_id),
+                user=request.user,
+                lesson=lesson,
+            ).prefetch_related('answers__question').first()
+        context['recent_events'] = context['progress'].events.all()[:8]
+        return context
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         course = context['object']
@@ -174,44 +223,12 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
             )
             if context['active_lesson'] is None:
                 raise Http404('Lesson not found')
-            context['material'] = getattr(context['active_lesson'], 'material', None)
-            context['progress'] = get_or_start_progress(
-                user=self.request.user,
+            context.update(self._stage_context(
+                self.request,
+                module=context['module'],
                 lesson=context['active_lesson'],
-            )
-            active_step = context['progress'].current_step
-            requested_step = self.request.GET.get('step')
-            if requested_step and requested_step.isdigit():
-                active_step = int(requested_step)
-            context['active_step'] = min(max(active_step, 1), 5)
-            context['active_step_label'] = self.lesson_steps[context['active_step'] - 1]['label']
-            if context['material']:
-                active_descriptor = self.lesson_steps[context['active_step'] - 1]
-                context['active_blocks'] = (
-                    get_published_lesson_blocks(context['active_lesson'])
-                    if active_descriptor['key'] == 'theory' else []
-                )
-                context['active_content'] = get_lesson_stage_content(
-                    context['active_lesson'],
-                    active_descriptor['key'],
-                    context['material'],
-                )
-            context['quiz_questions'] = list(
-                getattr(context['active_lesson'], 'published_quiz_questions', [])
-            )
-            context['quiz_attempt_history'] = list(QuizAttempt.objects.filter(
-                user=self.request.user,
-                lesson=context['active_lesson'],
-            ).order_by('-submitted_at', '-id')[:10])
-            context['quiz_last_attempt'] = context['quiz_attempt_history'][0] if context['quiz_attempt_history'] else None
-            attempt_id = self.request.GET.get('quiz_attempt')
-            context['quiz_attempt'] = None
-            if attempt_id and attempt_id.isdigit():
-                context['quiz_attempt'] = QuizAttempt.objects.filter(
-                    id=int(attempt_id),
-                    user=self.request.user,
-                    lesson=context['active_lesson'],
-                ).prefetch_related('answers__question').first()
+                requested_step=self.request.GET.get('step'),
+            ))
             lesson_index = all_lessons.index(context['active_lesson'])
             context['previous_lesson'] = (
                 all_lessons[lesson_index - 1] if lesson_index > 0 else None
@@ -220,5 +237,59 @@ class CourseTrainerView(LoginRequiredMixin, DetailView):
                 all_lessons[lesson_index + 1]
                 if lesson_index < len(all_lessons) - 1 else None
             )
-            context['recent_events'] = context['progress'].events.all()[:8]
         return context
+
+
+class LessonStepFragmentView(LoginRequiredMixin, View):
+    """Return just the step content for the trainer's no-reload navigation.
+
+    The full trainer page and this endpoint share ``_stage_context``, so a
+    step swapped in client-side is byte-identical to a fresh server render.
+    """
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect_to_login(request.get_full_path(), self.get_login_url())
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        course = get_object_or_404(
+            Course.objects.filter(
+                Q(students=request.user) | Q(owner=request.user),
+            ).distinct(),
+            slug=kwargs['slug'],
+        )
+        module = get_object_or_404(course.modules, id=kwargs['module_id'])
+        lesson = get_object_or_404(
+            Lesson.objects.select_related('material').prefetch_related(
+                Prefetch(
+                    'blocks',
+                    queryset=LessonBlock.objects.filter(
+                        published=True,
+                    ).order_by('position', 'id'),
+                    to_attr='published_lesson_blocks',
+                ),
+                Prefetch(
+                    'quiz_questions',
+                    queryset=QuizQuestion.objects.filter(
+                        published=True,
+                    ).order_by('position', 'id'),
+                    to_attr='published_quiz_questions',
+                ),
+            ),
+            module=module,
+            id=kwargs['lesson_id'],
+        )
+        context = CourseTrainerView()._stage_context(
+            request,
+            module=module,
+            lesson=lesson,
+            requested_step=request.GET.get('step'),
+        )
+        context['object'] = course
+        context['lesson_steps'] = CourseTrainerView.lesson_steps
+        return TemplateResponse(
+            request,
+            'courses/manage/course/trainer_step.html',
+            context,
+        )

@@ -4,7 +4,11 @@ from django.utils.translation import gettext_lazy as _
 from courses.views.generic.list import (CourseListView, SubjectView,
                                         ContentListView, ModuleListView,
                                         ModuleOrderView, ContentOrderView)
-from courses.views.generic.detail import CourseDetailView, CourseTrainerView
+from courses.views.generic.detail import (
+    CourseDetailView,
+    CourseTrainerView,
+    LessonStepFragmentView,
+)
 from courses.views.audit import (
     CourseAuditCompareView,
     CourseAuditHistoryView,
@@ -49,6 +53,9 @@ urlpatterns = [
     path("course/<slug:slug>/trainer/<int:module_id>/lesson/<int:lesson_id>/progress/",
          LessonProgressUpdateView.as_view(),
          name="course_trainer_lesson_progress"),
+    path("course/<slug:slug>/trainer/<int:module_id>/lesson/<int:lesson_id>/step/",
+         LessonStepFragmentView.as_view(),
+         name="course_trainer_lesson_step"),
     path("course/<slug:slug>/trainer/<int:module_id>/lesson/<int:lesson_id>/quiz/submit/",
          QuizSubmitView.as_view(),
          name="course_trainer_quiz_submit"),

@@ -1,0 +1,8 @@
+{% load static %}
+{% load lesson_material %}
+<div class="course-learning__stage-region" data-step="{{ active_step }}">
+  {% include 'courses/manage/course/_trainer_stepper.html' %}
+  <div class="course-learning__stage-wrap">
+    {% include 'courses/manage/course/_trainer_stage.html' %}
+  </div>
+</div>
