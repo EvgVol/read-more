@@ -112,3 +112,40 @@ class TestDashboardLikeCount(TestCase):
         # dashboard should not scale its query count with the number of
         # posts (a naive per-post .count() adds one query per post).
         self.assertLess(len(ctx.captured_queries), 20)
+
+    def test_like_count_is_one_scan_of_the_through_table(self):
+        """Django 5.0 QuerySet.explain(): the count must be a single
+        scan of the m2m through table, never N per-post queries."""
+        from django.test.utils import CaptureQueriesContext
+        from django.db import connection
+
+        u = self.User.objects.create_user(
+            username='dp', email='dp@example.com', password='pass123')
+        posts = [
+            self.Post.objects.create(
+                title=f'Q{i}', author=u, body='b', image=self._img(),
+                status=self.Post.Status.PUBLISHED)
+            for i in range(5)
+        ]
+        for p in posts:
+            p.users_like.add(u)  # 5 likes
+
+        with CaptureQueriesContext(connection) as ctx:
+            response = self.client.get(reverse('core:dashboard'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['like_count'], 5)
+
+        through_table = self.Post.users_like.through._meta.db_table
+        touching = [q['sql'] for q in ctx.captured_queries
+                    if through_table in q['sql']]
+        # Exactly ONE query touches the through table (the count),
+        # not one per post.
+        self.assertEqual(len(touching), 1)
+        self.assertIn('count(*)', touching[0].lower())
+
+        # The actual executor plan is a single scan of that table.
+        plan = self.Post.users_like.through.objects.all().explain()
+        plan = '\n'.join(plan) if isinstance(plan, list) else str(plan)
+        # PG pads the plan with spaces; strip them so the table name is
+        # found regardless of the executor's whitespace formatting.
+        self.assertIn(through_table, plan.replace(' ', ''))
