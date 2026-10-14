@@ -1,9 +1,13 @@
 from io import BytesIO
+from datetime import timedelta
 
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.core.management import call_command
 from django.test import TestCase, Client
 from django.urls import reverse
+from django.utils import timezone
+from io import StringIO
 from PIL import Image
 
 from blog.models import Post
@@ -90,3 +94,48 @@ class TestActionDashboard(TestCase):
         self.assertEqual(response.status_code, 200)
         actions = list(response.context['actions'])
         self.assertEqual(len(actions), 2)
+
+
+class TestCleanupOldActions(TestCase):
+    """Tests for the cleanup_old_actions management command."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='actor', email='act@example.com', password='pass123')
+        # one fresh action, one 100 days old
+        create_action(self.user, 'fresh verb')
+        create_action(self.user, 'old verb')
+        self.old = Action.objects.get(verb='old verb')
+        Action.objects.filter(pk=self.old.pk).update(
+            created=timezone.now() - timedelta(days=100))
+        self.old.refresh_from_db()
+
+    def _run(self, *args):
+        out = StringIO()
+        call_command('cleanup_old_actions', *args, stdout=out)
+        return out.getvalue()
+
+    def test_dry_run_does_not_delete(self):
+        output = self._run('--days', '90')
+        self.assertEqual(Action.objects.count(), 2)
+        self.assertIn('1', output)  # reports 1 deletable
+
+    def test_apply_deletes_only_stale(self):
+        output = self._run('--days', '90', '--apply')
+        remaining = list(Action.objects.values_list('verb', flat=True))
+        self.assertEqual(remaining, ['fresh verb'])
+        self.assertIn('1', output)
+
+    def test_custom_days_window(self):
+        # 100-day-old action is "fresh" under a 365-day window
+        output = self._run('--days', '365', '--apply')
+        self.assertEqual(Action.objects.count(), 2)
+        self.assertIn('0', output)
+
+    def test_days_below_one_rejected(self):
+        out = StringIO()
+        err = StringIO()
+        call_command('cleanup_old_actions', '--days', '0', stdout=out,
+                     stderr=err)
+        self.assertIn('1', err.getvalue())
+        self.assertEqual(Action.objects.count(), 2)
