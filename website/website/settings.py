@@ -345,5 +345,9 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
+# User actions older than this many days are removed by
+# `manage.py cleanup_old_actions --apply` (see actions/management/commands).
+ACTIONS_RETENTION_DAYS = 90
+
 TELEGRAM_TOKEN = config('TELEGRAM_TOKEN')   
 TELEGRAM_CHAT_ID = config('TELEGRAM_CHAT_ID')
