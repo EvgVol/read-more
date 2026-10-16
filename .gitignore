@@ -159,6 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 static
+!website/static/
+!website/static/plugins/rating/dist/
+!website/static/scss/lib/
 media
+!website/static/images/media/
 cache
 .DS_Store
