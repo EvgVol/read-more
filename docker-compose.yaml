@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
 
   db:
@@ -16,7 +14,9 @@ services:
       - ./data/cache:/data
 
   web:
-    image: evol93/readmore_hub
+    image: read-more-web:local
+    build:
+      context: ./website
     restart: always
     volumes:
       - static_value:/code/static/
@@ -28,7 +28,9 @@ services:
       - ./.env
 
   celery_worker:
-    image: evol93/readmore_hub
+    image: read-more-web:local
+    build:
+      context: ./website
     restart: always
     depends_on:
       - db

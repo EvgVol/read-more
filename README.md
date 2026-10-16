@@ -147,6 +147,14 @@ The recommended deployment target is a server running Docker + Docker Compose:
    docker compose exec web python manage.py migrate --noinput
    ```
 
+The web image is built from the repository itself (the `build:` section
+in compose + `website/Dockerfile`); no image registry or Docker Hub is
+involved. `website/static/` is committed so a clean clone builds a
+complete image. To update a running server:
+   ```
+   git pull && docker compose up -d --build
+   ```
+
 For a manual (non-Docker) deployment:
 
 - Install PostgreSQL 14+ (Django 5.2 requires it) and create the
